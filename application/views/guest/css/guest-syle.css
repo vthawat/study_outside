@@ -1,0 +1,81 @@
+#navigation a.app-title{
+	color:#ededed;
+}
+.navbar-default .navbar-nav > li > a {
+	color: #ededed;
+	}
+#navigation li.active a{
+	color: #1f3b08;
+}
+.navbar {
+	border-style: solid;
+	border-bottom-width:2px;
+	border-bottom-color: #e74c3c;
+	
+}
+.app-brand a.app-title{
+
+	display: block;
+	font-size: larger;
+	padding-top: 7px;
+	font-size: 22pt;
+}
+
+#navigation .app-icon{
+	padding-top: 5px;
+}
+
+.carousel .carousel-inner > .item > img 
+{
+	    max-height: none;
+		height: 450px;
+	    
+}
+.carousel .carousel-inner
+{
+	margin-left: auto;
+	margin-right: auto;
+	width: 60%;
+}
+
+section.cover {
+	background-color: #2c3e50;
+	/*background: url(../images/sample-cover.jpg) no-repeat center;*/
+	background-size: cover;
+	min-height: 360px;
+}
+.cover h3.title{
+	margin-top: 100px;
+	color: #1abc9c;
+	font-size: 20pt;
+}
+.cover p{
+	color: #ecf0f1;
+	font-size: 18pt;
+}
+.cover h1.intro-text{
+	margin-top: 150px;
+	color: #ecf0f1;
+	font-size: 70pt;
+}
+section.about {
+	min-height: 300px;
+}
+.footer-app-icon{
+	height: 64px;
+}
+.footer{
+	font-size: 16pt;
+}
+.footer h3.title{
+	color: #1abc9c;
+
+}
+.list-group li{
+	font-size: 16pt;
+}
+.list-group li i{
+	color: #27ae60;
+	font-size: 18pt;
+}
+
