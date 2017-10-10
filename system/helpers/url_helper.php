@@ -454,7 +454,7 @@ if ( ! function_exists('prep_url'))
 
 		if ( ! $url OR ! isset($url['scheme']))
 		{
-			$str = 'https://'.$str;
+			$str = 'http://'.$str;
 		}
 
 		return $str;

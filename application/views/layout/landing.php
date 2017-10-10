@@ -69,7 +69,6 @@
                             <span class="icon-bar"></span>
                             <span class="icon-bar"></span>
                         </button>
-                        <a class="navbar-brand" href="http://www.eng.psu.ac.th" target="_blank"><img src="<?=prep_url($this->config->item('uiux_path').'/web/vendors/ecs/images/eng-logo-nav.png')?>"></a>
                             <?=$app_info?>
                         
                     </div>

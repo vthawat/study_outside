@@ -1,20 +1,42 @@
-  <div class="container">
-   <div class="row">
-     <div class="col-md-12">
-     <h2 class="intro-text thai-font">คุณสมบัติของชุด DevStarter Template Version 1.0</h2>
-     <p>
-       <ul class="list-group thai-font">
-         <li class="list-group-item"><i class="fa fa-fw fa-check"></i>Base on PHP Codeigniter framework version 3.1.5</li>
-         <li class="list-group-item"><i class="fa fa-fw fa-check"></i>Integrated Ezrbac library การควบคุมสิทธิ์เข้าถึงจากส่วนกลาง version 1.0 กำลังพัฒนาเป็น ABAC Service</li>
-         <li class="list-group-item"><i class="fa fa-fw fa-check"></i>Integrated Template library</li>
-          <li class="list-group-item"><i class="fa fa-fw fa-check"></i>Integrated HMVC library</li>
-         <li class="list-group-item list-group-item-success"><i class="fa fa-fw fa-check"></i>Integrated UI/UX client version 1.0 ภายใต้เพลตฟอร์ม Microservice</li>
-         <li class="list-group-item list-group-item-success"><i class="fa fa-fw fa-check"></i>Integrated PSU OAuth2 client version 1.0 ภายใต้เพลตฟอร์ม Microservice</li>
-         <li class="list-group-item list-group-item-success"><i class="fa fa-fw fa-check"></i>Integrated PDF client version 1.0 ภายใต้เพลตฟอร์ม Microservice</li>
-         <li class="list-group-item"><i class="fa fa-fw fa-check"></i>Started Guest Public Access</li>
-         <li class="list-group-item"><i class="fa fa-fw fa-check"></i>Started User Private Access</li>
-       </ul>
-     </p>
+  <div class="container feature">
+  <h2 class="intro-text thai-font">คุณสมบัติของระบบสารสนเทศบริหารจัดการการศึกษาภาคสนาม ด้วยกระบวนการวางแผนการเดินทางอัตโนมัติ</h2>
+   
+  <div class="row">
+     <div class="col-md-4">
+      <p><img class="img-responsive img-feature wow fadeInLeft animated" data-wow-duration="1s" data-wow-delay=".5s" src="<?=base_url('images/select-location.png')?>" alt=""></p>
+     
+     </div>
+     <div class="col-md-offset-3 col-md-5">
+     <h3 class="thai-font title"><i class="fa fa-fw fa-paper-plane"></i>เลือกสถานที่ศึกษาดูงานได้อย่างง่ายดาย</h3>
+      <p class="thai-font desc">จากฐานข้อมูลสถานที่ศึกษาดูงานที่เราได้รวบรวมไว้แบ่งตามสาขาวิชา เช่น ระบบเกษตร เศรษฐศาตร์เกษตร หรือจะเลือกตามจรายชื่่อจังหวัดในประเทศไทย
+        ก็พร้อมที่จะบอกว่าพิกัดตำแหน่งของสถานที่่ ที่น่าสนใจเกี่ยวกับการศึกษาดูงานลงพื้นที่นั้นๆ
+      </p>
+     
      </div>
    </div>
+  <hr>
+   <div class="row">
+     <div class="col-md-4">
+      <p><img class="img-responsive img-feature wow fadeInLeft animated" data-wow-duration="2s" data-wow-delay="1s" src="<?=base_url('images/map-routing.png')?>" alt=""></p>
+     
+     </div>
+     <div class="col-md-offset-3 col-md-5">
+       <h3 class="thai-font title"><i class="fa fa-fw fa-paper-plane"></i>นำเสนอเส้นทางการเดินทาง</h3>
+      <p class="thai-font desc">เราได้นำบริการค้นหาเส้นทางของ Google Map มาช่วยค้นหาเส้นทางที่เหมาะสม พร้อมบอกระยะทางและเวลาเพื่อนำเสนอและตัดสินใจเส้นทาง หรือจะกำหนดเส้นทางได้ด้วยตัวเอง</p>
+     
+     </div>
+   </div>
+   <hr>
+   <div class="row">
+     <div class="col-md-4">
+      <p><img class="img-responsive img-feature wow fadeInLeft animated" data-wow-duration="1s" data-wow-delay=".5s" src="<?=base_url('images/weather.png')?>" alt=""></p>
+     
+     </div>
+     <div class="col-md-offset-3 col-md-5">
+       <h3 class="thai-font title"><i class="fa fa-fw fa-paper-plane"></i>พยากรณ์อากาศ</h3>
+      <p class="thai-font desc">เรามีข้อมูลพยากรณ์อากาศที่เชื่อถือได้ ที่จะช่วยให้คุณตัดสินใจเลือกวันที่เดินทางไปยังสถานที่นั้นๆ เพื่อให้แผนการเดินทางของคุณเป็นไปอย่างสมบูรณ์</p>
+     
+     </div>
+   </div>
+
   </div>

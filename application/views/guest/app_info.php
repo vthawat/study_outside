@@ -1,1 +1,1 @@
-<div class="navbar-brand app-brand"><a href="<?=base_url()?>" class="app-title thai-font"><?=$app_name?></a></div>
+<div class="navbar-brand app-brand"><a href="<?=base_url()?>" class="app-title thai-font"><i class="fa fa-fw fa-home"></i><?=$app_name?></a></div>
