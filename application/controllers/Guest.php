@@ -7,7 +7,7 @@ public function __construct()
 		parent::__construct();
 
 		$data['app_icon']=prep_url($this->config->item('uiux_path').'/web/vendors/ecs/images/app_icons/'.$this->config->item('uiux_app_icon'));	
-		$data['app_name']='SORM System';
+		$data['app_name']='STDO System';
 		$data['app_desc']='ระบบสารสนเทศบริหารจัดการการศึกษาภาคสนามด้วยกระบวนการวางแผนการเดินทางอัตโนมัติ';
 		$data['app_version']='Version dev-0.1';
 		$data['app_admin_department']='ชื่อหน่วยงาน/ภาควิชา';

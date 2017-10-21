@@ -389,7 +389,7 @@ $config['encryption_key'] = 'E@s6BMBMYx?EQ=9qnYMtZ^';
 |
 */
 $config['sess_driver'] = 'files';
-$config['sess_cookie_name'] = 'rbac_session';
+$config['sess_cookie_name'] = 'stdo_session';
 $config['sess_expiration'] = 7200;
 $config['sess_save_path'] = NULL;
 $config['sess_match_ip'] = FALSE;
@@ -412,7 +412,7 @@ $config['sess_regenerate_destroy'] = FALSE;
 |
 */
 $config['cookie_prefix']	= '';
-$config['cookie_domain']	= '.eng.psu.ac.th';
+$config['cookie_domain']	= '.watdevops.net';
 $config['cookie_path']		= '/';
 $config['cookie_secure']	= TRUE;
 $config['cookie_httponly'] 	= FALSE;
