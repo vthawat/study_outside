@@ -27,7 +27,8 @@
 		                    <?=$message?>
 		                </div>
 		                <div class="error-actions">
-		                    <a href="<?=base_url()?>" class="btn btn-primary btn-lg"><span class="fa fa-fw fa-home"></span>Home</a>
+		                    <a href="<?=base_url()?>" class="btn btn-primary btn-lg"><span class="fa fa-fw fa-home"></span>Home</a> 
+							<a href="<?=base_url()?>" class="btn btn-warning btn-lg"><span class="fa fa-fw fa-home"></span>Back</a>
 		                </div>
 		            </div>
 		            </div>

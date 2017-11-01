@@ -1,5 +1,6 @@
                <ul class="top-menu nav navbar-nav navbar-right" style="margin-right:10px">
                             <!-- NAV -->
+							<!--
                           	<li class="dropdown dropdown-large">
 				<a href="#" class="dropdown-toggle" data-toggle="dropdown"><i class="fa fa-fw fa-th"></i>Applications</a>
 				
@@ -38,8 +39,9 @@
                             		<li><a href="#"><img src="<?=prep_url($this->config->item('uiux_path').'/web/vendors/ecs/images/flag-th.png')?>"> Thai</a></li>
                             	</ul>
                             </li>
+			   		-->
                  <?php if(empty($User_info)):?>
-                      <li><a href="<?=base_url('psuoauth2')?>"><i class="fa fa-fw fa-sign-in"></i>Sign-in</a></li>
+                      <li><a href="<?=base_url('staff')?>"><i class="fa fa-fw fa-sign-in"></i>Sign-in</a></li>
                   <?php else:?>
                   	<li class="dropdown dropdown-large"><a href="#" class="dropdown-toggle" data-toggle="dropdown"><i class="fa fa-fw fa-user"></i><?=$User_info->username?></a>
                   		<ul class="dropdown-menu dropdown-menu-large">

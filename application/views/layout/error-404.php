@@ -27,6 +27,7 @@
 		                </div>
 		                <div class="error-actions">
 		                    <a href="<?=base_url()?>" class="btn btn-primary btn-lg"><span class="fa fa-fw fa-home"></span>Home</a>
+							<a href="javascript:history.back()" class="btn btn-warning btn-lg"><span class="fa fa-fw fa-undo"></span>Back</a>
 		                </div>
 		            </div>
 		            </div>

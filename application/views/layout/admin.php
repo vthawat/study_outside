@@ -17,7 +17,7 @@
           page. However, you can choose any other skin. Make sure you
           apply the skin class to the body tag so the changes take effect.
     -->
-    <link href="<?=prep_url($this->config->item('uiux_path'))?>/web/vendors/AdminLTE/dist/css/skins/skin-red.min.css" rel="stylesheet" type="text/css" />
+    <link href="<?=prep_url($this->config->item('uiux_path'))?>/web/vendors/AdminLTE/dist/css/skins/skin-green.min.css" rel="stylesheet" type="text/css" />
     <link href="<?=prep_url($this->config->item('uiux_path'))?>/web/vendors/bootsnipp/custom.css" rel="stylesheet" type="text/css" />
 	<?=$_styles?>
     <!-- HTML5 Shim and Respond.js IE8 support of HTML5 elements and media queries -->
@@ -58,24 +58,24 @@
   |               | sidebar-mini                            |
   |---------------------------------------------------------|
   -->
-  <body class="skin-red sidebar-mini" ng-app="app">
+  <body class="skin-green sidebar-mini" ng-app="app">
     <div class="wrapper">
 
       <!-- Main Header -->
       <header class="main-header">
 	   <div class="hidden-xs">
         <!-- Logo -->
-        <a href="http://www.eng.psu.ac.th" target="_blank" class="logo navbar-eng" style="height:60px">
-        	<span class="logo-mini"><img src="<?=prep_url($this->config->item('uiux_path').'/web/vendors/ecs/images/eng-logo-nav.png')?>"></span>
+        <a href="<?=base_url()?>" target="_blank" class="logo" style="height:60px">
+        	<span class="logo-mini"><img class="std-logo" src="<?=prep_url($this->config->item('uiux_path').'/web/vendors/ecs/images/app_icons/'.$this->config->item('uiux_app_icon_small'))?>"></span>
           <!-- logo for regular state and mobile devices -->
-          <span class="logo-lg" style="font-size: 26px"><img src="<?=prep_url($this->config->item('uiux_path').'/web/vendors/ecs/images/eng-logo-nav.png')?>"></span>
+          <span class="logo-lg" style="font-size: 26px"><img class="std-logo" src="<?=prep_url($this->config->item('uiux_path').'/web/vendors/ecs/images/app_icons/'.$this->config->item('uiux_app_icon_small'))?>"></span>
         </a>
 		</div>
         <!-- Header Navbar -->
-        <nav class="navbar navbar-static-top navbar-eng" role="navigation">
+        <nav class="navbar navbar-static-top" role="navigation">
           <!-- Sidebar toggle button-->
           <a href="#" class="sidebar-toggle" data-toggle="offcanvas" role="button">
-            <span class="font-medium thai-font"><?=$app_name?></span>
+            <span class="font-medium thai-font"> <?=$app_name?></span>
           </a>
           <!-- Navbar Right Menu -->
           <div class="navbar-custom-menu">

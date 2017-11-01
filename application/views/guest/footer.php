@@ -5,7 +5,7 @@
                     <h3 class="title thai-font"><?=$app_name?></h3>
                     <ul class="list-unstyled">
                     	<li></li>
-                         <li><?=$app_desc?></li>
+                         <?php if(!empty($app_desc)):?><li><?=$app_desc?></li><?php endif?>
                         <li><?=$app_version?></li>
                     </ul>
             </div>
@@ -13,7 +13,7 @@
            	 <h3 class="title thai-font">ผู้ดูแลระบบ</h3>
            	 <ul class="list-unstyled">
                     	<li><?=$app_admin_department?></li>
-                    	<li>คณะวิศวกรรมศาสตร์</li>
+                    	<li>คณะทรัพยากรธรรมชาติ</li>
                     	<li>มหาวิทยาลัยสงขลานครินทร์</li>
                     </ul>
             </div>

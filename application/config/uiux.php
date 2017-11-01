@@ -9,4 +9,5 @@
 */
 $config['uiux_path']='stdo.watdevops.net/uiux'; // uiux path start without 'http//' or 'https//'
 
-$config['uiux_app_icon']='devportal.png';
+$config['uiux_app_icon']='stdo.png';
+$config['uiux_app_icon_small']='stdo-small.png';
