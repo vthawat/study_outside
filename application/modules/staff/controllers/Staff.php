@@ -6,10 +6,14 @@ class Staff extends CI_Controller {
 	public function __construct()
 	{
 		parent::__construct();
+
+		$userinfo=$this->session->userdata('username');
+		exit(print_r($this->session->userdata()));
+		if(empty($userinfo)) redirect(base_url('psuauthen'));
 		$this->template->set_template('admin');
 		$data['User_info']=null;
 		$data['app_icon']=prep_url($this->config->item('uiux_path').'/web/vendors/ecs/images/app_icons/'.$this->config->item('uiux_app_icon'));
-		$data['app_name']='STDO Application';
+		$data['app_name']='FTPS Application';
 		$data['app_desc']='ระบบสารสนเทศบริหารจัดการการศึกษาภาคสนามด้วยกระบวนการวางแผนการเดินทางอัตโนมัติ';
 		$data['app_version']='Version 1.0';
 		$data['app_admin_department']='ภาควิชาพัฒนาการเกษตร';
@@ -18,7 +22,7 @@ class Staff extends CI_Controller {
 		$data['app_admin_phone']='6122';
 		$this->template->write('title',$data['app_name'],TRUE);
 		$this->template->write('app_name',$data['app_name'],TRUE);
-		$this->template->write_view('menu','guest/top_menu',$data);
+		//$this->template->write_view('menu','guest/top_menu',$data);
 		$this->template->write_view('footer','guest/footer',$data);
 		$this->template->add_css($this->load->view('css/admin-style.css',null,TRUE),'embed',TRUE);
 		$this->template->add_css($this->load->view('guest/css/guest-syle.css',null,TRUE),'embed',TRUE);

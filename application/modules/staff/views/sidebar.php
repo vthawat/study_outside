@@ -19,3 +19,4 @@
                 <li><a href="<?=base_url()?>staff/subject_major"><i class='fa fa-circle-o text-green fa-fw'></i>สาขาวิชา</a></li>
             </ul>
     </li>            
+    

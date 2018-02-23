@@ -34,7 +34,15 @@ $config['modules_locations'] = array(APPPATH . 'modules/');
 | a PHP script and you can easily do that on your own.
 |
 */
-$config['base_url'] = 'http://stdo.watdevops.net';
+$config['base_url'] = 'http://ftps.watdevops.net';
+
+
+/*
+|
+| config restrict FAC_ID
+|
+*/
+$config['system_allow_fac']=array('12');
 
 /*
 |--------------------------------------------------------------------------
@@ -389,9 +397,9 @@ $config['encryption_key'] = 'E@s6BMBMYx?EQ=9qnYMtZ^';
 |
 */
 $config['sess_driver'] = 'files';
-$config['sess_cookie_name'] = 'stdo_session';
+$config['sess_cookie_name'] = 'ftps_session';
 $config['sess_expiration'] = 7200;
-$config['sess_save_path'] = NULL;
+$config['sess_save_path'] = '/tmp';
 $config['sess_match_ip'] = FALSE;
 $config['sess_time_to_update'] = 300;
 $config['sess_regenerate_destroy'] = FALSE;

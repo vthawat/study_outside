@@ -1,11 +1,11 @@
 <?php defined('BASEPATH') OR exit('No direct script access allowed');
 
-class Guest extends CI_Controller {
+class Psuauthen extends CI_Controller {
 
 public function __construct()
 	{
 		parent::__construct();
-
+		//$this->load->library('authen');
 		$data['app_icon']=prep_url($this->config->item('uiux_path').'/web/vendors/ecs/images/app_icons/'.$this->config->item('uiux_app_icon'));	
 		$data['app_name']='FTPS Application';
 		$data['app_desc']='ระบบสารสนเทศบริหารจัดการการศึกษาภาคสนามด้วยกระบวนการวางแผนการเดินทางอัตโนมัติ';
@@ -22,17 +22,30 @@ public function __construct()
 		$this->template->write_view('footer','guest/footer',$data);
 		$this->template->add_css($this->load->view('guest/css/guest-syle.css',null,TRUE),'embed',TRUE);
 	}
-	public function index()
+function index()
 	{
-	
-		
-		
-		$this->template->write_view('content','guest/cover');
-		$this->template->write_view('content','guest/about');
+
+
+		$this->template->add_css($this->load->view('login/frm_login.css',null,TRUE),'embed',TRUE);
+		$this->template->write_view('content','login/frm_login');
 		$this->template->render();
 
 	}
-}
+function credentail()
+	{
+		$username=$this->input->post('username');
+		$password=$this->input->post('password');
+		$response=$this->authen->credential($username,$password);
+		if(!$response) show_error("Login หรือ Username ไม่ถูกต้อง",403);
+		elseif(!in_array($response['fac_id'],$this->config->item('system_allow_fac')))
+						show_error("ระบบนี้ใช้งานกับบุคลากรของภาควิชาพัฒนาการเกษตร คณะทรัพยากรธรรมชาติเท่านั้น",403);
+		else{
+		//	exit(print_r($response));
+			$this->session->set_userdata($response);
+			redirect(base_url('staff'));
+		//exit(print_r($this->session->userdata()));
+		}
 
-/* End of file guest.php */
-/* Location: ./application/controllers/guest.php */
+
+	}
+}
