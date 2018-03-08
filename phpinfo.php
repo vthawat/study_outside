@@ -1,2 +1,3 @@
 <?php
-phpinfo();
+session_start();
+$_SESSION['test']="sgdsg";

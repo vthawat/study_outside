@@ -75,10 +75,10 @@ $query_builder = TRUE;
 
 $db['default'] = array(
 	'dsn'	=> '',
-	'hostname' => '',
-	'username' => '',
+	'hostname' => 'localhost',
+	'username' => 'root',
 	'password' => '',
-	'database' => '',
+	'database' => 'ftps_db',
 	'dbdriver' => 'mysqli',
 	'dbprefix' => '',
 	'pconnect' => FALSE,

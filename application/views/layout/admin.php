@@ -65,7 +65,7 @@
       <header class="main-header">
 	   <div class="hidden-xs">
         <!-- Logo -->
-        <a href="<?=base_url()?>" target="_blank" class="logo" style="height:60px">
+        <a href="<?=base_url()?>" class="logo" style="height:60px">
         	<span class="logo-mini"><img class="std-logo" src="<?=prep_url($this->config->item('uiux_path').'/web/vendors/ecs/images/app_icons/'.$this->config->item('uiux_app_icon_small'))?>"></span>
           <!-- logo for regular state and mobile devices -->
           <span class="logo-lg" style="font-size: 26px"><img class="std-logo" src="<?=prep_url($this->config->item('uiux_path').'/web/vendors/ecs/images/app_icons/'.$this->config->item('uiux_app_icon_small'))?>"></span>
