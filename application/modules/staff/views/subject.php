@@ -19,8 +19,8 @@
 							    <span class="fa fa-cog fa-fw"></span><span class="caret"></span>
 							  </button>
 							  <ul class="dropdown-menu">
-							    <li><a href="<?=base_url('staff/subject/edit')?>" class="text-yellow"><span class="fa fa-edit fa-fw"></span>แก้ไข</a></li>
-							    <li><a href="<?=base_url('staff/subject/delete')?>" class="text-red" onclick="return confirm('ยืนยันการลบรายการ?')"><span class="fa fa-remove fa-fw"></span>ลบ</a></li>
+							    <li><a href="<?=base_url('staff/subject/edit/'.$item->id)?>" class="text-yellow"><span class="fa fa-edit fa-fw"></span>แก้ไข</a></li>
+							    <li><a href="<?=base_url('staff/delete/subject/'.$item->id)?>" class="text-red" onclick="return confirm('ยืนยันการลบรายการ?')"><span class="fa fa-remove fa-fw"></span>ลบ</a></li>
 							  </ul>
 							</div>
 					</td>

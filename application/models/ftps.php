@@ -24,6 +24,34 @@ class Ftps extends CI_Model
         }
        else return $this->db->get('subject_list')->result();
 
-    }  
+    } 
+    function post_subject_major()
+    {
+        return $this->db->insert('subject_major',$this->input->post());
+    }
+    function post_subject()
+    {
+        return $this->db->insert('subject_list',$this->input->post());
+    }
+    function put_subject_major($id)
+    {
+        $this->db->where('id',$id);
+        return $this->db->update('subject_major',$this->input->post());
+    }
+    function put_subject($id)
+    {
+        $this->db->where('id',$id);
+        return $this->db->update('subject_list',$this->input->post());
+    }
+    function delete_subject_major($id)
+    {
+        $this->db->where('id',$id);
+        return $this->db->delete('subject_major');
+    }
+    function delete_subject($id)
+    {
+        $this->db->where('id',$id);
+        return $this->db->delete('subject_list');
+    }
 
 }

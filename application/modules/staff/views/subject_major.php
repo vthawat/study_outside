@@ -18,7 +18,7 @@
 							  </button>
 							  <ul class="dropdown-menu">
 							    <li><a href="<?=base_url('staff/subject_major/edit/'.$item->id)?>" class="text-yellow"><span class="fa fa-edit fa-fw"></span>แก้ไข</a></li>
-							    <li><a href="<?=base_url('staff/subject_major/delete/'.$item->id)?>" class="text-red" onclick="return confirm('ยืนยันการลบรายการ?')"><span class="fa fa-remove fa-fw"></span>ลบ</a></li>
+							    <li><a href="<?=base_url('staff/delete/subject_major/'.$item->id)?>" class="text-red" onclick="return confirm('ยืนยันการลบรายการ?')"><span class="fa fa-remove fa-fw"></span>ลบ</a></li>
 							  </ul>
 							</div>
 					</td>

@@ -48,6 +48,16 @@ class Staff extends CI_Controller {
 				$this->template->write('page_header','ชื่อสาขาวิชา<i class="fa fa-fw fa-angle-double-right"></i> เพิ่มใหม่');
 				$this->template->write_view('content','contents',$data);
 		break;
+		case 'edit':
+				$data['edit_item']=$this->ftps->get_subject_major($id);
+				$data['action']=base_url('staff/put/subject_major/'.$id);
+				$data['content']=array('title'=>'',
+				'color'=>'primary',
+				//'toolbar'=>$this->load->view('toolsbar',null,TRUE),
+				'detail'=>$this->load->view('frm_subject_major',$data,TRUE));
+				$this->template->write('page_header','ชื่อสาขาวิชา<i class="fa fa-fw fa-angle-double-right"></i> แก้ไข');
+				$this->template->write_view('content','contents',$data);
+		break;
 		
 		default;
 		$data['Subject_major']=$this->ftps->get_subject_major();
@@ -60,16 +70,97 @@ class Staff extends CI_Controller {
 		}
 		$this->template->render();
 	}
-	function subject()
+	function subject($action=null,$id=null)
 	{
-		$data['Subject']=$this->ftps->get_subject();
-		$data['content']=array('title'=>'รายชื่อวิชาฝึกภาคสนาม',
+		switch($action)
+		{
+			case 'new':
+				$data['action']=base_url('staff/post/subject');
+				$data['content']=array('title'=>'',
+				'color'=>'primary',
+				//'toolbar'=>$this->load->view('toolsbar',null,TRUE),
+				'detail'=>$this->load->view('frm_subject',$data,TRUE));
+				$this->template->write('page_header','ชื่อวิชา<i class="fa fa-fw fa-angle-double-right"></i> เพิ่มใหม่');
+				$this->template->write_view('content','contents',$data);
+			break;
+			case 'edit':
+				$data['edit_item']=$this->ftps->get_subject($id);
+				$data['action']=base_url('staff/put/subject/'.$id);
+				$data['content']=array('title'=>'',
+				'color'=>'primary',
+				//'toolbar'=>$this->load->view('toolsbar',null,TRUE),
+				'detail'=>$this->load->view('frm_subject',$data,TRUE));
+				$this->template->write('page_header','ชื่อวิชา<i class="fa fa-fw fa-angle-double-right"></i> แก้ไข');
+				$this->template->write_view('content','contents',$data);
+			break;
+			default;
+			$data['Subject']=$this->ftps->get_subject();
+			$data['content']=array('title'=>'รายชื่อวิชาฝึกภาคสนาม',
 								'color'=>'primary',
 								'toolbar'=>$this->load->view('toolsbar',null,TRUE),
 								'detail'=>$this->load->view('subject',$data,TRUE));
-		$this->template->write_view('content','contents',$data);
-		$this->template->write('page_header','ข้อมูลพื้นฐาน<i class="fa fa-fw fa-angle-double-right"></i> รายวิชาฝึกภาคสนาม');
+			$this->template->write_view('content','contents',$data);
+			$this->template->write('page_header','ข้อมูลพื้นฐาน<i class="fa fa-fw fa-angle-double-right"></i> รายวิชาฝึกภาคสนาม');
+		}
 		$this->template->render();
+
+	}
+	function post($action=null)
+	{
+		switch($action)
+		{
+			case 'subject_major':
+				if($this->ftps->post_subject_major())
+				redirect(base_url('staff/'.$action));
+				else show_error('ไม่สามารถบันทึกได้');
+			break;
+			case 'subject':
+				if($this->ftps->post_subject())
+				redirect(base_url('staff/'.$action));
+				else show_error('ไม่สามารถบันทึกได้');
+			break;
+			default;
+			show_error('ไม่สามารถดำเนินการได้');
+		}
+
+	}
+	function put($action=null,$id)
+	{
+		switch($action)
+		{
+			case 'subject_major':
+				if($this->ftps->put_subject_major($id))
+				redirect(base_url('staff/'.$action));
+				else show_error('ไม่สามารถบันทึกได้');
+			break;
+			case 'subject':
+				if($this->ftps->put_subject($id))
+				redirect(base_url('staff/'.$action));
+				else show_error('ไม่สามารถบันทึกได้');
+			break;
+			default;
+			show_error('ไม่สามารถดำเนินการได้');
+		}
+
+	}
+	function delete($action=null,$id)
+	{
+		switch($action)
+		{
+			case 'subject_major':
+				if($this->ftps->delete_subject_major($id))
+				redirect(base_url('staff/'.$action));
+				else show_error('ไม่สามารถลบได้');
+			break;
+			case 'subject':
+				if($this->ftps->delete_subject($id))
+				redirect(base_url('staff/'.$action));
+				else show_error('ไม่สามารถลบได้');
+			break;
+
+			default;
+			show_error('ไม่สามารถดำเนินการได้');
+		}
 
 	}
 }
