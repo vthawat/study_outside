@@ -31,8 +31,18 @@ class Staff extends CI_Controller {
 	public function index()
 	{
 
-	
 		$this->template->render();
+		
+	}
+	function subject_major($action=null)
+	{
 
+		$data['content']=array('title'=>'รายชื่อสาขาวิชา',
+								'color'=>'primary',
+								'toolbar'=>$this->load->view('toolsbar',null,TRUE),
+								'detail'=>'');
+		$this->template->write('page_header','ข้อมูลพื้นฐาน<i class="fa fa-fw fa-angle-double-right"></i> สาขาวิชา');
+		$this->template->write_view('content','contents',$data);
+		$this->template->render();
 	}
 }
