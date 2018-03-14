@@ -16,6 +16,7 @@
             <ul class="treeview-menu">
               	<li><a href="<?=base_url()?>staff/study_place"><i class='fa fa-circle-o text-green fa-fw'></i>สถานที่ศึกษาดูงาน</a></li>
                 <li><a href="<?=base_url()?>staff/subject_major"><i class='fa fa-circle-o text-green fa-fw'></i>สาขาวิชา</a></li>
+                <li><a href="<?=base_url()?>staff/subject"><i class='fa fa-circle-o text-green fa-fw'></i>รายวิชาฝึกภาคสนาม</a></li>
             </ul>
     </li>            
     
