@@ -35,13 +35,29 @@ class Staff extends CI_Controller {
 		$this->template->render();
 		
 	}
+	function json_get_amphur_by_province_id($province_id)
+	{
+		$amphur=array();
+		foreach($this->amphur->get_by_province_id($province_id) as $item)
+			array_push($amphur,array('id'=>$item->AMPHUR_ID,'amphur_name'=>$item->AMPHUR_NAME));
+		print json_encode($amphur);
+	}
+	function json_get_district_by_amphur_id($amphur_id)
+	{
+		$district=array();
+		foreach($this->district->get_by_amphur_id($amphur_id) as $item)
+			array_push($district,array('id'=>$item->DISTRICT_ID,'district_name'=>$item->DISTRICT_NAME));
+		print json_encode($district);
+	}
 	function place($action=null)
 	{
 		switch($action)
 		{
 			case 'new':
+				$this->template->add_js($this->load->view('js/select-box.js',null,TRUE),'embed',TRUE);
+				$data['Province']=$this->province->get_all();
 				$data['content']=array('color'=>'success',
-									  'detail'=>$this->load->view('frm_place_study',null,TRUE));
+									  'detail'=>$this->load->view('frm_place_study',$data,TRUE));
 				$this->template->write_view('content','contents',$data);
 				$this->template->write('page_header','สถานที่ศึกษาดูงาน<i class="fa fa-fw fa-angle-double-right"></i>เพิ่มใหม่');
 			break;

@@ -10,6 +10,7 @@ class Country_province extends CI_Model
 	}
 	function get_all()
 	{
+		$this->db->order_by('GEO_ID');
 		return $this->db->get($this->table)->result();
 	}
 	function get_by_geo_id($geo_id)
