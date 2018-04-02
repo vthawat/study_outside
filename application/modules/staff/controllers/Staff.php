@@ -14,13 +14,13 @@ class Staff extends CI_Controller {
 		$this->template->set_template('admin');
 		$data['User_info']=$this->userinfo->get_active_sign_in();
 		$data['app_icon']=prep_url($this->config->item('uiux_path').'/web/vendors/ecs/images/app_icons/'.$this->config->item('uiux_app_icon'));
-		$data['app_name']='FTPS Application';
-		$data['app_desc']='ระบบสารสนเทศบริหารจัดการการศึกษาภาคสนามด้วยกระบวนการวางแผนการเดินทางอัตโนมัติ';
-		$data['app_version']='Version 1.0';
-		$data['app_admin_department']='ภาควิชาพัฒนาการเกษตร';
-		$data['app_admin_contact']='สุดารา คล้ายมณี';
-		$data['app_admin_email']='sudara.k@psu.ac.th';
-		$data['app_admin_phone']='6122';
+		$data['app_name']=$this->config->item('app_info')['app_name'];
+		$data['app_desc']=$this->config->item('app_info')['app_desc'];
+		$data['app_version']=$this->config->item('app_info')['app_version'];
+		$data['app_admin_department']=$this->config->item('app_info')['app_admin_department'];
+		$data['app_admin_contact']=$this->config->item('app_info')['app_admin_contact'];
+		$data['app_admin_email']=$this->config->item('app_info')['app_admin_email'];
+		$data['app_admin_phone']=$this->config->item('app_info')['app_admin_phone'];
 		$this->template->write('title',$data['app_name'],TRUE);
 		$this->template->write('app_name',$data['app_name'],TRUE);
 		$this->template->write_view('menu','top_menu',$data);
@@ -31,9 +31,40 @@ class Staff extends CI_Controller {
 	}
 	public function index()
 	{
-
+		
 		$this->template->render();
 		
+	}
+	function place($action=null)
+	{
+		switch($action)
+		{
+			case 'new':
+				$data['content']=array('color'=>'success',
+									  'detail'=>$this->load->view('frm_place_study',null,TRUE));
+				$this->template->write_view('content','contents',$data);
+				$this->template->write('page_header','สถานที่ศึกษาดูงาน<i class="fa fa-fw fa-angle-double-right"></i>เพิ่มใหม่');
+			break;
+		default;
+		$data['content']=array('color'=>'primary',
+									'size'=>9,
+									'title'=>'จำนวนทั้งหมด xx สถานที่',
+									'toolbar'=>'<a class="btn icon-btn btn-success add-new" href="'.base_url('staff/place/new').'"><span class="btn-glyphicon fa fa-plus img-circle text-success"></span>เพิ่มใหม่</a>',
+									'detail'=>$this->load->view('place_list_items',null,TRUE));
+		$this->template->write_view('content','contents',$data);
+		// prepare data for fillter 
+		//$this->template->add_js($this->load->view('js/geo_fillter.js',null,TRUE),'embed',TRUE);
+		//$fillter['status_list']=$this->trader_profile->get_status_all();
+		//$fillter['geo_fillter']=$this->country_geography->get_all();
+		//$fillter['product_type_fillter']=$this->base_product_type->get_all();
+		$data['content']=array('title'=>"<i class='fa fa-filter fa-fw'></i>ตัวกรองข้อมูล",
+								'size'=>3,
+								'color'=>'success',
+								'detail'=>'');
+		$this->template->write_view('content','contents',$data);
+		$this->template->write('page_header','สถานที่ศึกษาดูงาน');
+		}
+		$this->template->render();
 	}
 	function subject_major($action=null,$id=null)
 	{

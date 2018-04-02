@@ -36,6 +36,14 @@ $config['modules_locations'] = array(APPPATH . 'modules/');
 */
 $config['base_url'] = 'http://localhost/ftps';
 
+$config['app_info']=array('app_name'=>'FTPS Application',
+                          'app_desc'=>'ระบบสารสนเทศบริหารจัดการการศึกษาภาคสนามด้วยกระบวนการวางแผนการเดินทางอัตโนมัติ',
+                          'app_version'=>'Version 1.0',
+                          'app_admin_department'=>'ภาควิชาพัฒนาการเกษตร',
+                          'app_admin_contact'=>'สุดารา คล้ายมณี',
+                          'app_admin_email'=>'sudara.k@psu.ac.th',
+                          'app_admin_phone'=>'6122');
+
 
 /*
 |

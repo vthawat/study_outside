@@ -3,7 +3,13 @@ class Ftps extends CI_Model
 {
 	function __construct()
 	{
-		parent::__construct();			
+        parent::__construct();
+        $this->load->model('country_geography','geography');
+		$this->load->model('country_province','province');
+		$this->load->model('country_amphur','amphur');
+		$this->load->model('country_district','district');
+        $this->load->model('country_zipcode','zipcode');
+        $this->load->model('study_place');				
     }
     function get_subject_major($id=null)
     {
