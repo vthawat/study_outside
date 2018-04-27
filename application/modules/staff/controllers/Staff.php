@@ -54,7 +54,14 @@ class Staff extends CI_Controller {
 		switch($action)
 		{
 			case 'new':
+				// map helpers
+				$this->template->add_js('https://maps.google.com/maps/api/js?key=AIzaSyBGE-KGQB9PP6uq4wErMO0Xbxmz4FWxy3Q&libraries=places&language=th','link');
+				$this->template->add_js('assets/gmaps/js/locationpicker.jquery.min.js');
+				$this->template->add_css($this->load->view('css/map.css',null,TRUE),'embed',TRUE);
+				$this->template->add_js($this->load->view('js/place-search.js',null,TRUE),'embed',TRUE);
+				//
 				$this->template->add_js($this->load->view('js/select-box.js',null,TRUE),'embed',TRUE);
+				$data['action']=base_url('staff/post/place');
 				$data['Province']=$this->province->get_all();
 				$data['content']=array('color'=>'success',
 									  'detail'=>$this->load->view('frm_place_study',$data,TRUE));
@@ -165,6 +172,11 @@ class Staff extends CI_Controller {
 				if($this->ftps->post_subject())
 				redirect(base_url('staff/'.$action));
 				else show_error('ไม่สามารถบันทึกได้');
+			break;
+			case 'place':
+					if($this->study_place->post())
+					redirect(base_url('staff/'.$action));
+					else show_error('ไม่สามารถบันทึกได้');
 			break;
 			default;
 			show_error('ไม่สามารถดำเนินการได้');

@@ -440,7 +440,7 @@ class CI_Template {
       switch ($type)
       {
 	  	case 'link':
-		$js = '<script type="text/javascript" src="https://'.$script .'"';
+		$js = '<script type="text/javascript" src="'.$script .'"';
             if ($defer)
             {
                $js .= ' defer="defer"';

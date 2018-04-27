@@ -14,6 +14,11 @@ class Study_place extends CI_Model
 		return $this->db->get($this->table)->result();
 	}
 
+	function post()
+    {
+        return $this->db->insert($this->table,$this->input->post());
+    }
+
 }
 
 /* End of file template.php */

@@ -18,6 +18,24 @@
     </div>
   </div>
   <div class="form-group">
+    <label for="contact-phone" class="col-sm-2 control-label">หมายเลขโทรศัพท์*</label>
+    <div class="col-sm-10">
+      <input type="text" class="form-control" name="contact_phone" id="contact-phone"  value="<?php if(!empty($edit_item)) print $edit_item->contact_phone?>" required>
+    </div>
+  </div>
+  <div class="form-group">
+    <label for="contact-fax" class="col-sm-2 control-label">หมายเลขโทรสาร*</label>
+    <div class="col-sm-10">
+      <input type="text" class="form-control" name="contact_fax" id="contact-fax"  value="<?php if(!empty($edit_item)) print $edit_item->contact_fax?>" required>
+    </div>
+  </div>
+  <div class="form-group">
+    <label for="contact-email" class="col-sm-2 control-label">อีเมล*</label>
+    <div class="col-sm-10">
+      <input type="text" class="form-control" name="contact_email" id="contact-email"  value="<?php if(!empty($edit_item)) print $edit_item->contact_email?>" required>
+    </div>
+  </div>
+  <div class="form-group">
     <label for="address" class="col-sm-2 control-label">ที่อยู่*</label>
     <div class="col-sm-10">
       <input type="text" class="form-control" name="address" id="address"  value="<?php if(!empty($edit_item)) print $edit_item->address?>" required>
@@ -58,10 +76,16 @@
 		 </div>		
 		<div class="input-group">
       		<span class="input-group-addon"><i class="fa fa-map-marker fa-fw"></i>Latitude</span>
-			<input <?php if(!empty($project_planning->LATITUDE)):?>value="<?=$project_planning->LATITUDE?>"<?php endif?> class="form-control" type="text" name="latitude" id="latitude" />
+			<input <?php if(!empty($project_planning->LATITUDE)):?>value="<?=$project_planning->LATITUDE?>"<?php endif?> class="form-control" type="text" name="lat" id="latitude" />
 			<span class="input-group-addon"><i class="fa fa-map-marker fa-fw"></i>Longtitude</span>
-			<input <?php if(!empty($project_planning->LONGTITUDE)):?>value="<?=$project_planning->LONGTITUDE?>"<?php endif?> class="form-control" type="text" name="longtitude"  id="longtitude" />
+			<input <?php if(!empty($project_planning->LONGTITUDE)):?>value="<?=$project_planning->LONGTITUDE?>"<?php endif?> class="form-control" type="text" name="long"  id="longtitude" />
 		</div>
 <div id="gm-map"></div>
+</div>
+<div class="form-group">
+    <div class="col-sm-10 col-sm-offset-2">
+    <button class="btn icon-btn btn-success save"><span class="btn-glyphicon fa fa-save img-circle text-success"></span>บันทึก</button>
+    <a class="btn icon-btn btn-default cancel" href="javascript:history.back()"><span class="btn-glyphicon fa fa-stop img-circle text-gray"></span>ยกเลิก</a>
+    </div>
 </div>
 </form>
