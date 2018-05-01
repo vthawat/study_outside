@@ -69,11 +69,12 @@ class Staff extends CI_Controller {
 				$this->template->write('page_header','สถานที่ศึกษาดูงาน<i class="fa fa-fw fa-angle-double-right"></i>เพิ่มใหม่');
 			break;
 		default;
+		$data['Study_place']=$this->study_place->get_all();
 		$data['content']=array('color'=>'primary',
 									'size'=>9,
-									'title'=>'จำนวนทั้งหมด xx สถานที่',
+									'title'=>'จำนวนทั้งหมด '.count($data['Study_place']).' สถานที่',
 									'toolbar'=>'<a class="btn icon-btn btn-success add-new" href="'.base_url('staff/place/new').'"><span class="btn-glyphicon fa fa-plus img-circle text-success"></span>เพิ่มใหม่</a>',
-									'detail'=>$this->load->view('place_list_items',null,TRUE));
+									'detail'=>$this->load->view('place_list_items',$data,TRUE));
 		$this->template->write_view('content','contents',$data);
 		// prepare data for fillter 
 		//$this->template->add_js($this->load->view('js/geo_fillter.js',null,TRUE),'embed',TRUE);
