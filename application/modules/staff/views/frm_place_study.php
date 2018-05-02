@@ -97,11 +97,9 @@
 		</div>
 <div id="gm-map"></div>
 </div>
-<div class="form-group">
-    <div class="col-sm-10 col-sm-offset-2">
+<div class="text-center">
     <button class="btn icon-btn btn-success save"><span class="btn-glyphicon fa fa-save img-circle text-success"></span>บันทึก</button>
-    <a class="btn icon-btn btn-default cancel" href="javascript:history.back()"><span class="btn-glyphicon fa fa-stop img-circle text-gray"></span>ยกเลิก</a>
-    </div>
+    <a class="btn icon-btn btn-default cancel" href="javascript:history.back()"><span class="btn-glyphicon fa fa-mail-reply img-circle text-primary"></span>ยกเลิก</a>
 </div>
 
 

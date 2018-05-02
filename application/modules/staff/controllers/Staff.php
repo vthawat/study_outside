@@ -49,7 +49,7 @@ class Staff extends CI_Controller {
 			array_push($district,array('id'=>$item->DISTRICT_ID,'district_name'=>$item->DISTRICT_NAME));
 		print json_encode($district);
 	}
-	function place($action=null)
+	function place($action=null,$place_id=null)
 	{
 		switch($action)
 		{
@@ -65,9 +65,22 @@ class Staff extends CI_Controller {
 				$data['action']=base_url('staff/post/place');
 				$data['Province']=$this->province->get_all();
 				$data['content']=array('color'=>'success',
+										'toolbar'=>'<a class="btn icon-btn btn-default cancel" href="javascript:history.back()"><span class="btn-glyphicon fa fa-mail-reply img-circle text-primary"></span>ยกเลิก</a>',
 									  'detail'=>$this->load->view('frm_place_study',$data,TRUE));
 				$this->template->write_view('content','contents',$data);
 				$this->template->write('page_header','สถานที่ศึกษาดูงาน<i class="fa fa-fw fa-angle-double-right"></i>เพิ่มใหม่');
+			break;
+			case 'knowledge':
+				 $this->template->write('page_header','สถานที่ศึกษาดูงาน<i class="fa fa-fw fa-angle-double-right"></i>องค์ความรู้ของสถานที่');
+				 $place=$this->study_place->get_by_id($place_id);
+				 $data['content']=array('color'=>'success',
+										 'title'=>$place->place_name.' อ.'.$place->AMPHUR_NAME.' จ.'.$place->PROVINCE_NAME,
+										 'toolbar'=>'<a class="btn icon-btn btn-default cancel" href="javascript:history.back()"><span class="btn-glyphicon fa fa-mail-reply img-circle text-primary"></span>ยกเลิก</a> <a class="btn icon-btn btn-success add-new" href="'.base_url('staff/place/new_knowled/'.$place_id).'"><span class="btn-glyphicon fa fa-plus img-circle text-success"></span>เพิ่มใหม่</a>',
+										'detail'=>'');
+				$this->template->write_view('content','contents',$data);				
+			break;
+			case 'new_knowled':
+				$this->template->write('page_header','สถานที่ศึกษาดูงาน<i class="fa fa-fw fa-angle-double-right"></i>เพิ่มองค์ความรู้ใหม่');
 			break;
 		default;
 		$data['Study_place']=$this->study_place->get_all();
