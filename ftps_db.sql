@@ -10,7 +10,7 @@ Target Server Type    : MYSQL
 Target Server Version : 50624
 File Encoding         : 65001
 
-Date: 2018-04-27 23:36:29
+Date: 2018-05-03 00:09:19
 */
 
 SET FOREIGN_KEY_CHECKS=0;
@@ -17538,7 +17538,6 @@ CREATE TABLE `khowledge_items` (
   `subject_major_id` int(11) DEFAULT NULL,
   `knowledge_id` int(11) DEFAULT NULL,
   `study_place_id` int(11) DEFAULT NULL,
-  `study_period` int(11) DEFAULT NULL,
   PRIMARY KEY (`id`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
@@ -17554,6 +17553,7 @@ CREATE TABLE `knowledge` (
   `id` int(11) NOT NULL AUTO_INCREMENT,
   `title` varchar(345) DEFAULT NULL,
   `desc` varchar(455) DEFAULT NULL,
+  `image` varchar(200) DEFAULT NULL,
   PRIMARY KEY (`id`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
@@ -17637,14 +17637,33 @@ CREATE TABLE `study_place` (
   `create_date` date DEFAULT NULL,
   `last_update` date DEFAULT NULL,
   PRIMARY KEY (`id`)
-) ENGINE=InnoDB AUTO_INCREMENT=4 DEFAULT CHARSET=utf8;
+) ENGINE=InnoDB AUTO_INCREMENT=3 DEFAULT CHARSET=utf8;
 
 -- ----------------------------
 -- Records of study_place
 -- ----------------------------
-INSERT INTO `study_place` VALUES ('1', 'ศูนย์การเรียนรู้ชุมชนบ้านควนมีด', 'นายธวัช วราไชย', 'เกษตรกร 4.0', '72 หมู่ 2', '8220', '920', '70', null, null, null, 'ตำบล คลองเปียะ', '7.1756004', '100.61434699999995', null, null);
-INSERT INTO `study_place` VALUES ('2', 'ศูนย์การเรียนรู้ชุมชนบ้านควนมีด', 'นายธวัช วราไชย', 'เกษตรกร 4.0', '72 หมู่ 2', '8220', '920', '70', null, null, null, '3017 ตำบล คลองเปียะ อำเภอ จะนะ สงขลา 90130 ประเทศไทย', '6.973837000464176', '100.66851689313808', null, null);
-INSERT INTO `study_place` VALUES ('3', 'กดเ้กด', 'กด้', 'กด้', 'dgdfg', '3691', '410', '28', '554545', '4584584', 'test@m.com', 'ตำบล วังแสง', '16.45103173747801', '102.84573388314209', null, null);
+INSERT INTO `study_place` VALUES ('1', 'dfghfd', 'dfghfd', 'dfgh', 'dgfdh', '1383', '173', '14', 'dfghdf', '', '', '17 ซอย ชัยมงคล 3 ตำบล บางพระ อำเภอเมืองตราด ตราด 23000 ประเทศไทย', '12.246824386597835', '102.52116411960446', null, null);
+INSERT INTO `study_place` VALUES ('2', 'xdfgdfg', 'dfgdfg', 'dgdfg', 'dfgfd', '1671', '204', '17', 'dfgfd', '', '', 'ถนนสุวรรณศร ตำบล ท่าช้าง อำเภอเมืองนครนายก นครนายก 26000 ประเทศไทย', '14.212022085197582', '101.20262267135013', null, null);
+
+-- ----------------------------
+-- Table structure for study_place_major_list
+-- ----------------------------
+DROP TABLE IF EXISTS `study_place_major_list`;
+CREATE TABLE `study_place_major_list` (
+  `id` int(11) NOT NULL AUTO_INCREMENT,
+  `study_place_id` int(11) DEFAULT NULL,
+  `subject_major_id` int(11) DEFAULT NULL,
+  PRIMARY KEY (`id`)
+) ENGINE=InnoDB AUTO_INCREMENT=6 DEFAULT CHARSET=utf8;
+
+-- ----------------------------
+-- Records of study_place_major_list
+-- ----------------------------
+INSERT INTO `study_place_major_list` VALUES ('1', '1', '1');
+INSERT INTO `study_place_major_list` VALUES ('2', '1', '3');
+INSERT INTO `study_place_major_list` VALUES ('3', '2', '1');
+INSERT INTO `study_place_major_list` VALUES ('4', '2', '2');
+INSERT INTO `study_place_major_list` VALUES ('5', '2', '3');
 
 -- ----------------------------
 -- Table structure for subject_list
@@ -17691,9 +17710,10 @@ CREATE TABLE `user_privilage` (
   `level` varchar(255) DEFAULT NULL,
   `active` int(11) DEFAULT '1',
   PRIMARY KEY (`id`)
-) ENGINE=InnoDB AUTO_INCREMENT=2 DEFAULT CHARSET=utf8;
+) ENGINE=InnoDB AUTO_INCREMENT=3 DEFAULT CHARSET=utf8;
 
 -- ----------------------------
 -- Records of user_privilage
 -- ----------------------------
 INSERT INTO `user_privilage` VALUES ('1', '0024025', 'staff', '1');
+INSERT INTO `user_privilage` VALUES ('2', '0027847', 'staff', '1');
