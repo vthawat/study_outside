@@ -1,4 +1,5 @@
 <form method="post" class="form-horizontal" action="<?php if(!empty($action)) print $action?>">
+ <div class="col-md-8">
  <div class="form-group">
     <label for="place-name" class="col-sm-2 control-label">ชื่อสถานที่*</label>
     <div class="col-sm-10">
@@ -24,15 +25,15 @@
     </div>
   </div>
   <div class="form-group">
-    <label for="contact-fax" class="col-sm-2 control-label">หมายเลขโทรสาร*</label>
+    <label for="contact-fax" class="col-sm-2 control-label">หมายเลขโทรสาร</label>
     <div class="col-sm-10">
-      <input type="text" class="form-control" name="contact_fax" id="contact-fax"  value="<?php if(!empty($edit_item)) print $edit_item->contact_fax?>" required>
+      <input type="text" class="form-control" name="contact_fax" id="contact-fax"  value="<?php if(!empty($edit_item)) print $edit_item->contact_fax?>">
     </div>
   </div>
   <div class="form-group">
-    <label for="contact-email" class="col-sm-2 control-label">อีเมล*</label>
+    <label for="contact-email" class="col-sm-2 control-label">อีเมล</label>
     <div class="col-sm-10">
-      <input type="text" class="form-control" name="contact_email" id="contact-email"  value="<?php if(!empty($edit_item)) print $edit_item->contact_email?>" required>
+      <input type="text" class="form-control" name="contact_email" id="contact-email"  value="<?php if(!empty($edit_item)) print $edit_item->contact_email?>">
     </div>
   </div>
   <div class="form-group">
@@ -66,7 +67,21 @@
       </select>
     </div>
   </div>
-  <div class="box-body">
+ </div>
+ <div class="col-md-4">
+      <div class="alert bg-warning">
+      <label>สาขาวิชา</label>
+      <ul class="list-group">
+      <?php foreach($Subject_major as $item):?>
+      <li style="font-size:14px;" class="list-group-item"><input type="checkbox" name="subject_major_id[]" id="subject-major-<?=$item->id?>" value="<?=$item->id?>"> <label for="subject-major-<?=$item->id?>"><?=$item->major_name?></label></li>
+      <?php endforeach?>
+      </ul>
+      </div>
+ </div>
+
+ <div class="clearfix"></div>
+ 
+ <div class="box-body">
   <h4 class="text-success">พิกัดของสถานที่ศึกษาดูงานภาคสนาม</h4>
 		<div class="form-group">
 		  <div>
@@ -88,4 +103,6 @@
     <a class="btn icon-btn btn-default cancel" href="javascript:history.back()"><span class="btn-glyphicon fa fa-stop img-circle text-gray"></span>ยกเลิก</a>
     </div>
 </div>
+
+
 </form>

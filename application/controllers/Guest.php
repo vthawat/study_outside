@@ -27,7 +27,7 @@ public function __construct()
 	
 		
 		
-		$this->template->write_view('content','guest/cover');
+	//	$this->template->write_view('content','guest/cover');
 		$this->template->write_view('content','guest/about');
 		$this->template->render();
 

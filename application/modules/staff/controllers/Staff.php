@@ -61,6 +61,7 @@ class Staff extends CI_Controller {
 				$this->template->add_js($this->load->view('js/place-search.js',null,TRUE),'embed',TRUE);
 				//
 				$this->template->add_js($this->load->view('js/select-box.js',null,TRUE),'embed',TRUE);
+				$data['Subject_major']=$this->ftps->get_subject_major();
 				$data['action']=base_url('staff/post/place');
 				$data['Province']=$this->province->get_all();
 				$data['content']=array('color'=>'success',
@@ -174,7 +175,7 @@ class Staff extends CI_Controller {
 				redirect(base_url('staff/'.$action));
 				else show_error('ไม่สามารถบันทึกได้');
 			break;
-			case 'place':
+			case 'place':					
 					if($this->study_place->post())
 					redirect(base_url('staff/'.$action));
 					else show_error('ไม่สามารถบันทึกได้');

@@ -16,13 +16,12 @@
    </div>
   <hr>
    <div class="row">
-     <div class="col-md-4">
-      <p><img class="img-responsive img-feature wow fadeInLeft animated" data-wow-duration="2s" data-wow-delay="1s" src="<?=base_url('images/map-routing.png')?>" alt=""></p>
-     
-     </div>
      <div class="col-md-offset-3 col-md-5">
        <h3 class="thai-font title"><i class="fa fa-fw fa-paper-plane"></i>นำเสนอเส้นทางการเดินทาง</h3>
       <p class="thai-font desc">เราได้นำบริการค้นหาเส้นทางของ Google Map มาช่วยค้นหาเส้นทางที่เหมาะสม พร้อมบอกระยะทางและเวลาเพื่อนำเสนอและตัดสินใจเส้นทาง หรือจะกำหนดเส้นทางได้ด้วยตัวเอง</p>
+       </div>
+       <div class="col-md-4">
+      <p><img class="img-responsive img-feature wow fadeInLeft animated" data-wow-duration="2s" data-wow-delay="1s" src="<?=base_url('images/map-routing.png')?>" alt=""></p>
      
      </div>
    </div>

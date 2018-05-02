@@ -20,8 +20,23 @@ class Study_place extends CI_Model
 
 	function post()
     {
-        return $this->db->insert($this->table,$this->input->post());
-    }
+	   $data=$this->input->post();
+	   $subject_major_list=$this->input->post('subject_major_id');
+	   unset($data['subject_major_id']);
+	   $this->db->insert($this->table,$data);
+	   $study_place_id=$this->db->insert_id();
+	   foreach($subject_major_list as $subject_major_id)
+		$this->post_study_place_major_list($study_place_id,$subject_major_id);
+	
+	return TRUE;
+
+	}
+	function post_study_place_major_list($study_place_id,$subject_major_id)
+	{
+		$data=array('study_place_id'=>$study_place_id,
+					'subject_major_id'=>$subject_major_id);
+		$this->db->insert('study_place_major_list',$data);
+	}
 
 }
 
