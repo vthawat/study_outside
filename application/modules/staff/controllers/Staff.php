@@ -231,7 +231,11 @@ class Staff extends CI_Controller {
 				redirect(base_url('staff/'.$action));
 				else show_error('ไม่สามารถลบได้');
 			break;
-
+			case 'place':
+				if($this->study_place->delete($id))
+					redirect(base_url('staff/'.$action));
+				else show_error('ไม่สามารถลบได้');
+			break;
 			default;
 			show_error('ไม่สามารถดำเนินการได้');
 		}

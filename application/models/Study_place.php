@@ -41,6 +41,11 @@ class Study_place extends CI_Model
 	return TRUE;
 
 	}
+	function delete($id)
+	{
+		$this->db->where('id',$id);
+		return $this->db->delete($this->table);
+	}
 	function post_study_place_major_list($study_place_id,$subject_major_id)
 	{
 		$data=array('study_place_id'=>$study_place_id,

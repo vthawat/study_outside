@@ -26,7 +26,7 @@
 							  <ul class="dropdown-menu">
                   <li><a href="<?=base_url('staff/place/knowledge/'.$item->id)?>" class="text-blue"><i class="fa fa-fw fa-info-circle"></i>องค์ความรู้ของสถานที่</a></li>
                   <li><a href="#" class="text-yellow"><i class="fa fa-fw fa-pencil"></i>แก้ไข</a></li>
-                  <li><a href="#" class="text-red"><i class="fa fa-fw fa-remove"></i>ลบ</a></li>
+                  <li><a href="<?=base_url('staff/delete/place/'.$item->id)?>" class="text-red" onclick="return confirm('ยืนยันการลบรายการสถานที่: <?=$item->place_name?>?')"><i class="fa fa-fw fa-remove"></i>ลบ</a></li>
 							  </ul>
 							</div>
   
