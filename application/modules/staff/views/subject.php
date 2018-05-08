@@ -1,15 +1,15 @@
 <?php if(!empty($Subject)):?>
 	<table class="table table-hover tb-basic">
 		<thead>
-			<th>#ID</th>
+			<th>#</th>
 			<th>รหัสวิชา</th>
 			<th>ชื่อวิชา</th>
 			<th>การจัดการ</th>
 		</thead>
 		<tbody>
-			<?php foreach($Subject as $item):?>
+			<?php $num=1;foreach($Subject as $item):?>
 				<tr>
-					<td><?=$item->id?></td>
+					<td><?=$num?></td>
 					<td><?=$item->subject_code?></td>
 					<td><?=$item->subject_name?></td>
 					<td>
@@ -25,7 +25,7 @@
 							</div>
 					</td>
 				</tr>
-			<?php endforeach;?>
+			<?php $num++;endforeach;?>
 		</tbody>
 	</table>
 <?php endif;?>

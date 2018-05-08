@@ -1,14 +1,14 @@
 <?php if(!empty($Subject_major)):?>
 	<table class="table table-hover tb-basic">
 		<thead>
-			<th>#ID</th>
+			<th>#</th>
 			<th>สาขาวิชา</th>
 			<th>การจัดการ</th>
 		</thead>
 		<tbody>
-			<?php foreach($Subject_major as $item):?>
+			<?php $num=1;foreach($Subject_major as $item):?>
 				<tr>
-					<td><?=$item->id?></td>
+					<td><?=$num?></td>
 					<td><?=$item->major_name?></td>
 					<td>
 						<!-- Single button -->
@@ -23,7 +23,7 @@
 							</div>
 					</td>
 				</tr>
-			<?php endforeach;?>
+			<?php $num++;endforeach;?>
 		</tbody>
 	</table>
 <?php endif;?>
