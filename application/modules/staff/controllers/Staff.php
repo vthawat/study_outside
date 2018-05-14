@@ -35,6 +35,24 @@ class Staff extends CI_Controller {
 		$this->template->render();
 		
 	}
+	function trip()
+	{
+
+		$this->template->render();
+		
+	}
+	function cars()
+	{
+
+		$this->template->render();
+		
+	}
+	function report()
+	{
+
+		$this->template->render();
+		
+	}
 	function json_get_amphur_by_province_id($province_id)
 	{
 		$amphur=array();
@@ -69,6 +87,26 @@ class Staff extends CI_Controller {
 									  'detail'=>$this->load->view('frm_place_study',$data,TRUE));
 				$this->template->write_view('content','contents',$data);
 				$this->template->write('page_header','สถานที่ศึกษาดูงาน<i class="fa fa-fw fa-angle-double-right"></i>เพิ่มใหม่');
+			break;
+			case 'edit':
+				// map helpers
+				$this->template->add_js('https://maps.google.com/maps/api/js?key=AIzaSyBGE-KGQB9PP6uq4wErMO0Xbxmz4FWxy3Q&libraries=places&language=th','link');
+				$this->template->add_js('assets/gmaps/js/locationpicker.jquery.min.js');
+				$this->template->add_css($this->load->view('css/map.css',null,TRUE),'embed',TRUE);
+				$this->template->add_js($this->load->view('js/place-search.js',null,TRUE),'embed',TRUE);
+				//
+				$this->template->add_js($this->load->view('js/select-box.js',null,TRUE),'embed',TRUE);
+				
+				$data['edit_item']=$this->study_place->get_by_id($place_id);
+				$data['Subject_major']=$this->ftps->get_subject_major();
+				$data['action']=base_url('staff/post/place');
+				$data['Province']=$this->province->get_all();
+				$data['content']=array('color'=>'success',
+										'toolbar'=>'<a class="btn icon-btn btn-default cancel" href="javascript:history.back()"><span class="btn-glyphicon fa fa-mail-reply img-circle text-primary"></span>ยกเลิก</a>',
+									  'detail'=>$this->load->view('frm_place_study',$data,TRUE));
+				$this->template->write_view('content','contents',$data);
+				$this->template->write('page_header','สถานที่ศึกษาดูงาน<i class="fa fa-fw fa-angle-double-right"></i>แก้ไข');
+			
 			break;
 			case 'knowledge':
 				 $this->template->write('page_header','สถานที่ศึกษาดูงาน<i class="fa fa-fw fa-angle-double-right"></i>องค์ความรู้ของสถานที่');

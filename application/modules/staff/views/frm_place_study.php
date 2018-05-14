@@ -45,7 +45,7 @@
   <div class="form-group">
     <label for="province" class="col-sm-2 control-label">จังหวัด*</label>
     <div class="col-sm-10">
-      <select name="province_id" id="province" class="form-control">
+      <select name="province_id" id="province" class="form-control" required>
         <option value="0">--เลือก--</option>
         <?php foreach($Province as $item):?>
         <option value="<?=$item->PROVINCE_ID?>"><?=$item->PROVINCE_NAME?></option>
@@ -56,15 +56,21 @@
   <div class="form-group">
     <label for="amphur" class="col-sm-2 control-label">อำเภอ*</label>
     <div class="col-sm-10">
-      <select name="amphur_id" id="amphur" class="form-control">
+      <select name="amphur_id" id="amphur" class="form-control" required>
       </select>
     </div>
   </div>
   <div class="form-group">
     <label for="district" class="col-sm-2 control-label">ตำบล*</label>
     <div class="col-sm-10">
-      <select name="district_id" id="district" class="form-control">
+      <select name="district_id" id="district" class="form-control" required>
       </select>
+    </div>
+  </div>
+  <div class="form-group">
+    <label for="place-spec" class="col-sm-2 control-label">การประเมินสถานที่</label>
+    <div class="col-sm-10">
+      <textarea name="place_spec" id="place-spec" rows="6" class="form-control"><?php if(!empty($edit_item)) print $edit_item->place_spec?></textarea>
     </div>
   </div>
  </div>
