@@ -99,7 +99,7 @@ class Staff extends CI_Controller {
 				
 				$data['edit_item']=$this->study_place->get_by_id($place_id);
 				$data['Subject_major']=$this->ftps->get_subject_major();
-				$data['action']=base_url('staff/post/place');
+				$data['action']=base_url('staff/put/place/'.$place_id);
 				$data['Province']=$this->province->get_all();
 				$data['content']=array('color'=>'success',
 										'toolbar'=>'<a class="btn icon-btn btn-default cancel" href="javascript:history.back()"><span class="btn-glyphicon fa fa-mail-reply img-circle text-primary"></span>ยกเลิก</a>',

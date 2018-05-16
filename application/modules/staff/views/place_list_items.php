@@ -2,7 +2,7 @@
 <?php foreach($Study_place as $item):?>
 <li class="list-group-item">
   <h4 class="text-primary"><i class="fa fa-fw fa-map-pin"></i><?=$item->place_name?></h4>
-  <div class="col-md-5 col-sm-12"><h4>ที่อยู่</h4>
+  <div class="col-md-4 col-sm-12"><h4>ที่อยู่</h4>
   <address><?=$item->address?></address>
   <address>ตำบล<?=$item->DISTRICT_NAME?></address>
   <address>อำเภอ<?=$item->AMPHUR_NAME?></address>
@@ -16,7 +16,7 @@
   <address>โทรสาร <?=$item->contact_fax?></address>
   <address>อีเมล <?=$item->contact_email?></address>
   </div>
-  <div class="col-md-3">
+  <div class="col-md-4">
   					<!-- Single button -->
             <div class="btn-group">
 							  <a class="btn btn-primary" href=""><i class="fa fa-fw fa-search-plus"></i>ดูรายละเอียด</a>

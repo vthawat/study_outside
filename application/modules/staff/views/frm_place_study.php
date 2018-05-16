@@ -48,7 +48,7 @@
       <select name="province_id" id="province" class="form-control" required>
         <option value="0">--เลือก--</option>
         <?php foreach($Province as $item):?>
-        <option value="<?=$item->PROVINCE_ID?>"><?=$item->PROVINCE_NAME?></option>
+        <option value="<?=$item->PROVINCE_ID?>" <?php if(!empty($edit_item)) if($item->PROVINCE_ID==$edit_item->province_id):?>selected<?php endif?>><?=$item->PROVINCE_NAME?></option>
         <?php endforeach?>
       </select>
     </div>
@@ -57,6 +57,12 @@
     <label for="amphur" class="col-sm-2 control-label">อำเภอ*</label>
     <div class="col-sm-10">
       <select name="amphur_id" id="amphur" class="form-control" required>
+        <?php if(!empty($edit_item)):?>
+            <?php $amphur_list=$this->amphur->get_by_province_id($edit_item->province_id)?>
+            <?php foreach($amphur_list as $item):?>
+                <option value="<?=$item->AMPHUR_ID?>" <?php if(!empty($edit_item)) if($item->AMPHUR_ID==$edit_item->amphur_id):?>selected<?php endif?>><?=$item->AMPHUR_NAME?></option>
+            <?php endforeach?>
+        <?php endif?>
       </select>
     </div>
   </div>
@@ -64,6 +70,12 @@
     <label for="district" class="col-sm-2 control-label">ตำบล*</label>
     <div class="col-sm-10">
       <select name="district_id" id="district" class="form-control" required>
+      <?php if(!empty($edit_item)):?>
+            <?php $district_list=$this->district->get_by_amphur_id($edit_item->amphur_id)?>
+            <?php foreach($district_list as $item):?>
+                <option value="<?=$item->DISTRICT_ID?>" <?php if(!empty($edit_item)) if($item->DISTRICT_ID==$edit_item->district_id):?>selected<?php endif?>><?=$item->DISTRICT_NAME?></option>
+            <?php endforeach?>
+        <?php endif?>
       </select>
     </div>
   </div>
@@ -79,7 +91,11 @@
       <label>สาขาวิชา</label>
       <ul class="list-group">
       <?php foreach($Subject_major as $item):?>
-      <li style="font-size:14px;" class="list-group-item"><input type="checkbox" name="subject_major_id[]" id="subject-major-<?=$item->id?>" value="<?=$item->id?>"> <label for="subject-major-<?=$item->id?>"><?=$item->major_name?></label></li>
+        <?php if(!empty($edit_item)&&$this->study_place->get_study_place_major_list($edit_item->id,$item->id)):?>
+        <li style="font-size:14px;" class="list-group-item list-group-item-success"><input type="checkbox" name="subject_major_id[]" id="subject-major-<?=$item->id?>" value="<?=$item->id?>" checked> <label for="subject-major-<?=$item->id?>"><?=$item->major_name?></label></li>
+        <?php else:?>
+        <li style="font-size:14px;" class="list-group-item"><input type="checkbox" name="subject_major_id[]" id="subject-major-<?=$item->id?>" value="<?=$item->id?>"> <label for="subject-major-<?=$item->id?>"><?=$item->major_name?></label></li>
+        <?php endif?>
       <?php endforeach?>
       </ul>
       </div>
@@ -91,15 +107,15 @@
   <h4 class="text-success">พิกัดของสถานที่ศึกษาดูงานภาคสนาม</h4>
 		<div class="form-group">
 		  <div>
-			  <input <?php if(!empty($trader)):?>value="<?=$trader->map_address?>"<?php endif?> id="map-address" name="map_address" type="text" class="form-control">
+			  <input <?php if(!empty($edit_item)):?>value="<?=$edit_item->map_address?>"<?php endif?> id="map-address" name="map_address" type="text" class="form-control">
 			  <span class="help-block">ค้นหาสถานที่ ระบุชื่อสถานที่</span> 
 			 </div>
 		 </div>		
 		<div class="input-group">
       		<span class="input-group-addon"><i class="fa fa-map-marker fa-fw"></i>Latitude</span>
-			<input <?php if(!empty($project_planning->LATITUDE)):?>value="<?=$project_planning->LATITUDE?>"<?php endif?> class="form-control" type="text" name="lat" id="latitude" />
+			<input <?php if(!empty($edit_item->lat)):?>value="<?=$edit_item->lat?>"<?php endif?> class="form-control" type="text" name="lat" id="latitude" />
 			<span class="input-group-addon"><i class="fa fa-map-marker fa-fw"></i>Longtitude</span>
-			<input <?php if(!empty($project_planning->LONGTITUDE)):?>value="<?=$project_planning->LONGTITUDE?>"<?php endif?> class="form-control" type="text" name="long"  id="longtitude" />
+			<input <?php if(!empty($edit_item->long)):?>value="<?=$edit_item->long?>"<?php endif?> class="form-control" type="text" name="long"  id="longtitude" />
 		</div>
 <div id="gm-map"></div>
 </div>

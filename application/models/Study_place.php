@@ -52,6 +52,19 @@ class Study_place extends CI_Model
 					'subject_major_id'=>$subject_major_id);
 		$this->db->insert('study_place_major_list',$data);
 	}
+	function get_study_place_major_list($study_place_id,$subject_major_id=null)
+	{
+		$this->db->where('study_place_id',$study_place_id);
+		if($subject_major_id)
+		{
+			$this->db->where('subject_major_id',$subject_major_id);
+			$result=$this->db->get('study_place_major_list')->result();
+			if(!empty($result))
+				return TRUE;
+			else return FALSE;
+		}
+		else return $this->db->get('study_place_major_list')->result();
+	}
 
 }
 
