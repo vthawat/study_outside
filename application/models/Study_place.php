@@ -41,11 +41,35 @@ class Study_place extends CI_Model
 	return TRUE;
 
 	}
+	function put($study_place_id)
+	{
+		$data=$this->input->post();
+		$subject_major_list=$this->input->post('subject_major_id');
+		/* remove subject major list */
+		if(!empty($subject_major_list)) 
+			if($this->delete_subject_major_list($study_place_id))
+				foreach($subject_major_list as $subject_major_id)
+					$this->post_study_place_major_list($study_place_id,$subject_major_id);
+		
+		/* update study place */
+		unset($data['subject_major_id']);
+		$this->db->where('id',$study_place_id);
+		if($this->db->update($this->table,$data)) return TRUE;
+		else return FALSE;
+
+	}
+	function delete_subject_major_list($study_place_id)
+	{
+		$this->db->where('study_place_id',$study_place_id);
+		$this->db->delete('study_place_major_list');
+		return TRUE;
+	}
 	function delete($id)
 	{
 		$this->db->where('id',$id);
 		return $this->db->delete($this->table);
 	}
+
 	function post_study_place_major_list($study_place_id,$subject_major_id)
 	{
 		$data=array('study_place_id'=>$study_place_id,
