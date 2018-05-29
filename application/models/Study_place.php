@@ -27,7 +27,11 @@ class Study_place extends CI_Model
 		return $this->db->get('study_place')->row();
 
 	}
-
+	function get_knowledge_by_study_place_id($study_place_id)
+	{
+		$this->db->where('study_place_id',$study_place_id);
+		return $this->db->get('khowledge_items')->result();
+	}
 	function post()
     {
 	   $data=$this->input->post();
@@ -39,6 +43,31 @@ class Study_place extends CI_Model
 		$this->post_study_place_major_list($study_place_id,$subject_major_id);
 	
 	return TRUE;
+
+	}
+	function post_knowledge($study_place_id)
+	{
+
+		$data=array('study_place_id'=>$study_place_id,
+					'title'=>$this->input->post('title'),
+					 'desc'=>$this->input->post('desc'));
+		if($this->db->insert('khowledge_items',$data))
+		{
+			 $knowledge_id=$this->db->insert_id();
+
+		// upload images file
+		$config['upload_path'] = 'images/knowledge/';
+		$config['overwrite']=TRUE;
+		$config['allowed_types'] = 'jpg|png';
+		$config['file_name']='knowledge-'.$knowledge_id;	
+		$this->load->library('upload', $config);
+		$this->upload->do_upload('knowledge_image');
+		// update images name
+		$this->db->where('id',$knowledge_id);
+		$this->db->update('khowledge_items',array('images'=>$config['file_name'].$this->upload->data('file_ext')));
+		return TRUE;
+		}
+		else return FALSE;
 
 	}
 	function put($study_place_id)

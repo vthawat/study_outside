@@ -111,6 +111,7 @@ class Staff extends CI_Controller {
 			case 'knowledge':
 				 $this->template->write('page_header','สถานที่ศึกษาดูงาน<i class="fa fa-fw fa-angle-double-right"></i>องค์ความรู้ของสถานที่');
 				 $place=$this->study_place->get_by_id($place_id);
+				 $data['knowledge_items']=$this->study_place->get_knowledge_by_study_place_id($place_id);
 				 $data['Place']=$place;
 				 $data['content']=array('color'=>'success',
 										 'title'=>$place->place_name.' อ.'.$place->AMPHUR_NAME.' จ.'.$place->PROVINCE_NAME,
@@ -123,10 +124,11 @@ class Staff extends CI_Controller {
 				$this->template->add_js($this->load->view('js/upload_knowledge_image.js',null,TRUE),'embed',TRUE);
 				$place=$this->study_place->get_by_id($place_id);
 				$this->template->write('page_header','สถานที่ศึกษาดูงาน<i class="fa fa-fw fa-angle-double-right"></i>องค์ความรู้ของสถานที่<i class="fa fa-fw fa-angle-double-right"></i>เพิ่มใหม่');
+				$data['action']=base_url('staff/post/knowledge/'.$place_id);
 				$data['content']=array('color'=>'success',
 				'title'=>$place->place_name.' อ.'.$place->AMPHUR_NAME.' จ.'.$place->PROVINCE_NAME,
 				'toolbar'=>'<a class="btn icon-btn btn-default cancel" href="javascript:history.back()"><span class="btn-glyphicon fa fa-mail-reply img-circle text-primary"></span>ยกเลิก</a>',
-			   'detail'=>$this->load->view('frm_knowledge',null,TRUE));
+			   'detail'=>$this->load->view('frm_knowledge',$data,TRUE));
 				$this->template->write_view('content','contents',$data);	
 				break;
 		default;
@@ -221,7 +223,7 @@ class Staff extends CI_Controller {
 		$this->template->render();
 
 	}
-	function post($action=null)
+	function post($action=null,$study_place_id=null)
 	{
 		switch($action)
 		{
@@ -239,6 +241,12 @@ class Staff extends CI_Controller {
 					if($this->study_place->post())
 					redirect(base_url('staff/'.$action));
 					else show_error('ไม่สามารถบันทึกได้');
+			break;
+			case 'knowledge':
+				if($this->study_place->post_knowledge($study_place_id))
+				redirect(base_url('staff/place/'.$action.'/'.$study_place_id));
+				else show_error('ไม่สามารถบันทึกได้');
+			
 			break;
 			default;
 			show_error('ไม่สามารถดำเนินการได้');

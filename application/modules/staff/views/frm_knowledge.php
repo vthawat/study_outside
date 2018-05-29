@@ -1,4 +1,4 @@
-<form method="post" class="form-horizontal" action="<?php if(!empty($action)) print $action?>">
+<form method="post" class="form-horizontal" action="<?php if(!empty($action)) print $action?>" enctype="multipart/form-data">
 <div class="col-md-4">
     <h4>ภาพประกอบ</h4>
                         <!-- image-preview-filename input [CUT FROM HERE]-->
@@ -13,7 +13,7 @@
                                 <div class="btn btn-default image-preview-input">
                                     <span class="fa fa-folder-open"></span>
                                     <span class="image-preview-input-title">Browse</span>
-                                    <input type="file" accept="image/png, image/jpeg" name="app_icon_file" required/> <!-- rename it -->
+                                    <input type="file" accept="image/png, image/jpeg" name="knowledge_image" required/> <!-- rename it -->
                                 </div>
                             </span>
                         </div><!-- /input-group image-preview [TO HERE]--> 
@@ -31,5 +31,9 @@
         <textarea class="form-control" name="desc" id="knowledge-desc" cols="30" rows="10" required><?php if(!empty($edit_item)) print $edit_item->desc?></textarea>
         </div>
     </div>
+</div>
+<div class="text-center">
+    <button class="btn icon-btn btn-success save"><span class="btn-glyphicon fa fa-save img-circle text-success"></span>บันทึก</button>
+    <a class="btn icon-btn btn-default cancel" href="javascript:history.back()"><span class="btn-glyphicon fa fa-mail-reply img-circle text-primary"></span>ยกเลิก</a>
 </div>
 <form>
