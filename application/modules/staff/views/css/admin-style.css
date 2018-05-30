@@ -6,3 +6,17 @@ address{
     margin-bottom:8px;
     margin-left: 10px;
 }
+ul.knowledge-items li a,ul.knowledge-items li i{
+    font-size: 16px;
+}
+.knowledge-title{
+    text-align: center;
+    padding-top: 8px;
+    font-size: 16px;
+}
+.knowledge-desc{
+    font-size: 16px; 
+}
+.well{
+    padding: 4px;
+}

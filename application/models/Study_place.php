@@ -32,6 +32,11 @@ class Study_place extends CI_Model
 		$this->db->where('study_place_id',$study_place_id);
 		return $this->db->get('khowledge_items')->result();
 	}
+	function get_knowledge_by_id($id)
+	{
+		$this->db->where('id',$id);
+		return $this->db->get('khowledge_items')->row();
+	}
 	function post()
     {
 	   $data=$this->input->post();

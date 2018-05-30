@@ -1,20 +1,27 @@
-<table class="table table-responsive">
-<thead>
-    <th>#</th>
-    <th>ภาพประกอบ</th>
-    <th>ชื่อองค์ความรู้</th>
-    <th>คำอธิบาย</th>
-    <th>การจัดการ</th>
-</thead>
-<tbody>
+
+<ul class="list-group knowledge-items">
 <?php foreach($knowledge_items as $key=>$item):?>
-    <tr>
-        <td><?=$key+1?></td>
-        <td class="col-md-1 col-sm-4 col-xs-4"><image class="img-responsive" src="<?=base_url('images/knowledge/'.$item->images)?>"></td>
-        <td><?=$item->title?></td>
-        <td><?=nl2br($item->desc)?></td>
-        <td></td>
-    </tr>
+    <li class="list-group-item">
+        <div class="col-md-3 col-xs-6">
+            <div class="well">
+                <img class="img-responsive" src="<?=base_url('images/knowledge/'.$item->images)?>">
+                <div class="knowledge-title"><?=$item->title?></div>
+            </div>
+        </div>
+        <div class="col-md-6 knowledge-desc"><?=nl2br($item->desc)?></div>
+        <div class="col-md-3">
+                        <div class="btn-group">
+                            <button type="button" class="btn btn-default dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+							    <span class="fa fa-cog fa-fw"></span><span class="caret"></span>
+							  </button>
+							  <ul class="dropdown-menu">
+                                 <li><a href="<?=base_url('staff/place/edit_knowled/'.$item->id)?>" class="text-yellow"><i class="fa fa-fw fa-pencil"></i>แก้ไข</a></li>
+                                 <li><a href="" class="text-red" onclick="return confirm('ยืนยันการลบรายการสถานที่:')"><i class="fa fa-fw fa-remove"></i>ลบ</a></li>
+                              </ul>
+                        </div>
+        </div>
+        <div class="clearfix"></div>
+    </li>
+    
 <?php endforeach?>
-</tbody>
-</table>
+</ul>
