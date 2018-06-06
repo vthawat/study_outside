@@ -60,20 +60,51 @@ class Study_place extends CI_Model
 		{
 			 $knowledge_id=$this->db->insert_id();
 
-		// upload images file
-		$config['upload_path'] = 'images/knowledge/';
-		$config['overwrite']=TRUE;
-		$config['allowed_types'] = 'jpg|png';
-		$config['file_name']='knowledge-'.$knowledge_id;	
-		$this->load->library('upload', $config);
-		$this->upload->do_upload('knowledge_image');
-		// update images name
-		$this->db->where('id',$knowledge_id);
-		$this->db->update('khowledge_items',array('images'=>$config['file_name'].$this->upload->data('file_ext')));
+			if (!empty($_FILES['knowledge_image']['name']))
+			{
+				// upload images file
+					$config['upload_path'] = 'images/knowledge/';
+					$config['overwrite']=TRUE;
+					$config['allowed_types'] = 'jpg|png';
+					$config['file_name']='knowledge-'.$knowledge_id;	
+					$this->load->library('upload', $config);
+					$this->upload->do_upload('knowledge_image');
+					// update images name
+					$this->db->where('id',$knowledge_id);
+					$this->db->update('khowledge_items',array('images'=>$config['file_name'].$this->upload->data('file_ext')));
+			}
+			else{
+				// update images blank name
+					$this->db->where('id',$knowledge_id);
+					$this->db->update('khowledge_items',array('images'=>'none-images.png'));	
+			}
 		return TRUE;
 		}
 		else return FALSE;
 
+	}
+	function put_knowledge($knowledge_id)
+	{
+		$data=array('title'=>$this->input->post('title'),
+					 'desc'=>$this->input->post('desc'));
+		$this->db->where('id',$knowledge_id);
+		if($this->db->update('khowledge_items',$data))
+		{
+			if (!empty($_FILES['knowledge_image']['name']))
+			{
+				// upload images file
+					$config['upload_path'] = 'images/knowledge/';
+					$config['overwrite']=TRUE;
+					$config['allowed_types'] = 'jpg|png';
+					$config['file_name']='knowledge-'.$knowledge_id;	
+					$this->load->library('upload', $config);
+					$this->upload->do_upload('knowledge_image');
+					// update images name
+					$this->db->where('id',$knowledge_id);
+					$this->db->update('khowledge_items',array('images'=>$config['file_name'].$this->upload->data('file_ext')));
+			}
+			return TRUE;	
+		}
 	}
 	function put($study_place_id)
 	{

@@ -1,6 +1,6 @@
 <form method="post" class="form-horizontal" action="<?php if(!empty($action)) print $action?>" enctype="multipart/form-data">
 <div class="col-md-4">
-    <h4>ภาพประกอบ</h4>
+    <h4>รูปภาพ</h4>
                         <!-- image-preview-filename input [CUT FROM HERE]-->
                         <div class="input-group image-preview">
                             <input type="text" class="form-control image-preview-filename" disabled="disabled"> <!-- don't give a name === doesn't send on POST/GET -->
@@ -13,14 +13,19 @@
                                 <div class="btn btn-default image-preview-input">
                                     <span class="fa fa-folder-open"></span>
                                     <span class="image-preview-input-title">Browse</span>
-                                    <input type="file" accept="image/png, image/jpeg" name="knowledge_image" required/> <!-- rename it -->
+                                    <input type="file" accept="image/png, image/jpeg" name="knowledge_image" /> <!-- rename it -->
                                 </div>
                             </span>
                         </div><!-- /input-group image-preview [TO HERE]--> 
+                        <?php if(!empty($edit_item)):?>
+                         <div class="well">
+                                <img class="img-responsive" src="<?=base_url('images/knowledge/'.$edit_item->images)?>" alt="">
+                        </div>
+                        <?php endif?>
 </div>
 <div class="col-md-8">
     <div class="form-group">
-        <label for="knowledge-title" class="col-sm-2 control-label">ชื่อองค์ความรู้*</label>
+        <label for="knowledge-title" class="col-sm-2 control-label">ชื่อเรื่อง*</label>
         <div class="col-sm-10">
         <input type="text" class="form-control" name="title" id="knowledge-title"  value="<?php if(!empty($edit_item)) print $edit_item->title?>" required>
         </div>

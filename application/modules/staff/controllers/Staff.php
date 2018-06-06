@@ -286,6 +286,12 @@ class Staff extends CI_Controller {
 				redirect(base_url('staff/'.$action));
 				else show_error('ไม่สามารถบันทึกได้');
 			break;
+			case 'knowledge':
+				if($this->study_place->put_knowledge($id))
+					redirect(base_url('staff/place/'.$action.'/'.$this->study_place->get_knowledge_by_id($id)->study_place_id));
+				else show_error('ไม่สามารถบันทึกได้');
+
+			break;
 			default;
 			show_error('ไม่สามารถดำเนินการได้');
 		}
