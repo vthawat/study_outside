@@ -15,8 +15,8 @@
 							    <span class="fa fa-cog fa-fw"></span><span class="caret"></span>
 							  </button>
 							  <ul class="dropdown-menu">
-                                 <li><a href="<?=base_url('staff/place/edit_knowled/'.$item->id)?>" class="text-yellow"><i class="fa fa-fw fa-pencil"></i>แก้ไข</a></li>
-                                 <li><a href="" class="text-red" onclick="return confirm('ยืนยันการลบรายการสถานที่:')"><i class="fa fa-fw fa-remove"></i>ลบ</a></li>
+                                 <li><a href="<?=base_url('staff/place/edit_knowledge/'.$item->id)?>" class="text-yellow"><i class="fa fa-fw fa-pencil"></i>แก้ไข</a></li>
+                                 <li><a href="<?=base_url('staff/delete/knowledge/'.$item->id)?>" class="text-red" onclick="return confirm('ยืนยันการลบรายการ:<?=$item->title?>')"><i class="fa fa-fw fa-remove"></i>ลบ</a></li>
                               </ul>
                         </div>
         </div>
@@ -25,3 +25,6 @@
     
 <?php endforeach?>
 </ul>
+<?php if(empty($knowledge_items)):?>
+<div class="alert alert-danger">ไม่พบรายการองค์ความรู้</div>
+<?php endif?>

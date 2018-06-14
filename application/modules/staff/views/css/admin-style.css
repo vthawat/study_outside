@@ -13,8 +13,8 @@ ul.knowledge-items li a,ul.knowledge-items li i{
     text-align: center;
     padding: 8px;
     font-size: 16px;
-    color: #013243;
-    background-color: white;
+    color: #f1f9fc;
+    background-color: steelblue;
 }
 
 .knowledge-desc{

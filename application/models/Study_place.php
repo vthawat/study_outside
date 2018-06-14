@@ -134,6 +134,19 @@ class Study_place extends CI_Model
 		$this->db->where('id',$id);
 		return $this->db->delete($this->table);
 	}
+	function delete_knowledge($id)
+	{
+		// delete images file
+		$knowledge=$this->get_knowledge_by_id($id);
+		$study_place_id=$knowledge->study_place_id;
+		if($knowledge->images!='none-images.png')
+			unlink('images/knowledge/'.$knowledge->images);
+		// delete record
+		$this->db->where('id',$id);
+		$this->db->delete('khowledge_items');
+		return $study_place_id;
+
+	}
 
 	function post_study_place_major_list($study_place_id,$subject_major_id)
 	{

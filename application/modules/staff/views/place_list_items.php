@@ -19,7 +19,7 @@
   <div class="col-md-4">
   					<!-- Single button -->
             <div class="btn-group">
-							  <a class="btn btn-primary" href=""><i class="fa fa-fw fa-search-plus"></i>ดูรายละเอียด</a>
+							  <a href="<?=base_url('staff/place/detail/'.$item->id)?>" class="btn btn-primary" href=""><i class="fa fa-fw fa-search-plus"></i>ดูรายละเอียด</a>
 							  <button type="button" class="btn btn-default dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
 							    <span class="fa fa-cog fa-fw"></span><span class="caret"></span>
 							  </button>

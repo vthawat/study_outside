@@ -131,7 +131,7 @@ class Staff extends CI_Controller {
 			   'detail'=>$this->load->view('frm_knowledge',$data,TRUE));
 				$this->template->write_view('content','contents',$data);	
 				break;
-			case 'edit_knowled':
+			case 'edit_knowledge':
 				$this->template->add_css($this->load->view('css/upload_knowledge_image.css',null,TRUE),'embed',TRUE);
 				$this->template->add_js($this->load->view('js/upload_knowledge_image.js',null,TRUE),'embed',TRUE);
 				$place=$this->study_place->get_by_id($this->study_place->get_knowledge_by_id($place_id)->study_place_id);
@@ -143,7 +143,6 @@ class Staff extends CI_Controller {
 				'toolbar'=>'<a class="btn icon-btn btn-default cancel" href="javascript:history.back()"><span class="btn-glyphicon fa fa-mail-reply img-circle text-primary"></span>ยกเลิก</a>',
 			   'detail'=>$this->load->view('frm_knowledge',$data,TRUE));
 				$this->template->write_view('content','contents',$data);
-
 			break;
 		default;
 		$data['Study_place']=$this->study_place->get_all();
@@ -258,7 +257,7 @@ class Staff extends CI_Controller {
 			break;
 			case 'knowledge':
 				if($this->study_place->post_knowledge($study_place_id))
-				redirect(base_url('staff/place/'.$action.'/'.$study_place_id));
+				redirect(base_url('staff/place/'.$action.'/'.$study_place_id),'refresh');
 				else show_error('ไม่สามารถบันทึกได้');
 			
 			break;
@@ -314,6 +313,12 @@ class Staff extends CI_Controller {
 			case 'place':
 				if($this->study_place->delete($id))
 					redirect(base_url('staff/'.$action));
+				else show_error('ไม่สามารถลบได้');
+			break;
+			case 'knowledge':
+				$study_place_id=$this->study_place->delete_knowledge($id);
+				if($study_place_id)
+					redirect(base_url('staff/place/'.$action.'/'.$study_place_id));
 				else show_error('ไม่สามารถลบได้');
 			break;
 			default;
