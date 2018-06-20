@@ -1,7 +1,20 @@
 <ul class="list-gruoup">
 <?php foreach($Study_place as $item):?>
 <li class="list-group-item">
-  <h4 class="text-primary"><i class="fa fa-fw fa-map-pin"></i><?=$item->place_name?></h4>
+  <h3 class="text-success thai-webfont"><i class="fa fa-fw fa-map-pin"></i><?=$item->place_name?></h3>
+  <div class="col-md-3 col-xs-6">
+  <?php  $knowledge_items=$this->study_place->get_knowledge_by_study_place_id($item->id);?>
+  <?php if(!empty($knowledge_items)):?>   
+          <div class="well">
+                <img class="img-responsive" src="<?=base_url('images/knowledge/'.$knowledge_items[0]->images)?>">
+            </div>
+
+  <?php else:?>
+          <div class="well">
+                  <img class="img-responsive" src="<?=base_url('images/knowledge/none-images.png')?>">
+          </div>
+  <?php endif?>
+  </div>
   <div class="col-md-4 col-sm-12"><h4>ที่อยู่</h4>
   <address><?=$item->address?></address>
   <address>ตำบล<?=$item->DISTRICT_NAME?></address>
@@ -16,10 +29,11 @@
   <address>โทรสาร <?=$item->contact_fax?></address>
   <address>อีเมล <?=$item->contact_email?></address>
   </div>
-  <div class="col-md-4">
+    <div class="clearfix"></div>
+    <div class="col-md-offset-8 col-md-4">
   					<!-- Single button -->
             <div class="btn-group">
-							  <a href="<?=base_url('staff/place/detail/'.$item->id)?>" class="btn btn-primary" href=""><i class="fa fa-fw fa-search-plus"></i>ดูรายละเอียด</a>
+							  <a class="btn btn-primary" href="#"><i class="fa fa-fw fa-search-plus"></i>ดูรายละเอียด</a>
 							  <button type="button" class="btn btn-default dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
 							    <span class="fa fa-cog fa-fw"></span><span class="caret"></span>
 							  </button>
@@ -31,7 +45,7 @@
 							</div>
   
   </div>
-    <div class="clearfix"></div>
+  <div class="clearfix"></div>
 </li>
 <?php endforeach?>
 </ul>
