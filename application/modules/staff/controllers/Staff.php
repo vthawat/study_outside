@@ -153,14 +153,12 @@ class Staff extends CI_Controller {
 									'detail'=>$this->load->view('place_list_items',$data,TRUE));
 		$this->template->write_view('content','contents',$data);
 		// prepare data for fillter 
-		//$this->template->add_js($this->load->view('js/geo_fillter.js',null,TRUE),'embed',TRUE);
-		//$fillter['status_list']=$this->trader_profile->get_status_all();
-		//$fillter['geo_fillter']=$this->country_geography->get_all();
-		//$fillter['product_type_fillter']=$this->base_product_type->get_all();
+		$data['provice_list']=$this->province->get_all();
+		$data['Subject_major']=$this->ftps->get_subject_major();
 		$data['content']=array('title'=>"<i class='fa fa-filter fa-fw'></i>ตัวกรองข้อมูล",
 								'size'=>3,
 								'color'=>'success',
-								'detail'=>'');
+								'detail'=>$this->load->view('place_filter',$data,TRUE));
 		$this->template->write_view('content','contents',$data);
 		$this->template->write('page_header','สถานที่ศึกษาดูงาน');
 		}

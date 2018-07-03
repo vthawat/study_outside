@@ -121,7 +121,7 @@
         <br /><br />
       </div><!-- /.content-wrapper -->
       <!-- Main Footer -->
-      <div class="main-footer bg-black">
+      <div class="main-footer" style="color:white ;background-color:#222d32">
         <!-- Default to the left -->
         <?=$footer?>
       </div>
