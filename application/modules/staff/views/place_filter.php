@@ -3,7 +3,7 @@
 	<div class="form-group">
 		 <label for="province" class="col-sm-3 control-label">จังหวัด</label>
 		 <div class="col-sm-9">
-		 	<select class="form-control" id="province" name="PROVINCE_ID">
+		 	<select class="form-control" id="province" name="province_id">
 		 		<option value="">--เลือกจังหวัด--</option>
                  <?php foreach($provice_list as $item):?>
                  <option value="<?=$item->PROVINCE_ID?>" <?php if($this->input->post('PROVINCE_ID')==$item->PROVINCE_ID):?>selected<?php endif;?>><?=$item->PROVINCE_NAME?></option>
@@ -14,7 +14,7 @@
 	<div class="form-group">
 		 <label for="amphur" class="col-sm-3 control-label">อำเภอ</label>
 		 <div class="col-sm-9">
-		 	<select class="form-control" id="amphur" name="AMPHUR_ID">
+		 	<select class="form-control" id="amphur" name="amphur_id">
 		 		<option value="">--เลือกอำเภอ--</option>
 		 	</select>
 		 </div>
@@ -22,7 +22,7 @@
     	<div class="form-group">
 		 <label for="district" class="col-sm-3 control-label">ตำบล</label>
 		 <div class="col-sm-9">
-		 	<select class="form-control" id="district" name="DISTRICT_ID">
+		 	<select class="form-control" id="district" name="district_id">
 		 		<option value="">--เลือกตำบล--</option>
 		 	</select>
 		 </div>

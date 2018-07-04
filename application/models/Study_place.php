@@ -9,13 +9,17 @@ class Study_place extends CI_Model
 		
 			
 	}
-	function get_all()
+	function get_all($fillter=array())
 	{
 		$this->db->select('study_place.*,country_province.PROVINCE_NAME,country_amphur.AMPHUR_NAME,country_district.DISTRICT_NAME');
 		$this->db->join('country_province','study_place.province_id=country_province.PROVINCE_ID');
 		$this->db->join('country_amphur','study_place.amphur_id=country_amphur.AMPHUR_ID');
 		$this->db->join('country_district','study_place.district_id=country_district.DISTRICT_ID');
-		return $this->db->get('study_place')->result();
+				foreach($fillter as $key=>$item)
+				 if(empty($item)) unset($fillter[$key]);
+		$query=$this->db->get_where($this->table,$fillter);
+		return $query->result();
+	//	return $this->db->get('study_place')->result();
 	}
 	function get_by_id($id)
 	{

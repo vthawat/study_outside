@@ -144,8 +144,11 @@ class Staff extends CI_Controller {
 			   'detail'=>$this->load->view('frm_knowledge',$data,TRUE));
 				$this->template->write_view('content','contents',$data);
 			break;
+
 		default;
-		$data['Study_place']=$this->study_place->get_all();
+			$filter=array();
+				if(!empty($this->input->post())) $filter=$this->input->post();
+		$data['Study_place']=$this->study_place->get_all($filter);
 		$data['content']=array('color'=>'primary',
 									'size'=>9,
 									'title'=>'จำนวนทั้งหมด '.count($data['Study_place']).' สถานที่',
@@ -153,6 +156,7 @@ class Staff extends CI_Controller {
 									'detail'=>$this->load->view('place_list_items',$data,TRUE));
 		$this->template->write_view('content','contents',$data);
 		// prepare data for fillter 
+		$this->template->add_js($this->load->view('js/select-box.js',null,TRUE),'embed',TRUE);
 		$data['provice_list']=$this->province->get_all();
 		$data['Subject_major']=$this->ftps->get_subject_major();
 		$data['content']=array('title'=>"<i class='fa fa-filter fa-fw'></i>ตัวกรองข้อมูล",
