@@ -12,24 +12,25 @@ class Study_place extends CI_Model
 	function get_all($fillter=array())
 	{
 		$this->db->select('study_place.*,country_province.PROVINCE_NAME,country_amphur.AMPHUR_NAME,country_district.DISTRICT_NAME');
-		$this->db->join('country_province','study_place.province_id=country_province.PROVINCE_ID');
-		$this->db->join('country_amphur','study_place.amphur_id=country_amphur.AMPHUR_ID');
-		$this->db->join('country_district','study_place.district_id=country_district.DISTRICT_ID');
+		$this->db->join('country_province','study_place.province_id=country_province.PROVINCE_ID','left');
+		$this->db->join('country_amphur','study_place.amphur_id=country_amphur.AMPHUR_ID','left','left');
+		$this->db->join('country_district','study_place.district_id=country_district.DISTRICT_ID','left');
+	//	$this->db->join('study_place_major_list','study_place.id=study_place_major_list.study_place_id');
 				foreach($fillter as $key=>$item)
 				 if(empty($item)) unset($fillter[$key]);
 		$query=$this->db->get_where($this->table,$fillter);
+		//exit(print $this->db->last_query());
 		return $query->result();
 	//	return $this->db->get('study_place')->result();
 	}
 	function get_by_id($id)
 	{
 		$this->db->select('study_place.*,country_province.PROVINCE_NAME,country_amphur.AMPHUR_NAME,country_district.DISTRICT_NAME');
-		$this->db->join('country_province','study_place.province_id=country_province.PROVINCE_ID');
-		$this->db->join('country_amphur','study_place.amphur_id=country_amphur.AMPHUR_ID');
-		$this->db->join('country_district','study_place.district_id=country_district.DISTRICT_ID');
+		$this->db->join('country_province','study_place.province_id=country_province.PROVINCE_ID','left');
+		$this->db->join('country_amphur','study_place.amphur_id=country_amphur.AMPHUR_ID','left');
+		$this->db->join('country_district','study_place.district_id=country_district.DISTRICT_ID','left');
 		$this->db->where('id',$id);
 		return $this->db->get('study_place')->row();
-
 	}
 	function get_knowledge_by_study_place_id($study_place_id)
 	{

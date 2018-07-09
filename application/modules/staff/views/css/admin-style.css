@@ -23,3 +23,12 @@ ul.knowledge-items li a,ul.knowledge-items li i{
 .well{
     padding: 4px;
 }
+.modal-dialog {
+    top:5% !important;
+    transform: translate(0, -50%) !important;
+    -ms-transform: translate(0, -50%) !important;
+    -webkit-transform: translate(0, -50%) !important;
+    margin:auto;
+    width:90%;
+    overflow-y: initial !important
+  }

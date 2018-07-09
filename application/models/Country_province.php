@@ -23,6 +23,18 @@ class Country_province extends CI_Model
 		$this->db->where('PROVINCE_ID',$province_id);
 		return $this->db->get($this->table)->row();
 	}
+	function get_province_of_place()
+	{
+		$sql="SELECT DISTINCT
+		country_province.PROVINCE_ID,
+		country_province.PROVINCE_NAME
+		FROM
+		study_place
+		INNER JOIN country_province ON study_place.province_id = country_province.PROVINCE_ID
+		ORDER BY
+		country_province.PROVINCE_NAME ASC";
+		return $this->db->query($sql)->result();
+	}
 }
 
 /* End of file template.php */

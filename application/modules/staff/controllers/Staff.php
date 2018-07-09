@@ -147,7 +147,13 @@ class Staff extends CI_Controller {
 
 		default;
 			$filter=array();
-				if(!empty($this->input->post())) $filter=$this->input->post();
+				if(!empty($this->input->post()))
+				{ 
+					$filter['study_place.province_id']=$this->input->post('province_id');
+					$filter['study_place.amphur_id']=$this->input->post('amphur_id');
+					$filter['study_place.district_id']=$this->input->post('district_id');
+				}
+
 		$data['Study_place']=$this->study_place->get_all($filter);
 		$data['content']=array('color'=>'primary',
 									'size'=>9,
@@ -157,7 +163,8 @@ class Staff extends CI_Controller {
 		$this->template->write_view('content','contents',$data);
 		// prepare data for fillter 
 		$this->template->add_js($this->load->view('js/select-box.js',null,TRUE),'embed',TRUE);
-		$data['provice_list']=$this->province->get_all();
+		$this->template->add_js($this->load->view('js/modal.js',null,TRUE),'embed',TRUE);
+		$data['provice_list']=$this->province->get_province_of_place();
 		$data['Subject_major']=$this->ftps->get_subject_major();
 		$data['content']=array('title'=>"<i class='fa fa-filter fa-fw'></i>ตัวกรองข้อมูล",
 								'size'=>3,
@@ -168,6 +175,19 @@ class Staff extends CI_Controller {
 		}
 		$this->template->render();
 	}
+	function place_detail($place_id=null)
+	{
+		// render for modal
+		$data['knowledge_items']=$this->study_place->get_knowledge_by_study_place_id($place_id);
+		$data['view_knowledge']=$this->load->view('knowledge_list',$data,TRUE);
+		$data['item']=$this->study_place->get_by_id($place_id);
+		$data['content']=array('color'=>'primary',
+								'title'=>'<h3 class="text-success thai-webfont"><i class="fa fa-fw fa-map-pin"></i>'.$this->study_place->get_by_id($place_id)->place_name.'</h3>',
+								'detail'=>$this->load->view('place_details',$data,TRUE));
+		
+		print $this->load->view('contents',$data,TRUE);
+	}
+	
 	function subject_major($action=null,$id=null)
 	{
 		switch($action)

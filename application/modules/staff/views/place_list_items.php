@@ -15,15 +15,15 @@
           </div>
   <?php endif?>
   </div>
-  <div class="col-md-4 col-sm-12"><h4>ที่อยู่</h4>
+  <div class="col-md-4 col-sm-12"><h3 class="thai-font">ที่อยู่</h3>
   <address><?=$item->address?></address>
-  <address>ตำบล<?=$item->DISTRICT_NAME?></address>
-  <address>อำเภอ<?=$item->AMPHUR_NAME?></address>
-  <address>จังหวัด<?=$item->PROVINCE_NAME?></address>
-  <address>รหัสไปรษณีย์ <?=$this->zipcode->get_by_district_id($item->district_id)?></address>
+  <address>ต.<?=$item->DISTRICT_NAME?></address>
+  <address>อ.<?=$item->AMPHUR_NAME?></address>
+  <address>จ.<?=$item->PROVINCE_NAME?></address>
+  <address>รหัสไปรษณีย์ <?php if(!empty($item->district_id)):?><?=$this->zipcode->get_by_district_id($item->district_id)?><?php endif?></address>
   </div>
-  <div class="col-md-4 col-sm-12"><h4>การติดต่อ</h4>
-  <address>ชื่อ-นามสกุล <?=$item->contact_name?></address>
+  <div class="col-md-4 col-sm-12"><h3 class="thai-font">การติดต่อ</h3>
+  <address><?=$item->contact_name?></address>
   <address>ตำแหน่ง <?=$item->contact_position?></address>
   <address>โทรศัพท์ <?=$item->contact_phone?></address>
   <address>โทรสาร <?=$item->contact_fax?></address>
@@ -33,7 +33,7 @@
     <div class="col-md-offset-8 col-md-4">
   					<!-- Single button -->
             <div class="btn-group">
-							  <a class="btn btn-primary" href="#"><i class="fa fa-fw fa-search-plus"></i>ดูรายละเอียด</a>
+							  <a class="btn btn-primary" data-toggle="modal" href="<?=base_url('staff/place_detail/'.$item->id)?>" data-target=".modal"><i class="fa fa-fw fa-search-plus"></i>ดูรายละเอียด</a>
 							  <button type="button" class="btn btn-default dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
 							    <span class="fa fa-cog fa-fw"></span><span class="caret"></span>
 							  </button>
@@ -49,3 +49,9 @@
 </li>
 <?php endforeach?>
 </ul>
+<div class="modal fade" tabindex="-1" role="dialog">
+  <div class="modal-dialog" role="document">
+    <div class="modal-content">
+    </div><!-- /.modal-content -->
+  </div><!-- /.modal-dialog -->
+</div><!-- /.modal -->
