@@ -1,3 +1,6 @@
+<script>
+  var place_location=[<?=$item->lat?>,<?=$item->long?>];
+</script>
 <div class="col-md-4 col-sm-12"><h3 class="thai-font"><i class="fa fa-fw fa-search"></i>ที่อยู่</h3>
   <address><?=$item->address?></address>
   <address>ต.<?=$item->DISTRICT_NAME?></address>
@@ -19,3 +22,5 @@
 <div class="clearfix"></div>
 <h3 class="thai-font"><i class="fa fa-fw fa-lightbulb-o"></i>องค์ความรู้ของสถานที่</h3>
 <?php if(!empty($view_knowledge)):?><?=$view_knowledge?><?php endif?>
+<h3 class="thai-font"><i class="fa fa-fw fa-map-o"></i>แผนที่</h3>
+<div id="gm-map"></div>

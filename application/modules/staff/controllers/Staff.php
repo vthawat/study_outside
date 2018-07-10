@@ -146,7 +146,12 @@ class Staff extends CI_Controller {
 			break;
 
 		default;
-			$filter=array();
+		//load map
+		$this->template->add_js('https://maps.google.com/maps/api/js?key=AIzaSyBGE-KGQB9PP6uq4wErMO0Xbxmz4FWxy3Q&libraries=places&language=th','link');
+		$this->template->add_js('assets/gmaps/js/gmap3.js');
+		$this->template->add_css($this->load->view('css/map.css',null,TRUE),'embed',TRUE);
+		//$this->template->add_js($this->load->view('js/view-big-map.js',null,TRUE),'embed',TRUE);
+		$filter=array();
 				if(!empty($this->input->post()))
 				{ 
 					$filter['study_place.province_id']=$this->input->post('province_id');
@@ -177,6 +182,7 @@ class Staff extends CI_Controller {
 	}
 	function place_detail($place_id=null)
 	{
+	
 		// render for modal
 		$data['knowledge_items']=$this->study_place->get_knowledge_by_study_place_id($place_id);
 		$data['view_knowledge']=$this->load->view('knowledge_list',$data,TRUE);
