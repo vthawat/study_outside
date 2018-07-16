@@ -37,15 +37,41 @@
 		<div class="form-group">
 			 <div class="col-sm-12">
 			<div class="alert bg-warning">
-				<label>สาขาวิชา</label>
+			<h3 class="thai-font"><i class="fa fa-fw fa-search"></i>สาขาวิชา</h3>
 				<ul class="list-group">
-				<?php foreach($Subject_major as $item):?>
-					<?php if(!empty($edit_item)&&$this->study_place->get_study_place_major_list($edit_item->id,$item->id)):?>
+				<?php
+					if(!empty($this->input->post('subject_major_id')))
+					 $array_major_item=$this->input->post('subject_major_id');
+					else $array_major_item=array();
+				?>
+				<?php foreach($Subject_major as $key=>$item):?>
+					<?php if(in_array($item->id,$array_major_item)):?>
 					<li style="font-size:14px;" class="list-group-item list-group-item-success"><input type="checkbox" name="subject_major_id[]" id="subject-major-<?=$item->id?>" value="<?=$item->id?>" checked> <label for="subject-major-<?=$item->id?>"><?=$item->major_name?></label></li>
 					<?php else:?>
 					<li style="font-size:14px;" class="list-group-item"><input type="checkbox" name="subject_major_id[]" id="subject-major-<?=$item->id?>" value="<?=$item->id?>"> <label for="subject-major-<?=$item->id?>"><?=$item->major_name?></label></li>
 					<?php endif?>
 				<?php endforeach?>
+				</ul>
+				</div>
+		 </div>
+	</div>
+	<div class="form-group">
+			 <div class="col-sm-12">
+			<div class="alert bg-warning">
+				<h3 class="thai-font"><i class="fa fa-fw fa-lightbulb-o"></i>องค์ความรู้</h3>
+				<ul class="list-group">
+				<?php
+					if(!empty($this->input->post('knowledge_id')))
+					 $array_knowledge_item=$this->input->post('knowledge_id');
+					else $array_knowledge_item=array();
+				?>
+				<?php $know_id=0;foreach($Knowledge_item as $item):?>
+					<?php if(in_array($item->title,$array_knowledge_item)):?>
+					<li style="font-size:14px;" class="list-group-item list-group-item-success"><input type="checkbox" name="knowledge_id[]" id="knowledge-<?=$know_id?>" value="<?=$item->title?>" checked> <label for="knowledge-<?=$know_id?>"><?=$item->title?></label></li>
+					<?php else:?>
+					<li style="font-size:14px;" class="list-group-item"><input type="checkbox" name="knowledge_id[]" id="knowledge-<?=$know_id?>" value="<?=$item->title?>"> <label for="knowledge-<?=$know_id?>"><?=$item->title?></label></li>
+					<?php endif?>
+				<?php $know_id++;endforeach?>
 				</ul>
 				</div>
 		 </div>

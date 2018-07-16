@@ -157,6 +157,9 @@ class Staff extends CI_Controller {
 					$filter['study_place.province_id']=$this->input->post('province_id');
 					$filter['study_place.amphur_id']=$this->input->post('amphur_id');
 					$filter['study_place.district_id']=$this->input->post('district_id');
+					$filter['study_place_major_list.subject_major_id']=$this->input->post('subject_major_id');
+					//exit(print_r($this->input->post('knowledge_id')));
+					$filter['khowledge_items.id']=$this->input->post('knowledge_id');
 				}
 
 		$data['Study_place']=$this->study_place->get_all($filter);
@@ -171,6 +174,7 @@ class Staff extends CI_Controller {
 		$this->template->add_js($this->load->view('js/modal.js',null,TRUE),'embed',TRUE);
 		$data['provice_list']=$this->province->get_province_of_place();
 		$data['Subject_major']=$this->ftps->get_subject_major();
+		$data['Knowledge_item']=$this->study_place->get_knowledge_group_by_name();
 		$data['content']=array('title'=>"<i class='fa fa-filter fa-fw'></i>ตัวกรองข้อมูล",
 								'size'=>3,
 								'color'=>'success',

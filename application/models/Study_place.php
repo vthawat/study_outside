@@ -15,10 +15,31 @@ class Study_place extends CI_Model
 		$this->db->join('country_province','study_place.province_id=country_province.PROVINCE_ID','left');
 		$this->db->join('country_amphur','study_place.amphur_id=country_amphur.AMPHUR_ID','left','left');
 		$this->db->join('country_district','study_place.district_id=country_district.DISTRICT_ID','left');
-	//	$this->db->join('study_place_major_list','study_place.id=study_place_major_list.study_place_id');
-				foreach($fillter as $key=>$item)
+		$this->db->group_by('study_place.id');
+		//$this->db->join('study_place_major_list','study_place.id=study_place_major_list.study_place_id','left');
+		$this->db->from('study_place,study_place_major_list,khowledge_items');
+		foreach($fillter as $key=>$item)
 				 if(empty($item)) unset($fillter[$key]);
-		$query=$this->db->get_where($this->table,$fillter);
+				 if(!empty($fillter['study_place_major_list.subject_major_id']))
+				 {
+					$id=$fillter['study_place_major_list.subject_major_id'];
+				//	exit(print_r($id));
+					 $this->db->where_in('study_place_major_list.subject_major_id',$id);
+					 $this->db->where('study_place_major_list.study_place_id=study_place.id');
+					 unset($fillter['study_place_major_list.subject_major_id']);
+				 }
+				 if(!empty($fillter['khowledge_items.id']))
+				 {
+					
+					$knowledge_item=$fillter['khowledge_items.id'];
+					 $this->db->where_in('khowledge_items.title',$knowledge_item);
+					 $this->db->where('khowledge_items.study_place_id=study_place.id');
+					 unset($fillter['khowledge_items.id']);
+
+				 }
+				 $this->db->where($fillter);
+
+		$query=$this->db->get();
 		//exit(print $this->db->last_query());
 		return $query->result();
 	//	return $this->db->get('study_place')->result();
@@ -36,6 +57,14 @@ class Study_place extends CI_Model
 	{
 		$this->db->where('study_place_id',$study_place_id);
 		return $this->db->get('khowledge_items')->result();
+	}
+	function get_knowledge_group_by_name()
+	{
+		$sql="SELECT DISTINCT
+		khowledge_items.title
+		FROM
+		khowledge_items";
+		return $this->db->query($sql)->result();
 	}
 	function get_knowledge_by_id($id)
 	{
