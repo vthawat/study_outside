@@ -49,6 +49,7 @@
 </li>
 <?php endforeach?>
 </ul>
+<div class="text-center"><?=$this->pagination->create_links()?></div>
 <div class="modal fade" tabindex="-1" role="dialog">
   <div class="modal-dialog" role="document">
     <div class="modal-content">

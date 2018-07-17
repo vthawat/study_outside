@@ -36,8 +36,7 @@
 
 		<div class="form-group">
 			 <div class="col-sm-12">
-			<div class="alert bg-warning">
-			<h3 class="thai-font"><i class="fa fa-fw fa-search"></i>สาขาวิชา</h3>
+					<h3 class="thai-font"><i class="fa fa-fw fa-search"></i>สาขาวิชา</h3>
 				<ul class="list-group">
 				<?php
 					if(!empty($this->input->post('subject_major_id')))
@@ -51,13 +50,11 @@
 					<li style="font-size:14px;" class="list-group-item"><input type="checkbox" name="subject_major_id[]" id="subject-major-<?=$item->id?>" value="<?=$item->id?>"> <label for="subject-major-<?=$item->id?>"><?=$item->major_name?></label></li>
 					<?php endif?>
 				<?php endforeach?>
-				</ul>
-				</div>
+				</ul>	
 		 </div>
 	</div>
 	<div class="form-group">
 			 <div class="col-sm-12">
-			<div class="alert bg-warning">
 				<h3 class="thai-font"><i class="fa fa-fw fa-lightbulb-o"></i>องค์ความรู้</h3>
 				<ul class="list-group">
 				<?php
@@ -72,8 +69,7 @@
 					<li style="font-size:14px;" class="list-group-item"><input type="checkbox" name="knowledge_id[]" id="knowledge-<?=$know_id?>" value="<?=$item->title?>"> <label for="knowledge-<?=$know_id?>"><?=$item->title?></label></li>
 					<?php endif?>
 				<?php $know_id++;endforeach?>
-				</ul>
-				</div>
+				</ul>			
 		 </div>
 	</div>
 	  	<div class="form-group">

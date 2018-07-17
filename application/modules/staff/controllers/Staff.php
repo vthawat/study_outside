@@ -146,6 +146,7 @@ class Staff extends CI_Controller {
 			break;
 
 		default;
+		$this->load->library('pagination');
 		//load map
 		$this->template->add_js('https://maps.google.com/maps/api/js?key=AIzaSyBGE-KGQB9PP6uq4wErMO0Xbxmz4FWxy3Q&libraries=places&language=th','link');
 		$this->template->add_js('assets/gmaps/js/gmap3.js');
@@ -161,11 +162,32 @@ class Staff extends CI_Controller {
 					//exit(print_r($this->input->post('knowledge_id')));
 					$filter['khowledge_items.id']=$this->input->post('knowledge_id');
 				}
-
-		$data['Study_place']=$this->study_place->get_all($filter);
+				$limit=5;
+				$data['Study_place']=$this->study_place->get_all($filter,$limit,$this->input->get('page'));
+				$config['total_rows'] = count($this->study_place->get_all($filter));
+				$config['per_page'] = $limit;
+				$config['query_string_segment']="page";
+				$config['use_page_numbers'] = TRUE; 
+				$config['num_links'] = 10;
+				$config['page_query_string'] = TRUE;
+				$config['full_tag_open'] = "<ul class='pagination'>";
+				$config['full_tag_close'] ="</ul>";
+				$config['num_tag_open'] = '<li>';
+				$config['num_tag_close'] = '</li>';
+				$config['cur_tag_open'] = "<li class='disabled'><li class='active'><a href='#'>";
+				$config['cur_tag_close'] = "<span class='sr-only'></span></a></li>";
+				$config['next_tag_open'] = "<li>";
+				$config['next_tagl_close'] = "</li>";
+				$config['prev_tag_open'] = "<li>";
+				$config['prev_tagl_close'] = "</li>";
+				$config['first_tag_open'] = "<li>";
+				$config['first_tagl_close'] = "</li>";
+				$config['last_tag_open'] = "<li>";
+				$config['last_tagl_close'] = "</li>";
+				$this->pagination->initialize($config);
 		$data['content']=array('color'=>'primary',
 									'size'=>9,
-									'title'=>'จำนวนทั้งหมด '.count($data['Study_place']).' สถานที่',
+									'title'=>'จำนวนทั้งหมด '.count($this->study_place->get_all()).' สถานที่',
 									'toolbar'=>'<a class="btn icon-btn btn-success add-new" href="'.base_url('staff/place/new').'"><span class="btn-glyphicon fa fa-plus img-circle text-success"></span>เพิ่มใหม่</a>',
 									'detail'=>$this->load->view('place_list_items',$data,TRUE));
 		$this->template->write_view('content','contents',$data);

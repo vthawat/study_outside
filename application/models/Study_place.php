@@ -9,7 +9,7 @@ class Study_place extends CI_Model
 		
 			
 	}
-	function get_all($fillter=array())
+	function get_all($fillter=array(),$limit=null,$page=null)
 	{
 		$this->db->select('study_place.*,country_province.PROVINCE_NAME,country_amphur.AMPHUR_NAME,country_district.DISTRICT_NAME');
 		$this->db->join('country_province','study_place.province_id=country_province.PROVINCE_ID','left');
@@ -38,7 +38,7 @@ class Study_place extends CI_Model
 
 				 }
 				 $this->db->where($fillter);
-
+		$this->db->limit($limit,$page);
 		$query=$this->db->get();
 		//exit(print $this->db->last_query());
 		return $query->result();
