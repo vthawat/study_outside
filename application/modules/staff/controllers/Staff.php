@@ -166,8 +166,10 @@ class Staff extends CI_Controller {
 				$data['Study_place']=$this->study_place->get_all($filter,$limit,$this->input->get('page'));
 				$config['total_rows'] = count($this->study_place->get_all($filter));
 				$config['per_page'] = $limit;
+				//$config['suffix'] ="&filter=".$filter;
 				$config['query_string_segment']="page";
-				$config['use_page_numbers'] = TRUE; 
+			//	$config['use_page_numbers'] = TRUE; 
+				$config['first_url'] =base_url('staff/place');
 				$config['num_links'] = 10;
 				$config['page_query_string'] = TRUE;
 				$config['full_tag_open'] = "<ul class='pagination'>";
