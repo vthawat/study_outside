@@ -3,7 +3,8 @@
     <li class="treeview">
         <a href="<?=base_url()?>"><i class='fa fa-rocket text-green fa-fw'></i><span>จัดการข้อมูลการเดินทาง</span> <i class="fa fa-angle-left pull-right"></i></a>
             <ul class="treeview-menu">
-                <li><a href="<?=base_url()?>staff/trip"><i class='fa fa-circle-o text-green fa-fw'></i>รายการศึกษาดูงาน</a></li>
+                <li><a href="<?=base_url('staff/calendar')?>"><i class='fa fa-circle-o text-green fa-fw'></i>ปฏิทินการเดินทาง</a></li>
+                <li><a href="<?=base_url()?>staff/trip"><i class='fa fa-circle-o text-green fa-fw'></i>กำหนดการเดินทาง</a></li>
               	<!--<li><a href="<?=base_url()?>staff/money"><i class='fa fa-circle-o text-green fa-fw'></i>จัดการข้อมูลงบประมาณ</a></li> -->
                 <li><a href="<?=base_url()?>staff/cars"><i class='fa fa-circle-o text-green fa-fw'></i>ออกใบขอใช้รถ</a></li>
                 <li><a href="<?=base_url()?>staff/report"><i class='fa fa-circle-o text-green fa-fw'></i>รายงานสรุปการเดินทาง</a></li>

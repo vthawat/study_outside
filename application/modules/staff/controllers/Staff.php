@@ -30,16 +30,29 @@ class Staff extends CI_Controller {
 		$this->template->write_view('sidebar','sidebar');
 	}
 	public function index()
-	{
-		
-		$this->template->render();
-		
+	{	
+		$this->template->render();	
 	}
-	function trip()
+	function calendar()
 	{
-
 		$this->template->render();
-		
+	}
+	function trip($action=null,$id=null)
+	{
+		switch($action)
+		{
+			case 'new':
+				$this->template->write('page_header','กำหนดการเดินทาง<i class="fa fa-fw fa-angle-double-right"></i>สร้างใหม่');
+			break;
+
+		default:
+		$data['content']=['title'=>'รายการกำหนดการเดินทางทั้งหมด',
+						  'color'=>'success',
+						  'toolbar'=>'<a class="btn icon-btn btn-success add-new" href="'.base_url('staff/trip/new').'"><span class="btn-glyphicon fa fa-plus img-circle text-success"></span>สร้างใหม่</a>'];
+		$this->template->write_view('content','contents',$data);
+		$this->template->write('page_header','กำหนดการเดินทาง');
+		}
+		$this->template->render();	
 	}
 	function cars()
 	{
