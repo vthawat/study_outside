@@ -10,7 +10,7 @@ Target Server Type    : MYSQL
 Target Server Version : 50624
 File Encoding         : 65001
 
-Date: 2018-05-14 22:29:14
+Date: 2018-08-01 00:04:02
 */
 
 SET FOREIGN_KEY_CHECKS=0;
@@ -17534,17 +17534,27 @@ INSERT INTO `country_zipcode` VALUES ('7455', '961303', '76', '997', '8860', '96
 -- ----------------------------
 DROP TABLE IF EXISTS `khowledge_items`;
 CREATE TABLE `khowledge_items` (
-  `id` int(11) NOT NULL,
+  `id` int(11) NOT NULL AUTO_INCREMENT,
   `study_place_id` int(11) DEFAULT NULL,
   `title` varchar(350) DEFAULT NULL,
   `desc` text,
   `images` varchar(350) DEFAULT NULL,
   PRIMARY KEY (`id`)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+) ENGINE=InnoDB AUTO_INCREMENT=23 DEFAULT CHARSET=utf8;
 
 -- ----------------------------
 -- Records of khowledge_items
 -- ----------------------------
+INSERT INTO `khowledge_items` VALUES ('6', '24', 'น้ำสมุนไพร', '-', 'knowledge-6.jpg');
+INSERT INTO `khowledge_items` VALUES ('7', '6', 'ปลูกข้าว', '1.กเกด\r\n2.กดเกดเ\r\n3.กดเกดเ', 'knowledge-7.png');
+INSERT INTO `khowledge_items` VALUES ('11', '13', 'ตลาดน้ำ', 'ลองแดน สามคลอง สองเมือง กันก่อน โดยลำคลอง 3 สาย ซึ่งเป็นที่ตั้งของชุมชนคลองแดน ตั้งแต่อดีตจนถึงปัจจุบัน ประกอบด้วยลำคลอง 3 สาย ได้แก่ คลองระโนด คลองชะอวด และคลองปากพนัง เชื่อมต่อบรรจบกัน ณ จุดนี้ เป็นเส้นแบ่งเขตแดน 2 จังหวัด คือ ตำบลคลองแดน อำเภอระโนด จังหวัดสงขลา กับตำบลรามแก้ว อำเภอหัวไทร จังหวัดนครศรีธรรมราช และนี้ก็คือที่มาของตลาดริมน้ำคลองแดน “สามคลอง สองจังหวัด” …(สงขลา-นครศรีฯ)', 'knowledge-11.jpg');
+INSERT INTO `khowledge_items` VALUES ('12', '13', 'มวยทะเล', 'ลูกหลานชาวคลองแดน อบรมมัคคุเทศน์น้อย อีกไม่นานจะเป็นมัคคุเทศน์อาสาบริการนักท่องเที่ยวฟรีครับ', 'knowledge-12.jpg');
+INSERT INTO `khowledge_items` VALUES ('14', '12', 'ตลาดป่าไผ่', 'ตลาดแนวใหม่ อนุรักษ์ธรรมชาติ ที่เพิ่งเปิดเมื่อต้นปีนี้เอง ในส่วน ของตลาดจะเป็นธรรมชาติแบบสุดๆโอบล้อมไปด้วยต้นไผ่และมีพื้นที่ ที่กว้างขวางกว่า 30', 'knowledge-14.jpg');
+INSERT INTO `khowledge_items` VALUES ('17', '32', 'สวนครูนอง', '-', 'knowledge-17.jpg');
+INSERT INTO `khowledge_items` VALUES ('18', '23', 'โฮมสเตย์', '-', 'knowledge-18.jpg');
+INSERT INTO `khowledge_items` VALUES ('20', '20', 'ปลูกข้าว', '-', 'knowledge-20.jpg');
+INSERT INTO `khowledge_items` VALUES ('21', '5', 'ปลูกข้าว', '-', 'none-images.png');
+INSERT INTO `khowledge_items` VALUES ('22', '13', 'โฮมสเตย์', '-', 'none-images.png');
 
 -- ----------------------------
 -- Table structure for schedule_plan
@@ -17583,21 +17593,30 @@ CREATE TABLE `student_list_name` (
 -- ----------------------------
 
 -- ----------------------------
--- Table structure for study_period
+-- Table structure for study_period_trip
 -- ----------------------------
-DROP TABLE IF EXISTS `study_period`;
-CREATE TABLE `study_period` (
+DROP TABLE IF EXISTS `study_period_trip`;
+CREATE TABLE `study_period_trip` (
   `id` int(11) NOT NULL,
-  `subject_major_id` int(11) DEFAULT NULL,
+  `subject_major_id` varchar(200) DEFAULT NULL,
   `subject_list_id` int(11) DEFAULT NULL,
   `approvers` varchar(145) DEFAULT NULL,
   `approval` varchar(145) DEFAULT NULL,
   `rec_date` date DEFAULT NULL,
+  `last_update` datetime DEFAULT NULL,
+  `duration` int(1) DEFAULT NULL,
+  `start_date` date DEFAULT NULL,
+  `end_date` date DEFAULT NULL,
+  `trip_mode` int(1) DEFAULT NULL,
+  `start_province` varchar(120) DEFAULT NULL,
+  `end_province` varchar(120) DEFAULT NULL,
+  `knowledge_selected` varchar(500) DEFAULT NULL,
+  `status` varchar(200) DEFAULT NULL,
   PRIMARY KEY (`id`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
 -- ----------------------------
--- Records of study_period
+-- Records of study_period_trip
 -- ----------------------------
 
 -- ----------------------------
@@ -17623,35 +17642,34 @@ CREATE TABLE `study_place` (
   `create_date` date DEFAULT NULL,
   `last_update` date DEFAULT NULL,
   PRIMARY KEY (`id`)
-) ENGINE=InnoDB AUTO_INCREMENT=34 DEFAULT CHARSET=utf8;
+) ENGINE=InnoDB AUTO_INCREMENT=33 DEFAULT CHARSET=utf8;
 
 -- ----------------------------
 -- Records of study_place
 -- ----------------------------
-INSERT INTO `study_place` VALUES ('4', 'สวนสละ นายนัน ชูเอียด', 'คุณนัน ชูเอียด ', 'เจ้าของกิจการ', 'อ.ป่าบอน จ.พัทลุง', '8574', '961', '73', '087-8377042', '-', '-', null, '', '7.6166823', '100.07402309999998', null, null);
-INSERT INTO `study_place` VALUES ('5', 'ศูนย์พัฒนาที่ดินจังหวัดตรัง', 'คุณเสาวคนธ์ บุญยะวันตัง', 'นักวิชาการ', 'หัวหน้าสถานี ตำบล บ้านควน อำเภอเมืองตรัง', null, '943', '72', '081-7480507', '-', '-', null, 'ทางหลวงชนบท ตรัง 2024 ตำบล บ้านควน อำเภอเมืองตรัง ตรัง 92000 ประเทศไทย', '7.5152', '99.64232919999995', null, null);
-INSERT INTO `study_place` VALUES ('6', 'ศูนย์เรียนรู้ชุมชนตามแนวเศรษฐกิจพอเพียง ', 'ประทิ่น นาคมิตร  ', 'ประธานกลุ่ม', 'ต.ลำสินธุ์ อ.ศรีนครินทร์ จ.พัทลุง', '8589', '964', '73', '086-2921923', '-', '-', null, 'ศูนย์เรียนรู้ชุมชนตามแนวเศรษฐกิจพอเพียง ต.ลำสินธุ์', '0', '0', null, null);
-INSERT INTO `study_place` VALUES ('7', 'ฟาร์มเห็ดแหลมทองนาโหนด', 'คุณชัยยงค์ คชพันธ์', 'เจ้าของกิจการ', 'ต.นาโหนด อ.เมืองพัทลุง จ.พัทลุ', null, '954', '73', '089-8702332', '-', '-', null, '445 ถนน ราเมศวร์ ตำบล คูหาสวรรค์ อำเภอเมืองพัทลุง พัทลุง 93000 ประเทศไทย', '7.612483999999999', '100.06404199999997', null, null);
-INSERT INTO `study_place` VALUES ('8', 'สถาบันการเงินชุมชน ตำบลกำแพงเพชร', 'คุณอิสมาแอ สามารถ ', 'ประธานกลุ่ม', 'อ.รัตภูมิ  จ.สงขลา', '8267', '926', '70', '084-8546015', '-', '-', null, 'สถาบันการเงินชุมชน ตำบลกำแพงเพชร', '0', '0', null, null);
-INSERT INTO `study_place` VALUES ('9', 'กลุ่มเกษตรกรทำนาตะโหมด', 'คุณอรุณ ไพชำนาญ ', 'ประธานกลุ่ม', 'อ.ตะโหมด จ.พัทลุง', '8538', '957', '73', '089-7372634', '-', '-', null, 'กลุ่มเกษตรกรทำนาตะโหมด', '0', '0', null, null);
+INSERT INTO `study_place` VALUES ('4', 'สวนสละ นายนัน ชูเอียด', 'คุณนัน ชูเอียด ', 'เจ้าของกิจการ', '-', '8574', '961', '73', '087-8377042', '-', '-', '', 'ช่วยทุกขราษฎร์ ตำบล คูหาสวรรค์ อำเภอเมืองพัทลุง พัทลุง 93000 ประเทศไทย', '7.6166823', '100.07402309999998', null, null);
+INSERT INTO `study_place` VALUES ('5', 'ศูนย์พัฒนาที่ดินจังหวัดตรัง', 'คุณเสาวคนธ์ บุญยะวันตัง', 'นักวิชาการ', '-', '8390', '943', '72', '081-7480507', '-', '-', '', 'ทางหลวงชนบท ตรัง 2024 ตำบล บ้านควน อำเภอเมืองตรัง ตรัง 92000 ประเทศไทย', '7.5152', '99.64232919999995', null, null);
+INSERT INTO `study_place` VALUES ('6', 'ศูนย์เรียนรู้ชุมชนตามแนวเศรษฐกิจพอเพียง ', 'ประทิ่น นาคมิตร  ', 'ประธานกลุ่ม', '-', '8589', '964', '73', '086-2921923', '-', '-', '-ดีมาก\r\n-ทางเข้าลำบาก\r\n-รองรับเข้าดูได้ 2 คน', '200 ถนน ราเมศวร์ ตำบล คูหาสวรรค์ อำเภอเมืองพัทลุง พัทลุง 93000 ประเทศไทย', '7.617915862574645', '100.0817907773071', null, null);
+INSERT INTO `study_place` VALUES ('7', 'ฟาร์มเห็ดแหลมทองนาโหนด', 'คุณชัยยงค์ คชพันธ์', 'เจ้าของกิจการ', '-', '8515', '954', '73', '089-8702332', '-', '-', '', '406 ถนน ราเมศวร์ ตำบล คูหาสวรรค์ อำเภอเมืองพัทลุง พัทลุง 93000 ประเทศไทย', '7.612483999999999', '100.06404199999997', null, null);
+INSERT INTO `study_place` VALUES ('8', 'สถาบันการเงินชุมชน ตำบลกำแพงเพชร', 'คุณอิสมาแอ สามารถ ', 'ประธานกลุ่ม', '-', '8267', '926', '70', '084-8546015', '-', '-', '', 'ถนน ยนตรการกำธร ตำบล กำแพงเพชร อำเภอ รัตภูมิ สงขลา 90180 ประเทศไทย', '7.135514799999998', '100.26073500000007', null, null);
+INSERT INTO `study_place` VALUES ('9', 'กลุ่มเกษตรกรทำนาตะโหมด', 'คุณอรุณ ไพชำนาญ ', 'ประธานกลุ่ม', '-', '8538', '957', '73', '089-7372634', '-', '-', '', 'พัทลุง ประเทศไทย', '0', '0', null, null);
 INSERT INTO `study_place` VALUES ('10', 'สหกรณ์เครดิตยูเนี่ยนบ้านควนพนางตุง จำกัด', 'คุณนิวัฒน์ บำรุงดี ', 'ประธานกลุ่ม', 'อ.ควนขนุน จ.พัทลุง', '8541', '958', '73', '089-7330551', '-', '-', null, 'สหกรณ์เครดิตยูเนี่ยนบ้านควนพนางตุง จำกัด', '0', '0', null, null);
-INSERT INTO `study_place` VALUES ('11', 'กลุ่มอาชีพสหกรณ์บ้านพังดาน', 'คุณชาย คงแก้ว  ', 'ประธานกลุ่ม', 'อ.ควนขนุน จ.พัทลุง', '8541', '958', '73', '091-7767685', '-', '-', null, 'กลุ่มอาชีพสหกรณ์บ้านพังดาน  ', '0', '0', null, null);
-INSERT INTO `study_place` VALUES ('12', 'สวนป่าไผ่สร้างสุข', 'ธนาธีรภัทร์ (เทน) นวลแก้ว ', 'ประธานกลุ่ม', 'อ.ควนขนุน จ.พัทลุง', '8541', '958', '73', '084-3960433', '-', '-', null, 'สวนป่าไผ่สร้างสุข', '0', '0', null, null);
-INSERT INTO `study_place` VALUES ('13', 'บ้านริมน้ำโฮมสเตย์ ตลาดน้ำคลองแดน', 'คุณกันภัย  พืชมงคล ', 'เจ้าของกิจการ', 'อ.ระโนด จังหวัดสงขลา', '8248', '924', '70', '089-9756970', '-', '-', null, 'ตลาดน้ำคลองแดน', '0', '0', null, null);
+INSERT INTO `study_place` VALUES ('11', 'กลุ่มอาชีพสหกรณ์บ้านพังดาน', 'คุณชาย คงแก้ว  ', 'ประธานกลุ่ม', '-', '8541', '958', '73', '091-7767685', '-', '-', '', '', '0', '0', null, null);
+INSERT INTO `study_place` VALUES ('12', 'สวนป่าไผ่สร้างสุข', 'ธนาธีรภัทร์ (เทน) นวลแก้ว ', 'ประธานกลุ่ม', '-', '8541', '958', '73', '084-3960433', '-', '-', '', '4048 อำเภอ ควนขนุน พัทลุง 93110 ประเทศไทย', '7.72723295721826', '100.0068525240074', null, null);
+INSERT INTO `study_place` VALUES ('13', 'บ้านริมน้ำโฮมสเตย์ ตลาดน้ำคลองแดน', 'คุณกันภัย  พืชมงคล ', 'เจ้าของกิจการ', '-', '8248', '924', '70', '089-9756970', '-', '-', '', 'Unnamed Road, ตำบล ท่าบอน อำเภอ ระโนด สงขลา 90140 ประเทศไทย', '7.842152516149033', '100.33746805872192', null, null);
 INSERT INTO `study_place` VALUES ('14', 'ศูนย์เรียนรู้วิถีโหนด-นา-เล', 'คุณพูนทรัพย์ ศรีชู ', 'ประธานกลุ่ม', 'อ.สทิงพระ  จ.สงขลา', '8331', '932', '70', '081-2757156', '-', '-', null, 'ศูนย์เรียนรู้วิถีโหนด-นา-เล', '0', '0', null, null);
 INSERT INTO `study_place` VALUES ('15', 'ร้านสลัดบ้านนายบ๊วย', 'คุณสิรภพ ชูประเสริฐ ', 'เจ้าของกิจการ', 'อ.เมือง จ.พัทลุง', null, '954', '73', '081-5434007', '-', '-', null, 'สลัดบ้านนายบ๊วย', '0', '0', null, null);
-INSERT INTO `study_place` VALUES ('16', 'Greentech Biolab', 'คุณแอนโทรนี่ ไชยกุล ', 'เจ้าของกิจการ', 'อ.หาดใหญ่ จ.สงขลา', null, '918', '70', '081-9570929', '-', '-', null, 'Greentech Biolab', '0', '0', null, null);
-INSERT INTO `study_place` VALUES ('17', 'กลุ่มส่งเสริมอาชีพสตรีเจ๊ะบิลัง (ขนมผูกรัก)', 'คุณมาซีเต๊าะ  บิลังโหนด', 'ประธานกลุ่ม', 'อ.เมือง จ.สตูล', '8354', '936', '71', '087-6305592', '-', '-', null, 'กลุ่มส่งเสริมอาชีพสตรีเจ๊ะบิลัง (ขนมผูกรัก) ', '0', '0', null, null);
+INSERT INTO `study_place` VALUES ('16', 'Greentech Biolab', 'คุณแอนโทรนี่ ไชยกุล ', 'เจ้าของกิจการ', '-', '8289', '928', '70', '081-9570929', '-', '-', '', '', '0', '0', null, null);
+INSERT INTO `study_place` VALUES ('17', 'กลุ่มส่งเสริมอาชีพสตรีเจ๊ะบิลัง (ขนมผูกรัก)', 'คุณมาซีเต๊าะ  บิลังโหนด', 'ประธานกลุ่ม', 'อ.เมือง จ.สตูล', '8354', '936', '71', '087-6305592', '-', '-', '', '', '0', '0', null, null);
 INSERT INTO `study_place` VALUES ('18', 'Lucky Super Bread', 'คุณศุภาพิชญ์ ดวงไข ', 'ประธานกลุ่ม', 'อ.เมือง จ.สตูล', null, '936', '71', '083-1834956', '-', '-', null, 'Lucky Super Bread', '0', '0', null, null);
 INSERT INTO `study_place` VALUES ('19', 'ศูนย์การเรียนรู้เศรษฐกิจพอเพียง ตามแนวทางพระราชดำริ กอ.รมน.จว.สตูล', 'คุณศิริพร  แก้วบุญ', 'ประธานกลุ่ม', 'อ.ควนกาหลง จ.สตูล  ', '8364', '938', '71', '087-3335556', '-', '-', null, 'ศูนย์การเรียนรู้เศรษฐกิจพอเพียง ตามแนวทางพระราชดำริ กอ.รมน.จว.สตูล', '0', '0', null, null);
-INSERT INTO `study_place` VALUES ('20', 'ศูนย์เรียนรู้เศรษฐกิจพอเพียงบ้านเขากลม', 'คุณสงวน มงคลศรีพันเลิศ', 'ประธานกลุ่ม', 'ต.หนองทะเล อ.เมือง จ.กระบี่', null, '864', '64', '089-5906738', '-', '-', null, 'ศูนย์เรียนรู้เศรษฐกิจพอเพียงบ้านเขากลม', '0', '0', null, null);
+INSERT INTO `study_place` VALUES ('20', 'ศูนย์เรียนรู้เศรษฐกิจพอเพียงบ้านเขากลม', 'คุณสงวน มงคลศรีพันเลิศ', 'ประธานกลุ่ม', '-', '7801', '864', '64', '089-5906738', '-', '-', '', 'Unnamed Road, ตำบล หนองทะเล อำเภอเมืองกระบี่ กระบี่ 81000 ประเทศไทย', '8.106096491557613', '98.79809333527612', null, null);
 INSERT INTO `study_place` VALUES ('21', 'การทำประมงชายฝั่ง', 'คุณชวนคนึง วรัจฉรียกุล ', 'เกษตรตำบล', 'เกาะยาวน้อย', '7869', '873', '65', '087-8990337', '-', '-', null, 'จังหวัด พังงา   ', '0', '0', null, null);
-INSERT INTO `study_place` VALUES ('22', 'การทำประมงชายฝั่ง', 'คุณชวนคนึง วรัจฉรียกุล ', 'เกษตรตำบล', 'เกาะยาวน้อย', '7869', '873', '65', '087-8990337', '-', '-', null, 'จังหวัด พังงา   ', '0', '0', null, null);
 INSERT INTO `study_place` VALUES ('23', 'ณ โฮมสเตย์ เกาะยาวน้อย ', 'คุณสำเริง ราเขต ', 'ประธานกลุ่ม', '-', '7869', '873', '65', '081-9680877', '-', '-', null, 'ณ โฮมสเตย์ เกาะยาวน้อย   ', '0', '0', null, null);
-INSERT INTO `study_place` VALUES ('24', 'ศูนย์การเรียนรู้นาโปแก ', 'คุณปรียากร  สมบูรณ์แก้ว', 'ประธานกลุ่ม', 'อ.ควนขนุน จ.พัทลุง', '8541', '958', '73', '062-5916632', '-', '-', null, '4048 ตำบล มะกอกเหนือ อำเภอ ควนขนุน พัทลุง 93110 ประเทศไทย', '7.737531499999998', '100.04409140000007', null, null);
+INSERT INTO `study_place` VALUES ('24', 'ศูนย์การเรียนรู้นาโปแก ', 'คุณปรียากร  สมบูรณ์แก้ว', 'ประธานกลุ่ม', 'อ.ควนขนุน จ.พัทลุง', '8541', '958', '73', '062-5916632', '-', '-', '', '4048 ตำบล มะกอกเหนือ อำเภอ ควนขนุน พัทลุง 93110 ประเทศไทย', '7.736021279864532', '100.04406638328624', null, null);
 INSERT INTO `study_place` VALUES ('25', 'โครงการ 1 ไร่ 1 แสน ', 'คุณณัฐพล หนูแสง  ', 'ประธานกลุ่ม', '-', '8252', '924', '70', '089-6530164', '-', '-', null, 'โครงการ 1 ไร่ 1 แสน   ', '0', '0', null, null);
 INSERT INTO `study_place` VALUES ('26', 'บ่อเตี้ยฟาร์ม', 'คุณสุนทร  นิยมยาตรา ', 'เจ้าของกิจการ', 'อ.สิงหนคร จ.สงขลา', '8341', '932', '70', '086-9641654', '-', '-', null, 'บ่อเตี้ยฟาร์ม', '0', '0', null, null);
-INSERT INTO `study_place` VALUES ('27', 'ศูนย์การเรียนรู้ ภูมิปัญญาชาวบก', 'คุณไพฑูรย์ (ครูฑูรย์) ศิริรักษ์ ', 'เจ้าของกิจการ', 'อ.สทิงพระ  จ.สิงหนคร', '8197', '919', '70', '087-3912325', '-', '-', null, '408 ตำบล จะทิ้งพระ อำเภอ สทิงพระ สงขลา 90190 ประเทศไทย', '7.484866999999999', '100.437051', null, null);
+INSERT INTO `study_place` VALUES ('27', 'ศูนย์การเรียนรู้ ภูมิปัญญาชาวบก', 'คุณไพฑูรย์ (ครูฑูรย์) ศิริรักษ์ ', 'เจ้าของกิจการ', '-', '8197', '919', '70', '087-3912325', '-', '-', '', '408 ตำบล จะทิ้งพระ อำเภอ สทิงพระ สงขลา 90190 ประเทศไทย', '7.484866999999999', '100.437051', null, null);
 INSERT INTO `study_place` VALUES ('28', 'กลุ่มแม่บ้านหัวเขา', 'คุณอถิวรรนท์  ทองแท่น', 'เกษตรตำบล', '-', null, '936', '71', '081-5423608', '-', '-', null, 'กลุ่มแม่บ้านหัวเขา สตูล', '0', '0', null, null);
 INSERT INTO `study_place` VALUES ('29', 'กลุ่มกาแฟพื้นเมือง', 'คุณอถิวรรนท์  ทองแท่น  ', 'เกษตรตำบล', '-', null, '936', '71', '081-5423608', '-', '-', null, 'กลุ่มกาแฟพื้นเมือง จังหวัด สตูล   ', '0', '0', null, null);
 INSERT INTO `study_place` VALUES ('30', 'กลุ่มการทำโรตีกรอบ', 'คุณอถิวรรนท์  ทองแท่น  ', 'เกษตรตำบล', '-', null, '936', '71', '081-5423608', '-', '-', null, 'จังหวัด สตูล   ', '0', '0', null, null);
@@ -17667,16 +17685,29 @@ CREATE TABLE `study_place_major_list` (
   `study_place_id` int(11) DEFAULT NULL,
   `subject_major_id` int(11) DEFAULT NULL,
   PRIMARY KEY (`id`)
-) ENGINE=InnoDB AUTO_INCREMENT=6 DEFAULT CHARSET=utf8;
+) ENGINE=InnoDB AUTO_INCREMENT=51 DEFAULT CHARSET=utf8;
 
 -- ----------------------------
 -- Records of study_place_major_list
 -- ----------------------------
-INSERT INTO `study_place_major_list` VALUES ('1', '1', '1');
-INSERT INTO `study_place_major_list` VALUES ('2', '1', '3');
-INSERT INTO `study_place_major_list` VALUES ('3', '2', '1');
-INSERT INTO `study_place_major_list` VALUES ('4', '2', '2');
-INSERT INTO `study_place_major_list` VALUES ('5', '2', '3');
+INSERT INTO `study_place_major_list` VALUES ('29', '4', '1');
+INSERT INTO `study_place_major_list` VALUES ('30', '4', '3');
+INSERT INTO `study_place_major_list` VALUES ('31', '6', '1');
+INSERT INTO `study_place_major_list` VALUES ('32', '6', '3');
+INSERT INTO `study_place_major_list` VALUES ('33', '11', '1');
+INSERT INTO `study_place_major_list` VALUES ('34', '11', '2');
+INSERT INTO `study_place_major_list` VALUES ('35', '24', '1');
+INSERT INTO `study_place_major_list` VALUES ('36', '24', '2');
+INSERT INTO `study_place_major_list` VALUES ('37', '24', '3');
+INSERT INTO `study_place_major_list` VALUES ('38', '27', '1');
+INSERT INTO `study_place_major_list` VALUES ('41', '5', '2');
+INSERT INTO `study_place_major_list` VALUES ('42', '5', '3');
+INSERT INTO `study_place_major_list` VALUES ('45', '17', '2');
+INSERT INTO `study_place_major_list` VALUES ('46', '13', '3');
+INSERT INTO `study_place_major_list` VALUES ('47', '20', '1');
+INSERT INTO `study_place_major_list` VALUES ('48', '20', '2');
+INSERT INTO `study_place_major_list` VALUES ('49', '16', '1');
+INSERT INTO `study_place_major_list` VALUES ('50', '8', '2');
 
 -- ----------------------------
 -- Table structure for subject_list
