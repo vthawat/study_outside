@@ -1,7 +1,7 @@
 <form method="post" class="form-horizontal" action="<?php if(!empty($action)) print $action?>">
 <div class="form-group">
     <label for="subject_list" class="col-sm-2 control-label">เลือกรายวิชา</label>
-    <div class="col-sm-10">
+    <div class="col-sm-4">
       <select name="subject_list_id" id="subject_list" class="form-control">
         <option value="">--เลือกรายวิชา--</option>
         <?php if(!empty($Subject_list)) foreach($Subject_list as $item):?>
