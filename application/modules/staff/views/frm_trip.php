@@ -13,12 +13,13 @@
   <div class="form-group">
     <label for="trip-start" class="col-sm-2 control-label">วันที่เริ่มเดินทาง</label>
     <div class="col-sm-4">
-      <input type="text" class="form-control" name="start_date" id="trip-start"  value="" required>
+        <div class="input-daterange input-group" id="datepicker">
+            <input type="text" class="form-control start_date" name="start_date" />
+            <span class="input-group-addon">ถึง</span>
+            <input type="text" class="form-control end_date" name="end_date" />
+        </div>
     </div>
-    <label for="trip-start" class="col-sm-2 control-label">ถึงวันที่</label>
-    <div class="col-sm-4">
-      <input type="text" class="form-control" name="end_date" id="trip-end"  value="" required>
-    </div>
+
   </div>
   <div class="form-group">
     <label for="trip-duration" class="col-sm-2 control-label">จำนวนวัน</label>
@@ -28,10 +29,10 @@
   </div>
   <div class="form-group">
     <label for="select-trip-mode" class="col-sm-2 control-label"></label>
-    <div class="col-sm-3">
+    <div class="col-sm-2">
       <input type="radio" name="trip_mode" id="trip-mode-1" value="1"> <label for="trip-mode-1">ค้างคืน/ต้องการที่พัก</label>
     </div>
-    <div class="col-sm-3">
+    <div class="col-sm-2">
       <input type="radio" name="trip_mode" id="trip-mode-2" value="2"> <label for="trip-mode-2">ไม่พักค้างคืน/ไป-กลับ</label>
     </div>
   </div>
