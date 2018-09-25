@@ -37,6 +37,22 @@
     </div>
   </div>
   <div class="form-group">
+    <label for="major-list" class="col-sm-2 control-label">สถานที่เริ่มต้น</label>
+    <div class="col-sm-5"><input type="text" name="start_location" class="form-control" value=" คณะทรัพยากรธรรมชาติ มหาวิทยาลัยสงขลานครินทร์ ตำบล คอหงส์ อำเภอ หาดใหญ่ สงขลา">
+    </div>
+  </div>
+  <div class="form-group">
+    <label for="major-list" class="col-sm-2 control-label">สถานที่ปลายทาง</label>
+    <div class="col-sm-3">
+      <select class="form-control" name="end_location">
+          <option value="">--เลือกจังหวัด--</option>
+          <?php foreach($EndLocationList as $item):?>
+          <option value="<?=$item->PROVINCE_NAME?>"><?=$item->PROVINCE_NAME?></option>
+          <?php endforeach?>
+      </select>
+    </div>
+  </div>
+  <div class="form-group">
     <label for="major-list" class="col-sm-2 control-label">เลือกสาขาวิชา</label>
     <div class="col-sm-5">
     <ul class="list-group">

@@ -49,6 +49,7 @@ class Staff extends CI_Controller {
 				$this->template->write('page_header','กำหนดการเดินทาง<i class="fa fa-fw fa-angle-double-right"></i>สร้างใหม่');
 				$data['Subject_list']=$this->ftps->get_subject();
 				$data['Subject_major']=$this->ftps->get_subject_major();
+				$data['EndLocationList']=$this->province->get_all();
 				$data['content']=['title'=>'',
 								  'detail'=>$this->load->view('frm_trip',$data,TRUE)];
 				$this->template->write_view('content','contents',$data);
