@@ -10,7 +10,7 @@ Target Server Type    : MYSQL
 Target Server Version : 50624
 File Encoding         : 65001
 
-Date: 2018-08-01 00:04:02
+Date: 2018-09-25 23:30:46
 */
 
 SET FOREIGN_KEY_CHECKS=0;
@@ -17608,8 +17608,8 @@ CREATE TABLE `study_period_trip` (
   `start_date` date DEFAULT NULL,
   `end_date` date DEFAULT NULL,
   `trip_mode` int(1) DEFAULT NULL,
-  `start_province` varchar(120) DEFAULT NULL,
-  `end_province` varchar(120) DEFAULT NULL,
+  `start_location` varchar(220) DEFAULT NULL,
+  `end_location` varchar(220) DEFAULT NULL,
   `knowledge_selected` varchar(500) DEFAULT NULL,
   `status` varchar(200) DEFAULT NULL,
   PRIMARY KEY (`id`)
