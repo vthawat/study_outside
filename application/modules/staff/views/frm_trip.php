@@ -53,7 +53,7 @@
     </div>
   </div>
   <div class="form-group">
-    <label for="major-list" class="col-sm-2 control-label">เลือกสาขาวิชา</label>
+    <label for="major-list" class="col-sm-2 control-label">สาขาวิชา</label>
     <div class="col-sm-5">
     <ul class="list-group">
       <?php foreach($Subject_major as $item):?>
@@ -65,5 +65,18 @@
       <?php endforeach?>
       </ul>
     </div>
+  </div>
+  <div class="form-group">
+    <label for="major-list" class="col-sm-2 control-label">องค์ความรู้ที่สนใจ</label>
+    <div class="col-md-10 col-sm-10">
+    <ul class="list-unstyled">
+    <?php $know_id=0;foreach($Knowledge_item as $item):?>
+					<li style="font-size:14px;" class="col-md-3 col-xs-6"><input type="checkbox" name="knowledge_id[]" id="knowledge-<?=$know_id?>" value="<?=$item->title?>"> <label for="knowledge-<?=$know_id?>"><?=$item->title?></label></li>
+				<?php $know_id++;endforeach?>
+    </li>
+    </div>
+  </div>
+  <div class="form-group">
+    <div class="col-sm-offset-2 col-sm-3"><button class="btn btn-success"><i class="fa fa-fw fa-search"></i>ค้นหาสถานที่</button></div>
   </div>
 </form>

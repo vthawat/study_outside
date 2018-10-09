@@ -50,6 +50,7 @@ class Staff extends CI_Controller {
 				$data['Subject_list']=$this->ftps->get_subject();
 				$data['Subject_major']=$this->ftps->get_subject_major();
 				$data['EndLocationList']=$this->province->get_all();
+				$data['Knowledge_item']=$this->study_place->get_knowledge_group_by_name();
 				$data['content']=['title'=>'',
 								  'detail'=>$this->load->view('frm_trip',$data,TRUE)];
 				$this->template->write_view('content','contents',$data);
