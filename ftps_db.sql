@@ -10,7 +10,7 @@ Target Server Type    : MYSQL
 Target Server Version : 50624
 File Encoding         : 65001
 
-Date: 2018-09-25 23:30:46
+Date: 2018-10-09 23:20:59
 */
 
 SET FOREIGN_KEY_CHECKS=0;
@@ -17610,6 +17610,7 @@ CREATE TABLE `study_period_trip` (
   `trip_mode` int(1) DEFAULT NULL,
   `start_location` varchar(220) DEFAULT NULL,
   `end_location` varchar(220) DEFAULT NULL,
+  `study_place_selected` varchar(500) DEFAULT NULL,
   `knowledge_selected` varchar(500) DEFAULT NULL,
   `status` varchar(200) DEFAULT NULL,
   PRIMARY KEY (`id`)
