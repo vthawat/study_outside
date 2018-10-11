@@ -58,9 +58,9 @@
     <ul class="list-group">
       <?php foreach($Subject_major as $item):?>
         <?php if(!empty($edit_item)&&$this->study_place->get_study_place_major_list($edit_item->id,$item->id)):?>
-        <li style="font-size:14px;" class="list-group-item list-group-item-success"><input type="checkbox" name="subject_major_id[]" id="subject-major-<?=$item->id?>" value="<?=$item->id?>" checked> <label for="subject-major-<?=$item->id?>"><?=$item->major_name?></label></li>
+        <li style="font-size:14px;" class="list-group-item list-group-item-success"><input type="checkbox" name="subject_major_selected[]" id="subject-major-<?=$item->id?>" value="<?=$item->id?>" checked> <label for="subject-major-<?=$item->id?>"><?=$item->major_name?></label></li>
         <?php else:?>
-        <li style="font-size:14px;" class="list-group-item"><input type="checkbox" name="subject_major_id[]" id="subject-major-<?=$item->id?>" value="<?=$item->id?>"> <label for="subject-major-<?=$item->id?>"><?=$item->major_name?></label></li>
+        <li style="font-size:14px;" class="list-group-item"><input type="checkbox" name="subject_major_selected[]" id="subject-major-<?=$item->id?>" value="<?=$item->id?>"> <label for="subject-major-<?=$item->id?>"><?=$item->major_name?></label></li>
         <?php endif?>
       <?php endforeach?>
       </ul>
@@ -71,12 +71,15 @@
     <div class="col-md-10 col-sm-10">
     <ul class="list-unstyled">
     <?php $know_id=0;foreach($Knowledge_item as $item):?>
-					<li style="font-size:14px;" class="col-md-3 col-xs-6"><input type="checkbox" name="knowledge_id[]" id="knowledge-<?=$know_id?>" value="<?=$item->title?>"> <label for="knowledge-<?=$know_id?>"><?=$item->title?></label></li>
+					<li style="font-size:14px;" class="col-md-3 col-xs-6"><input type="checkbox" name="knowledge_selected[]" id="knowledge-<?=$know_id?>" value="<?=$item->title?>"> <label for="knowledge-<?=$know_id?>"><?=$item->title?></label></li>
 				<?php $know_id++;endforeach?>
     </li>
     </div>
   </div>
   <div class="form-group">
-    <div class="col-sm-offset-2 col-sm-3"><button class="btn btn-success"><i class="fa fa-fw fa-search"></i>ค้นหาสถานที่</button></div>
+    <div class="col-sm-offset-2 col-sm-3">
+    <button class="btn icon-btn btn-success save"><span class="btn-glyphicon fa fa-save img-circle text-success"></span>บันทึก</button>
+    <a class="btn icon-btn btn-default cancel" href="javascript:history.back()"><span class="btn-glyphicon fa fa-stop img-circle text-gray"></span>ยกเลิก</a>
+    </div>
   </div>
 </form>

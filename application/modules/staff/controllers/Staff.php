@@ -47,6 +47,7 @@ class Staff extends CI_Controller {
 				$this->template->add_css('assets/datepicker/datepicker3.css');
 				$this->template->add_js($this->load->view('js/datepicker.js',null,TRUE),'embed',TRUE);
 				$this->template->write('page_header','กำหนดการเดินทาง<i class="fa fa-fw fa-angle-double-right"></i>สร้างใหม่');
+				$data['action']=base_url('staff/post/trip');
 				$data['Subject_list']=$this->ftps->get_subject();
 				$data['Subject_major']=$this->ftps->get_subject_major();
 				$data['EndLocationList']=$this->province->get_all();
@@ -57,9 +58,11 @@ class Staff extends CI_Controller {
 			break;
 
 		default:
-		$data['content']=['title'=>'รายการกำหนดการเดินทางทั้งหมด',
+		$data['Trip_list']=$this->study_trip->get_all();
+		$data['content']=['title'=>'รายการกำหนดการเดินทาง',
 						  'color'=>'success',
-						  'toolbar'=>'<a class="btn icon-btn btn-success add-new" href="'.base_url('staff/trip/new').'"><span class="btn-glyphicon fa fa-plus img-circle text-success"></span>สร้างใหม่</a>'];
+						  'toolbar'=>'<a class="btn icon-btn btn-success add-new" href="'.base_url('staff/trip/new').'"><span class="btn-glyphicon fa fa-plus img-circle text-success"></span>สร้างใหม่</a>',
+						  'detail'=>$this->load->view('trip',$data,TRUE)];
 		$this->template->write_view('content','contents',$data);
 		$this->template->write('page_header','กำหนดการเดินทาง');
 		}
@@ -340,6 +343,11 @@ class Staff extends CI_Controller {
 				redirect(base_url('staff/place/'.$action.'/'.$study_place_id),'refresh');
 				else show_error('ไม่สามารถบันทึกได้');
 			
+			break;
+			case 'trip':
+				if($this->study_trip->post_trip())
+				redirect(base_url('staff/'.$action));
+				else show_error('ไม่สามารถบันทึกได้');
 			break;
 			default;
 			show_error('ไม่สามารถดำเนินการได้');

@@ -9,7 +9,8 @@ class Ftps extends CI_Model
 		$this->load->model('country_amphur','amphur');
 		$this->load->model('country_district','district');
         $this->load->model('country_zipcode','zipcode');
-        $this->load->model('study_place');				
+        $this->load->model('study_place');
+        $this->load->model('study_trip');			
     }
     function get_subject_major($id=null)
     {
