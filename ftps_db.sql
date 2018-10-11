@@ -10,7 +10,7 @@ Target Server Type    : MYSQL
 Target Server Version : 50624
 File Encoding         : 65001
 
-Date: 2018-10-09 23:20:59
+Date: 2018-10-12 00:14:04
 */
 
 SET FOREIGN_KEY_CHECKS=0;
@@ -17597,8 +17597,8 @@ CREATE TABLE `student_list_name` (
 -- ----------------------------
 DROP TABLE IF EXISTS `study_period_trip`;
 CREATE TABLE `study_period_trip` (
-  `id` int(11) NOT NULL,
-  `subject_major_id` varchar(200) DEFAULT NULL,
+  `id` int(11) NOT NULL AUTO_INCREMENT,
+  `subject_major_selected` varchar(200) DEFAULT NULL,
   `subject_list_id` int(11) DEFAULT NULL,
   `approvers` varchar(145) DEFAULT NULL,
   `approval` varchar(145) DEFAULT NULL,
@@ -17614,11 +17614,14 @@ CREATE TABLE `study_period_trip` (
   `knowledge_selected` varchar(500) DEFAULT NULL,
   `status` varchar(200) DEFAULT NULL,
   PRIMARY KEY (`id`)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+) ENGINE=InnoDB AUTO_INCREMENT=4 DEFAULT CHARSET=utf8;
 
 -- ----------------------------
 -- Records of study_period_trip
 -- ----------------------------
+INSERT INTO `study_period_trip` VALUES ('1', '[\"1\",\"2\"]', '1', null, null, null, null, '2', '2018-10-23', '2018-10-24', '1', ' คณะทรัพยากรธรรมชาติ มหาวิทยาลัยสงขลานครินทร์ ตำบล คอหงส์ อำเภอ หาดใหญ่ สงขลา', 'อำนาจเจริญ   ', null, '[\"\\u0e19\\u0e49\\u0e33\\u0e2a\\u0e21\\u0e38\\u0e19\\u0e44\\u0e1e\\u0e23\",\"\\u0e15\\u0e25\\u0e32\\u0e14\\u0e1b\\u0e48\\u0e32\\u0e44\\u0e1c\\u0e48\"]', 'อยู่ระหว่างการดำเนินการ');
+INSERT INTO `study_period_trip` VALUES ('2', '[\"1\",\"2\"]', '3', null, null, null, null, '9', '2018-10-24', '2018-11-01', '1', ' คณะทรัพยากรธรรมชาติ มหาวิทยาลัยสงขลานครินทร์ ตำบล คอหงส์ อำเภอ หาดใหญ่ สงขลา', 'นครนายก   ', null, '[\"\\u0e19\\u0e49\\u0e33\\u0e2a\\u0e21\\u0e38\\u0e19\\u0e44\\u0e1e\\u0e23\",\"\\u0e1b\\u0e25\\u0e39\\u0e01\\u0e02\\u0e49\\u0e32\\u0e27\",\"\\u0e2a\\u0e27\\u0e19\\u0e04\\u0e23\\u0e39\\u0e19\\u0e2d\\u0e07\"]', 'อยู่ระหว่างการดำเนินการ');
+INSERT INTO `study_period_trip` VALUES ('3', '[\"1\",\"2\",\"3\"]', '2', null, null, null, null, '1', '2018-10-16', '2018-10-16', '2', ' คณะทรัพยากรธรรมชาติ มหาวิทยาลัยสงขลานครินทร์ ตำบล คอหงส์ อำเภอ หาดใหญ่ สงขลา', 'พัทลุง   ', null, '[\"\\u0e19\\u0e49\\u0e33\\u0e2a\\u0e21\\u0e38\\u0e19\\u0e44\\u0e1e\\u0e23\",\"\\u0e1b\\u0e25\\u0e39\\u0e01\\u0e02\\u0e49\\u0e32\\u0e27\",\"\\u0e15\\u0e25\\u0e32\\u0e14\\u0e1b\\u0e48\\u0e32\\u0e44\\u0e1c\\u0e48\",\"\\u0e2a\\u0e27\\u0e19\\u0e04\\u0e23\\u0e39\\u0e19\\u0e2d\\u0e07\"]', 'อยู่ระหว่างการดำเนินการ');
 
 -- ----------------------------
 -- Table structure for study_place
