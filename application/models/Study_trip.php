@@ -12,6 +12,11 @@ class Study_trip extends CI_Model
 	{
 		return $this->db->get($this->table)->result();
 	}
+	function get_by_id($id)
+	{
+		$this->db->where('id',$id);
+		return $this->db->get($this->table)->row();
+	}
 	function post_trip()
 	{
 		$data=$this->input->post();

@@ -46,7 +46,7 @@ class Staff extends CI_Controller {
 				$this->template->add_js('assets/datepicker/locales/bootstrap-datepicker.th.js');
 				$this->template->add_css('assets/datepicker/datepicker3.css');
 				$this->template->add_js($this->load->view('js/datepicker.js',null,TRUE),'embed',TRUE);
-				$this->template->write('page_header','กำหนดการเดินทาง<i class="fa fa-fw fa-angle-double-right"></i>สร้างใหม่');
+				$this->template->write('page_header','<a href="../trip"><i class="fa fa-fw fa-calendar-check-o"></i>กำหนดการเดินทาง</a><i class="fa fa-fw fa-angle-double-right"></i>สร้างใหม่');
 				$data['action']=base_url('staff/post/trip');
 				$data['Subject_list']=$this->ftps->get_subject();
 				$data['Subject_major']=$this->ftps->get_subject_major();
@@ -56,6 +56,13 @@ class Staff extends CI_Controller {
 								  'detail'=>$this->load->view('frm_trip',$data,TRUE)];
 				$this->template->write_view('content','contents',$data);
 			break;
+			case 'waypoint':
+			$this->template->write('page_header','<a href="../trip"><i class="fa fa-fw fa-calendar-check-o"></i>กำหนดการเดินทาง</a><i class="fa fa-fw fa-angle-double-right"></i>สร้างเส้นทาง');
+			$title=$this->ftps->get_subject($this->study_trip->get_by_id($id)->subject_list_id)->subject_code.' '.$this->ftps->get_subject($this->study_trip->get_by_id($id)->subject_list_id)->subject_name;
+			$data['content']=['title'=>$title,
+							  'color'=>'primary'];
+			$this->template->write_view('content','contents',$data);
+			break;
 
 		default:
 		$data['Trip_list']=$this->study_trip->get_all();
@@ -64,7 +71,7 @@ class Staff extends CI_Controller {
 						  'toolbar'=>'<a class="btn icon-btn btn-success add-new" href="'.base_url('staff/trip/new').'"><span class="btn-glyphicon fa fa-plus img-circle text-success"></span>สร้างใหม่</a>',
 						  'detail'=>$this->load->view('trip',$data,TRUE)];
 		$this->template->write_view('content','contents',$data);
-		$this->template->write('page_header','กำหนดการเดินทาง');
+		$this->template->write('page_header','<a href="trip"><i class="fa fa-fw fa-calendar-check-o"></i>กำหนดการเดินทาง</a>');
 		}
 		$this->template->render();	
 	}
