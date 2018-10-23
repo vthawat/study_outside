@@ -31,6 +31,16 @@ class Study_trip extends CI_Model
 		if($this->db->insert($this->table,$data)) return TRUE;
 		else return FALSE;
 	}
+	function suggest_location($trip_id)
+	{
+		$trips=$this->get_by_id($trip_id);
+		$subject_major=json_decode($trips->subject_major_selected,TRUE);
+		$knowledge_item=json_decode($trips->knowledge_selected,TRUE);
+		$filter=array();
+		$filter['study_place_major_list.subject_major_id']=$subject_major;
+		$filter['khowledge_items.id']=$knowledge_item;
+		return $this->study_place->get_all($filter);
+	}
 	
 	
 

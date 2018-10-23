@@ -58,9 +58,12 @@ class Staff extends CI_Controller {
 			break;
 			case 'waypoint':
 			$this->template->write('page_header','<a href="../trip"><i class="fa fa-fw fa-calendar-check-o"></i>กำหนดการเดินทาง</a><i class="fa fa-fw fa-angle-double-right"></i>สร้างเส้นทาง');
-			$title=$this->ftps->get_subject($this->study_trip->get_by_id($id)->subject_list_id)->subject_code.' '.$this->ftps->get_subject($this->study_trip->get_by_id($id)->subject_list_id)->subject_name;
+			$title='รายวิชา '.$this->ftps->get_subject($this->study_trip->get_by_id($id)->subject_list_id)->subject_code.' '.$this->ftps->get_subject($this->study_trip->get_by_id($id)->subject_list_id)->subject_name;
+			$data['trips']=$this->study_trip->get_by_id($id);
+			$data['place_relation']=$this->study_trip->suggest_location($id);
 			$data['content']=['title'=>$title,
-							  'color'=>'primary'];
+							  'color'=>'primary',
+							  'detail'=>$this->load->view('waypoint-place',$data,TRUE)];
 			$this->template->write_view('content','contents',$data);
 			break;
 
