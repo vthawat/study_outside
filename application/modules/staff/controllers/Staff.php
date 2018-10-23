@@ -57,6 +57,11 @@ class Staff extends CI_Controller {
 				$this->template->write_view('content','contents',$data);
 			break;
 			case 'waypoint':
+			//load map
+			$this->template->add_js('https://maps.google.com/maps/api/js?key=AIzaSyBGE-KGQB9PP6uq4wErMO0Xbxmz4FWxy3Q&libraries=places&language=th','link');
+			$this->template->add_js('assets/gmaps/js/gmap3.js');
+			$this->template->add_css($this->load->view('css/map.css',null,TRUE),'embed',TRUE);
+			$this->template->add_js($this->load->view('js/modal.js',null,TRUE),'embed',TRUE);
 			$this->template->write('page_header','<a href="../trip"><i class="fa fa-fw fa-calendar-check-o"></i>กำหนดการเดินทาง</a><i class="fa fa-fw fa-angle-double-right"></i>สร้างเส้นทาง');
 			$title='รายวิชา '.$this->ftps->get_subject($this->study_trip->get_by_id($id)->subject_list_id)->subject_code.' '.$this->ftps->get_subject($this->study_trip->get_by_id($id)->subject_list_id)->subject_name;
 			$data['trips']=$this->study_trip->get_by_id($id);

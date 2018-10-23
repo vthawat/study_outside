@@ -23,6 +23,7 @@
   <address>ต.<?=$item->DISTRICT_NAME?></address>
   <address>อ.<?=$item->AMPHUR_NAME?></address>
   <address>จ.<?=$item->PROVINCE_NAME?></address>
+  <a class="btn btn-primary" data-toggle="modal" href="<?=base_url('staff/place_detail/'.$item->id)?>" data-target=".modal"><i class="fa fa-fw fa-search-plus"></i>ดูรายละเอียด</a>
                         <div class="material-switch pull-right">
                             <input id="place-id-<?=$item->id?>" name="map_place_id[]" type="checkbox"/>
                             <label for="place-id-<?=$item->id?>" class="label-success"></label>
@@ -34,3 +35,9 @@
 </div>
 </div>
 <div class="col-md-7"><h4 class="text-center"><i class="fa fa-fw fa-map"></i>เส้นทาง</h4></div>
+<div class="modal fade" tabindex="-1" role="dialog">
+  <div class="modal-dialog" role="document">
+    <div class="modal-content">
+    </div><!-- /.modal-content -->
+  </div><!-- /.modal-dialog -->
+</div><!-- /.modal -->
