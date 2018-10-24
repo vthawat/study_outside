@@ -1,6 +1,17 @@
+$(function () {
+
+    $('.place-selected').click(function()
+        {
+            if($(this).is(":checked")) alert("add"+$(this).val());
+            else alert("remove");
+
+    });
+
+
 var directionDisplay;
 var directionsService = new google.maps.DirectionsService();
 var map;
+//var locationSelected=
 
 function initialize() {
     directionsDisplay = new google.maps.DirectionsRenderer({
@@ -12,7 +23,7 @@ function initialize() {
         mapTypeId: google.maps.MapTypeId.ROADMAP,
     }
 
-    map = new google.maps.Map(document.getElementById("map-canvas"), myOptions);
+    map = new google.maps.Map(document.getElementById("map-waypoint"), myOptions);
     directionsDisplay.setMap(map);
     calcRoute();
 }
@@ -21,18 +32,20 @@ function calcRoute() {
 
     var waypts = [];
 
-    stop = new google.maps.LatLng(7.6166823, 100.07402309999998)
+    stop = new google.maps.LatLng(7.736021279864532,100.04406638328624)
     waypts.push({
         location: stop,
         stopover: true
     });
+ 
    // createMarker(stop);
     stop = new google.maps.LatLng(7.617915862574645,100.0817907773071)
     waypts.push({
         location: stop,
         stopover: true
     });
-  //  createMarker(stop);
+ /*
+    //  createMarker(stop);
     stop = new google.maps.LatLng(8.453622240015882,98.52849285875243)
     waypts.push({
         location: stop,
@@ -50,10 +63,12 @@ function calcRoute() {
         stopover: true
     });
 
+*/
 
-
-    start = new google.maps.LatLng(7.005198611113918, 100.49956991183467);
-    end = new google.maps.LatLng(8.430519548419,99.9622689575333);
+    //start = new google.maps.LatLng(7.005198611113918, 100.49956991183467);
+   // end = new google.maps.LatLng(7.736021279864532,100.04406638328624);
+    start='<?=$trips->start_location?>';
+    end ='<?=$trips->end_location?>';
     
     createMarker(start,1);
    // createMarker(end);
@@ -86,8 +101,10 @@ function createMarker(latlng,mlabel) {
     var marker = new google.maps.Marker({
         position: latlng,
         map: map,
-        label: { text: 'P'+mlabel },
+       // label: { text: 'P'+mlabel },
     });
 }
 
 initialize();
+
+});
