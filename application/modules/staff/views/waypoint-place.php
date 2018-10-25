@@ -35,8 +35,10 @@
 </ul>
 </div>
 </div>
-<div class="col-md-7"><h4><i class="fa fa-fw fa-map"></i>เส้นทาง</h4>
+<div class="col-md-7"><h4><i class="fa fa-fw fa-map"></i>เส้นทาง<i class="fa fa-fw fa-angle-double-right"></i><?=$trips->start_location?> - <?=$trips->end_location?></h4>
 <div id="map-waypoint"></div>
+<h4><i class="fa fa-fw fa-clock-o"></i>รายะทางและเวลา</h4>
+<div id="directions-panel"></div>
 </div>
 <div class="modal fade" tabindex="-1" role="dialog">
   <div class="modal-dialog" role="document">

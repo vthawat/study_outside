@@ -24,7 +24,7 @@ $(function () {
     });
 
 
-var directionDisplay;
+
 var directionsService = new google.maps.DirectionsService();
 var map;
 //var locationSelected=
@@ -46,72 +46,9 @@ function initialize() {
 
 function calcRoute() {
 
-   
-/*
-    stop = new google.maps.LatLng(7.736021279864532,100.04406638328624)
-    waypts.push({
-        location: stop,
-        stopover: true
-    });
- 
-   // createMarker(stop);
-    stop = new google.maps.LatLng(7.617915862574645,100.0817907773071)
-    waypts.push({
-        location: stop,
-        stopover: true
-    });
- 
-    //  createMarker(stop);
-    stop = new google.maps.LatLng(8.453622240015882,98.52849285875243)
-    waypts.push({
-        location: stop,
-        stopover: true
-    });
-  //  createMarker(stop);
-        stop = new google.maps.LatLng(7.246390973037559,100.54027799799803)
-    waypts.push({
-        location: stop,
-        stopover: true
-    });
-        stop = new google.maps.LatLng(7.106774065331006,100.63284421354979)
-    waypts.push({
-        location: stop,
-        stopover: true
-    });
-
-*/
-
-
-//var start_address = "<?=$trips->start_location?>";
-//var end_address = "<?=$trips->end_location?>";
-//var start;
-//var start_latitude=converStringToCoordinates(start_address);
-//console.log(start_latitude);
-//var end_latitude=converStringToCoordinates(end_address);
-
-
-//console.log(latitude);
-//start = new google.maps.LatLng(7.106774065331006,100.63284421354979);
-//var geo_start = new google.maps.Geocoder();
-/*
-geo_start.geocode( { 'address': start_address}, function(results, status) {
-
-    if (status == google.maps.GeocoderStatus.OK) {
-    //var latitude = results[0].geometry.location.lat();
-    //var longitude = results[0].geometry.location.lng();
-    start_coordinate=results[0].geometry.location;
- 
-    } 
-});
-
-*/
-//console.log(start_coordinate);
-
-//start=start[0].geometry.location;
-   // end = new google.maps.LatLng(7.736021279864532,100.04406638328624);
-   // start='<?=$trips->start_location?>';
    start = new google.maps.LatLng(7.004969,100.4990518);
    end ='<?=$trips->end_location?>';
+   //end = new google.maps.LatLng(7.004969,100.4990518);
     
     createMarker(start,1);
    // createMarker(end);
@@ -129,10 +66,21 @@ geo_start.geocode( { 'address': start_address}, function(results, status) {
         if (status == google.maps.DirectionsStatus.OK) {
             directionsDisplay.setDirections(response);
             var route = response.routes[0];
+            var summaryPanel = document.getElementById('directions-panel');
+            $('#directions-panel').empty();
 						for (var i = 0; i < route.legs.length; i++) {
-						//	console.log(route.legs[i].end_location);
+							console.log(route.legs[i]);
              // createMarker(route.legs[i].start_location,i);
               createMarker(route.legs[i].end_location,i+2);
+              // display segment
+              var routeSegment = i + 1;
+              summaryPanel.innerHTML += '<b>Route Segment: ' + routeSegment +
+                  '</b><br>';
+              summaryPanel.innerHTML += route.legs[i].start_address + ' ถึง ';
+              summaryPanel.innerHTML += route.legs[i].end_address + '<br>';
+              summaryPanel.innerHTML += route.legs[i].duration.text + '<br>';
+              summaryPanel.innerHTML += route.legs[i].distance.text + '<br><br>';
+
 					}
 
         }
@@ -145,7 +93,7 @@ function createMarker(latlng,mlabel) {
     var marker = new google.maps.Marker({
         position: latlng,
         map: map,
-       // label: { text: 'P'+mlabel },
+        label: { text: 'L'+mlabel },
     });
 }
 
