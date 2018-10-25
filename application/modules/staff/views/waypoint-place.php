@@ -25,7 +25,7 @@
   <address>จ.<?=$item->PROVINCE_NAME?></address>
   <a class="btn btn-primary" data-toggle="modal" href="<?=base_url('staff/place_detail/'.$item->id)?>" data-target=".modal"><i class="fa fa-fw fa-search-plus"></i>ดูรายละเอียด</a>
                         <div class="material-switch pull-right">
-                            <?php $location_point=$item->lat.','.$item->long?>
+                            <?php $location_point=$item->lat.','.$item->long.','.$item->place_name?>
                             <input id="place-id-<?=$item->id?>" value="<?=$location_point?>" class="place-selected" name="map_place_id[]" type="checkbox"/>
                             <label for="place-id-<?=$item->id?>" class="label-success"></label>
                         </div>

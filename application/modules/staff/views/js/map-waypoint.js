@@ -13,7 +13,8 @@ $(function () {
                     stop = new google.maps.LatLng(start_location[0],start_location[1])
                     waypts.push({
                         location: stop,
-                        stopover: true
+                        stopover: true,
+                   //     title:start_location[2],
                     });
                    // console.log(start_location[0]);
             }
@@ -47,10 +48,12 @@ function initialize() {
 function calcRoute() {
 
    start = new google.maps.LatLng(7.004969,100.4990518);
-   end ='<?=$trips->end_location?>';
-   //end = new google.maps.LatLng(7.004969,100.4990518);
+   //end ='<?=$trips->end_location?>';
+   end = new google.maps.LatLng(7.004969,100.4990518);
+   // start='<?=$trips->start_location?>';
+    //end ='<?=$trips->start_location?>';
     
-    createMarker(start,1);
+   // createMarker(start,1);
    // createMarker(end);
     
     var request = {
@@ -71,14 +74,14 @@ function calcRoute() {
 						for (var i = 0; i < route.legs.length; i++) {
 							console.log(route.legs[i]);
              // createMarker(route.legs[i].start_location,i);
-              createMarker(route.legs[i].end_location,i+2);
+              createMarker(route.legs[i].end_location,i+1,route.legs[i].end_address);
               // display segment
               var routeSegment = i + 1;
-              summaryPanel.innerHTML += '<b>Route Segment: ' + routeSegment +
+              summaryPanel.innerHTML += '<b>เส้นทางช่วงที่: ' + routeSegment +
                   '</b><br>';
-              summaryPanel.innerHTML += route.legs[i].start_address + ' ถึง ';
+             summaryPanel.innerHTML += route.legs[i].start_address + '<i class="fa fa-fw fa-angle-double-right"></i>';
               summaryPanel.innerHTML += route.legs[i].end_address + '<br>';
-              summaryPanel.innerHTML += route.legs[i].duration.text + '<br>';
+              summaryPanel.innerHTML += route.legs[i].duration.text + ' ระยะทาง ';
               summaryPanel.innerHTML += route.legs[i].distance.text + '<br><br>';
 
 					}
@@ -88,12 +91,13 @@ function calcRoute() {
      
 }
 
-function createMarker(latlng,mlabel) {
+function createMarker(latlng,mlabel,title) {
     
     var marker = new google.maps.Marker({
         position: latlng,
         map: map,
         label: { text: 'L'+mlabel },
+        title:title,
     });
 }
 
