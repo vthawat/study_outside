@@ -28,7 +28,7 @@ class Study_trip extends CI_Model
 		$end_date=explode('/',$data['end_date']);
 		$data['start_date']=$start_date[2].'-'.$start_date[1].'-'.$start_date[0];
 		$data['end_date']=$end_date[2].'-'.$end_date[1].'-'.$end_date[0];
-		if($this->db->insert($this->table,$data)) return TRUE;
+		if($this->db->insert($this->table,$data)) return $this->db->insert_id();
 		else return FALSE;
 	}
 

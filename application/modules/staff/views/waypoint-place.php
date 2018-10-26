@@ -1,4 +1,4 @@
-<div class="col-md-5">
+<div class="col-md-4">
 <h4><i class="fa fa-fw fa-map-pin"></i>เลือกสถานที่แนะนำ</h4>
 <!-- Single button action list -->
 <div class="btn-group pull-right">
@@ -34,11 +34,21 @@
   <address>ต.<?=$item->DISTRICT_NAME?></address>
   <address>อ.<?=$item->AMPHUR_NAME?></address>
   <address>จ.<?=$item->PROVINCE_NAME?></address>
-  <a class="btn btn-primary" data-toggle="modal" href="<?=base_url('staff/place_detail/'.$item->id)?>" data-target=".modal"><i class="fa fa-fw fa-search-plus"></i>ดูรายละเอียด</a>
+  <div class="btn-group">
+							  <a class="btn btn-primary" data-toggle="modal" href="<?=base_url('staff/place_detail/'.$item->id)?>" data-target=".modal"><i class="fa fa-fw fa-search-plus"></i>ดูรายละเอียด</a>
+							  <button type="button" class="btn btn-default dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+							    <span class="fa fa-cog fa-fw"></span><span class="caret"></span>
+							  </button>
+							  <ul class="dropdown-menu">
+                  <li><a href="<?=base_url('staff/place/knowledge/'.$item->id)?>" class="text-blue"><i class="fa fa-fw fa-info-circle"></i>องค์ความรู้ของสถานที่</a></li>
+                  <li><a href="<?=base_url('staff/place/edit/'.$item->id)?>" class="text-yellow"><i class="fa fa-fw fa-pencil"></i>แก้ไข</a></li>
+                  <li><a href="<?=base_url('staff/delete/place/'.$item->id)?>" class="text-red" onclick="return confirm('ยืนยันการลบรายการสถานที่: <?=$item->place_name?>?')"><i class="fa fa-fw fa-remove"></i>ลบ</a></li>
+							  </ul>
+							</div>
                         <div class="material-switch pull-right">
                             <?php $location_point=$item->lat.','.$item->long.','.$item->id?>
                             <input id="place-id-<?=$item->id?>" value="<?=$location_point?>" class="place-selected" name="map_place_id[]" type="checkbox"/>
-                            <label for="place-id-<?=$item->id?>" class="label-success"></label>
+                            <label for="place-id-<?=$item->id?>" class="label-danger"></label>
                         </div>
   <div class="clearfix"></div>
 </li>
@@ -47,7 +57,7 @@
 </ul>
 </div>
 </div>
-<div class="col-md-7"><h4><i class="fa fa-fw fa-map"></i>เส้นทาง<i class="fa fa-fw fa-angle-double-right"></i><?=$trips->start_location?> - <?=$trips->end_location?></h4>
+<div class="col-md-8"><h4><i class="fa fa-fw fa-map"></i>เส้นทาง<i class="fa fa-fw fa-angle-double-right"></i><?=$trips->start_location?> - <?=$trips->end_location?></h4>
 <div id="map-waypoint"></div>
 <h4><i class="fa fa-fw fa-clock-o"></i>รายะทางและเวลา</h4>
 <div id="directions-panel"></div>

@@ -379,9 +379,12 @@ class Staff extends CI_Controller {
 			case 'trip':
 			//exit(print_r($this->input->post()));
 			 if(!empty($this->input->post('subject_major_selected'))&&!empty($this->input->post('knowledge_selected'))&&!empty($this->input->post('subject_list_id'))&&!empty($this->input->post('start_date')))
-				if($this->study_trip->post_trip())
-					redirect(base_url('staff/'.$action));
-				else show_error('ไม่สามารถบันทึกได้');
+				{
+					$trip_id=$this->study_trip->post_trip();	
+					if($trip_id)
+							redirect(base_url('staff/'.$action.'/waypoint/'.$trip_id));
+						else show_error('ไม่สามารถบันทึกได้');
+				}
 			else show_error('กรอกข้อมูลยังไม่สมบูรณ์');
 			break;
 			default;
@@ -417,7 +420,7 @@ class Staff extends CI_Controller {
 			case 'trip':
 			if(!empty($this->input->post('subject_major_selected'))&&!empty($this->input->post('knowledge_selected'))&&!empty($this->input->post('subject_list_id'))&&!empty($this->input->post('start_date')))
 				if($this->study_trip->put_trip($id))
-				redirect(base_url('staff/'.$action));
+				redirect(base_url('staff/'.$action.'/waypoint/'.$id));
 				else show_error('ไม่สามารถบันทึกได้');
 			else show_error('กรอกข้อมูลยังไม่สมบูรณ์');
 			break;
