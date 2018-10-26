@@ -61,9 +61,10 @@ class Study_place extends CI_Model
 	function get_knowledge_group_by_name()
 	{
 		$sql="SELECT DISTINCT
-		khowledge_items.title
+		khowledge_items.id,khowledge_items.title
 		FROM
-		khowledge_items";
+		khowledge_items GROUP BY
+		khowledge_items.title";
 		return $this->db->query($sql)->result();
 	}
 	function get_knowledge_by_id($id)

@@ -56,6 +56,22 @@ class Staff extends CI_Controller {
 								  'detail'=>$this->load->view('frm_trip',$data,TRUE)];
 				$this->template->write_view('content','contents',$data);
 			break;
+			case 'edit':
+				$this->template->add_js('assets/datepicker/bootstrap-datepicker.js');
+				$this->template->add_js('assets/datepicker/locales/bootstrap-datepicker.th.js');
+				$this->template->add_css('assets/datepicker/datepicker3.css');
+				$this->template->add_js($this->load->view('js/datepicker.js',null,TRUE),'embed',TRUE);
+				$this->template->write('page_header','<a href="../trip"><i class="fa fa-fw fa-calendar-check-o"></i>กำหนดการเดินทาง</a><i class="fa fa-fw fa-angle-double-right"></i>แก้ไข');
+				$data['edit_item']=$this->study_trip->get_by_id($id);
+				$data['action']=base_url('staff/put/trip/'.$id);
+				$data['Subject_list']=$this->ftps->get_subject();
+				$data['Subject_major']=$this->ftps->get_subject_major();
+				$data['EndLocationList']=$this->province->get_all();
+				$data['Knowledge_item']=$this->study_place->get_knowledge_group_by_name();
+				$data['content']=['title'=>'',
+								  'detail'=>$this->load->view('frm_trip',$data,TRUE)];
+				$this->template->write_view('content','contents',$data);
+			break;
 			case 'waypoint':
 			$data['trips']=$this->study_trip->get_by_id($id);
 			//load map
@@ -361,9 +377,12 @@ class Staff extends CI_Controller {
 			
 			break;
 			case 'trip':
+			//exit(print_r($this->input->post()));
+			 if(!empty($this->input->post('subject_major_selected'))&&!empty($this->input->post('knowledge_selected'))&&!empty($this->input->post('subject_list_id'))&&!empty($this->input->post('start_date')))
 				if($this->study_trip->post_trip())
-				redirect(base_url('staff/'.$action));
+					redirect(base_url('staff/'.$action));
 				else show_error('ไม่สามารถบันทึกได้');
+			else show_error('กรอกข้อมูลยังไม่สมบูรณ์');
 			break;
 			default;
 			show_error('ไม่สามารถดำเนินการได้');
@@ -394,6 +413,13 @@ class Staff extends CI_Controller {
 					redirect(base_url('staff/place/'.$action.'/'.$this->study_place->get_knowledge_by_id($id)->study_place_id));
 				else show_error('ไม่สามารถบันทึกได้');
 
+			break;
+			case 'trip':
+			if(!empty($this->input->post('subject_major_selected'))&&!empty($this->input->post('knowledge_selected'))&&!empty($this->input->post('subject_list_id'))&&!empty($this->input->post('start_date')))
+				if($this->study_trip->put_trip($id))
+				redirect(base_url('staff/'.$action));
+				else show_error('ไม่สามารถบันทึกได้');
+			else show_error('กรอกข้อมูลยังไม่สมบูรณ์');
 			break;
 			default;
 			show_error('ไม่สามารถดำเนินการได้');

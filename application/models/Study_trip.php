@@ -31,6 +31,22 @@ class Study_trip extends CI_Model
 		if($this->db->insert($this->table,$data)) return TRUE;
 		else return FALSE;
 	}
+
+	function put_trip($id)
+	{
+		$data=$this->input->post();
+		$data['subject_major_selected']=json_encode($data['subject_major_selected']);
+		$data['knowledge_selected']=json_encode($data['knowledge_selected']);
+		//$data['status']='อยู่ระหว่างการดำเนินการ'; // set init status
+		// change format date dd/mm/yyyy to yyyy-mm-dd
+		$start_date=explode('/',$data['start_date']);
+		$end_date=explode('/',$data['end_date']);
+		$data['start_date']=$start_date[2].'-'.$start_date[1].'-'.$start_date[0];
+		$data['end_date']=$end_date[2].'-'.$end_date[1].'-'.$end_date[0];
+		$this->db->where('study_period_trip.id',$id);
+		if($this->db->update($this->table,$data)) return TRUE;
+		else return FALSE;
+	}
 	function suggest_location($trip_id)
 	{
 		$trips=$this->get_by_id($trip_id);

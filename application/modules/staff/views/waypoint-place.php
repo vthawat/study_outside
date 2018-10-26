@@ -1,10 +1,21 @@
 <div class="col-md-5">
 <h4><i class="fa fa-fw fa-map-pin"></i>เลือกสถานที่แนะนำ</h4>
+<!-- Single button action list -->
+<div class="btn-group pull-right">
+							  <button type="button" class="btn btn-warning dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+							    <span class="fa fa-cog fa-fw"></span><span class="caret"></span>
+							  </button>
+							  <ul class="dropdown-menu">
+							    <li><a href="<?=base_url('staff/trip/edit/'.$trips->id)?>" class="text-yellow"><span class="fa fa-edit fa-fw"></span>แก้ไข</a></li>
+							    <li><a href="<?=base_url('staff/trip/remove/'.$trips->id)?>" class="text-red" onclick="return confirm('ยืนยันการลบรายการ กำหนดการเดินทางที่เกี่ยวข้องจะถูกลบ?')"><span class="fa fa-remove fa-fw"></span>ลบ</a></li>
+							  </ul>
+</div>
 <p>องค์ความรู้ที่สนใจ: <?php foreach(json_decode($trips->knowledge_selected,TRUE) as $knowledge):?><span class="label label-primary"><?=$knowledge?></span> <?php endforeach?></p>
-<p>สาขาวิชา: <?php foreach(json_decode($trips->subject_major_selected,TRUE) as $subject_major_id):?><span class="label label-success"><?=$this->ftps->get_subject_major($subject_major_id)->major_name?></span> <?php endforeach?></p>
+<p>สาขาวิชา: <?php if($trips->subject_major_selected!='null') foreach(json_decode($trips->subject_major_selected,TRUE) as $subject_major_id):?><span class="label label-success"><?=$this->ftps->get_subject_major($subject_major_id)->major_name?></span> <?php endforeach?></p>
 <div>
 <ul class="list-gruoup">
 <?php foreach($place_relation as $item):?>
+  <?php if($item->lat!='0'&&$item->long!='0'):?>
 <li class="list-group-item">
 <h3 class="text-success thai-webfont"><i class="fa fa-fw fa-map-pin"></i><?=$item->place_name?></h3>
 <div class="col-md-4 col-xs-6">
@@ -31,6 +42,7 @@
                         </div>
   <div class="clearfix"></div>
 </li>
+<?php endif?>
 <?php endforeach?>
 </ul>
 </div>
