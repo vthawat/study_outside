@@ -1,8 +1,28 @@
 $(function () {
     
-    var waypts = [];
-    $('.place-selected').click(function()
+var waypts = [];
+    $('.place-selected').change(function(){
+           waypts = []; // clear point
+        $('.place-selected').each(function (i) {
+            
+            if (this.checked) {
+                //console.log($(this).val()); 
+                var str=$(this).val();
+               var start_location=str.split(',');
+                stop = new google.maps.LatLng(start_location[0],start_location[1])
+                waypts.push({
+                    location: stop,
+                    stopover: true
+                });
+               // console.log(i);
+            }
+        });
+        initialize()
+    });
+
+  /*  $('.place-selected').click(function()
         {
+
             if($(this).is(":checked"))
             {
             //alert("add"+$(this).val());
@@ -20,9 +40,9 @@ $(function () {
             }
             
             else alert("remove");
-            initialize()
+          //  initialize()
 
-    });
+    });*/
 
 
 
@@ -72,12 +92,12 @@ function calcRoute() {
             var summaryPanel = document.getElementById('directions-panel');
             $('#directions-panel').empty();
 						for (var i = 0; i < route.legs.length; i++) {
-							console.log(route.legs[i]);
+							//console.log(route.legs[i]);
              // createMarker(route.legs[i].start_location,i);
               createMarker(route.legs[i].end_location,i+1,route.legs[i].end_address);
               // display segment
               var routeSegment = i + 1;
-              summaryPanel.innerHTML += '<b>เส้นทางช่วงที่: ' + routeSegment +
+              summaryPanel.innerHTML += '<b>Segment: ' + routeSegment +
                   '</b><br>';
              summaryPanel.innerHTML += route.legs[i].start_address + '<i class="fa fa-fw fa-angle-double-right"></i>';
               summaryPanel.innerHTML += route.legs[i].end_address + '<br>';
@@ -96,7 +116,7 @@ function createMarker(latlng,mlabel,title) {
     var marker = new google.maps.Marker({
         position: latlng,
         map: map,
-        label: { text: 'L'+mlabel },
+        label: { text: 'P'+mlabel },
         title:title,
     });
 }
