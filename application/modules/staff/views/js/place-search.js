@@ -11,7 +11,7 @@ $(document).ready(function(){
                     latitudeInput: $('#latitude'),
                     longitudeInput: $('#longtitude'),
                   //  radiusInput: 300,
-                    locationNameInput: $('#map-address')
+                    locationNameInput: $('#map-search')
                 },
                 enableAutocomplete: true,
                 onchanged: function (currentLocation, radius, isMarkerDropped) {

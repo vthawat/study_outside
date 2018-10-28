@@ -3,7 +3,7 @@ $(function () {
 		var get_url="<?=base_url($this->router->fetch_class())?>/json_get_amphur_by_province_id/"+$(this).val();
 		$('#amphur').empty();
 		$('#district').empty();
-		$('#map-address').val('จังหวัด '+$(this).find(":selected").text());
+		$('#map-search').val('จังหวัด '+$(this).find(":selected").text());
 		$.getJSON(get_url, function( data )
 		 {
 

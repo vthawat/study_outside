@@ -107,7 +107,7 @@
   <h4 class="text-success">พิกัดของสถานที่ศึกษาดูงานภาคสนาม</h4>
 		<div class="form-group">
 		  <div>
-			  <input <?php if(!empty($edit_item)):?>value="<?=$edit_item->map_address?>"<?php endif?> id="map-address" name="map_address" type="text" class="form-control">
+			  <input <?php if(!empty($edit_item)):?>value="<?=$edit_item->map_address?>"<?php endif?> id="map-search" name="map_address" type="text" class="form-control">
 			  <span class="help-block">ค้นหาสถานที่ ระบุชื่อสถานที่</span> 
 			 </div>
 		 </div>		
