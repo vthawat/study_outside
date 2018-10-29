@@ -97,8 +97,8 @@ function calcRoute() {
         //travelMode: google.maps.DirectionsTravelMode.DRIVING
         travelMode: 'DRIVING'
     };
-
-    directionsService.route(request, function (response, status) {
+   
+       directionsService.route(request, function (response, status) {
         if (status == google.maps.DirectionsStatus.OK) {
             directionsDisplay.setDirections(response);
             var route = response.routes[0];
@@ -106,7 +106,10 @@ function calcRoute() {
             var start_location_name;
             var end_location_name;
             $('#directions-panel').empty();
-
+            $('#directions-panel').append('<ul class="timeline">');
+            //summaryPanel.innerHTML+='<ul class="timeline">';
+            
+            
 						for (var i = 0; i < route.legs.length; i++) {
 
                                                  
@@ -148,16 +151,24 @@ function calcRoute() {
 
                             // display segment
                             var routeSegment = i + 1;
-                            summaryPanel.innerHTML += '<b>Segment: ' + routeSegment +'</b><br>';
+                           /* summaryPanel.innerHTML += '<b>Segment: ' + routeSegment +'</b><br>';
                             summaryPanel.innerHTML += start_location_name + '<i class="fa fa-fw fa-angle-double-right"></i>';
                             summaryPanel.innerHTML += end_location_name + '<br>';
                            // summaryPanel.innerHTML += route.legs[i].end_location.lat() + '<br>';
                             summaryPanel.innerHTML += route.legs[i].duration.text + ' ระยะทาง ';
                             summaryPanel.innerHTML += route.legs[i].distance.text + '<br><br>';
+                            */
+                           $('#directions-panel ul.timeline').append('<li class="time-circle"><b>Segment: ' + routeSegment +'</b><span><i class="fa fa-fw fa-angle-double-right"></i>เวลา '+route.legs[i].duration.text+'</span><span><i class="fa fa-fw fa-angle-double-right"></i>ระยะทาง '+route.legs[i].distance.text+'</span></li>');
+                           $('#directions-panel ul.timeline').append('<li>จาก'+start_location_name+'</li>');
+                           $('#directions-panel ul.timeline').append('<li>ถึง'+end_location_name+'</li>');
 
-					}
+                          
+
+                    }
+                    $('#directions-panel').append('</ul>');
 
         }
+        
     });
      
 }

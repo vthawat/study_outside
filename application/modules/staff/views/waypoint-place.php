@@ -59,7 +59,6 @@
 <?php endif?>
 <?php endforeach?>
 </ul>
-
 </div>
 <div class="col-md-8"><h4><i class="fa fa-fw fa-map"></i>เส้นทาง<i class="fa fa-fw fa-angle-double-right"></i><?=$trips->start_location?> - <?=$trips->end_location?></h4>
 <div id="map-waypoint"></div>
