@@ -51,7 +51,17 @@
 							</div>
                         <div class="material-switch pull-right">
                             <?php $location_point=$item->lat.':'.$item->long.':'.$item->id.':'.$item->place_name.':'.$item->map_address;?>
+                            <?php $array_place=array();if(!empty($trips->place_selected))
+                                 {
+                                $place_selected=json_decode($trips->place_selected,TRUE);
+                                foreach($place_selected as $place) array_push($array_place,$place['place_id']);
+                                 } 
+                                if(in_array($item->id,$array_place)):
+                            ?>
+                            <input id="place-id-<?=$item->id?>" value="<?=$location_point?>" class="place-selected" name="map_place_id[]" type="checkbox" checked/>
+                            <?php else:?>
                             <input id="place-id-<?=$item->id?>" value="<?=$location_point?>" class="place-selected" name="map_place_id[]" type="checkbox"/>
+                            <?php endif;?>
                             <label for="place-id-<?=$item->id?>" class="label-danger"></label>
                         </div>
   <div class="clearfix"></div>
@@ -62,7 +72,7 @@
 </div>
 <div class="col-md-8"><h4><i class="fa fa-fw fa-map"></i>เส้นทาง<i class="fa fa-fw fa-angle-double-right"></i><?=$trips->start_location?> - <?=$trips->end_location?></h4>
 <div id="map-waypoint" class="well"></div>
-<h4><i class="fa fa-fw fa-clock-o"></i>รายละเอียดของเส้นทางการเดินทาง สถานที่ ระยะทาง ระยะเวลา</h4>
+<h4><i class="fa fa-fw fa-clock-o"></i>รายละเอียดของเส้นทางการเดินทาง สถานที่ ระยะทางและเวลา</h4>
 <div id="directions-panel"></div>
 </div>
 <div class="modal fade" tabindex="-1" role="dialog">

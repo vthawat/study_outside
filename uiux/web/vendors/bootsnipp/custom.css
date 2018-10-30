@@ -422,8 +422,11 @@ ul.timeline > li {
 }
 ul.timeline > li.time-circle:before {
  
-  background: #98f39c;
+  background: #24ff87;
   border: 3px solid #065313;
+  left: 15px;
+  width: 30px;
+  height: 30px;
 }
 ul.timeline > li:before {
   content: ' ';

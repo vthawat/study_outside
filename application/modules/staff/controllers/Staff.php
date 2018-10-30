@@ -424,6 +424,10 @@ class Staff extends CI_Controller {
 				else show_error('ไม่สามารถบันทึกได้');
 			else show_error('กรอกข้อมูลยังไม่สมบูรณ์');
 			break;
+			case 'place_selected':
+				//print 'ok';
+				print $this->study_trip->put_place_selected($id);
+			break;
 			default;
 			show_error('ไม่สามารถดำเนินการได้');
 		}

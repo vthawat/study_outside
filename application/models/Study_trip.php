@@ -47,6 +47,14 @@ class Study_trip extends CI_Model
 		if($this->db->update($this->table,$data)) return TRUE;
 		else return FALSE;
 	}
+	function put_place_selected($id)
+	{
+		$data=$this->input->post();
+		$data['place_selected']=json_encode($data['place_selected']);
+		$this->db->where('study_period_trip.id',$id);
+		if($this->db->update($this->table,$data)) return TRUE;
+		else return FALSE;
+	}
 	function suggest_location($trip_id)
 	{
 		$trips=$this->get_by_id($trip_id);

@@ -20,10 +20,22 @@ var location_selected=[];
                 //test1=new google.maps.Lat(stop_location[0]);
                 location_selected.push({"place_id":stop_location[2],
                                         "place_name":stop_location[3],
-                                        "place_location":stop,
+                                        //"place_location":stop,
                                         "location_address":stop_location[4]
                                     });
-             
+                $.ajax({ method: "POST",
+                        //contentType: "application/json; charset=utf-8",
+                        //dataType: "json",
+                        url: "<?=base_url('staff/put/place_selected/'.$trips->id)?>",
+                        data:{place_selected:location_selected}
+                                      })
+                                        .fail(function(){
+                                            alert('ไม่สามารถบันทึกได้')
+                                        })
+                                        .done(function( msg ) {
+                                          //alert( "Data Saved: " + msg );
+                                        });
+                
             }
         });
         // console.log(location_selected);
@@ -177,8 +189,8 @@ function calcRoute() {
                     
                     totaldistance=(totaldistance/1000);
                    // console.log(secondsToDhms(totalduration));
-                    $('#directions-panel').append('<h4>รวมระยะทาง '+totaldistance.toFixed(1) + " กม."+'</h4>');
-                    $('#directions-panel').append('<h4>รวมระยะเวลา '+secondsToDhms(totalduration)+'</h4>');
+                    $('#directions-panel').append('<h4>รวมระยะทาง '+totaldistance.toFixed(1) + " กม."+' ระยะเวลา '+secondsToDhms(totalduration)+'</h4>');
+                    //$('#directions-panel').append();
         }
         
     });
