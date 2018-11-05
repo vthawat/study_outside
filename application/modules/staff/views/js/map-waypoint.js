@@ -223,6 +223,34 @@ function secondsToDhms(seconds) {
     else return 0+' นาที';
     }
 
+function loadWayPoint()
+{
+    $('.place-selected').each(function (i) {
+            
+        if (this.checked) {
+            //console.log($(this).val()); 
+            var str=$(this).val();
+           var stop_location=str.split(':');
+            stop = new google.maps.LatLng(stop_location[0],stop_location[1]);
+            //stop=stop_location[0]+','+stop_location[1];
+            waypts.push({
+                location: stop,
+                stopover: true
+            });
+            //test1=new google.maps.Lat(stop_location[0]);
+            location_selected.push({"place_id":stop_location[2],
+                                    "place_name":stop_location[3],
+                                    //"place_location":stop,
+                                    "location_address":stop_location[4]
+                                });
+            
+        }
+    });
+}
+
 initialize();
+<?php if(!empty($trips->place_selected)):?>
+loadWayPoint();
+<?php endif?>
 
 });
