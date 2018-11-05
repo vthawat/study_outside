@@ -199,11 +199,19 @@ function calcRoute() {
 
 function createMarker(latlng,label,title) {
    // console.log(latlng);
+
+   numberMarkerImg = {
+    url: '<?=base_url()?>/images/map-maker.png',
+    size: new google.maps.Size(42, 42),
+    scaledSize: new google.maps.Size(42, 42),
+    labelOrigin: new google.maps.Point(20,15)
+};
     var marker = new google.maps.Marker({
         position: latlng,
         map: map,
-        label: { text: 'P'+label },
+        label: { text: label.toString()},
         title:title,
+        icon: numberMarkerImg
     });
 }
 
