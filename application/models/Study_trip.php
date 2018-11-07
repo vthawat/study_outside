@@ -3,10 +3,11 @@ class Study_trip extends CI_Model
 {
 	var $table='study_period_trip';
 	var $desc='่กำหนดการเดินทางศึกษาดูงาน';
+	var $trip_status=array();
 	function __construct()
 	{
 		parent::__construct();
-			
+		$this->set_trip_color();
 	}
 	function get_all()
 	{
@@ -16,6 +17,10 @@ class Study_trip extends CI_Model
 	{
 		$this->db->where('id',$id);
 		return $this->db->get($this->table)->row();
+	}
+	function set_trip_color()
+	{
+		$this->trip_status=array(0=>'อยู่ระหว่างการดำเนินการ');
 	}
 	function post_trip()
 	{
@@ -37,8 +42,6 @@ class Study_trip extends CI_Model
 		$data=$this->input->post();
 		$data['subject_major_selected']=json_encode($data['subject_major_selected']);
 		$data['knowledge_selected']=json_encode($data['knowledge_selected']);
-		//$data['status']='อยู่ระหว่างการดำเนินการ'; // set init status
-		// change format date dd/mm/yyyy to yyyy-mm-dd
 		$start_date=explode('/',$data['start_date']);
 		$end_date=explode('/',$data['end_date']);
 		$data['start_date']=$start_date[2].'-'.$start_date[1].'-'.$start_date[0];
@@ -47,12 +50,23 @@ class Study_trip extends CI_Model
 		if($this->db->update($this->table,$data)) return TRUE;
 		else return FALSE;
 	}
+	function put_trip_status($id,$status)
+	{
+		$data=array("status"=>$status);
+		$this->db->where('study_period_trip.id',$id);
+		if($this->db->update($this->table,$data)) return TRUE;
+		else return FALSE;
+	}
+	function color_trip_status($status)
+	{
+		//$trip_status=$this->ge
+	}
 	function put_place_selected($id)
 	{
 		$data=$this->input->post();
 		$data['place_selected']=json_encode($data['place_selected']);
 		$this->db->where('study_period_trip.id',$id);
-		if($this->db->update($this->table,$data)) return TRUE;
+		if($this->db->update($this->table,$data)) return $this->put_trip_status($id,"สร้างเส้นทางแล้ว");
 		else return FALSE;
 	}
 	function suggest_location($trip_id)

@@ -21,11 +21,11 @@
                 <td>
                 			<!-- Single button -->
 							<div class="btn-group">
-							  <button type="button" class="btn btn-warning dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+							  <button type="button" class="btn btn-default dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
 							    <span class="fa fa-cog fa-fw"></span><span class="caret"></span>
 							  </button>
 							  <ul class="dropdown-menu">
-                                <li><a href="<?=base_url('staff/trip/waypoint/'.$item->id)?>"><span class="fa fa-fw fa-map-marker"></span>สร้างเส้นทาง</a></li>
+                                <li><a href="<?=base_url('staff/trip/waypoint/'.$item->id)?>" class="text-green"><span class="fa fa-fw fa-map-marker"></span>สร้างเส้นทาง</a></li>
 							    <li><a href="<?=base_url('staff/trip/edit/'.$item->id)?>" class="text-yellow"><span class="fa fa-edit fa-fw"></span>แก้ไข</a></li>
 							    <li><a href="<?=base_url('staff/trip/remove/'.$item->id)?>" class="text-red" onclick="return confirm('ยืนยันการลบรายการ?')"><span class="fa fa-remove fa-fw"></span>ลบ</a></li>
 							  </ul>
