@@ -7,7 +7,7 @@ class Study_trip extends CI_Model
 	function __construct()
 	{
 		parent::__construct();
-		$this->set_trip_color();
+		$this->set_trip_status();
 	}
 	function get_all()
 	{
@@ -18,9 +18,12 @@ class Study_trip extends CI_Model
 		$this->db->where('id',$id);
 		return $this->db->get($this->table)->row();
 	}
-	function set_trip_color()
+	function set_trip_status()
 	{
-		$this->trip_status=array(0=>'อยู่ระหว่างการดำเนินการ');
+		$this->trip_status=[1=>'อยู่ระหว่างการดำเนินการ',
+							2=>'สร้างเส้นทางแล้ว',
+							3=>'สร้างกำหนดการเดินทางแล้ว'
+							];
 	}
 	function post_trip()
 	{
@@ -57,9 +60,15 @@ class Study_trip extends CI_Model
 		if($this->db->update($this->table,$data)) return TRUE;
 		else return FALSE;
 	}
-	function color_trip_status($status)
+	function check_trip_status($status)
 	{
-		//$trip_status=$this->ge
+		
+		if(empty($status)) return 0;
+		else{
+			$status=array_keys($this->trip_status,$status);
+			return $status[0];
+		}
+
 	}
 	function put_place_selected($id)
 	{

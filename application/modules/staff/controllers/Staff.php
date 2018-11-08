@@ -46,7 +46,7 @@ class Staff extends CI_Controller {
 				$this->template->add_js('assets/datepicker/locales/bootstrap-datepicker.th.js');
 				$this->template->add_css('assets/datepicker/datepicker3.css');
 				$this->template->add_js($this->load->view('js/datepicker.js',null,TRUE),'embed',TRUE);
-				$this->template->write('page_header','<a href="../trip"><i class="fa fa-fw fa-calendar-check-o"></i>กำหนดการเดินทาง</a><i class="fa fa-fw fa-angle-double-right"></i>สร้างใหม่');
+				$this->template->write('page_header','<a href="../trip"><i class="fa fa-fw fa-calendar-check-o"></i>ความต้องการเดินทาง</a><i class="fa fa-fw fa-angle-double-right"></i>สร้างใหม่');
 				$data['action']=base_url('staff/post/trip');
 				$data['Subject_list']=$this->ftps->get_subject();
 				$data['Subject_major']=$this->ftps->get_subject_major();
@@ -61,7 +61,7 @@ class Staff extends CI_Controller {
 				$this->template->add_js('assets/datepicker/locales/bootstrap-datepicker.th.js');
 				$this->template->add_css('assets/datepicker/datepicker3.css');
 				$this->template->add_js($this->load->view('js/datepicker.js',null,TRUE),'embed',TRUE);
-				$this->template->write('page_header','<a href="../trip"><i class="fa fa-fw fa-calendar-check-o"></i>กำหนดการเดินทาง</a><i class="fa fa-fw fa-angle-double-right"></i>แก้ไข');
+				$this->template->write('page_header','<a href="../trip"><i class="fa fa-fw fa-calendar-check-o"></i>ความต้องการเดินทาง</a><i class="fa fa-fw fa-angle-double-right"></i>แก้ไข');
 				$data['edit_item']=$this->study_trip->get_by_id($id);
 				$data['action']=base_url('staff/put/trip/'.$id);
 				$data['Subject_list']=$this->ftps->get_subject();
@@ -80,7 +80,7 @@ class Staff extends CI_Controller {
 			$this->template->add_css($this->load->view('css/map.css',null,TRUE),'embed',TRUE);
 			$this->template->add_js($this->load->view('js/modal.js',null,TRUE),'embed',TRUE);
 			$this->template->add_js($this->load->view('js/map-waypoint.js',$data,TRUE),'embed',TRUE);
-			$this->template->write('page_header','<a href="../trip"><i class="fa fa-fw fa-calendar-check-o"></i>กำหนดการเดินทาง</a><i class="fa fa-fw fa-angle-double-right"></i>สร้างเส้นทาง');
+			$this->template->write('page_header','<a href="../trip"><i class="fa fa-fw fa-calendar-check-o"></i>ความต้องการเดินทาง</a><i class="fa fa-fw fa-angle-double-right"></i>สร้างเส้นทาง');
 			$title='รายวิชา '.$this->ftps->get_subject($this->study_trip->get_by_id($id)->subject_list_id)->subject_code.' '.$this->ftps->get_subject($this->study_trip->get_by_id($id)->subject_list_id)->subject_name;
 			$data['place_relation']=$this->study_trip->suggest_location($id);
 			$data['content']=['title'=>$title,
@@ -88,15 +88,18 @@ class Staff extends CI_Controller {
 							  'detail'=>$this->load->view('waypoint-place',$data,TRUE)];
 			$this->template->write_view('content','contents',$data);
 			break;
+			case 'schedule':
+			$this->template->write('page_header','<a href="../trip"><i class="fa fa-fw fa-calendar-check-o"></i>ความต้องการเดินทาง</a><i class="fa fa-fw fa-angle-double-right"></i>สร้างตารางกำหนดการเดินทาง');
+			break;
 
 		default:
 		$data['Trip_list']=$this->study_trip->get_all();
-		$data['content']=['title'=>'รายการกำหนดการเดินทาง',
+		$data['content']=['title'=>'รายการความต้องการเดินทาง',
 						  'color'=>'success',
 						  'toolbar'=>'<a class="btn icon-btn btn-success add-new" href="'.base_url('staff/trip/new').'"><span class="btn-glyphicon fa fa-plus img-circle text-success"></span>สร้างใหม่</a>',
 						  'detail'=>$this->load->view('trip',$data,TRUE)];
 		$this->template->write_view('content','contents',$data);
-		$this->template->write('page_header','<a href="trip"><i class="fa fa-fw fa-calendar-check-o"></i>กำหนดการเดินทาง</a>');
+		$this->template->write('page_header','<a href="trip"><i class="fa fa-fw fa-calendar-check-o"></i>ความต้องการเดินทาง</a>');
 		}
 		$this->template->render();	
 	}
