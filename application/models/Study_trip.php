@@ -78,6 +78,14 @@ class Study_trip extends CI_Model
 		if($this->db->update($this->table,$data)) return $this->put_trip_status($id,"สร้างเส้นทางแล้ว");
 		else return FALSE;
 	}
+	function put_trip_routing($id)
+	{
+		$data=$this->input->post();
+		$data['routing']=json_encode($data['routing']);
+		$this->db->where('study_period_trip.id',$id);
+		if($this->db->update($this->table,$data)) return TRUE;
+		else return FALSE;
+	}
 	function suggest_location($trip_id)
 	{
 		$trips=$this->get_by_id($trip_id);

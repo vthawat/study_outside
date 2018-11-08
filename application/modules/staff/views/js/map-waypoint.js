@@ -2,30 +2,28 @@ $(function () {
     
 var waypts = [];
 var location_selected=[];
+var map_routing=[];
     $('.place-selected').change(function(){
            waypts = []; // clear point
-           location_selected=[];
+           location_selected=[]; // clear location selected
+           map_routing=[]; // clear map routing
         $('.place-selected').each(function (i) {
             
             if (this.checked) {
-                //console.log($(this).val()); 
                 var str=$(this).val();
                var stop_location=str.split(':');
                 stop = new google.maps.LatLng(stop_location[0],stop_location[1]);
-                //stop=stop_location[0]+','+stop_location[1];
                 waypts.push({
                     location: stop,
                     stopover: true
                 });
-                //test1=new google.maps.Lat(stop_location[0]);
                 location_selected.push({"place_id":stop_location[2],
                                         "place_name":stop_location[3],
                                         //"place_location":stop,
                                         "location_address":stop_location[4]
                                     });
-                $.ajax({ method: "POST",
-                        //contentType: "application/json; charset=utf-8",
-                        //dataType: "json",
+                 // update location selected
+                     $.ajax({ method: "POST",
                         url: "<?=base_url('staff/put/place_selected/'.$trips->id)?>",
                         data:{place_selected:location_selected}
                                       })
@@ -33,44 +31,19 @@ var location_selected=[];
                                             alert('ไม่สามารถบันทึกได้')
                                         })
                                         .done(function( msg ) {
-                                          //alert( "Data Saved: " + msg );
-                                        });
+                                              });
                 
             }
         });
-        // console.log(location_selected);
-        initialize()
+              initialize();
+              
+
     });
-
-  /*  $('.place-selected').click(function()
-        {
-
-            if($(this).is(":checked"))
-            {
-            //alert("add"+$(this).val());
-               // createMarker(stop);
-               var str=$(this).val();
-               var start_location=str.split(',');
-
-                    stop = new google.maps.LatLng(start_location[0],start_location[1])
-                    waypts.push({
-                        location: stop,
-                        stopover: true,
-                   //     title:start_location[2],
-                    });
-                   // console.log(start_location[0]);
-            }
-            
-            else alert("remove");
-          //  initialize()
-
-    });*/
 
 
 
 var directionsService = new google.maps.DirectionsService();
 var map;
-//var locationSelected=
 
 function initialize() {
     directionsDisplay = new google.maps.DirectionsRenderer({
@@ -88,6 +61,8 @@ function initialize() {
         trafficLayer.setMap(map);*/
 
     calcRoute();
+    //console.log(map_routing);
+
 }
 
 function calcRoute() {
@@ -124,7 +99,8 @@ function calcRoute() {
             //summaryPanel.innerHTML+='<ul class="timeline">';
             
             
-						for (var i = 0; i < route.legs.length; i++) {
+                    for (var i = 0; i < route.legs.length; i++)
+                    {
 
                                                  
                             start_address=route.legs[i].start_address;
@@ -166,14 +142,7 @@ function calcRoute() {
                             
                             // display segment
                             var routeSegment = i + 1;
-                            
-                           /* summaryPanel.innerHTML += '<b>Segment: ' + routeSegment +'</b><br>';
-                            summaryPanel.innerHTML += start_location_name + '<i class="fa fa-fw fa-angle-double-right"></i>';
-                            summaryPanel.innerHTML += end_location_name + '<br>';
-                           // summaryPanel.innerHTML += route.legs[i].end_location.lat() + '<br>';
-                            summaryPanel.innerHTML += route.legs[i].duration.text + ' ระยะทาง ';
-                            summaryPanel.innerHTML += route.legs[i].distance.text + '<br><br>';
-                            */
+
                            // calculate segment distance
                            segment_distance=route.legs[i].distance.value;
                            segment_distance=(segment_distance/1000);
@@ -184,13 +153,35 @@ function calcRoute() {
                            $('#directions-panel ul.timeline').append('<li><span>จาก<i class="fa fa-fw fa-angle-double-right"></i>'+start_location_name+'</span></li>');
                            $('#directions-panel ul.timeline').append('<li><span>ถึง<i class="fa fa-fw fa-angle-double-right"></i>'+end_location_name+'</span></li>');                        
                             
-                        }
+                           // keep map routing pathway
+                           map_routing.push({"segment":routeSegment,
+                                            "start_location":start_location_name,
+                                            "end_location":end_location_name,
+                                            "duration":route.legs[i].duration.value,
+                                            "distance":route.legs[i].distance.value
+                                            });
+                    }
                     $('#directions-panel').append('</ul>');
                     
+                    // keep map totatal routing
+                    map_routing.push({"total_duration":totalduration,"total_distance":totaldistance});
+                    // display total trip routing
                     totaldistance=(totaldistance/1000);
-                   // console.log(secondsToDhms(totalduration));
-                    $('#directions-panel').append('<h4>รวมระยะทาง '+totaldistance.toFixed(1) + " กม."+' ระยะเวลา '+secondsToDhms(totalduration)+'</h4>');
-                    //$('#directions-panel').append();
+                    $('#directions-panel').append('<h4>รวมระยะทาง '+totaldistance.toFixed(1) + " กม."+' ระยะเวลา '+secondsToDhms(totalduration)+'</h4>')
+                   //console.log(map_routing);
+                       // update trip routing
+                    $.ajax({ method: "POST",
+                    url: "<?=base_url('staff/put/trip_routing/'.$trips->id)?>",
+                    data:{routing:map_routing}
+                                })
+                                    .fail(function(){
+                                        alert('ไม่สามารถบันทึกได้')
+                                    })
+                                    .done(function( msg ) {
+                                    // alert(msg);
+                                   // console.log(msg);
+                                        });
+
         }
         
     });

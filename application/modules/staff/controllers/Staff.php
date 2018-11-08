@@ -431,6 +431,11 @@ class Staff extends CI_Controller {
 				//print 'ok';
 				print $this->study_trip->put_place_selected($id);
 			break;
+			case 'trip_routing':
+				print $this->study_trip->put_trip_routing($id);
+				//print_r($this->input->post());
+				//print "ok";
+			break;
 			default;
 			show_error('ไม่สามารถดำเนินการได้');
 		}
