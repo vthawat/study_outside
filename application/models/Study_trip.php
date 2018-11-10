@@ -96,6 +96,19 @@ class Study_trip extends CI_Model
 		$filter['khowledge_items.id']=$knowledge_item;
 		return $this->study_place->get_all($filter);
 	}
+	function schedule_time_shift($segment_time=0,$duration_seconds=0)
+	{
+		$endTime = new DateTime("18:00");  // end time frame
+
+	   	if($segment_time==0)
+			$startTime = new DateTime("8.00"); // start time frame
+		else 
+		$startTime = new DateTime($segment_time); // start time first	
+		if($startTime < $endTime)  // time shift
+			$startTime->modify('+'.$duration_seconds.' seconds');
+		return $startTime->format('H:i');
+
+	}
 	
 	
 

@@ -89,7 +89,14 @@ class Staff extends CI_Controller {
 			$this->template->write_view('content','contents',$data);
 			break;
 			case 'schedule':
+			$data['trips']=$this->study_trip->get_by_id($id);
+			$title='รายวิชา '.$this->ftps->get_subject($this->study_trip->get_by_id($id)->subject_list_id)->subject_code.' '.$this->ftps->get_subject($this->study_trip->get_by_id($id)->subject_list_id)->subject_name;
 			$this->template->write('page_header','<a href="../trip"><i class="fa fa-fw fa-calendar-check-o"></i>ความต้องการเดินทาง</a><i class="fa fa-fw fa-angle-double-right"></i>สร้างตารางกำหนดการเดินทาง');
+			$data['content']=['title'=>$title,
+							  'color'=>'primary',
+							  'detail'=>$this->load->view('schedule',$data,TRUE)];
+			$this->template->write_view('content','contents',$data);
+			
 			break;
 
 		default:
@@ -428,13 +435,11 @@ class Staff extends CI_Controller {
 			else show_error('กรอกข้อมูลยังไม่สมบูรณ์');
 			break;
 			case 'place_selected':
-				//print 'ok';
 				print $this->study_trip->put_place_selected($id);
 			break;
 			case 'trip_routing':
 				print $this->study_trip->put_trip_routing($id);
-				//print_r($this->input->post());
-				//print "ok";
+	
 			break;
 			default;
 			show_error('ไม่สามารถดำเนินการได้');

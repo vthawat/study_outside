@@ -51,7 +51,7 @@ class Study_place extends CI_Model
 		$this->db->join('country_amphur','study_place.amphur_id=country_amphur.AMPHUR_ID','left');
 		$this->db->join('country_district','study_place.district_id=country_district.DISTRICT_ID','left');
 		$this->db->where('id',$id);
-		return $this->db->get('study_place')->row();
+		return $this->db->get('study_place')->row();	
 	}
 	function get_knowledge_by_study_place_id($study_place_id)
 	{
