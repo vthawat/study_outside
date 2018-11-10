@@ -6,7 +6,7 @@
 							    <span class="fa fa-cog fa-fw"></span><span class="caret"></span>
 							  </button>
 							  <ul class="dropdown-menu">
-							    <li><a href="<?=base_url('staff/trip/edit/'.$trips->id)?>" class="text-yellow"><span class="fa fa-edit fa-fw"></span>แก้ไข</a></li>
+							    <li><a href="<?=base_url('staff/trip/edit/'.$trips->id)?>" class="text-yellow"><span class="fa fa-edit fa-fw"></span>แก้ไขความต้องการเดินทาง</a></li>
 							    <li><a href="<?=base_url('staff/trip/remove/'.$trips->id)?>" class="text-red" onclick="return confirm('ยืนยันการลบรายการ กำหนดการเดินทางที่เกี่ยวข้องจะถูกลบ?')"><span class="fa fa-remove fa-fw"></span>ลบ</a></li>
 							  </ul>
 </div>
