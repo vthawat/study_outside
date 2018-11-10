@@ -104,7 +104,7 @@ class Study_trip extends CI_Model
 			$startTime = new DateTime("8.00"); // start time frame
 		else 
 		$startTime = new DateTime($segment_time); // start time first	
-		if($startTime < $endTime)  // time shift
+		//if($startTime < $endTime)  // time shift
 			$startTime->modify('+'.$duration_seconds.' seconds');
 		return $startTime->format('H:i');
 

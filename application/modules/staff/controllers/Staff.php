@@ -174,11 +174,11 @@ class Staff extends CI_Controller {
 										'toolbar'=>'<a class="btn icon-btn btn-default cancel" href="javascript:history.back()"><span class="btn-glyphicon fa fa-mail-reply img-circle text-primary"></span>ยกเลิก</a>',
 									  'detail'=>$this->load->view('frm_place_study',$data,TRUE));
 				$this->template->write_view('content','contents',$data);
-				$this->template->write('page_header','สถานที่ศึกษาดูงาน<i class="fa fa-fw fa-angle-double-right"></i>แก้ไข');
+				$this->template->write('page_header','<a href="'.base_url('staff/place').'">สถานที่ศึกษาดูงาน</a><i class="fa fa-fw fa-angle-double-right"></i>แก้ไข');
 			
 			break;
 			case 'knowledge':
-				 $this->template->write('page_header','สถานที่ศึกษาดูงาน<i class="fa fa-fw fa-angle-double-right"></i>องค์ความรู้ของสถานที่');
+				 $this->template->write('page_header','<a href="'.base_url('staff/place').'">สถานที่ศึกษาดูงาน</a><i class="fa fa-fw fa-angle-double-right"></i>องค์ความรู้ของสถานที่');
 				 $place=$this->study_place->get_by_id($place_id);
 				 $data['knowledge_items']=$this->study_place->get_knowledge_by_study_place_id($place_id);
 				 $data['Place']=$place;
@@ -204,7 +204,7 @@ class Staff extends CI_Controller {
 				$this->template->add_css($this->load->view('css/upload_knowledge_image.css',null,TRUE),'embed',TRUE);
 				$this->template->add_js($this->load->view('js/upload_knowledge_image.js',null,TRUE),'embed',TRUE);
 				$place=$this->study_place->get_by_id($this->study_place->get_knowledge_by_id($place_id)->study_place_id);
-				$this->template->write('page_header','สถานที่ศึกษาดูงาน<i class="fa fa-fw fa-angle-double-right"></i>องค์ความรู้ของสถานที่<i class="fa fa-fw fa-angle-double-right"></i>แก้ไข');
+				$this->template->write('page_header','<a href="'.base_url('staff/place').'">สถานที่ศึกษาดูงาน</a><i class="fa fa-fw fa-angle-double-right"></i>องค์ความรู้ของสถานที่<i class="fa fa-fw fa-angle-double-right"></i>แก้ไข');
 				$data['edit_item']=$this->study_place->get_knowledge_by_id($place_id);
 				$data['action']=base_url('staff/put/knowledge/'.$place_id);
 				$data['content']=array('color'=>'success',
