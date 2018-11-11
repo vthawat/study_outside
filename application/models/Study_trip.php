@@ -4,10 +4,32 @@ class Study_trip extends CI_Model
 	var $table='study_period_trip';
 	var $desc='่กำหนดการเดินทางศึกษาดูงาน';
 	var $trip_status=array();
+	var $start_time_frame='8.00';
+	var $end_time_frame='18.00';
 	function __construct()
 	{
 		parent::__construct();
 		$this->set_trip_status();
+	}
+	function cal_trip_perday()
+	{
+		$start = strtotime($this->start_time_frame);
+		$end   = strtotime($this->end_time_frame);
+		// diff time
+		$time_diff  = $end-$start; // unit second
+		return $time_diff;
+	}
+	function is_create_schedule($day=1,$routing)
+	{
+		$time_frame=$this->cal_trip_perday()*$day;
+		foreach($routing as $route)
+		{
+			if(!empty($route->total_duration)){
+
+				if($route->total_duration<$time_frame) return TRUE;
+				else return FALSE;
+			}
+		}
 	}
 	function get_all()
 	{
@@ -22,7 +44,8 @@ class Study_trip extends CI_Model
 	{
 		$this->trip_status=[1=>'อยู่ระหว่างการดำเนินการ',
 							2=>'สร้างเส้นทางแล้ว',
-							3=>'สร้างกำหนดการเดินทางแล้ว'
+							3=>'สร้างกำหนดการเดินทางแล้ว',
+							4=>'อนุมัติแล้ว'
 							];
 	}
 	function post_trip()
@@ -98,10 +121,10 @@ class Study_trip extends CI_Model
 	}
 	function schedule_time_shift($segment_time=0,$duration_seconds=0)
 	{
-		$endTime = new DateTime("18:00");  // end time frame
+		$endTime = new DateTime($this->end_time_frame);  // end time frame
 
 	   	if($segment_time==0)
-			$startTime = new DateTime("8.00"); // start time frame
+			$startTime = new DateTime($this->start_time_frame); // start time frame
 		else 
 		$startTime = new DateTime($segment_time); // start time first	
 		//if($startTime < $endTime)  // time shift
