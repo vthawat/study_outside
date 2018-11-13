@@ -16,8 +16,8 @@ class Study_trip extends CI_Model
 		$start = strtotime($this->start_time_frame);
 		$end   = strtotime($this->end_time_frame);
 		// diff time
-		$time_diff  = $end-$start; // unit second
-		return $time_diff;
+		$time_frame  = $end-$start; // unit second
+		return $time_frame;
 	}
 	function is_create_schedule($day=1,$routing)
 	{
@@ -26,8 +26,19 @@ class Study_trip extends CI_Model
 		{
 			if(!empty($route->total_duration)){
 
-				if($route->total_duration<$time_frame) return TRUE;
-				else return FALSE;
+				$duration_time=$route->total_duration*$day;
+				$percent=($duration_time*100)/$this->cal_trip_perday();
+				$percent=floor($percent);
+				print $percent;
+				if($day==1)
+					if($percent>=100||$percent<100) return TRUE;
+				elseif($day==2)
+				    if($percent>=200) return TRUE;
+				elseif($day==3)
+				    if($percent>=300) return TRUE;
+					
+		
+				//else return FALSE;
 			}
 		}
 	}
