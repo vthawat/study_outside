@@ -31,11 +31,11 @@ class Study_trip extends CI_Model
 				$percent=floor($percent);
 				print $percent;
 				if($day==1)
-					if($percent>=100||$percent<100) return TRUE;
+					if($percent<100) return TRUE;
 				elseif($day==2)
-				    if($percent>=200) return TRUE;
+				    if($percent>100) return TRUE;
 				elseif($day==3)
-				    if($percent>=300) return TRUE;
+				    if($percent>200) return TRUE;
 					
 		
 				//else return FALSE;

@@ -1,12 +1,8 @@
 <p>กำหนดการเดินทางศึกษาภาคสนาม เส้นทางเริ่มจาก<?=$trips->start_location?> ไปยัง จ.<?=$trips->end_location?> เริ่มเดินทางระหว่างวันที่ <?=$trips->start_date?> ถึง
  <?=$trips->end_date?> เป็นระยะเวลา <?=$trips->duration?> วัน</p>
 <div class="col-md-12">
-    <h3 class="thai-font text-blue"><i class="fa fa-fw fa-wrench"></i>ปรับแต่งกำหนดการเดินทาง</h3>
-    <?php for($day=1;$day<=$trips->duration;$day++):?>
- <hr>
- <h4 class="text-center"><i class="fa fa-fw fa-table"></i>กำหนดการของวันที่ <?=$day?></h4>
-  <?php if($this->study_trip->is_create_schedule($day,json_decode($trips->routing))): ?>
-    <table class="table table-hover">
+  <h3 class="thai-font text-blue"><i class="fa fa-fw fa-wrench"></i>ปรับแต่งกำหนดการเดินทาง</h3>
+     <table class="table table-hover">
         <thead class="bg-gray">
             <th class="col-md-2 col-xs-3 text-center">เวลา</th>
             <th>เพิ่มเวลาศึกษาดูงาน</th>
@@ -40,10 +36,6 @@
         <?php endforeach?>
         </tbody>
     </table>
-    <?php else:?>
-        <div><p>ไม่สามารถสร้างกำหนดการเดินทางได้ เนื่องจากจำนวนสถานที่ไม่เพียงพอ</p></div>
-    <?php endif?>
-<?php endfor?>
 <?php
 /*echo gmdate("i", 34200)."<br>"; // conver second to minute 
 $start = strtotime('08:30');
