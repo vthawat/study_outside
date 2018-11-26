@@ -35,6 +35,14 @@ class Staff extends CI_Controller {
 	}
 	function calendar()
 	{
+		
+		$this->template->write('page_header','<i class="fa fa-fw fa-calendar"></i>ปฏิทินการเดินทาง');
+		$this->template->add_css('uiux/web/vendors/AdminLTE/plugins/fullcalendar/fullcalendar.min.css');
+		$this->template->add_css('uiux/web/vendors/AdminLTE/plugins/fullcalendar/fullcalendar.min.css');
+		$this->template->add_js('https://cdnjs.cloudflare.com/ajax/libs/moment.js/2.11.2/moment.min.js','link');
+		$this->template->add_js('uiux/web/vendors/AdminLTE/plugins/fullcalendar/fullcalendar.min.js');
+		$this->template->add_js($this->load->view('js/calendar.js',null,TRUE),'embed',TRUE);
+		$this->template->write_view('content','calendar');
 		$this->template->render();
 	}
 	function trip($action=null,$id=null)
