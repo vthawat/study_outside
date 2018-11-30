@@ -31,7 +31,8 @@ class Staff extends CI_Controller {
 	}
 	public function index()
 	{	
-		$this->template->render();	
+		//$this->template->render();
+		redirect(base_url('staff/calendar'));
 	}
 	function calendar()
 	{

@@ -5,7 +5,7 @@
      <table class="table table-hover">
         <thead class="bg-gray">
             <th class="col-md-2 col-xs-3 text-center">เวลา</th>
-            <th>เพิ่มเวลาศึกษาดูงาน</th>
+            <th>เพิ่มเวลา</th>
             <th>สถานที่</th>
         </thead>
         <tbody>
@@ -29,7 +29,7 @@
                 else $end_location_details='อ.'.$end_place->AMPHUR_NAME.' จ.'.$end_place->PROVINCE_NAME;
             ?>
             <td class="text-center"><?=$start_time?> - <?=$end_time?></td>
-            <td></td>
+            <td><input name="stop-time" class="form-control"></td>
             <td><?=$rout->start_location?> <?=$start_location_details?> <i class="fa fa-fw fa-angle-double-right"></i><?=$rout->end_location?> <?=$end_location_details?></td>
         </tr>
         <?php endif;?>
