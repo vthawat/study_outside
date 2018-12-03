@@ -4,8 +4,8 @@
   <h3 class="thai-font text-blue"><i class="fa fa-fw fa-wrench"></i>ปรับแต่งกำหนดการเดินทาง</h3>
      <table class="table table-hover">
         <thead class="bg-gray">
-            <th class="col-md-2 col-xs-3 text-center">เวลา</th>
-            <th>เพิ่มเวลา</th>
+            <th class="col-md-2 col-xs-2 text-center">เวลา</th>
+            <th class="col-md-1 col-xs-2 text-center">เพิ่มเวลา</th>
             <th>สถานที่</th>
         </thead>
         <tbody>
@@ -29,8 +29,12 @@
                 else $end_location_details='อ.'.$end_place->AMPHUR_NAME.' จ.'.$end_place->PROVINCE_NAME;
             ?>
             <td class="text-center"><?=$start_time?> - <?=$end_time?></td>
-            <td><input name="stop-time" class="form-control"></td>
-            <td><?=$rout->start_location?> <?=$start_location_details?> <i class="fa fa-fw fa-angle-double-right"></i><?=$rout->end_location?> <?=$end_location_details?></td>
+            <td><select class="form-control" name="study_time[]">
+                <?php foreach($this->study_trip->study_time as $study_time):?>
+                    <option value="<?=strtotime($study_time)-strtotime('TODAY')?>"><?=$study_time?></option>
+                <?php endforeach?>
+            </select></td>
+            <td>จาก<?=$rout->start_location?> <?=$start_location_details?> <i class="fa fa-fw fa-angle-double-right"></i>ถึง<?=$rout->end_location?> <?=$end_location_details?></td>
         </tr>
         <?php endif;?>
         <?php endforeach?>

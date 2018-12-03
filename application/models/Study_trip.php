@@ -6,6 +6,7 @@ class Study_trip extends CI_Model
 	var $trip_status=array();
 	var $start_time_frame='8.00';
 	var $end_time_frame='18.00';
+	var $study_time=array("1:00","1:30","2:00","2:30","3:00"); // unit hour.
 	function __construct()
 	{
 		parent::__construct();
