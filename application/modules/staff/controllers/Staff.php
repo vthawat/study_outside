@@ -59,7 +59,7 @@ class Staff extends CI_Controller {
 				$data['action']=base_url('staff/post/trip');
 				$data['Subject_list']=$this->ftps->get_subject();
 				$data['Subject_major']=$this->ftps->get_subject_major();
-				$data['EndLocationList']=$this->province->get_all();
+				$data['EndLocationList']=$this->province->get_province_of_place();
 				$data['Knowledge_item']=$this->study_place->get_knowledge_group_by_name();
 				$data['content']=['title'=>'',
 								  'detail'=>$this->load->view('frm_trip',$data,TRUE)];
@@ -75,7 +75,7 @@ class Staff extends CI_Controller {
 				$data['action']=base_url('staff/put/trip/'.$id);
 				$data['Subject_list']=$this->ftps->get_subject();
 				$data['Subject_major']=$this->ftps->get_subject_major();
-				$data['EndLocationList']=$this->province->get_all();
+				$data['EndLocationList']=$this->province->get_province_of_place();
 				$data['Knowledge_item']=$this->study_place->get_knowledge_group_by_name();
 				$data['content']=['title'=>'',
 								  'detail'=>$this->load->view('frm_trip',$data,TRUE)];
@@ -478,6 +478,11 @@ class Staff extends CI_Controller {
 				$study_place_id=$this->study_place->delete_knowledge($id);
 				if($study_place_id)
 					redirect(base_url('staff/place/'.$action.'/'.$study_place_id));
+				else show_error('ไม่สามารถลบได้');
+			break;
+			case 'trip':
+				if($this->study_trip->delete($id)) 
+					redirect(base_url('staff/'.$action));
 				else show_error('ไม่สามารถลบได้');
 			break;
 			default;

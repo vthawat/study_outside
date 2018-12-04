@@ -30,7 +30,7 @@
                                 <li><a href="<?=base_url('staff/trip/waypoint/'.$item->id)?>" class="text-green"><span class="fa fa-fw fa-map-marker"></span>ปรับเปลี่ยนเส้นทาง</a></li>
                                 <?php endif?>
                                 <li><a href="<?=base_url('staff/trip/edit/'.$item->id)?>" class="text-yellow"><span class="fa fa-edit fa-fw"></span>แก้ไข</a></li>
-							    <li><a href="<?=base_url('staff/trip/remove/'.$item->id)?>" class="text-red" onclick="return confirm('ยืนยันการลบรายการ?')"><span class="fa fa-remove fa-fw"></span>ลบ</a></li>
+							    <li><a href="<?=base_url('staff/delete/trip/'.$item->id)?>" class="text-red" onclick="return confirm('ยืนยันการลบรายการ?')"><span class="fa fa-remove fa-fw"></span>ลบ</a></li>
 							  </ul>
 							</div>
                 </td>

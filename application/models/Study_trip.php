@@ -144,6 +144,13 @@ class Study_trip extends CI_Model
 		return $startTime->format('H:i');
 
 	}
+	function delete($id)
+	{
+		$this->db->where('id',$id);
+		if($this->db->delete($this->table)) return TRUE;
+		else return FALSE;
+		
+	}
 	
 	
 
