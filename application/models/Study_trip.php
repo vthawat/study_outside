@@ -6,11 +6,25 @@ class Study_trip extends CI_Model
 	var $trip_status=array();
 	var $start_time_frame='8.00';
 	var $end_time_frame='18.00';
+	var $time_break='12:00';
 	var $study_time=array("1:00","1:30","2:00","2:30","3:00"); // unit hour.
 	function __construct()
 	{
 		parent::__construct();
 		$this->set_trip_status();
+	}
+	function isTimeBreak($start_time,$end_time)
+	{
+		$time_break = new Datetime($this->time_break);
+		$begintime = new DateTime($start_time);
+		$endtime = new DateTime($end_time);
+		if($time_break > $begintime && $time_break < $endtime){
+			// between times
+			return TRUE;
+		} else {
+			// not between times
+			return FALSE;
+		}
 	}
 	function cal_trip_perday()
 	{
@@ -49,8 +63,16 @@ class Study_trip extends CI_Model
 	}
 	function get_by_id($id)
 	{
+		
 		$this->db->where('id',$id);
-		return $this->db->get($this->table)->row();
+		$trips=$this->db->get($this->table)->row();
+		if(!empty($trips)) {
+			//set time_frame
+			$this->start_time_frame=$trips->start_timeframe;
+			$this->end_time_frame=$trips->end_timeframe;
+		}
+		return $trips;
+		//return $this->db->get($this->table)->row();
 	}
 	function set_trip_status()
 	{

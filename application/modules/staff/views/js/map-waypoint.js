@@ -93,7 +93,7 @@ function calcRoute() {
            // var summaryPanel = document.getElementById('directions-panel');
             var start_location_name;
             var end_location_name;
-           // console.log(response);
+           // console.log(route.legs);
             $('#directions-panel').empty();
             $('#directions-panel').append('<ul class="timeline">');
             //summaryPanel.innerHTML+='<ul class="timeline">';
@@ -108,8 +108,9 @@ function calcRoute() {
                            if(i==0)
                            {
                             if(start_address==='Unnamed Road, ตำบล คอหงส์ อำเภอ หาดใหญ่ สงขลา 90110 ประเทศไทย')
-                                start_location_name='คณะทรัพยากรธรรมชาติ';
-                                start_place_id=0;
+                              {  start_location_name='คณะทรัพยากรธรรมชาติ';
+                                    start_place_id=0;
+                                 }
                            }
                            else
                             {
@@ -125,11 +126,11 @@ function calcRoute() {
                            
                             if(i==0)
                             {
-                             if(end_address==='Unnamed Road, ตำบล คอหงส์ อำเภอ หาดใหญ่ สงขลา 90110 ประเทศไทย')
+                                 if(end_address==='Unnamed Road, ตำบล คอหงส์ อำเภอ หาดใหญ่ สงขลา 90110 ประเทศไทย')
                                 {
                                     end_location_name='คณะทรัพยากรธรรมชาติ';
                                     end_place_id=0;
-                                }
+                               }
                              if(route.waypoint_order.length>0){
                               end_location_name=location_selected[route.waypoint_order[i]].place_name;
                               end_place_id=location_selected[route.waypoint_order[i]].place_id;
@@ -137,7 +138,8 @@ function calcRoute() {
                             }
                             else
                              {
-                                if(end_address=='Unnamed Road, ตำบล คอหงส์ อำเภอ หาดใหญ่ สงขลา 90110 ประเทศไทย')
+                                 console.log(start_address);
+                                if(end_address==='Unnamed Road, ตำบล คอหงส์ อำเภอ หาดใหญ่ สงขลา 90110 ประเทศไทย')
                                     {
                                         end_location_name='คณะทรัพยากรธรรมชาติ';
                                         end_place_id=0;

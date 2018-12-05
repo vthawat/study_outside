@@ -1,22 +1,60 @@
 <p>กำหนดการเดินทางศึกษาภาคสนาม เส้นทางเริ่มจาก<?=$trips->start_location?> ไปยัง จ.<?=$trips->end_location?> เริ่มเดินทางระหว่างวันที่ <?=$trips->start_date?> ถึง
  <?=$trips->end_date?> เป็นระยะเวลา <?=$trips->duration?> วัน</p>
 <div class="col-md-12">
+<?php if(!empty($this->input->post('study_time')))
+    {
+        $stop_time=$this->input->post('study_time');
+      //  print_r($stop_time);
+    }
+?>
+        
+
   <h3 class="thai-font text-blue"><i class="fa fa-fw fa-wrench"></i>ปรับแต่งกำหนดการเดินทาง</h3>
+  <form action="" method="post">
      <table class="table table-hover">
         <thead class="bg-gray">
             <th class="col-md-2 col-xs-2 text-center">เวลา</th>
-            <th class="col-md-1 col-xs-2 text-center">เพิ่มเวลา</th>
+            <th class="col-md-1 col-xs-2 text-center">เวลาดูงาน</th>
             <th>สถานที่</th>
         </thead>
         <tbody>
         <?php $routing=json_decode($trips->routing)?>
-        <?php foreach($routing as $rout):?>
+        <?php $i=0;foreach($routing as $rout):?>
         <?php if(empty($rout->total_duration)):?>
         <tr>
             <?php
                  if($rout->segment==1) $end_time=0;
-                 $start_time=$this->study_trip->schedule_time_shift($end_time);
-                 $end_time=$this->study_trip->schedule_time_shift($start_time,$rout->duration);
+                 
+                 
+
+                 if(!empty($stop_time))
+                 { 
+                    if($rout->end_place_id!=0)
+                    {
+                        // customize time
+                       // $start_time=$this->study_trip->schedule_time_shift($start_time+$stop_time[$i]);
+                       if($rout->segment==1)
+                      // {
+                           // first segment time not customize
+                            $start_time=$this->study_trip->schedule_time_shift($end_time);
+                           // $end_time=$this->study_trip->schedule_time_shift($start_time,$rout->duration);
+                     //  }
+                       else
+                      // {
+                            $start_time=$this->study_trip->schedule_time_shift($end_time,$stop_time[$i-1]);
+                           
+                      // }
+                    }
+                    else   $start_time=$this->study_trip->schedule_time_shift($end_time,$stop_time[$i-1]);
+                    $end_time=$this->study_trip->schedule_time_shift($start_time,$rout->duration);
+                   
+                 }
+                 else{
+                     // load default time
+                    $start_time=$this->study_trip->schedule_time_shift($end_time);
+                    $end_time=$this->study_trip->schedule_time_shift($start_time,$rout->duration);
+                 }
+                 
                  
                 // show place location
                 $start_place=$this->study_place->get_by_id($rout->start_place_id);
@@ -28,18 +66,30 @@
                     $end_location_details='อ.หาดใหญ่ จ.สงขลา';
                 else $end_location_details='อ.'.$end_place->AMPHUR_NAME.' จ.'.$end_place->PROVINCE_NAME;
             ?>
-            <td class="text-center"><?=$start_time?> - <?=$end_time?></td>
-            <td><select class="form-control" name="study_time[]">
-                <?php foreach($this->study_trip->study_time as $study_time):?>
-                    <option value="<?=strtotime($study_time)-strtotime('TODAY')?>"><?=$study_time?></option>
-                <?php endforeach?>
-            </select></td>
+            <td class="text-center"><?=$start_time?> - <?=$end_time?>|<?php if($this->study_trip->isTimeBreak($start_time,$end_time)) print "OK";?></td>
+            <td>
+            <?php if($rout->end_place_id!=0):?>
+                 <select class="form-control" name="study_time[]">
+                        <?php foreach($this->study_trip->study_time as $study_time):?>
+                            <?php if((strtotime($study_time)-strtotime('TODAY'))==$stop_time[$i]):?>
+                            <option value="<?=strtotime($study_time)-strtotime('TODAY')?>" selected><?=$study_time?></option>
+                            <?php else:?>
+                            <option value="<?=strtotime($study_time)-strtotime('TODAY')?>"><?=$study_time?></option>
+                <?php endif;?>
+                        <?php endforeach?>
+                </select>
+            <?php endif;?>
+            </td>
             <td>จาก<?=$rout->start_location?> <?=$start_location_details?> <i class="fa fa-fw fa-angle-double-right"></i>ถึง<?=$rout->end_location?> <?=$end_location_details?></td>
         </tr>
-        <?php endif;?>
+        <?php endif;?><?php $i++;?>
         <?php endforeach?>
         </tbody>
     </table>
+    <div class="text-center">
+    <button class="btn icon-btn btn-primary save"><span class="btn-glyphicon fa fa-history img-circle text-primary"></span>ปรับแต่งเวลา</button>
+    </div>
+    </form>
 <?php
 /*echo gmdate("i", 34200)."<br>"; // conver second to minute 
 $start = strtotime('08:30');

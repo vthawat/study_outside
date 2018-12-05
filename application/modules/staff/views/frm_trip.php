@@ -30,8 +30,18 @@
             <input type="text" class="form-control end_date" name="end_date" value="<?php if(!empty($edit_item)) print $end_date?>"/>
         </div>
     </div>
-
+    </div>
+    <div class="form-group">
+    <label for="start_timeframe" class="col-sm-2 control-label">กรอบเวลา</label>
+    <div class="col-sm-4">
+        <div class="input-timerange input-group">
+            <input type="text" class="form-control start_timeframe" name="start_timeframe" value="<?php if(!empty($edit_item)) print $edit_item->start_timeframe; else print "8.00";?>"/>
+            <span class="input-group-addon">ถึง</span>
+            <input type="text" class="form-control end_timeframe" name="end_timeframe" value="<?php if(!empty($edit_item)) print $edit_item->end_timeframe;else print "18.00";?>"/>
+        </div>
+    </div>
   </div>
+
   <div class="form-group">
     <label for="trip-duration" class="col-sm-2 control-label">จำนวนวัน</label>
     <div class="col-sm-1">
