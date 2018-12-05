@@ -66,7 +66,7 @@
                     $end_location_details='อ.หาดใหญ่ จ.สงขลา';
                 else $end_location_details='อ.'.$end_place->AMPHUR_NAME.' จ.'.$end_place->PROVINCE_NAME;
             ?>
-            <td class="text-center"><?=$start_time?> - <?=$end_time?>|<?php if($this->study_trip->isTimeBreak($start_time,$end_time)) print "OK";?></td>
+            <td class="text-center"><?=$start_time?> - <?=$end_time?></td>
             <td>
             <?php if($rout->end_place_id!=0):?>
                  <select class="form-control" name="study_time[]">
@@ -82,6 +82,13 @@
             </td>
             <td>จาก<?=$rout->start_location?> <?=$start_location_details?> <i class="fa fa-fw fa-angle-double-right"></i>ถึง<?=$rout->end_location?> <?=$end_location_details?></td>
         </tr>
+            <?php if($this->study_trip->isTimeBreak($start_time,$end_time)):?>
+                <tr>
+                 <td></td>
+                 <td>1 ชั่วโมง</td>
+                 <td>--พักกลางวัน--</td>
+                </tr>
+            <?php endif;?>
         <?php endif;?><?php $i++;?>
         <?php endforeach?>
         </tbody>
