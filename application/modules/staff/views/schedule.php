@@ -19,14 +19,11 @@
         </thead>
         <tbody>
         <?php $routing=json_decode($trips->routing)?>
-        <?php $i=0;foreach($routing as $rout):?>
+        <?php $flag_break=FALSE;$keep_end_time=array();$i=0;foreach($routing as $rout):?>
         <?php if(empty($rout->total_duration)):?>
-        <tr>
-            <?php
+        <?php
                  if($rout->segment==1) $end_time=0;
-                 
-                 
-
+        
                  if(!empty($stop_time))
                  { 
                     if($rout->end_place_id!=0)
@@ -34,18 +31,24 @@
                         // customize time
                        // $start_time=$this->study_trip->schedule_time_shift($start_time+$stop_time[$i]);
                        if($rout->segment==1)
-                      // {
-                           // first segment time not customize
+                             // first segment time not customize
                             $start_time=$this->study_trip->schedule_time_shift($end_time);
-                           // $end_time=$this->study_trip->schedule_time_shift($start_time,$rout->duration);
-                     //  }
+    
                        else
-                      // {
-                            $start_time=$this->study_trip->schedule_time_shift($end_time,$stop_time[$i-1]);
-                           
-                      // }
+                        $start_time=$this->study_trip->schedule_time_shift($end_time,$stop_time[$i-1]);  
+                                         
                     }
-                    else   $start_time=$this->study_trip->schedule_time_shift($end_time,$stop_time[$i-1]);
+                    //else
+                    /*if($flag_break){
+                        $start_time=$this->study_trip->schedule_time_shift($end_time,$stop_time[$i-1]+3600); //+3600 sec 
+                        $flag_break=FALSE;
+                        print "ok1";
+                    }*/
+                    
+                    //else 
+                    //$start_time=$this->study_trip->schedule_time_shift($end_time,$stop_time[$i-1]);  
+                    
+                    
                     $end_time=$this->study_trip->schedule_time_shift($start_time,$rout->duration);
                    
                  }
@@ -55,7 +58,7 @@
                     $end_time=$this->study_trip->schedule_time_shift($start_time,$rout->duration);
                  }
                  
-                 
+                 $keep_end_time[$i]=$end_time;
                 // show place location
                 $start_place=$this->study_place->get_by_id($rout->start_place_id);
                 if($rout->start_place_id==0)
@@ -66,6 +69,16 @@
                     $end_location_details='อ.หาดใหญ่ จ.สงขลา';
                 else $end_location_details='อ.'.$end_place->AMPHUR_NAME.' จ.'.$end_place->PROVINCE_NAME;
             ?>
+        <?php  if(!empty($stop_time))if($i!=0)if($this->study_trip->isTimeBreak($keep_end_time[$i-1],$start_time)):?>
+            <?php $flag_break=TRUE;?>
+                <tr>
+                 <td class="text-center">1 ชั่วโมง</td>
+                 <td></td>
+                 <td>-- พักกลางวัน --</td>
+                </tr>
+            <?php endif;?>
+        <tr>
+
             <td class="text-center"><?=$start_time?> - <?=$end_time?></td>
             <td>
             <?php if($rout->end_place_id!=0):?>
@@ -82,11 +95,12 @@
             </td>
             <td>จาก<?=$rout->start_location?> <?=$start_location_details?> <i class="fa fa-fw fa-angle-double-right"></i>ถึง<?=$rout->end_location?> <?=$end_location_details?></td>
         </tr>
-            <?php if($this->study_trip->isTimeBreak($start_time,$end_time)):?>
+            <?php  if(!empty($stop_time))if($this->study_trip->isTimeBreak($start_time,$end_time)):?>
+            <?php $flag_break=TRUE;?>
                 <tr>
+                 <td class="text-center">1 ชั่วโมง</td>
                  <td></td>
-                 <td>1 ชั่วโมง</td>
-                 <td>--พักกลางวัน--</td>
+                 <td>-- พักกลางวัน --</td>
                 </tr>
             <?php endif;?>
         <?php endif;?><?php $i++;?>
