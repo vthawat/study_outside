@@ -26,34 +26,33 @@
         
                  if(!empty($stop_time))
                  { 
-                    if($rout->end_place_id!=0)
-                    {
-                        // customize time
-                       // $start_time=$this->study_trip->schedule_time_shift($start_time+$stop_time[$i]);
-                       if($rout->segment==1)
-                             // first segment time not customize
-                            $start_time=$this->study_trip->schedule_time_shift($end_time);
-    
-                       else
-                        $start_time=$this->study_trip->schedule_time_shift($end_time,$stop_time[$i-1]);  
-                                         
-                    }
-                    //else
-                    /*if($flag_break){
-                        $start_time=$this->study_trip->schedule_time_shift($end_time,$stop_time[$i-1]+3600); //+3600 sec 
-                        $flag_break=FALSE;
-                        print "ok1";
-                    }*/
-                    
-                    //else 
-                    //$start_time=$this->study_trip->schedule_time_shift($end_time,$stop_time[$i-1]);  
-                    
+                   // if($rout->end_place_id!=0)  // first segment time not customize                      
+                      if($rout->segment==1)
+                          $start_time=$this->study_trip->schedule_time_shift($end_time);    
+                    // start customize time
+                    else $start_time=$this->study_trip->schedule_time_shift($end_time,$stop_time[$i-1]); 
                     
                     $end_time=$this->study_trip->schedule_time_shift($start_time,$rout->duration);
-                   
+                   if($flag_break){
+                       // $start_time=$this->study_trip->schedule_time_shift($end_time,$stop_time[$i-2]+3600); //+3600 sec 
+                      // $start_time=$this->study_trip->schedule_time_shift($end_time,$stop_time[$i-1]); 
+                        $flag_break=FALSE;
+                       // print $i.'/';
+                      //  print $stop_time[$i-2];
+                     // $start_time=$this->study_trip->schedule_time_shift($keep_end_time[$i-2],$stop_time[$i-2]); //+3600 sec 
+                     $start_time=$this->study_trip->schedule_time_shift($start_time,3600); //+3600 sec 
+                      // print $keep_end_time[$i-2];
+                     }
+                    // else $start_time=$this->study_trip->schedule_time_shift($end_time,$stop_time[$i-1]);
+                   // else  print $stop_time[$i-1];//$start_time=$this->study_trip->schedule_time_shift($end_time,$stop_time[$i-1]); //+3600 sec 
+                 //  {
+                       
+                  //  print $i;   
+                  // }
                  }
                  else{
                      // load default time
+                   
                     $start_time=$this->study_trip->schedule_time_shift($end_time);
                     $end_time=$this->study_trip->schedule_time_shift($start_time,$rout->duration);
                  }
@@ -70,11 +69,13 @@
                 else $end_location_details='อ.'.$end_place->AMPHUR_NAME.' จ.'.$end_place->PROVINCE_NAME;
             ?>
         <?php  if(!empty($stop_time))if($i!=0)if($this->study_trip->isTimeBreak($keep_end_time[$i-1],$start_time)):?>
-            <?php $flag_break=TRUE;?>
+            <?php $flag_break=TRUE;
+           // $start_time=$this->study_trip->schedule_time_shift($end_time,$stop_time[$i-1]+3600); //+3600 sec 
+            ?>
                 <tr>
                  <td class="text-center">1 ชั่วโมง</td>
                  <td></td>
-                 <td>-- พักกลางวัน --</td>
+                 <td>-- พักกลางวัน1 --</td>
                 </tr>
             <?php endif;?>
         <tr>
@@ -96,11 +97,14 @@
             <td>จาก<?=$rout->start_location?> <?=$start_location_details?> <i class="fa fa-fw fa-angle-double-right"></i>ถึง<?=$rout->end_location?> <?=$end_location_details?></td>
         </tr>
             <?php  if(!empty($stop_time))if($this->study_trip->isTimeBreak($start_time,$end_time)):?>
-            <?php $flag_break=TRUE;?>
+            <?php $flag_break=TRUE;
+            //$start_time=$this->study_trip->schedule_time_shift($end_time,$stop_time[$i-1]+3600); //+3600 sec
+           
+             ?>
                 <tr>
                  <td class="text-center">1 ชั่วโมง</td>
                  <td></td>
-                 <td>-- พักกลางวัน --</td>
+                 <td>-- พักกลางวัน2 --</td>
                 </tr>
             <?php endif;?>
         <?php endif;?><?php $i++;?>
