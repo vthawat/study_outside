@@ -1,5 +1,5 @@
-<p>กำหนดการเดินทางศึกษาภาคสนาม เส้นทางเริ่มจาก<?=$trips->start_location?> ไปยัง จ.<?=$trips->end_location?> เริ่มเดินทางระหว่างวันที่ <?=$trips->start_date?> ถึง
- <?=$trips->end_date?> เป็นระยะเวลา <?=$trips->duration?> วัน</p>
+<h4>กำหนดการเดินทางศึกษาภาคสนาม เส้นทางเริ่มจาก<?=$trips->start_location?> ไปยัง จ.<?=$trips->end_location?> <br>เริ่มเดินทางระหว่างวันที่ <?=$trips->start_date?> ถึง
+ <?=$trips->end_date?> เวลา <?=$trips->duration?> วัน</h4>
 <div class="col-md-12">
 <?php if(!empty($this->input->post('study_time')))
     {
@@ -34,42 +34,22 @@
                         if($rout->segment==1)   $start_time=$this->study_trip->schedule_time_shift($end_time);
                         
                         else $start_time=$this->study_trip->schedule_time_shift($end_time,$stop_time[$i-1]); 
-                    if($flag_break) {
-                        
-                        //$break_time=$stop_time[$i-1]+3600;
-                       // $start_time=$this->study_trip->schedule_time_shift($end_time,$break_time);
-                      // print $break_time;
-                        //$flag_break=FALSE;
-                        //print 'breakmode-'.$break_mode;
+                    if($flag_break)
+                    {
 
-                       // $start_time=$this->study_trip->schedule_time_shift($keep_end_time[$i-2],$break_time);
-                        if($break_mode==2){
-                          
+                        if($break_mode==2)
+                        {                       
                             $break_end_time=$keep_end_time[$i-1];
                             $break_time=$stop_time[$i-1]+3600;
                             $start_time_b=$this->study_trip->schedule_time_shift($break_end_time,$break_time);
                             $start_time=$start_time_b;
-                        }  //$start_time=$this->study_trip->schedule_time_shift($keep_end_time[$i-1],$break_time);
-                       // print $end_time.'+'.$stop_time[$i-1];
-                     //  $start_time=$this->study_trip->schedule_time_shift($end_time,$break_time);
-                       // $start_time_b=$this->study_trip->schedule_time_shift($break_end_time,$break_time);
-                       //print $break_end_time.'+'. $break_time.'=';
-                     // print $this->study_trip->schedule_time_shift($break_end_time,$break_time);
-                      //$start_time=$start_time_b;
-                     //print $start_time;
+                        } 
+                     // clear flag break;
                       $flag_break=FALSE;
-                       
+                      $break_mode=0;
                     } 
-                   // $start_time=$this->study_trip->schedule_time_shift($end_time,$stop_time[$i]);
-                    
-                    //print $break_mode."<br>";
-                    //$start_time=$this->study_trip->schedule_time_shift($end_time,$stop_time[$i-1]);
-                  //  print$start_time= $start_time_b;
-                   // else $start_time=$this->study_trip->schedule_time_shift($end_time,$stop_time[$i-1]);
-                   
-                  // $start_time=$this->study_trip->schedule_time_shift($end_time,$stop_time[$i-1]); 
                   $end_time=$this->study_trip->schedule_time_shift($start_time,$rout->duration);
-                  $break_mode=0;
+                  
                  }
                  else
                  {
