@@ -26,7 +26,7 @@ class Study_trip extends CI_Model
 			return FALSE;
 		}
 	}
-	function isTimeRest($start_time,$end_time)
+	function isTimeRest($start_time)
 	{
 
 		$start = strtotime($this->start_time_frame);
@@ -34,13 +34,7 @@ class Study_trip extends CI_Model
 		// diff time
 		$time_frame  = $end-$start; // unit second
 		if($time_frame>=$this->cal_trip_perday()) return TRUE;  // over 1 day
-		else{
-			$end   = strtotime($end_time);
-			// diff time
-			$time_frame  = $end-$start; // unit second
-			if($time_frame>=$this->cal_trip_perday()) return TRUE;  // over 1 day
-			else return FALSE;
-		}
+		else return FALSE;
 	}
 	function NextDay($date,$days){
 		//$date = "04-15-2013";

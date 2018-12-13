@@ -20,8 +20,8 @@
              $break_mode=0;
              $i=0;?>
   <form action="" method="post">
-     <table class="table table-hover">
-     <tr class="bg-blue">
+     <table class="table">
+     <tr>
                  <td></td>
                  <td></td>
                  <td><h3 class="thai-font"><span class="fa fa-table fa-fw"></span>กำหนดการเดินทางของวันที่ <?=$this->ftps->DateThai($this->study_trip->NextDay($trips->start_date,$days))?></h3></td>
@@ -121,13 +121,13 @@
 
             <?php if($days!=$trips->duration):?>
             <?php  if(!empty($stop_time))if($trips->duration>1)if($this->study_trip->isTimeRest($start_time,$end_time)):?>
-            <?php $flag_rest=TRUE; $end_time=0;$days++?>
+            <?php  $end_time=0;$days++?>
                 <tr>
                  <td></td>
                  <td></td>
                  <td>--พักค้างคืน--</td>
                 </tr>
-                <tr class="bg-blue">
+                <tr>
                  <td></td>
                  <td></td>
                  <td><h3 class="thai-font"><span class="fa fa-table fa-fw"></span>กำหนดการเดินทางของวันที่ <?=$this->ftps->DateThai($this->study_trip->NextDay($trips->start_date,$days))?></h3></td>
