@@ -1,4 +1,4 @@
-<h4>กำหนดการเดินทางศึกษาภาคสนาม เส้นทางเริ่มจาก<?=$trips->start_location?> ไปยัง จ.<?=$trips->end_location?> <br>เริ่มเดินทางระหว่างวันที่ <?=$this->ftps->DateThai($trips->start_date)?> ถึง
+<h4>กำหนดการเดินทางศึกษาภาคสนาม เส้นทางเริ่มจาก<?=$trips->start_location?> ไปยัง จ.<?=$trips->end_location?> เริ่มเดินทางระหว่างวันที่ <?=$this->ftps->DateThai($trips->start_date)?> ถึง
  <?=$this->ftps->DateThai($trips->end_date)?> เวลา <span class="badge bg-red" style="font-size:20px"><?=$trips->duration?></span> วัน</h4>
 <div class="col-md-12">
 <?php if(!empty($this->input->post('study_time')))
@@ -21,17 +21,17 @@
              $i=0;?>
   <form action="" method="post">
      <table class="table table-hover">
-        <thead class="bg-green">
+     <tr class="bg-blue">
+                 <td></td>
+                 <td></td>
+                 <td><h3 class="thai-font"><span class="fa fa-table fa-fw"></span>กำหนดการเดินทางของวันที่ <?=$this->ftps->DateThai($this->study_trip->NextDay($trips->start_date,$days))?></h3></td>
+                </tr>
+        <tr class="bg-blue-active">
             <th class="col-md-2 col-xs-2 text-center">เวลา</th>
             <th class="col-md-1 col-xs-2 text-center">เวลาดูงาน</th>
             <th>สถานที่</th>
-        </thead>
+        </tr>
         <tbody>
-        <tr class="bg-blue">
-                 <td></td>
-                 <td></td>
-                 <td>กำหนดการเดินทางของวันที่ <?=$this->ftps->DateThai($this->study_trip->NextDay($trips->start_date,$days))?></td>
-                </tr>
         <?php foreach($routing as $rout):?>
          <?php if(empty($rout->total_duration)):?>
         <?php                
@@ -130,8 +130,13 @@
                 <tr class="bg-blue">
                  <td></td>
                  <td></td>
-                 <td>กำหนดการเดินทางของวันที่ <?=$this->ftps->DateThai($this->study_trip->NextDay($trips->start_date,$days))?></td>
+                 <td><h3 class="thai-font"><span class="fa fa-table fa-fw"></span>กำหนดการเดินทางของวันที่ <?=$this->ftps->DateThai($this->study_trip->NextDay($trips->start_date,$days))?></h3></td>
                 </tr>
+                <tr class="bg-blue-active">
+            <th class="col-md-2 col-xs-2 text-center">เวลา</th>
+            <th class="col-md-1 col-xs-2 text-center">เวลาดูงาน</th>
+            <th>สถานที่</th>
+        </tr>
             <?php endif;?>
             <?php endif;?>
             
