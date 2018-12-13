@@ -26,6 +26,28 @@ class Study_trip extends CI_Model
 			return FALSE;
 		}
 	}
+	function isTimeRest($start_time,$end_time)
+	{
+
+		$start = strtotime($this->start_time_frame);
+		$end   = strtotime($start_time);
+		// diff time
+		$time_frame  = $end-$start; // unit second
+		if($time_frame>=$this->cal_trip_perday()) return TRUE;  // over 1 day
+		else{
+			$end   = strtotime($end_time);
+			// diff time
+			$time_frame  = $end-$start; // unit second
+			if($time_frame>=$this->cal_trip_perday()) return TRUE;  // over 1 day
+			else return FALSE;
+		}
+	}
+	function NextDay($date,$days){
+		//$date = "04-15-2013";
+		$date1 = str_replace('-', '/', $date);
+		$tomorrow = date('Y-m-d',strtotime($date1 . "+".($days-1)." days"));
+		return $tomorrow;
+	}
 	function cal_trip_perday()
 	{
 		$start = strtotime($this->start_time_frame);

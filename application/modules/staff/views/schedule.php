@@ -1,5 +1,5 @@
-<h4>กำหนดการเดินทางศึกษาภาคสนาม เส้นทางเริ่มจาก<?=$trips->start_location?> ไปยัง จ.<?=$trips->end_location?> <br>เริ่มเดินทางระหว่างวันที่ <?=$trips->start_date?> ถึง
- <?=$trips->end_date?> เวลา <?=$trips->duration?> วัน</h4>
+<h4>กำหนดการเดินทางศึกษาภาคสนาม เส้นทางเริ่มจาก<?=$trips->start_location?> ไปยัง จ.<?=$trips->end_location?> <br>เริ่มเดินทางระหว่างวันที่ <?=$this->ftps->DateThai($trips->start_date)?> ถึง
+ <?=$this->ftps->DateThai($trips->end_date)?> เวลา <span class="badge bg-red" style="font-size:20px"><?=$trips->duration?></span> วัน</h4>
 <div class="col-md-12">
 <?php if(!empty($this->input->post('study_time')))
     {
@@ -10,28 +10,35 @@
         
 
   <h3 class="thai-font text-blue"><i class="fa fa-fw fa-wrench"></i>ปรับแต่งกำหนดการเดินทาง</h3>
+  <?php
+            $routing=json_decode($trips->routing);
+             $flag_break=FALSE;
+             $flag_rest=FALSE;
+             $keep_end_time=array();
+             $end_time=0;
+             $days=1;
+             $break_mode=0;
+             $i=0;?>
   <form action="" method="post">
      <table class="table table-hover">
-        <thead class="bg-gray">
+        <thead class="bg-green">
             <th class="col-md-2 col-xs-2 text-center">เวลา</th>
             <th class="col-md-1 col-xs-2 text-center">เวลาดูงาน</th>
             <th>สถานที่</th>
         </thead>
         <tbody>
-        <?php
-            $routing=json_decode($trips->routing);
-             $flag_break=FALSE;
-             $keep_end_time=array();
-             $end_time=0;
-             $break_mode=0;
-             $i=0;?>
+        <tr class="bg-blue">
+                 <td></td>
+                 <td></td>
+                 <td>กำหนดการเดินทางของวันที่ <?=$this->ftps->DateThai($this->study_trip->NextDay($trips->start_date,$days))?></td>
+                </tr>
         <?php foreach($routing as $rout):?>
          <?php if(empty($rout->total_duration)):?>
         <?php                
                  if(!empty($stop_time))
                  { 
                         // first segment time not customize                      
-                        if($rout->segment==1)   $start_time=$this->study_trip->schedule_time_shift($end_time);
+                        if($rout->segment==1||$end_time==0)   $start_time=$this->study_trip->schedule_time_shift($end_time);
                         
                         else $start_time=$this->study_trip->schedule_time_shift($end_time,$stop_time[$i-1]); 
                     if($flag_break)
@@ -59,7 +66,7 @@
                  }
                  
                  $keep_end_time[$i]=$end_time;
-                // print  $keep_end_time[$i];
+
                 // show place location
                 $start_place=$this->study_place->get_by_id($rout->start_place_id);
                 if($rout->start_place_id==0)
@@ -72,17 +79,13 @@
             ?>
     <?php  if(!empty($stop_time))if($i!=0)if($this->study_trip->isTimeBreak($keep_end_time[$i-1],$start_time)):?>
             <?php $flag_break=TRUE;
-                $break_mode=1;
-               
+                    $break_mode=1;             
                     $break_end_time=$keep_end_time[$i-1];
                     $break_time=$stop_time[$i-1]+3600;
                     $start_time_b=$this->study_trip->schedule_time_shift($break_end_time,$break_time);
                    $start_time=$start_time_b;
                    $end_time=$this->study_trip->schedule_time_shift($start_time,$rout->duration);
-                   // print   $start_time_b;
-             
-               // print $i;
-           // $start_time=$this->study_trip->schedule_time_shift($end_time,$stop_time[$i-1]+3600); //+3600 sec 
+
             ?>
                 <tr>
                  <td class="text-center">1 ชั่วโมง</td>
@@ -108,17 +111,28 @@
             <td>จาก<?=$rout->start_location?> <?=$start_location_details?> <i class="fa fa-fw fa-angle-double-right"></i>ถึง<?=$rout->end_location?> <?=$end_location_details?></td>
         </tr>
         <?php  if(!empty($stop_time))if($this->study_trip->isTimeBreak($start_time,$end_time)):?>
-            <?php $flag_break=TRUE;
-             $break_mode=2;
-            // $i=$i-1;
-            //$start_time=$this->study_trip->schedule_time_shift($end_time,$stop_time[$i-1]+3600); //+3600 sec
-           
-             ?>
+            <?php $flag_break=TRUE;$break_mode=2;?>
                 <tr>
                  <td class="text-center">1 ชั่วโมง</td>
                  <td></td>
                  <td><input type="text" name="lunch_break[]" class="form-control" value="--พักกลางวัน--"></td>
                 </tr>
+            <?php endif;?>
+
+            <?php if($days!=$trips->duration):?>
+            <?php  if(!empty($stop_time))if($trips->duration>1)if($this->study_trip->isTimeRest($start_time,$end_time)):?>
+            <?php $flag_rest=TRUE; $end_time=0;$days++?>
+                <tr>
+                 <td></td>
+                 <td></td>
+                 <td>--พักค้างคืน--</td>
+                </tr>
+                <tr class="bg-blue">
+                 <td></td>
+                 <td></td>
+                 <td>กำหนดการเดินทางของวันที่ <?=$this->ftps->DateThai($this->study_trip->NextDay($trips->start_date,$days))?></td>
+                </tr>
+            <?php endif;?>
             <?php endif;?>
             
         <?php endif;?><?php $i++; ?>
@@ -140,5 +154,6 @@ $minutes = $diff - $hours * (60 * 60);
 echo 'Remaining time: ' . $hours .  ' hours, ' . floor( $minutes / 60 ) . ' minutes';
 */
 //print $this->study_trip->cal_trip_perday();
+//print $this->study_trip->cal_trip_perday
 ?>
 </div>
