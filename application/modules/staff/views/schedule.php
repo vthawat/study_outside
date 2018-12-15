@@ -28,7 +28,7 @@
                 </tr>
         <tr class="bg-blue-active">
             <th class="col-md-2 col-xs-2 text-center">เวลา</th>
-            <th class="col-md-1 col-xs-2 text-center">เวลาดูงาน</th>
+            <th class="col-md-2 col-xs-3 text-center">เวลาดูงาน</th>
             <th>สถานที่</th>
         </tr>
         <tbody>
@@ -120,12 +120,12 @@
             <?php endif;?>
 
             <?php if($days!=$trips->duration):?>
-            <?php  if(!empty($stop_time))if($trips->duration>1)if($this->study_trip->isTimeRest($start_time,$end_time)):?>
+            <?php  if(!empty($stop_time))if($trips->duration>1)if($this->study_trip->isTimeRest($end_time)):?>
             <?php  $end_time=0;$days++?>
                 <tr>
                  <td></td>
                  <td></td>
-                 <td>--พักค้างคืน--</td>
+                 <td><button class="btn btn-success"><i class="fa fa-fw fa-map-pin"></i>เพิ่มสถานที่พักค้างคืน</button></td>
                 </tr>
                 <tr>
                  <td></td>

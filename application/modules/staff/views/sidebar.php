@@ -16,6 +16,7 @@
         <a href="<?=base_url()?>"><i class='fa fa-gears text-green fa-fw'></i><span>จัดการข้อมูลพื้นฐาน</span> <i class="fa fa-angle-left pull-right"></i></a>
             <ul class="treeview-menu">
               	<li><a href="<?=base_url()?>staff/place"><i class='fa fa-circle-o text-green fa-fw'></i>สถานที่ศึกษาดูงาน</a></li>
+                <li><a href="<?=base_url()?>staff/place_rest"><i class='fa fa-circle-o text-green fa-fw'></i>สถานที่พักค้างคืน</a></li>
                 <li><a href="<?=base_url()?>staff/subject_major"><i class='fa fa-circle-o text-green fa-fw'></i>สาขาวิชา</a></li>
                 <li><a href="<?=base_url()?>staff/subject"><i class='fa fa-circle-o text-green fa-fw'></i>รายวิชาฝึกภาคสนาม</a></li>
             </ul>

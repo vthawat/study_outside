@@ -50,10 +50,10 @@
   </div>
   <div class="form-group">
     <label for="select-trip-mode" class="col-sm-2 control-label"></label>
-    <div class="col-sm-2">
+    <div class="col-sm-3">
       <input type="radio" name="trip_mode" id="trip-mode-1" value="1" <?php if(!empty($edit_item)&&$edit_item->trip_mode==1) print 'checked'?>> <label for="trip-mode-1">ค้างคืน/ต้องการที่พัก</label>
     </div>
-    <div class="col-sm-2">
+    <div class="col-sm-3">
       <input type="radio" name="trip_mode" id="trip-mode-2" value="2" <?php if(!empty($edit_item)&&$edit_item->trip_mode==2) print 'checked'?>> <label for="trip-mode-2">ไม่พักค้างคืน/ไป-กลับ</label>
     </div>
   </div>

@@ -299,6 +299,121 @@ class Staff extends CI_Controller {
 		
 		print $this->load->view('contents',$data,TRUE);
 	}
+/*** PLACE REST */
+function place_rest($action=null,$place_id=null)
+{
+	switch($action)
+	{
+		case 'new':
+			// map helpers
+			$this->template->add_js('https://maps.google.com/maps/api/js?key=AIzaSyBGE-KGQB9PP6uq4wErMO0Xbxmz4FWxy3Q&libraries=places&language=th','link');
+			$this->template->add_js('assets/gmaps/js/locationpicker.jquery.min.js');
+			$this->template->add_css($this->load->view('css/map.css',null,TRUE),'embed',TRUE);
+			$this->template->add_js($this->load->view('js/place-search.js',null,TRUE),'embed',TRUE);
+			//
+			$this->template->add_js($this->load->view('js/select-box.js',null,TRUE),'embed',TRUE);
+			$data['action']=base_url('staff/post/place_rest');
+			$data['Province']=$this->province->get_province_of_place();
+			$data['content']=array('color'=>'success',
+									'toolbar'=>'<a class="btn icon-btn btn-default cancel" href="javascript:history.back()"><span class="btn-glyphicon fa fa-mail-reply img-circle text-primary"></span>ยกเลิก</a>',
+								  'detail'=>$this->load->view('frm_place_rest',$data,TRUE));
+			$this->template->write_view('content','contents',$data);
+			$this->template->write('page_header','สถานที่พักค้างคืน<i class="fa fa-fw fa-angle-double-right"></i>เพิ่มใหม่');
+		break;
+		case 'edit':
+			// map helpers
+			$this->template->add_js('https://maps.google.com/maps/api/js?key=AIzaSyBGE-KGQB9PP6uq4wErMO0Xbxmz4FWxy3Q&libraries=places&language=th','link');
+			$this->template->add_js('assets/gmaps/js/locationpicker.jquery.min.js');
+			$this->template->add_css($this->load->view('css/map.css',null,TRUE),'embed',TRUE);
+			$this->template->add_js($this->load->view('js/place-search.js',null,TRUE),'embed',TRUE);
+			//
+			$this->template->add_js($this->load->view('js/select-box.js',null,TRUE),'embed',TRUE);
+			
+			$data['edit_item']=$this->study_place_rest->get_by_id($place_id);
+			$data['action']=base_url('staff/put/place_rest/'.$place_id);
+			$data['Province']=$this->province->get_province_of_place();
+			$data['content']=array('color'=>'success',
+									'toolbar'=>'<a class="btn icon-btn btn-default cancel" href="javascript:history.back()"><span class="btn-glyphicon fa fa-mail-reply img-circle text-primary"></span>ยกเลิก</a>',
+								  'detail'=>$this->load->view('frm_place_rest',$data,TRUE));
+			$this->template->write_view('content','contents',$data);
+			$this->template->write('page_header','<a href="'.base_url('staff/place_rest').'">สถานที่พักค้างคืน</a><i class="fa fa-fw fa-angle-double-right"></i>แก้ไข');
+		
+		break;
+
+	default;
+	$this->load->library('pagination');
+	//load map
+	$this->template->add_js('https://maps.google.com/maps/api/js?key=AIzaSyBGE-KGQB9PP6uq4wErMO0Xbxmz4FWxy3Q&libraries=places&language=th','link');
+	$this->template->add_js('assets/gmaps/js/gmap3.js');
+	$this->template->add_css($this->load->view('css/map.css',null,TRUE),'embed',TRUE);
+	//$this->template->add_js($this->load->view('js/view-big-map.js',null,TRUE),'embed',TRUE);
+	$filter=array();
+			if(!empty($this->input->post()))
+			{ 
+				$filter['study_place_rest.province_id']=$this->input->post('province_id');
+				$filter['study_place_rest.amphur_id']=$this->input->post('amphur_id');
+				$filter['study_place_rest.district_id']=$this->input->post('district_id');
+				//$filter['study_place_major_list.subject_major_id']=$this->input->post('subject_major_id');
+				//exit(print_r($this->input->post('knowledge_id')));
+				//$filter['khowledge_items.id']=$this->input->post('knowledge_id');
+			}
+			$limit=5;
+			$data['place_rest']=$this->study_place_rest->get_all($filter,$limit,$this->input->get('page'));
+			$config['total_rows'] = count($this->study_place_rest->get_all($filter));
+			$config['per_page'] = $limit;
+			//$config['suffix'] ="&filter=".$filter;
+			$config['query_string_segment']="page";
+		//	$config['use_page_numbers'] = TRUE; 
+			$config['first_url'] =base_url('staff/place');
+			$config['num_links'] = 10;
+			$config['page_query_string'] = TRUE;
+			$config['full_tag_open'] = "<ul class='pagination'>";
+			$config['full_tag_close'] ="</ul>";
+			$config['num_tag_open'] = '<li>';
+			$config['num_tag_close'] = '</li>';
+			$config['cur_tag_open'] = "<li class='disabled'><li class='active'><a href='#'>";
+			$config['cur_tag_close'] = "<span class='sr-only'></span></a></li>";
+			$config['next_tag_open'] = "<li>";
+			$config['next_tagl_close'] = "</li>";
+			$config['prev_tag_open'] = "<li>";
+			$config['prev_tagl_close'] = "</li>";
+			$config['first_tag_open'] = "<li>";
+			$config['first_tagl_close'] = "</li>";
+			$config['last_tag_open'] = "<li>";
+			$config['last_tagl_close'] = "</li>";
+			$this->pagination->initialize($config);
+	$data['content']=array('color'=>'primary',
+								'size'=>9,
+								'title'=>'จำนวนทั้งหมด '.count($this->study_place_rest->get_all()).' สถานที่',
+								'toolbar'=>'<a class="btn icon-btn btn-success add-new" href="'.base_url('staff/place_rest/new').'"><span class="btn-glyphicon fa fa-plus img-circle text-success"></span>เพิ่มใหม่</a>',
+								'detail'=>$this->load->view('place_rest_items',$data,TRUE));
+	$this->template->write_view('content','contents',$data);
+	// prepare data for fillter 
+	$this->template->add_js($this->load->view('js/select-box.js',null,TRUE),'embed',TRUE);
+	$this->template->add_js($this->load->view('js/modal.js',null,TRUE),'embed',TRUE);
+	$data['provice_list']=$this->province->get_province_of_place();
+	//$data['Subject_major']=$this->ftps->get_subject_major();
+	//$data['Knowledge_item']=$this->study_place->get_knowledge_group_by_name();
+	$data['content']=array('title'=>"<i class='fa fa-filter fa-fw'></i>ตัวกรองข้อมูล",
+							'size'=>3,
+							'color'=>'success',
+							'detail'=>$this->load->view('place_rest_filter',$data,TRUE));
+	$this->template->write_view('content','contents',$data);
+	$this->template->write('page_header','สถานที่พักค้างคืน');
+	}
+	$this->template->render();
+}
+function place_rest_detail($place_id=null)
+{
+
+	// render for modal
+	$data['item']=$this->study_place_rest->get_by_id($place_id);
+	$data['content']=array('color'=>'primary',
+							'title'=>'<h3 class="text-success thai-webfont"><i class="fa fa-fw fa-home"></i>'.$this->study_place_rest->get_by_id($place_id)->place_name.'</h3>',
+							'detail'=>$this->load->view('place_rest_details',$data,TRUE));
+	
+	print $this->load->view('contents',$data,TRUE);
+}
 	
 	function subject_major($action=null,$id=null)
 	{
@@ -389,6 +504,11 @@ class Staff extends CI_Controller {
 					redirect(base_url('staff/'.$action));
 					else show_error('ไม่สามารถบันทึกได้');
 			break;
+			case 'place_rest':					
+					if($this->study_place_rest->post())
+					redirect(base_url('staff/'.$action));
+					else show_error('ไม่สามารถบันทึกได้');
+			break;			
 			case 'knowledge':
 				if($this->study_place->post_knowledge($study_place_id))
 				redirect(base_url('staff/place/'.$action.'/'.$study_place_id),'refresh');
@@ -430,6 +550,11 @@ class Staff extends CI_Controller {
 				redirect(base_url('staff/'.$action));
 				else show_error('ไม่สามารถบันทึกได้');
 			break;
+			case 'place_rest':
+			if($this->study_place_rest->put($id))
+			redirect(base_url('staff/'.$action));
+			else show_error('ไม่สามารถบันทึกได้');
+		break;
 			case 'knowledge':
 				if($this->study_place->put_knowledge($id))
 					redirect(base_url('staff/place/'.$action.'/'.$this->study_place->get_knowledge_by_id($id)->study_place_id));
@@ -474,6 +599,11 @@ class Staff extends CI_Controller {
 					redirect(base_url('staff/'.$action));
 				else show_error('ไม่สามารถลบได้');
 			break;
+			case 'place_rest':
+			if($this->study_place_rest->delete($id))
+				redirect(base_url('staff/'.$action));
+			else show_error('ไม่สามารถลบได้');
+		break;
 			case 'knowledge':
 				$study_place_id=$this->study_place->delete_knowledge($id);
 				if($study_place_id)

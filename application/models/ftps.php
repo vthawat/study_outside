@@ -10,6 +10,7 @@ class Ftps extends CI_Model
 		$this->load->model('country_district','district');
         $this->load->model('country_zipcode','zipcode');
         $this->load->model('study_place');
+        $this->load->model('study_place_rest');
         $this->load->model('study_trip');			
     }
     function DateThai($strDate)
