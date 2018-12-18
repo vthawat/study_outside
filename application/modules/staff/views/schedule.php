@@ -7,11 +7,15 @@
       //print_r($stop_time);
     }
 ?>
-        
-
+            <script>var optimize_routing;
+                    var cut_waypoint=[];
+                        optimize_routing=<?=$trips->routing?>;
+            </script>
   <h3 class="thai-font text-blue"><i class="fa fa-fw fa-wrench"></i>ปรับแต่งกำหนดการเดินทาง</h3>
   <?php
-            $routing=json_decode($trips->routing);
+            //if(empty($trips->optimize_routing)) $routing=json_decode($trips->routing);
+           // else $routing=json_decode($trips->optimize_routing);
+             $routing=json_decode($trips->routing);
              $flag_break=FALSE;
              $flag_rest=FALSE;
              $keep_end_time=array();
@@ -75,7 +79,7 @@
                 $end_place=$this->study_place->get_by_id($rout->end_place_id);
                 if($rout->end_place_id==0)
                     $end_location_details='อ.หาดใหญ่ จ.สงขลา';
-                else $end_location_details='อ.'.$end_place->AMPHUR_NAME.' จ.'.$end_place->PROVINCE_NAME;
+                else $end_location_details='อ.'.$end_place->AMPHUR_NAME.' อ.'.$end_place->AMPHUR_NAME.' จ.'.$end_place->PROVINCE_NAME;
             ?>
     <?php  if(!empty($stop_time))if($i!=0)if($this->study_trip->isTimeBreak($keep_end_time[$i-1],$start_time)):?>
             <?php $flag_break=TRUE;
@@ -87,7 +91,7 @@
                    $end_time=$this->study_trip->schedule_time_shift($start_time,$rout->duration);
 
             ?>
-                <tr>
+                <tr class="bg-gray">
                  <td class="text-center">1 ชั่วโมง</td>
                  <td></td>
                  <td><input type="text" name="lunch_break[]" class="form-control" value="--พักกลางวัน--"></td>
@@ -112,7 +116,7 @@
         </tr>
         <?php  if(!empty($stop_time))if($this->study_trip->isTimeBreak($start_time,$end_time)):?>
             <?php $flag_break=TRUE;$break_mode=2;?>
-                <tr>
+                <tr class="bg-gray">
                  <td class="text-center">1 ชั่วโมง</td>
                  <td></td>
                  <td><input type="text" name="lunch_break[]" class="form-control" value="--พักกลางวัน--"></td>
@@ -121,11 +125,32 @@
 
             <?php if($days!=$trips->duration):?>
             <?php  if(!empty($stop_time))if($trips->duration>1)if($this->study_trip->isTimeRest($end_time)):?>
+            <script>
+                cut_waypoint.push({"start_place_id":<?=$rout->start_place_id?>,
+                                    "end_place_id":<?=$rout->end_place_id?>,
+                                    "segment":<?=$rout->segment?>
+                                });
+            </script>
             <?php  $end_time=0;$days++?>
                 <tr>
                  <td></td>
                  <td></td>
-                 <td><button class="btn btn-success"><i class="fa fa-fw fa-map-pin"></i>เพิ่มสถานที่พักค้างคืน</button></td>
+                 <td><h3 class="thai-font text-green"><i class="fa fa-fw fa-map-pin"></i> เลือกสถานที่พักค้างคืน</h3>
+                 <?php
+                    $filter=array();
+                    $filter['study_place_rest.amphur_id']=$start_place->amphur_id;
+                    $filter['study_place_rest.province_id']=$start_place->province_id;
+                 ?>
+                 <?php $place_list=$this->study_place_rest->get_all($filter);?>
+                 <?php if(empty($place_list)):?>
+                    <div class="alert">ไม่พบข้อมูลสถานที่พักค้างคืน ใน <?=$start_location_details?> <a class="btn icon-btn btn-success" href="<?=base_url('staff/place_rest/new');?>"><span class="btn-glyphicon fa fa-home img-circle text-success"></span>เพิ่มสถานที่พักค้างคืน</a></div>
+                <?php endif?>
+                <ul class="list-group">
+                 <?php if(!empty($place_list)) foreach($place_list as $place_rest):?>
+                    <li class="list-group-item"><?=$place_rest->place_name?> <a class="btn btn-primary" data-toggle="modal" href="<?=base_url('staff/place_rest_detail/'.$place_rest->id)?>" data-target=".modal"><i class="fa fa-fw fa-search-plus"></i>ดูรายละเอียด</a></li>
+                 <?php endforeach?>
+                 </ul>
+                 </td>
                 </tr>
                 <tr>
                  <td></td>
@@ -138,27 +163,19 @@
             <th>สถานที่</th>
         </tr>
             <?php endif;?>
-            <?php endif;?>
-            
+            <?php endif;?> 
         <?php endif;?><?php $i++; ?>
         <?php endforeach?>
         </tbody>
     </table>
     <div class="text-center">
-    <button class="btn icon-btn btn-primary save"><span class="btn-glyphicon fa fa-history img-circle text-primary"></span>ปรับแต่งเวลา</button>
+    <button class="btn icon-btn btn-primary save"><span class="btn-glyphicon fa fa-history img-circle text-primary"></span>ปรับแต่งกำหนดการ</button>
     </div>
     </form>
-<?php
-/*echo gmdate("i", 34200)."<br>"; // conver second to minute 
-$start = strtotime('08:30');
-$end   = strtotime('18:00');
-$diff  = $end - $start;
-echo $diff;
-$hours = floor($diff / (60 * 60));
-$minutes = $diff - $hours * (60 * 60);
-echo 'Remaining time: ' . $hours .  ' hours, ' . floor( $minutes / 60 ) . ' minutes';
-*/
-//print $this->study_trip->cal_trip_perday();
-//print $this->study_trip->cal_trip_perday
-?>
 </div>
+<div class="modal fade" tabindex="-1" role="dialog">
+  <div class="modal-dialog" role="document">
+    <div class="modal-content">
+    </div><!-- /.modal-content -->
+  </div><!-- /.modal-dialog -->
+</div><!-- /.modal -->

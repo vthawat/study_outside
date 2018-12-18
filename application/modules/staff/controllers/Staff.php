@@ -50,7 +50,7 @@ class Staff extends CI_Controller {
 	{
 		switch($action)
 		{
-			case 'new':
+			case 'new': /** กำหนดความต้องการเดินทาง */
 				$this->template->add_js('assets/datepicker/bootstrap-datepicker.js');
 				$this->template->add_js('assets/datepicker/locales/bootstrap-datepicker.th.js');
 				$this->template->add_css('assets/datepicker/datepicker3.css');
@@ -65,7 +65,7 @@ class Staff extends CI_Controller {
 								  'detail'=>$this->load->view('frm_trip',$data,TRUE)];
 				$this->template->write_view('content','contents',$data);
 			break;
-			case 'edit':
+			case 'edit': /** แก้ไขความต้องการเดินทาง */
 				$this->template->add_js('assets/datepicker/bootstrap-datepicker.js');
 				$this->template->add_js('assets/datepicker/locales/bootstrap-datepicker.th.js');
 				$this->template->add_css('assets/datepicker/datepicker3.css');
@@ -81,7 +81,7 @@ class Staff extends CI_Controller {
 								  'detail'=>$this->load->view('frm_trip',$data,TRUE)];
 				$this->template->write_view('content','contents',$data);
 			break;
-			case 'waypoint':
+			case 'waypoint':  /**  เลือกเส้นทางและสถานที่ */
 			$data['trips']=$this->study_trip->get_by_id($id);
 			//load map
 			$this->template->add_js('https://maps.google.com/maps/api/js?key=AIzaSyBGE-KGQB9PP6uq4wErMO0Xbxmz4FWxy3Q&language=th','link');
@@ -97,18 +97,24 @@ class Staff extends CI_Controller {
 							  'detail'=>$this->load->view('waypoint-place',$data,TRUE)];
 			$this->template->write_view('content','contents',$data);
 			break;
-			case 'schedule':
+
+			case 'schedule': /** กำหนดการเดินทาง */
+			//load map
+			$this->template->add_js('https://maps.google.com/maps/api/js?key=AIzaSyBGE-KGQB9PP6uq4wErMO0Xbxmz4FWxy3Q&libraries=places&language=th','link');
+			$this->template->add_js('assets/gmaps/js/gmap3.js');
+			$this->template->add_css($this->load->view('css/map.css',null,TRUE),'embed',TRUE);
+			$this->template->add_js($this->load->view('js/modal.js',null,TRUE),'embed',TRUE);
+			$this->template->add_js($this->load->view('js/schedule.js',null,TRUE),'embed',TRUE);
 			$data['trips']=$this->study_trip->get_by_id($id);
 			$title='รายวิชา '.$this->ftps->get_subject($this->study_trip->get_by_id($id)->subject_list_id)->subject_code.' '.$this->ftps->get_subject($this->study_trip->get_by_id($id)->subject_list_id)->subject_name;
 			$this->template->write('page_header','<a href="'.base_url('staff/trip').'"><i class="fa fa-fw fa-calendar-check-o"></i>ความต้องการเดินทาง</a><i class="fa fa-fw fa-angle-double-right"></i><a href="'.base_url('staff/trip/waypoint/'.$id).'">เส้นทาง</a><i class="fa fa-fw fa-angle-double-right"></i>สร้างตารางกำหนดการเดินทาง');
 			$data['content']=['title'=>$title,
 							  'color'=>'primary',
 							  'detail'=>$this->load->view('schedule',$data,TRUE)];
-			$this->template->write_view('content','contents',$data);
-			
+			$this->template->write_view('content','contents',$data);			
 			break;
 
-		default:
+		default: /** แสดงรายการความต้องการเดินทางทั้งหมด */
 		$data['Trip_list']=$this->study_trip->get_all();
 		$data['content']=['title'=>'รายการความต้องการเดินทาง',
 						  'color'=>'success',
