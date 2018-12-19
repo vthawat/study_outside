@@ -133,9 +133,7 @@
             </script>
             <?php  $end_time=0;$days++?>
                 <tr>
-                 <td></td>
-                 <td></td>
-                 <td><h3 class="thai-font text-green"><i class="fa fa-fw fa-map-pin"></i> เลือกสถานที่พักค้างคืน</h3>
+                 <td colspan="3">
                  <?php
                     $filter=array();
                     $filter['study_place_rest.amphur_id']=$start_place->amphur_id;
@@ -143,11 +141,20 @@
                  ?>
                  <?php $place_list=$this->study_place_rest->get_all($filter);?>
                  <?php if(empty($place_list)):?>
-                    <div class="alert">ไม่พบข้อมูลสถานที่พักค้างคืน ใน <?=$start_location_details?> <a class="btn icon-btn btn-success" href="<?=base_url('staff/place_rest/new');?>"><span class="btn-glyphicon fa fa-home img-circle text-success"></span>เพิ่มสถานที่พักค้างคืน</a></div>
+                    <div class="alert text-red">ไม่พบข้อมูลสถานที่พักค้างคืน ใน <?=$start_location_details?> <a class="btn icon-btn btn-success" href="<?=base_url('staff/place_rest/new');?>"><span class="btn-glyphicon fa fa-home img-circle text-success"></span>เพิ่มสถานที่พักค้างคืน</a></div>
                 <?php endif?>
+                <?php if(!empty($place_list)):?><h3 class="thai-font text-blue"><i class="fa fa-fw fa-home"></i> เลือกสถานที่พักค้างคืนใน <?=$start_location_details?></h3><?php endif?>
                 <ul class="list-group">
                  <?php if(!empty($place_list)) foreach($place_list as $place_rest):?>
-                    <li class="list-group-item"><?=$place_rest->place_name?> <a class="btn btn-primary" data-toggle="modal" href="<?=base_url('staff/place_rest_detail/'.$place_rest->id)?>" data-target=".modal"><i class="fa fa-fw fa-search-plus"></i>ดูรายละเอียด</a></li>
+                    <li class="list-group-item">
+                    <span>จาก<?=$rout->start_location?> <i class="fa fa-fw fa-angle-double-right"></i>ถึง<?=$place_rest->place_name.' ต.'. $place_rest->DISTRICT_NAME.' อ.'.$place_rest->AMPHUR_NAME?></span>
+                    <div class="pull-right">
+                    <a class="btn btn-primary" data-toggle="modal" href="<?=base_url('staff/place_rest_detail/'.$place_rest->id)?>" data-target=".modal"><i class="fa fa-fw fa-search-plus"></i>ดูรายละเอียด</a>
+                    <button type="button" class="btn btn-danger"><i class="fa fa-fw fa-map-marker"></i>เลือก</button>
+                    </div>
+                    <div class="clearfix"></div>
+                    </li>
+                    
                  <?php endforeach?>
                  </ul>
                  </td>
