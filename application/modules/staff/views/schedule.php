@@ -125,12 +125,7 @@
 
             <?php if($days!=$trips->duration):?>
             <?php  if(!empty($stop_time))if($trips->duration>1)if($this->study_trip->isTimeRest($end_time)):?>
-            <script>
-                cut_waypoint.push({"start_place_id":<?=$rout->start_place_id?>,
-                                    "end_place_id":<?=$rout->end_place_id?>,
-                                    "segment":<?=$rout->segment?>
-                                });
-            </script>
+
             <?php  $end_time=0;$days++?>
                 <tr>
                  <td colspan="3">
@@ -146,6 +141,18 @@
                 <?php if(!empty($place_list)):?><h3 class="thai-font text-blue"><i class="fa fa-fw fa-home"></i> เลือกสถานที่พักค้างคืนใน <?=$start_location_details?></h3><?php endif?>
                 <ul class="list-group">
                  <?php if(!empty($place_list)) foreach($place_list as $place_rest):?>
+                    <script>
+                    cut_waypoint.push({"cut_start_place_id":<?=$rout->start_place_id?>,
+                                        "cut_end_place_id":<?=$rout->end_place_id?>,
+                                        "cut_segment":<?=$rout->segment?>,
+                                        "cut_start_place_lat":<?=$this->study_place->get_by_id($rout->start_place_id)->lat?>,
+                                        "cut_start_place_lng":<?=$this->study_place->get_by_id($rout->start_place_id)->long?>,
+                                        "schedule_days":<?=$days-1?>,
+                                        "rest_place_id":<?=$place_rest->id?>,
+                                        "rest_place_lat":<?=$place_rest->lat?>,
+                                        "rest_place_lng":<?=$place_rest->long?>
+                                    });
+                </script>
                     <li class="list-group-item">
                     <span>จาก<?=$rout->start_location?> <i class="fa fa-fw fa-angle-double-right"></i>ถึง<?=$place_rest->place_name.' ต.'. $place_rest->DISTRICT_NAME.' อ.'.$place_rest->AMPHUR_NAME?></span>
                     <div class="pull-right">
