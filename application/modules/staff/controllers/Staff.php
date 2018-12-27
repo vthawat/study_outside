@@ -103,7 +103,7 @@ class Staff extends CI_Controller {
 			$this->template->add_js('https://maps.google.com/maps/api/js?key=AIzaSyBGE-KGQB9PP6uq4wErMO0Xbxmz4FWxy3Q&libraries=places&language=th','link');
 			$this->template->add_js('assets/gmaps/js/gmap3.js');
 			$this->template->add_css($this->load->view('css/map.css',null,TRUE),'embed',TRUE);
-			$this->template->add_js($this->load->view('js/modal.js',null,TRUE),'embed',TRUE);
+			$this->template->add_js($this->load->view('js/modal-place-rest.js',null,TRUE),'embed',TRUE);
 			$this->template->add_js($this->load->view('js/schedule.js',null,TRUE),'embed',TRUE);
 			$data['trips']=$this->study_trip->get_by_id($id);
 			$title='รายวิชา '.$this->ftps->get_subject($this->study_trip->get_by_id($id)->subject_list_id)->subject_code.' '.$this->ftps->get_subject($this->study_trip->get_by_id($id)->subject_list_id)->subject_name;

@@ -27,3 +27,8 @@
   width: 100%;
   height: 500px;
 }
+#map-waypoint-place-rest{
+  display: block;
+  width: 100%;
+  height: 600px;
+}

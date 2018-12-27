@@ -138,7 +138,7 @@
                  <?php if(empty($place_list)):?>
                     <div class="alert text-red">ไม่พบข้อมูลสถานที่พักค้างคืน ใน <?=$start_location_details?> <a class="btn icon-btn btn-success" href="<?=base_url('staff/place_rest/new');?>"><span class="btn-glyphicon fa fa-home img-circle text-success"></span>เพิ่มสถานที่พักค้างคืน</a></div>
                 <?php endif?>
-                <?php if(!empty($place_list)):?><h3 class="thai-font text-blue"><i class="fa fa-fw fa-home"></i> เลือกสถานที่พักค้างคืนใน <?=$start_location_details?></h3><?php endif?>
+                <?php if(!empty($place_list)):?><h3 class="thai-font text-blue"><i class="fa fa-fw fa-bed"></i> เลือกสถานที่พักค้างคืนใน <?=$start_location_details?></h3><?php endif?>
                 <ul class="list-group">
                  <?php if(!empty($place_list)) foreach($place_list as $place_rest):?>
                     <script>
@@ -156,8 +156,8 @@
                     <li class="list-group-item">
                     <span>จาก<?=$rout->start_location?> <i class="fa fa-fw fa-angle-double-right"></i>ถึง<?=$place_rest->place_name.' ต.'. $place_rest->DISTRICT_NAME.' อ.'.$place_rest->AMPHUR_NAME?></span>
                     <div class="pull-right">
-                    <a class="btn btn-primary" data-toggle="modal" href="<?=base_url('staff/place_rest_detail/'.$place_rest->id)?>" data-target=".modal"><i class="fa fa-fw fa-search-plus"></i>ดูรายละเอียด</a>
-                    <button type="button" class="btn btn-danger"><i class="fa fa-fw fa-map-marker"></i>เลือก</button>
+                    <a class="btn btn-primary" data-toggle="modal" href="<?=base_url('staff/place_rest_detail/'.$place_rest->id)?>" data-target=".modal-place-rest-details"><i class="fa fa-fw fa-search-plus"></i>ดูรายละเอียด</a>
+                    <button type="button" data-toggle="modal" class="btn btn-danger select-rest-place" value="<?=$place_rest->id?>"><i class="fa fa-fw fa-map-marker"></i>เลือก</button>
                     </div>
                     <div class="clearfix"></div>
                     </li>
@@ -187,9 +187,22 @@
     </div>
     </form>
 </div>
-<div class="modal fade" tabindex="-1" role="dialog">
+<div class="modal fade modal-place-rest-details" tabindex="-1" role="dialog">
   <div class="modal-dialog" role="document">
     <div class="modal-content">
+    </div><!-- /.modal-content -->
+  </div><!-- /.modal-dialog -->
+</div><!-- /.modal -->
+<div class="modal fade modal-select-place-rest" tabindex="-1" role="dialog">
+  <div class="modal-dialog" role="document">
+    <div class="modal-content">
+    <div class="box box-success">
+        <div class="box-header"><h3 class="thai-font">คำนวณเส้นทางไปยังที่พักค้างคืน</h3></div>
+        <div class="box-body">
+        <div id="map-waypoint-place-rest" class="well"></div>
+        <div id="directions-panel"></div>
+         </div>
+    </div>
     </div><!-- /.modal-content -->
   </div><!-- /.modal-dialog -->
 </div><!-- /.modal -->
