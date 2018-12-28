@@ -69,11 +69,24 @@ $(document).ready(function(){
              directionsDisplay.setDirections(response);
              var route = response.routes[0];
             console.log(route.legs);
-             
+            $('#directions-panel').empty();
+            $('#directions-panel').append('<ul class="timeline">');
                      for (var i = 0; i < route.legs.length; i++)
                      {
-                        createMarker(route.legs[i].end_location,i+2,"ที่พักค้างคืน"+location_name[i]);
+                                                    // display segment
+                                                    var routeSegment = i + 1;
+                                                     // calculate segment distance
+                                                     segment_distance=route.legs[i].distance.value;
+                                                     segment_distance=(segment_distance/1000);
+                                                     segment_distance=segment_distance.toFixed(1) + " กม.";
+                                                     // calculate segment duration
+                                                       segment_duration=secondsToDhms(route.legs[i].duration.value);
+                                                       $('#directions-panel ul.timeline').append('<li class="time-circle"><b>Segment: ' + routeSegment +'</b><span><i class="fa fa-fw fa-angle-double-right"></i>เวลา '+segment_duration+'</span><span><i class="fa fa-fw fa-angle-double-right"></i>ระยะทาง '+segment_distance+'</span></li>');
+                                                       $('#directions-panel ul.timeline').append('<li><span>จาก<i class="fa fa-fw fa-angle-double-right"></i>'+route.legs[i].start_address+'</span></li>');
+                                                       $('#directions-panel ul.timeline').append('<li><span>ถึง<i class="fa fa-fw fa-angle-double-right"></i>'+route.legs[i].end_address+'</span></li>');    
+                                                       createMarker(route.legs[i].end_location,i+2,"ที่พักค้างคืน"+location_name[i]);
                      }
+            $('#directions-panel').append('</ul>');
 
          }
          
@@ -95,6 +108,21 @@ $(document).ready(function(){
     directionsDisplay.setMap(map);
 
 }
+function secondsToDhms(seconds) {
+    seconds = Number(seconds);
+    var d = Math.floor(seconds / (3600*24));
+    var h = Math.floor(seconds % (3600*24) / 3600);
+    var m = Math.floor(seconds % 3600 / 60);
+    var s = Math.floor(seconds % 3600 % 60);
+    
+    var dDisplay = d > 0 ? d + (d == 1 ? " วัน " : " วัน ") : "";
+    var hDisplay = h > 0 ? h + (h == 1 ? " ชั่วโมง " : " ชั่วโมง ") : "";
+    var mDisplay = m > 0 ? m + (m == 1 ? " นาที " : " นาที ") : "";
+    var sDisplay = s > 0 ? s + (s == 1 ? " วินาที" : " วินาที") : "";
+    if(seconds!=0)
+        return dDisplay + hDisplay + mDisplay + sDisplay;
+    else return 0+' นาที';
+    }
 function createMarker(latlng,label,title) {
     // console.log(latlng);
  
