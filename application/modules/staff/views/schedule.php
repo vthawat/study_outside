@@ -147,10 +147,15 @@
                                         "cut_segment":<?=$rout->segment?>,
                                         "cut_start_place_lat":<?=$this->study_place->get_by_id($rout->start_place_id)->lat?>,
                                         "cut_start_place_lng":<?=$this->study_place->get_by_id($rout->start_place_id)->long?>,
+                                        "cut_start_place_name":"<?=$rout->start_location?>",
+                                        "cut_end_place_lat":<?=$this->study_place->get_by_id($rout->end_place_id)->lat?>,
+                                        "cut_end_place_lng":<?=$this->study_place->get_by_id($rout->end_place_id)->long?>,
+                                        "cut_end_place_name":"<?=$rout->end_location?>",
                                         "schedule_days":<?=$days-1?>,
                                         "rest_place_id":<?=$place_rest->id?>,
                                         "rest_place_lat":<?=$place_rest->lat?>,
-                                        "rest_place_lng":<?=$place_rest->long?>
+                                        "rest_place_lng":<?=$place_rest->long?>,
+                                        "rest_place_name":"<?=$place_rest->place_name?>"
                                     });
                 </script>
                     <li class="list-group-item">

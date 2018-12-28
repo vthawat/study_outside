@@ -4,7 +4,7 @@ $(document).ready(function(){
     var directionsService = new google.maps.DirectionsService();
     var map;
     //*** select plce button click */
-   
+    //initialize();
     $('.select-rest-place').click(function(){
        // initialize();
         waypts = [];
@@ -15,10 +15,10 @@ $(document).ready(function(){
       console.log(place_rest_select);
       
       stop_place_rest = new google.maps.LatLng(place_rest_select.rest_place_lat,place_rest_select.rest_place_lng);
-   /*   waypts.push({
+     waypts.push({
         location: stop_place_rest,
         stopover: true
-    });*/
+    });
       calcRoute(place_rest_select);
 
     });
@@ -47,12 +47,13 @@ $(document).ready(function(){
 
     start = new google.maps.LatLng(waypoint.cut_start_place_lat,waypoint.cut_start_place_lng);
 
-    end = new google.maps.LatLng(waypoint.rest_place_lat,waypoint.rest_place_lng);
-
-     
+    end = new google.maps.LatLng(waypoint.cut_end_place_lat,waypoint.cut_end_place_lng);
+    location_name=[];
+    location_name.push(waypoint.rest_place_name,waypoint.cut_end_place_name);
+    // console.log(location_name);
     // createMarker(start,1);
-    createMarker(start,1,'จุดเรียนรู้สุดท้ายของวัน');
-    createMarker(end,2,'ทีพักค้างคืน');
+    createMarker(start,1,waypoint.cut_start_place_name);
+   // createMarker(end,2,'ทีพักค้างคืน');
      
      var request = {
          origin: start,
@@ -71,7 +72,7 @@ $(document).ready(function(){
              
                      for (var i = 0; i < route.legs.length; i++)
                      {
-                        //createMarker(route.legs[i].end_location,i+1,'44');
+                        createMarker(route.legs[i].end_location,i+2,"ที่พักค้างคืน"+location_name[i]);
                      }
 
          }
@@ -85,8 +86,10 @@ $(document).ready(function(){
     });
 
     var myOptions = {
-        zoom: 12,
+        zoom: 3,
         mapTypeId: google.maps.MapTypeId.ROADMAP,
+       // center: {lat: 7.557865957483602, lng: 99.6024086306885}
+
     }
     map = new google.maps.Map(document.getElementById("map-waypoint-place-rest"), myOptions);
     directionsDisplay.setMap(map);
