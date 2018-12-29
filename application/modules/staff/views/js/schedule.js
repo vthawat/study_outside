@@ -125,9 +125,15 @@ function secondsToDhms(seconds) {
     }
 function createMarker(latlng,label,title) {
     // console.log(latlng);
- 
+ if(label===2){ maker_url='<?=base_url()?>/images/map-place-rest.png';
+  //  map_label='';
+}
+ else {
+     maker_url='<?=base_url()?>/images/map-maker.png';
+    // map_label=label.toString();
+ }
     numberMarkerImg = {
-     url: '<?=base_url()?>/images/map-maker.png',
+     url: maker_url,
      size: new google.maps.Size(42, 42),
      scaledSize: new google.maps.Size(42, 42),
      labelOrigin: new google.maps.Point(20,15)
