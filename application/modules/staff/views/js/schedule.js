@@ -1,12 +1,13 @@
 $(document).ready(function(){
+    
     $.ajaxSetup({ cache: false });
     var waypts = [];
     var directionsService = new google.maps.DirectionsService();
     var map;
     //*** select plce button click */
-    //initialize();
+  //  initialize();
     $('.select-rest-place').click(function(){
-       // initialize();
+    // initialize();
         waypts = [];
         $('.modal-select-place-rest').modal('show')
      
@@ -25,11 +26,11 @@ $(document).ready(function(){
 
     $('.modal-select-place-rest').on('hidden.bs.modal', function (e) {
         ///$(this).removeData();
-        //$('#map-waypoint-place-rest').empty();
+        $('#map-waypoint-place-rest').empty();
 
     });
     $('.modal-select-place-rest').on('show.bs.modal', function (e) {
-        initialize();
+       initialize();
         ///$(this).removeData();
         //$('#map-waypoint-place-rest').empty();
 
@@ -99,8 +100,11 @@ $(document).ready(function(){
     });
 
     var myOptions = {
-        zoom: 3,
+        zoom: 5,
+      // zoomControl: false,
         mapTypeId: google.maps.MapTypeId.ROADMAP,
+        //gestureHandling: 'none',
+       // zoomControl: false
        // center: {lat: 7.557865957483602, lng: 99.6024086306885}
 
     }
@@ -124,27 +128,45 @@ function secondsToDhms(seconds) {
     else return 0+' นาที';
     }
 function createMarker(latlng,label,title) {
+
     // console.log(latlng);
- if(label===2){ maker_url='<?=base_url()?>/images/map-place-rest.png';
+ if(label===2){
+ maker_url='<?=base_url()?>/images/map-place-rest.png';
   //  map_label='';
+  numberMarkerImg = {
+    url: maker_url,
+    size: new google.maps.Size(42, 42),
+    scaledSize: new google.maps.Size(42, 42),
+    labelOrigin: new google.maps.Point(20,15)
+};
+// map_label=label.toString();
+var marker = new google.maps.Marker({
+    position: latlng,
+    map: map,
+  //  label: { text: 'ff'},
+    title:title,
+    icon: numberMarkerImg
+});
 }
  else {
      maker_url='<?=base_url()?>/images/map-maker.png';
+     numberMarkerImg = {
+        url: maker_url,
+        size: new google.maps.Size(42, 42),
+        scaledSize: new google.maps.Size(42, 42),
+        labelOrigin: new google.maps.Point(20,15)
+    };
     // map_label=label.toString();
+    var marker = new google.maps.Marker({
+        position: latlng,
+        map: map,
+        label: { text: label.toString()},
+        title:title,
+        icon: numberMarkerImg
+    });
  }
-    numberMarkerImg = {
-     url: maker_url,
-     size: new google.maps.Size(42, 42),
-     scaledSize: new google.maps.Size(42, 42),
-     labelOrigin: new google.maps.Point(20,15)
- };
-     var marker = new google.maps.Marker({
-         position: latlng,
-         map: map,
-         label: { text: label.toString()},
-         title:title,
-         icon: numberMarkerImg
-     });
+
+
  }
 
 });
