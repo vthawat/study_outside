@@ -202,7 +202,7 @@
   <div class="modal-dialog" role="document">
     <div class="modal-content">
     <div class="box box-success">
-        <div class="box-header"><h3 class="thai-font">คำนวณเส้นทางไปยังที่พักค้างคืน</h3></div>
+        <div class="box-header"><h3 class="thai-font">คำนวณเส้นทางสำหรับสถานที่พักค้างคืน</h3></div>
         <div class="box-body">
         <div id="map-waypoint-place-rest" class="well"></div>
         <div id="directions-panel"></div>

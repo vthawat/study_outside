@@ -93,7 +93,8 @@ $(document).ready(function(){
                                                        $('#directions-panel ul.timeline').append('<li class="time-circle"><b>Segment: ' + routeSegment +'</b><span><i class="fa fa-fw fa-angle-double-right"></i>เวลา '+segment_duration+'</span><span><i class="fa fa-fw fa-angle-double-right"></i>ระยะทาง '+segment_distance+'</span></li>');
                                                        $('#directions-panel ul.timeline').append('<li><span>จาก<i class="fa fa-fw fa-angle-double-right"></i>'+start_location+'</span></li>');
                                                        $('#directions-panel ul.timeline').append('<li><span>ถึง<i class="fa fa-fw fa-angle-double-right"></i>'+end_location+'</span></li>');    
-                                                       createMarker(route.legs[i].end_location,i+2,"ที่พักค้างคืน"+location_name[i]);
+                                                      if(i==0) createMarker(route.legs[i].end_location,i+2,"ที่พักค้างคืน"+location_name[i]);
+                                                      else createMarker(route.legs[i].end_location,i+2,location_name[i]);
                      }
             $('#directions-panel').append('</ul>');
 
