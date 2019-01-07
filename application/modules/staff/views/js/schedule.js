@@ -80,11 +80,19 @@ $(document).ready(function(){
                                                      segment_distance=route.legs[i].distance.value;
                                                      segment_distance=(segment_distance/1000);
                                                      segment_distance=segment_distance.toFixed(1) + " กม.";
+                                                     if(i==0) {
+                                                         start_location=waypoint.cut_start_place_name;
+                                                         end_location='ที่พัก '+waypoint.rest_place_name;
+                                                          }
+                                                    else{
+                                                        start_location='ที่พัก '+waypoint.rest_place_name;
+                                                        end_location=waypoint.cut_end_place_name
+                                                    }
                                                      // calculate segment duration
                                                        segment_duration=secondsToDhms(route.legs[i].duration.value);
                                                        $('#directions-panel ul.timeline').append('<li class="time-circle"><b>Segment: ' + routeSegment +'</b><span><i class="fa fa-fw fa-angle-double-right"></i>เวลา '+segment_duration+'</span><span><i class="fa fa-fw fa-angle-double-right"></i>ระยะทาง '+segment_distance+'</span></li>');
-                                                       $('#directions-panel ul.timeline').append('<li><span>จาก<i class="fa fa-fw fa-angle-double-right"></i>'+route.legs[i].start_address+'</span></li>');
-                                                       $('#directions-panel ul.timeline').append('<li><span>ถึง<i class="fa fa-fw fa-angle-double-right"></i>'+route.legs[i].end_address+'</span></li>');    
+                                                       $('#directions-panel ul.timeline').append('<li><span>จาก<i class="fa fa-fw fa-angle-double-right"></i>'+start_location+'</span></li>');
+                                                       $('#directions-panel ul.timeline').append('<li><span>ถึง<i class="fa fa-fw fa-angle-double-right"></i>'+end_location+'</span></li>');    
                                                        createMarker(route.legs[i].end_location,i+2,"ที่พักค้างคืน"+location_name[i]);
                      }
             $('#directions-panel').append('</ul>');
