@@ -207,6 +207,11 @@
         <div id="map-waypoint-place-rest" class="well"></div>
         <div id="directions-panel"></div>
          </div>
+         <div class="box-footer">
+            <div class="text-center">
+            <button class="btn icon-btn btn-success save-rest-place"><span class="btn-glyphicon fa fa-save img-circle text-success"></span>บันทึก</button>
+            </div>                
+         </div>
     </div>
     </div><!-- /.modal-content -->
   </div><!-- /.modal-dialog -->

@@ -4,7 +4,7 @@ $(document).ready(function(){
    // on hideden place rest detail
     $('.modal-place-rest-details').on('hidden.bs.modal', function (e) {
         // do something...
-         $(this).removeData();
+      //   $(this).removeData();
       }) 
 
 // on shown place rest detail

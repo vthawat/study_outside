@@ -5,9 +5,9 @@ $(document).ready(function(){
     var directionsService = new google.maps.DirectionsService();
     var map;
     //*** select plce button click */
-  //  initialize();
+ //  initialize();
     $('.select-rest-place').click(function(){
-    // initialize();
+    initialize();
         waypts = [];
         $('.modal-select-place-rest').modal('show')
      
@@ -26,13 +26,17 @@ $(document).ready(function(){
 
     $('.modal-select-place-rest').on('hidden.bs.modal', function (e) {
         ///$(this).removeData();
-        $('#map-waypoint-place-rest').empty();
+     //   $('#map-waypoint-place-rest').empty();
 
     });
     $('.modal-select-place-rest').on('show.bs.modal', function (e) {
-       initialize();
+      // initialize();
         ///$(this).removeData();
         //$('#map-waypoint-place-rest').empty();
+        $('.save-rest-place').click(function(){
+
+            console.log('save');
+        });
 
     });
 
