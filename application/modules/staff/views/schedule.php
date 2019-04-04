@@ -210,7 +210,7 @@
          <div class="box-footer">
             <div class="text-center">
             <button class="btn icon-btn btn-success save-rest-place"><span class="btn-glyphicon fa fa-save img-circle text-success"></span>บันทึก</button>
-            <button class="btn icon-btn btn-default"  data-dismiss="modal"><span class="btn-glyphicon fa fa-stop img-circle text-gray"></span>ยกเลิก</button>
+            <button class="btn icon-btn btn-default" data-dismiss="modal"><span class="btn-glyphicon fa fa-stop img-circle text-gray"></span>ยกเลิก</button>
             </div>                
          </div>
     </div>
