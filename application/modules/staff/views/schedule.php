@@ -79,7 +79,7 @@
                 $end_place=$this->study_place->get_by_id($rout->end_place_id);
                 if($rout->end_place_id==0)
                     $end_location_details='อ.หาดใหญ่ จ.สงขลา';
-                else $end_location_details='อ.'.$end_place->AMPHUR_NAME.' อ.'.$end_place->AMPHUR_NAME.' จ.'.$end_place->PROVINCE_NAME;
+                else $end_location_details='อ.'.$end_place->AMPHUR_NAME.' จ.'.$end_place->PROVINCE_NAME;
             ?>
     <?php  if(!empty($stop_time))if($i!=0)if($this->study_trip->isTimeBreak($keep_end_time[$i-1],$start_time)):?>
             <?php $flag_break=TRUE;

@@ -4,6 +4,9 @@ $(document).ready(function(){
     var waypts = [];
     var directionsService = new google.maps.DirectionsService();
     var map;
+    var place_rest_select;
+    var route_place_rest=[];
+    var route_with_place_rest=[];
     //*** select plce button click */
  //  initialize();
     $('.select-rest-place').click(function(){
@@ -12,8 +15,8 @@ $(document).ready(function(){
         $('.modal-select-place-rest').modal('show')
      
       //console.log(getObjectByValue(cut_waypoint,'rest_place_id',parseInt($(this).val())));
-      var place_rest_select=getObjectByValue(cut_waypoint,'rest_place_id',parseInt($(this).val()));
-      console.log(place_rest_select);
+      place_rest_select=getObjectByValue(cut_waypoint,'rest_place_id',parseInt($(this).val()));
+      //console.log(place_rest_select);
       
       stop_place_rest = new google.maps.LatLng(place_rest_select.rest_place_lat,place_rest_select.rest_place_lng);
      waypts.push({
@@ -36,6 +39,12 @@ $(document).ready(function(){
         $('.save-rest-place').click(function(){
 
             console.log('save');
+           // console.log(place_rest_select);
+           route_with_place_rest.push({
+               "place_rest_selected":place_rest_select,
+               "route_place_rest":route_place_rest
+           });
+           console.log(route_with_place_rest);
         });
 
     });
@@ -73,7 +82,7 @@ $(document).ready(function(){
          if (status == google.maps.DirectionsStatus.OK) {
              directionsDisplay.setDirections(response);
              var route = response.routes[0];
-            console.log(route.legs);
+           // console.log(route.legs);
             $('#directions-panel').empty();
             $('#directions-panel').append('<ul class="timeline">');
                      for (var i = 0; i < route.legs.length; i++)
@@ -99,6 +108,11 @@ $(document).ready(function(){
                                                        $('#directions-panel ul.timeline').append('<li><span>ถึง<i class="fa fa-fw fa-angle-double-right"></i>'+end_location+'</span></li>');    
                                                       if(i==0) createMarker(route.legs[i].end_location,i+2,"ที่พักค้างคืน"+location_name[i]);
                                                       else createMarker(route.legs[i].end_location,i+2,location_name[i]);
+                        route_place_rest.push({
+                                "segment":routeSegment,
+                                "duration":route.legs[i].duration.value,
+                                "distance":route.legs[i].distance.value
+                        });
                      }
             $('#directions-panel').append('</ul>');
 
