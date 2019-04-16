@@ -44,7 +44,8 @@ $(document).ready(function(){
                "place_rest_selected":place_rest_select,
                "route_place_rest":route_place_rest
            });
-           console.log(route_with_place_rest);
+           $('.modal-select-place-rest').modal('hide');
+           //console.log(route_with_place_rest);
         });
 
     });

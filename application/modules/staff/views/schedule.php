@@ -31,7 +31,7 @@
                  <td><h3 class="thai-font"><span class="fa fa-table fa-fw"></span>กำหนดการเดินทางของวันที่ <?=$this->ftps->DateThai($this->study_trip->NextDay($trips->start_date,$days))?></h3></td>
                 </tr>
         <tr class="bg-blue-active">
-            <th class="col-md-2 col-xs-2 text-center">เวลา</th>
+            <th class="col-md-2 col-xs-2 text-center">เวลาเดินทาง</th>
             <th class="col-md-2 col-xs-3 text-center">เวลาดูงาน</th>
             <th>สถานที่</th>
         </tr>
@@ -160,6 +160,7 @@
                 </script>
                     <li class="list-group-item">
                     <span>จาก<?=$rout->start_location?> <i class="fa fa-fw fa-angle-double-right"></i>ถึง<?=$place_rest->place_name.' ต.'. $place_rest->DISTRICT_NAME.' อ.'.$place_rest->AMPHUR_NAME?></span>
+                    <div class="place-<?=$place_rest->id?>-start-time"><?=$start_time?></div>
                     <div class="pull-right">
                     <a class="btn btn-primary" data-toggle="modal" href="<?=base_url('staff/place_rest_detail/'.$place_rest->id)?>" data-target=".modal-place-rest-details"><i class="fa fa-fw fa-search-plus"></i>ดูรายละเอียด</a>
                     <button type="button" data-toggle="modal" class="btn btn-danger select-rest-place" value="<?=$place_rest->id?>"><i class="fa fa-fw fa-map-marker"></i>เลือก</button>
