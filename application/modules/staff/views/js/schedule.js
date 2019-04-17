@@ -30,22 +30,28 @@ $(document).ready(function(){
     $('.modal-select-place-rest').on('hidden.bs.modal', function (e) {
         ///$(this).removeData();
      //   $('#map-waypoint-place-rest').empty();
-
+     //route_with_place_rest=[];
+     //alert('fg')
     });
-    $('.modal-select-place-rest').on('show.bs.modal', function (e) {
+    $('.modal-select-place-rest').on('shown.bs.modal', function (e) {
       // initialize();
         ///$(this).removeData();
         //$('#map-waypoint-place-rest').empty();
-        $('.save-rest-place').click(function(){
-
-            console.log('save');
+       i=0;
+        $(this).find('.save-rest-place').click(function(){
+            //route_with_place_rest=[];
+            
+            i++;
+            console.log('save'+i);
            // console.log(place_rest_select);
-           route_with_place_rest.push({
-               "place_rest_selected":place_rest_select,
-               "route_place_rest":route_place_rest
-           });
-           $('.modal-select-place-rest').modal('hide');
-           //console.log(route_with_place_rest);
+           //route_with_place_rest.push({
+             //  "place_rest_selected":place_rest_select,
+              // "route_place_rest":route_place_rest
+           //});
+          // console.log(route_with_place_rest);
+          // $('.modal-select-place-rest').modal('hide');
+           //$('.place-1-start-time')
+         //  console.log(route_with_place_rest);
         });
 
     });
