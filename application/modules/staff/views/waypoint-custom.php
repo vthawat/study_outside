@@ -1,11 +1,12 @@
 <?php $place_selected=json_decode($trips->place_ordering);?>
 <div class="col-md-4">
 <h4><i class="fa fa-fw fa-list"></i>ลำดับสถานที่ใหม่ เพื่อปรับเปลี่ยนเส้นทาง</h4>
-<ul class="list-group">
+<ul class="list-group place-sortable">
 <?php $i=1;foreach($place_selected as $item):?>
 <?php if($item->place_id!=0):?>
-<li class="list-group-item">
-<h3 class="text-blue thai-webfont"><span class="place_order"><?=$i?></span> <?=$item->place_name?></h3>
+<li class="list-group-item pid-<?=$item->place_id?>">
+  <input type="hidden" class="splace-id" value="<?=$item->place_id?>">
+<h3 class="text-blue thai-webfont"><span class="place-order-number"><?=$i?></span> <?=$item->place_name?></h3>
   <?php $place_details=$this->study_place->get_by_id($item->place_id);?>
   <address>ต.<?=$place_details->DISTRICT_NAME?>อ.<?=$place_details->AMPHUR_NAME?>จ.<?=$place_details->PROVINCE_NAME?></address>
 </li>

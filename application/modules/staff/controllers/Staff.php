@@ -99,6 +99,9 @@ class Staff extends CI_Controller {
 			break;
 			
 			case 'custom_route': //** ปรับแต่งเส้นทางเอง **/
+			$this->template->add_js('assets/sortable/jquery-sortable-min.js');
+			$this->template->add_js($this->load->view('js/place_sortable.js',null,TRUE),'embed',TRUE);
+			$this->template->add_css($this->load->view('css/sortable.css',null,TRUE),'embed',TRUE);
 				$data['trips']=$this->study_trip->get_by_id($id);
 				$this->template->write('page_header','<a href="../waypoint/'.$id.'"><i class="fa fa-fw fa-calendar-check-o"></i>เส้นทางอัตโนมัติ</a><i class="fa fa-fw fa-angle-double-right"></i>ปรับแต่งเส้นทาง');
 				//$data['place_selected']=$this->study_trip->suggest_location($id);
