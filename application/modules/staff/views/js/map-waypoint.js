@@ -3,10 +3,12 @@ $.ajaxSetup({ cache: false });
 var waypts = [];
 var location_selected=[];
 var map_routing=[];
+var place_ordering=[];
     $('.place-selected').change(function(){
            waypts = []; // clear point
            location_selected=[]; // clear location selected
            map_routing=[]; // clear map routing
+           place_ordering=[];
         $('.place-selected').each(function (i) {
             
             if (this.checked) {
@@ -32,6 +34,7 @@ var map_routing=[];
                                         })
                                         .done(function( msg ) {
                                               });
+  
                 
             }
         });
@@ -138,7 +141,7 @@ function calcRoute() {
                             }
                             else
                              {
-                                 console.log(start_address);
+                                 //console.log(start_address);
                                 if(end_address==='Unnamed Road, ตำบล คอหงส์ อำเภอ หาดใหญ่ สงขลา 90110 ประเทศไทย')
                                     {
                                         end_location_name='คณะทรัพยากรธรรมชาติ';
@@ -155,7 +158,7 @@ function calcRoute() {
                              totaldistance = totaldistance + route.legs[i].distance.value;
                              totalduration=totalduration+route.legs[i].duration.value;
                             createMarker(route.legs[i].end_location,i+1,end_location_name);
-                            
+                            place_ordering.push({"place_id":end_place_id,"place_name":end_location_name});
                             // display segment
                             var routeSegment = i + 1;
 
@@ -186,7 +189,7 @@ function calcRoute() {
                     // display total trip routing
                     totaldistance=(totaldistance/1000);
                     $('#directions-panel').append('<h4>รวมระยะทาง '+totaldistance.toFixed(1) + " กม."+' ระยะเวลา '+secondsToDhms(totalduration)+'</h4>')
-                   //console.log(map_routing);
+                   console.log(place_ordering);
                        // update trip routing
                     $.ajax({ method: "POST",
                     url: "<?=base_url('staff/put/trip_routing/'.$trips->id)?>",
@@ -199,6 +202,16 @@ function calcRoute() {
                                     // alert(msg);
                                    // console.log(msg);
                                         });
+                     // update place ordering
+                               $.ajax({ method: "POST",
+                                               url: "<?=base_url('staff/put/place_ordering/'.$trips->id)?>",
+                                               data:{place_ordering:place_ordering}
+                                                             })
+                                                               .fail(function(){
+                                                                   alert('ไม่สามารถบันทึกได้')
+                                                               })
+                                                               .done(function( msg ) {
+                                                                     });
 
         }
         

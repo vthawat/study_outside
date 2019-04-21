@@ -151,6 +151,15 @@ class Study_trip extends CI_Model
 		if($this->db->update($this->table,$data)) return $this->put_trip_status($id,"สร้างเส้นทางแล้ว");
 		else return FALSE;
 	}
+	
+	function place_ordering($id)
+	{
+		$data=$this->input->post();
+		$data['place_ordering']=json_encode($data['place_ordering']);
+		$this->db->where('study_period_trip.id',$id);
+		if($this->db->update($this->table,$data)) return TRUE;
+		else return FALSE;
+	}
 	function put_trip_routing($id)
 	{
 		$data=$this->input->post();

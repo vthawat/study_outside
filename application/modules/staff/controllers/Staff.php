@@ -81,7 +81,7 @@ class Staff extends CI_Controller {
 								  'detail'=>$this->load->view('frm_trip',$data,TRUE)];
 				$this->template->write_view('content','contents',$data);
 			break;
-			case 'waypoint':  /**  เลือกเส้นทางและสถานที่ */
+			case 'waypoint':  /**  เลือกสถานที่และสร้างเส้นทางอัตโนมัติ */
 			$data['trips']=$this->study_trip->get_by_id($id);
 			//load map
 			$this->template->add_js('https://maps.google.com/maps/api/js?key=AIzaSyBGE-KGQB9PP6uq4wErMO0Xbxmz4FWxy3Q&language=th','link');
@@ -96,6 +96,18 @@ class Staff extends CI_Controller {
 							  'color'=>'primary',
 							  'detail'=>$this->load->view('waypoint-place',$data,TRUE)];
 			$this->template->write_view('content','contents',$data);
+			break;
+			
+			case 'custom_route': //** ปรับแต่งเส้นทางเอง **/
+				$data['trips']=$this->study_trip->get_by_id($id);
+				$this->template->write('page_header','<a href="../waypoint/'.$id.'"><i class="fa fa-fw fa-calendar-check-o"></i>เส้นทางอัตโนมัติ</a><i class="fa fa-fw fa-angle-double-right"></i>ปรับแต่งเส้นทาง');
+				//$data['place_selected']=$this->study_trip->suggest_location($id);
+				$title='รายวิชา '.$this->ftps->get_subject($this->study_trip->get_by_id($id)->subject_list_id)->subject_code.' '.$this->ftps->get_subject($this->study_trip->get_by_id($id)->subject_list_id)->subject_name;
+				$data['content']=['title'=>$title,
+								  'color'=>'primary',
+								  'detail'=>$this->load->view('waypoint-custom',$data,TRUE)];
+				$this->template->write_view('content','contents',$data);
+			
 			break;
 
 			case 'schedule': /** กำหนดการเดินทาง */
@@ -577,6 +589,9 @@ function place_rest_detail($place_id=null)
 			case 'place_selected':
 				print $this->study_trip->put_place_selected($id);
 			break;
+			case 'place_ordering':
+			print $this->study_trip->place_ordering($id);
+		break;
 			case 'trip_routing':
 				print $this->study_trip->put_trip_routing($id);
 	
