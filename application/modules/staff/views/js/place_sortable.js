@@ -10,6 +10,7 @@ $(function  () {
                $('li.pid-'+$(this).val()).find('.place-order-number').text(i+1);
             //console.log($(this).val());
             });
+            loadWayPoint();
         }
     });
    

@@ -8,6 +8,8 @@
   <input type="hidden" class="splace-id" value="<?=$item->place_id?>">
 <h3 class="text-blue thai-webfont"><span class="place-order-number"><?=$i?></span> <?=$item->place_name?></h3>
   <?php $place_details=$this->study_place->get_by_id($item->place_id);?>
+  <?php $location_point=$place_details->lat.':'.$place_details->long.':'.$place_details->id.':'.$place_details->place_name.':'.$place_details->map_address;?>
+  <input type="hidden" class="splace-location-point" value="<?=$location_point?>">
   <address>ต.<?=$place_details->DISTRICT_NAME?>อ.<?=$place_details->AMPHUR_NAME?>จ.<?=$place_details->PROVINCE_NAME?></address>
 </li>
 <?php $i++;endif;?>
