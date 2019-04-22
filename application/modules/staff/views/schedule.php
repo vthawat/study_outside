@@ -94,7 +94,7 @@
                 <tr class="bg-gray">
                  <td class="text-center"><span class="schedule-start-time-day<?=$days?> schedule-end-time-day<?=$days?>">1 ชั่วโมง</span></td>
                  <td></td>
-                 <td><input type="text" name="lunch_break[]" class="form-control schedule-arrive-place-day<?=$days?>" value="--พักกลางวัน--"></td>
+                 <td><input type="text" name="lunch_break[]" class="form-control schedule-arrive-place-day<?=$days?> schedule-depart-place-day<?=$days?>" value="--พักกลางวัน--"></td>
                 </tr>
             <?php endif;?>
         <tr>
@@ -119,7 +119,7 @@
                 <tr class="bg-gray">
                  <td class="text-center"><span class="schedule-start-time-day<?=$days?> schedule-end-time-day<?=$days?>">1 ชั่วโมง</span></td>
                  <td></td>
-                 <td><input type="text" name="lunch_break[]" class="form-control schedule-break schedule-arrive-place-day<?=$days?>" value="--พักกลางวัน--"></td>
+                 <td><input type="text" name="lunch_break[]" class="form-control schedule-break schedule-arrive-place-day<?=$days?> schedule-depart-place-day<?=$days?>" value="--พักกลางวัน--"></td>
                 </tr>
             <?php endif;?>
 

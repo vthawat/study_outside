@@ -270,8 +270,29 @@ var marker = new google.maps.Marker({
        
 
         });
-      }
-      console.log(schedule_arrive_place);
+
+             // keep end depart place of schedule
+             $('.schedule-depart-place-day'+day.toString()).each(function (i) {
+            
+              if($(this).is('input:text'))
+              {
+                schedule_depart_place.push({
+                 "days":day,
+                 "place":$(this).val()
+               });  
+              }
+              else{
+                schedule_depart_place.push({
+                 "days":day,
+                 "place":$(this).text()
+               });  
+              }
+            
+     
+             });
+
+      } // end for days
+      console.log(schedule_depart_place);
 
  });
 
