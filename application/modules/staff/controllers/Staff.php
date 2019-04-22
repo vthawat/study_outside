@@ -172,6 +172,11 @@ class Staff extends CI_Controller {
 			array_push($district,array('id'=>$item->DISTRICT_ID,'district_name'=>$item->DISTRICT_NAME));
 		print json_encode($district);
 	}
+	function json_get_end_time(){
+		$duration=$this->input->get('duration');
+		$start_time=$this->input->get('start_time');
+		print $this->study_trip->schedule_time_shift($start_time,$duration);
+	}
 	function place($action=null,$place_id=null)
 	{
 		switch($action)

@@ -7,6 +7,7 @@ $(document).ready(function(){
     var place_rest_select;
     var route_place_rest=[];
     var route_with_place_rest=[];
+    var place_endtime;
     //*** select plce button click */
  //  initialize();
     $('.select-rest-place').click(function(){
@@ -30,29 +31,47 @@ $(document).ready(function(){
     $('.modal-select-place-rest').on('hidden.bs.modal', function (e) {
         ///$(this).removeData();
      //   $('#map-waypoint-place-rest').empty();
-     //route_with_place_rest=[];
+     route_place_rest=[];
+     route_with_place_rest=[];
      //alert('fg')
     });
     $('.modal-select-place-rest').on('shown.bs.modal', function (e) {
-      // initialize();
-        ///$(this).removeData();
-        //$('#map-waypoint-place-rest').empty();
+
        i=0;
-        $(this).find('.save-rest-place').click(function(){
-            //route_with_place_rest=[];
-            
-            i++;
-            console.log('save'+i);
-           // console.log(place_rest_select);
-           //route_with_place_rest.push({
-             //  "place_rest_selected":place_rest_select,
-              // "route_place_rest":route_place_rest
-           //});
-          // console.log(route_with_place_rest);
-          // $('.modal-select-place-rest').modal('hide');
-           //$('.place-1-start-time')
-         //  console.log(route_with_place_rest);
+        $(this).find('.save-rest-place').click(function(){ // Save Place Selection
+         
+           if(i===0)
+           {
+                  
+                // console.log('save'+i);
+                // console.log(place_rest_select);
+                route_with_place_rest.push({
+                  "place_rest_selected":place_rest_select,
+                    "route_place_rest":route_place_rest
+                });
+                console.log(route_with_place_rest);
+                place_rest_duration=route_with_place_rest[0].route_place_rest[0].duration;
+                place_stat_time=$('.place-'+route_with_place_rest[0].place_rest_selected.rest_place_id+'-start-time').text();
+                            $.ajax({
+                  method: "GET",
+                  url: "<?=base_url('staff/json_get_end_time')?>",
+                  data: { start_time: place_stat_time, duration: place_rest_duration }
+                })
+                  .done(function( res_data ) {
+                    $('.place-'+route_with_place_rest[0].place_rest_selected.rest_place_id+'-end-time').text(res_data);
+                    $('ul.place-listed li.list-group-item').removeClass('bg-gray');
+                    $('.place-'+route_with_place_rest[0].place_rest_selected.rest_place_id+'-end-time').parent().parent().addClass('bg-gray');
+                   // alert( "Data Saved: " + msg );
+                  });
+                //getEndTime(10,10);
+               // console.log(getEndTime(10,10))
+               // $('.place-'+route_with_place_rest[0].place_rest_selected.rest_place_id+'-end-time').text(test);
+                $('.modal-select-place-rest').modal('hide');
+              //  console.log(route_with_place_rest);
+           }
+         i++;
         });
+
 
     });
 
@@ -146,6 +165,7 @@ $(document).ready(function(){
     directionsDisplay.setMap(map);
 
 }
+
 function secondsToDhms(seconds) {
     seconds = Number(seconds);
     var d = Math.floor(seconds / (3600*24));

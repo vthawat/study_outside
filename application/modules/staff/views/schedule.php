@@ -136,10 +136,10 @@
                  ?>
                  <?php $place_list=$this->study_place_rest->get_all($filter);?>
                  <?php if(empty($place_list)):?>
-                    <div class="alert text-red">ไม่พบข้อมูลสถานที่พักค้างคืน ใน <?=$start_location_details?> <a class="btn icon-btn btn-success" href="<?=base_url('staff/place_rest/new');?>"><span class="btn-glyphicon fa fa-home img-circle text-success"></span>เพิ่มสถานที่พักค้างคืน</a></div>
+                    <div class="alert text-red">ไม่พบข้อมูลสถานที่พักค้างคืน ใน <?=$start_location_details?> <a class="btn icon-btn btn-success" href="<?=base_url('staff/place_rest/new');?>"><span class="btn-glyphicon fa fa-bed img-circle text-success"></span>เพิ่มสถานที่พักค้างคืน</a></div>
                 <?php endif?>
                 <?php if(!empty($place_list)):?><h3 class="thai-font text-blue"><i class="fa fa-fw fa-bed"></i> เลือกสถานที่พักค้างคืนใน <?=$start_location_details?></h3><?php endif?>
-                <ul class="list-group">
+                <ul class="list-group place-listed">
                  <?php if(!empty($place_list)) foreach($place_list as $place_rest):?>
                     <script>
                     cut_waypoint.push({"cut_start_place_id":<?=$rout->start_place_id?>,
@@ -160,7 +160,7 @@
                 </script>
                     <li class="list-group-item">
                     <span>จาก<?=$rout->start_location?> <i class="fa fa-fw fa-angle-double-right"></i>ถึง<?=$place_rest->place_name.' ต.'. $place_rest->DISTRICT_NAME.' อ.'.$place_rest->AMPHUR_NAME?></span>
-                    <div class="place-<?=$place_rest->id?>-start-time"><?=$start_time?></div>
+                    <div><span class="place-<?=$place_rest->id?>-start-time"><?=$start_time?></span> - <span class="place-<?=$place_rest->id?>-end-time"></span></div>
                     <div class="pull-right">
                     <a class="btn btn-primary" data-toggle="modal" href="<?=base_url('staff/place_rest_detail/'.$place_rest->id)?>" data-target=".modal-place-rest-details"><i class="fa fa-fw fa-search-plus"></i>ดูรายละเอียด</a>
                     <button type="button" data-toggle="modal" class="btn btn-danger select-rest-place" value="<?=$place_rest->id?>"><i class="fa fa-fw fa-map-marker"></i>เลือก</button>
@@ -170,6 +170,7 @@
                     
                  <?php endforeach?>
                  </ul>
+                 <div class="text-right"><a class="btn icon-btn btn-success" href="<?=base_url('staff/place_rest/new');?>"><span class="btn-glyphicon fa fa-bed img-circle text-success"></span>เพิ่มสถานที่พักค้างคืน</a></div>
                  </td>
                 </tr>
                 <tr>

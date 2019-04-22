@@ -30,7 +30,7 @@ $(document).ready(function(){
                 fillColor : "#FFAF9F",
                 strokeColor : "#FF512F"
               })
-             // .fit();
+              .fit();
           });    
       }) 
 
