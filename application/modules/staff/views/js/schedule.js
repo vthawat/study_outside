@@ -9,12 +9,12 @@ $(document).ready(function(){
     var route_with_place_rest=[];
     var place_endtime;
     //*** select plce button click */
- //  initialize();
+  initialize();
     $('.select-rest-place').click(function(){
-    initialize();
+   // initialize();
         waypts = [];
         $('.modal-select-place-rest').modal('show')
-     
+       // initialize();
       //console.log(getObjectByValue(cut_waypoint,'rest_place_id',parseInt($(this).val())));
       place_rest_select=getObjectByValue(cut_waypoint,'rest_place_id',parseInt($(this).val()));
       //console.log(place_rest_select);
@@ -154,7 +154,7 @@ $(document).ready(function(){
 
     var myOptions = {
         zoom: 5,
-      // zoomControl: false,
+       zoomControl: true,
         mapTypeId: google.maps.MapTypeId.ROADMAP,
         //gestureHandling: 'none',
        // zoomControl: false
