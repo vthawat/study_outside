@@ -252,19 +252,19 @@ var marker = new google.maps.Marker({
 
           });
      // keep end arrive place of schedule
-         $('span.schedule-arrive-place-day'+day.toString()).each(function (i) {
+         $('.schedule-arrive-place-day'+day.toString()).each(function (i) {
             
-         if($(this).is('input'))
+         if($(this).is('input:text'))
          {
           schedule_arrive_place.push({
             "days":day,
-            "time":$(this).val()
+            "place":$(this).val()
           });  
          }
          else{
           schedule_arrive_place.push({
             "days":day,
-            "time":$(this).text()
+            "place":$(this).text()
           });  
          }
        
