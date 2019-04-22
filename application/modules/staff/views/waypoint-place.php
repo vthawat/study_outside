@@ -14,9 +14,10 @@
 <p>สาขาวิชา: <?php if($trips->subject_major_selected!='null') foreach(json_decode($trips->subject_major_selected,TRUE) as $subject_major_id):?><span class="label label-success"><?=$this->ftps->get_subject_major($subject_major_id)->major_name?></span> <?php endforeach?></p>
 
 <ul class="list-group">
-<?php if(empty($place_relation)):?><div class="alert alert-info"><h3 class="thai-font"><i class="fa fa-fw fa-exclamation-circle"></i>ไม่พบข้อมูลสถานที่ ที่สัมพันธ์กับ</h3>
-<p>องค์ความรู้ที่สนใจ: <?php foreach(json_decode($trips->knowledge_selected,TRUE) as $knowledge):?><span class="label label-primary"><?=$knowledge?></span> <?php endforeach?></p>
+<?php if(empty($place_relation)):?><div class="alert alert-danger"><h3 class="thai-font"><i class="fa fa-fw fa-exclamation-circle"></i>ไม่พบข้อมูลสถานที่ ที่สัมพันธ์กับ <a href="<?=base_url('staff/trip/edit/'.$trips->id)?>">แก้ไขความต้องการเดินทาง</a></h3>
+<!--<p>องค์ความรู้ที่สนใจ: <?php foreach(json_decode($trips->knowledge_selected,TRUE) as $knowledge):?><span class="label label-primary"><?=$knowledge?></span> <?php endforeach?></p>
 <p>สาขาวิชา: <?php if($trips->subject_major_selected!='null') foreach(json_decode($trips->subject_major_selected,TRUE) as $subject_major_id):?><span class="label label-success"><?=$this->ftps->get_subject_major($subject_major_id)->major_name?></span> <?php endforeach?></p>
+-->
 </div><?php endif?>
 <?php foreach($place_relation as $item):?>
   <?php if($item->lat!='0'&&$item->long!='0'):?>
