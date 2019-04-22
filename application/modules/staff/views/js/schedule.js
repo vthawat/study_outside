@@ -59,8 +59,8 @@ $(document).ready(function(){
                 })
                   .done(function( res_data ) {
                     $('.place-'+route_with_place_rest[0].place_rest_selected.rest_place_id+'-end-time').text(res_data);
-                    $('ul.place-listed li.list-group-item').removeClass('bg-gray');
-                    $('.place-'+route_with_place_rest[0].place_rest_selected.rest_place_id+'-end-time').parent().parent().addClass('bg-gray');
+                    $('ul.place-listed li.list-group-item').removeClass('bg-gray selected');
+                    $('.place-'+route_with_place_rest[0].place_rest_selected.rest_place_id+'-end-time').parent().parent().addClass('bg-gray selected');
                    // alert( "Data Saved: " + msg );
                   });
                 //getEndTime(10,10);
@@ -153,7 +153,7 @@ $(document).ready(function(){
     });
 
     var myOptions = {
-        zoom: 5,
+        zoom: 12,
        zoomControl: true,
         mapTypeId: google.maps.MapTypeId.ROADMAP,
         //gestureHandling: 'none',

@@ -611,6 +611,7 @@ function place_rest_detail($place_id=null)
 				print $this->study_trip->put_trip_routing($id);
 	
 			break;
+		
 			default;
 			show_error('ไม่สามารถดำเนินการได้');
 		}

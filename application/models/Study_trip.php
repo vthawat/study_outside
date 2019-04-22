@@ -168,6 +168,8 @@ class Study_trip extends CI_Model
 		if($this->db->update($this->table,$data)) return TRUE;
 		else return FALSE;
 	}
+	
+
 	function suggest_location($trip_id)
 	{
 		$trips=$this->get_by_id($trip_id);
