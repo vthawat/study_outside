@@ -159,28 +159,29 @@ function calcRoute() {
                     $('#directions-panel').append('<h4>รวมระยะทาง '+totaldistance.toFixed(1) + " กม."+' ระยะเวลา '+secondsToDhms(totalduration)+'</h4>')
                    //console.log(place_ordering);
                        // update trip routing
-                   /* $.ajax({ method: "POST",
+                    $.ajax({ method: "POST",
                     url: "<?=base_url('staff/put/trip_routing/'.$trips->id)?>",
                     data:{routing:map_routing}
                                 })
                                     .fail(function(){
-                                        alert('ไม่สามารถบันทึกได้')
+                                        alert('ไม่สามารถบันทึกเส้นทางได้')
                                     })
                                     .done(function( msg ) {
                                     // alert(msg);
                                    // console.log(msg);
                                         });
+                                       
                      // update place ordering
-                        /*       $.ajax({ method: "POST",
+                               $.ajax({ method: "POST",
                                                url: "<?=base_url('staff/put/place_ordering/'.$trips->id)?>",
                                                data:{place_ordering:place_ordering}
                                                              })
                                                                .fail(function(){
-                                                                   alert('ไม่สามารถบันทึกได้')
+                                                                   alert('ไม่สามารถบันทึกการเรียงลำดับได้')
                                                                })
                                                                .done(function( msg ) {
                                                                      });
-                                                                     */
+                                                                    
 
         }
         

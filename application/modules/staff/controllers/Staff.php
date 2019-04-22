@@ -85,11 +85,11 @@ class Staff extends CI_Controller {
 			$data['trips']=$this->study_trip->get_by_id($id);
 			//load map
 			$this->template->add_js('https://maps.google.com/maps/api/js?key=AIzaSyBGE-KGQB9PP6uq4wErMO0Xbxmz4FWxy3Q&language=th','link');
-			//$this->template->add_js('assets/gmaps/js/gmap3.js');
+			$this->template->add_js('assets/gmaps/js/gmap3.js');
 			$this->template->add_css($this->load->view('css/map.css',null,TRUE),'embed',TRUE);
 			$this->template->add_js($this->load->view('js/modal.js',null,TRUE),'embed',TRUE);
 			$this->template->add_js($this->load->view('js/map-waypoint.js',$data,TRUE),'embed',TRUE);
-			$this->template->write('page_header','<a href="../trip"><i class="fa fa-fw fa-calendar-check-o"></i>ความต้องการเดินทาง</a><i class="fa fa-fw fa-angle-double-right"></i>สร้างเส้นทางอัตโนมัติ');
+			$this->template->write('page_header','<a href="../trip/"><i class="fa fa-fw fa-calendar-check-o"></i>ความต้องการเดินทาง</a><i class="fa fa-fw fa-angle-double-right"></i>สร้างเส้นทางอัตโนมัติ');
 			$title='รายวิชา '.$this->ftps->get_subject($this->study_trip->get_by_id($id)->subject_list_id)->subject_code.' '.$this->ftps->get_subject($this->study_trip->get_by_id($id)->subject_list_id)->subject_name;
 			$data['place_relation']=$this->study_trip->suggest_location($id);
 			$data['content']=['title'=>$title,
@@ -109,7 +109,7 @@ class Staff extends CI_Controller {
 			$this->template->add_js($this->load->view('js/map-waypoint-custom.js',$data,TRUE),'embed',TRUE);
 			$this->template->add_css($this->load->view('css/sortable.css',null,TRUE),'embed',TRUE);
 				$data['trips']=$this->study_trip->get_by_id($id);
-				$this->template->write('page_header','<a href="../waypoint/'.$id.'"><i class="fa fa-fw fa-calendar-check-o"></i>เส้นทางอัตโนมัติ</a><i class="fa fa-fw fa-angle-double-right"></i>ปรับแต่งเส้นทางด้วยตนเอง');
+				$this->template->write('page_header','<a href="../trip/"><i class="fa fa-fw fa-calendar-check-o"></i>ความต้องการเดินทาง</a><i class="fa fa-fw fa-angle-double-right"></i>ปรับแต่งเส้นทางด้วยตนเอง');
 				//$data['place_selected']=$this->study_trip->suggest_location($id);
 				$title='รายวิชา '.$this->ftps->get_subject($this->study_trip->get_by_id($id)->subject_list_id)->subject_code.' '.$this->ftps->get_subject($this->study_trip->get_by_id($id)->subject_list_id)->subject_name;
 				$data['content']=['title'=>$title,
@@ -128,7 +128,7 @@ class Staff extends CI_Controller {
 			$this->template->add_js($this->load->view('js/schedule.js',null,TRUE),'embed',TRUE);
 			$data['trips']=$this->study_trip->get_by_id($id);
 			$title='รายวิชา '.$this->ftps->get_subject($this->study_trip->get_by_id($id)->subject_list_id)->subject_code.' '.$this->ftps->get_subject($this->study_trip->get_by_id($id)->subject_list_id)->subject_name;
-			$this->template->write('page_header','<a href="'.base_url('staff/trip').'"><i class="fa fa-fw fa-calendar-check-o"></i>ความต้องการเดินทาง</a><i class="fa fa-fw fa-angle-double-right"></i><a href="'.base_url('staff/trip/waypoint/'.$id).'">เส้นทาง</a><i class="fa fa-fw fa-angle-double-right"></i>สร้างตารางกำหนดการเดินทาง');
+			$this->template->write('page_header','<a href="'.base_url('staff/trip/edit/'.$id).'"><i class="fa fa-fw fa-calendar-check-o"></i>ความต้องการเดินทาง</a><i class="fa fa-fw fa-angle-double-right"></i><a href="'.base_url('staff/trip/custom_route/'.$id).'">ปรับแต่งเส้นทาง</a><i class="fa fa-fw fa-angle-double-right"></i>สร้างตารางกำหนดการเดินทาง');
 			$data['content']=['title'=>$title,
 							  'color'=>'primary',
 							  'detail'=>$this->load->view('schedule',$data,TRUE)];
@@ -591,7 +591,8 @@ function place_rest_detail($place_id=null)
 			case 'trip':
 			if(!empty($this->input->post('subject_major_selected'))&&!empty($this->input->post('knowledge_selected'))&&!empty($this->input->post('subject_list_id'))&&!empty($this->input->post('start_date')))
 				if($this->study_trip->put_trip($id))
-				redirect(base_url('staff/'.$action.'/waypoint/'.$id));
+				//redirect(base_url('staff/'.$action.'/waypoint/'.$id));
+				redirect(base_url('staff/'.$action));
 				else show_error('ไม่สามารถบันทึกได้');
 			else show_error('กรอกข้อมูลยังไม่สมบูรณ์');
 			break;

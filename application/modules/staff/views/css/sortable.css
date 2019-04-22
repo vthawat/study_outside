@@ -11,10 +11,26 @@ body.dragging, body.dragging * {
   ul.place-sortable li.placeholder {
     position: relative;
     list-style: none;
+    border-bottom: 2px solid forestgreen;
+
     /** More li styles **/
   }
   ul.place-sortable li.placeholder:before {
     position: absolute;
-    border-bottom: 1px;
+    
     /** Define arrowhead **/
+  }
+
+  .place-order-number{
+    display: table-cell;
+    width: 32px;
+    height: 32px;
+    text-align: center;
+    vertical-align: middle;
+    background: red;
+    border-radius: 50%;
+    color: white;
+   /* padding: 4px;*/
+    float: left;
+    margin-right: 2px;
   }

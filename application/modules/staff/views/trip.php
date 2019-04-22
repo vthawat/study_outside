@@ -26,8 +26,9 @@
                                 <?php if($this->study_trip->check_trip_status($item->status)==1):?>
                                 <li><a href="<?=base_url('staff/trip/waypoint/'.$item->id)?>" class="text-green"><span class="fa fa-fw fa-map-marker"></span>สร้างเส้นทาง</a></li>
 							    <?php elseif($this->study_trip->check_trip_status($item->status)==2):?>
-                                <li><a href="<?=base_url('staff/trip/schedule/'.$item->id)?>" class="text-blue"><span class="fa fa-fw fa-table"></span>สร้างตารางกำหนดการเดินทาง</a></li>
-                                <li><a href="<?=base_url('staff/trip/waypoint/'.$item->id)?>" class="text-green"><span class="fa fa-fw fa-map-marker"></span>ปรับเปลี่ยนเส้นทาง</a></li>
+                                <li><a href="<?=base_url('staff/trip/schedule/'.$item->id)?>" class="text-green"><span class="fa fa-fw fa-table"></span>สร้างตารางกำหนดการเดินทาง</a></li>
+                                <li><a href="<?=base_url('staff/trip/waypoint/'.$item->id)?>" class="text-aqua"><span class="fa fa-fw fa-map-o"></span>ปรับเปลี่ยนเส้นทางอัตโนมัติ</a></li>
+                                <li><a href="<?=base_url('staff/trip/custom_route/'.$item->id)?>" class="text-blue"><span class="fa fa-fw fa-map"></span>ปรับเปลี่ยนเส้นทางด้วยตนเอง</a></li>
                                 <?php endif?>
                                 <li><a href="<?=base_url('staff/trip/edit/'.$item->id)?>" class="text-yellow"><span class="fa fa-edit fa-fw"></span>แก้ไข</a></li>
 							    <li><a href="<?=base_url('staff/delete/trip/'.$item->id)?>" class="text-red" onclick="return confirm('ยืนยันการลบรายการ?')"><span class="fa fa-remove fa-fw"></span>ลบ</a></li>

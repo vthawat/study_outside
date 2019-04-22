@@ -2,12 +2,12 @@
 <h4><i class="fa fa-fw fa-map-pin"></i>เลือกสถานที่แนะนำ</h4>
 <!-- Single button action list -->
 <div class="btn-group pull-right">
-							  <button type="button" class="btn btn-warning dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+							  <button type="button" class="btn btn-default dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
 							    <span class="fa fa-cog fa-fw"></span><span class="caret"></span>
 							  </button>
 							  <ul class="dropdown-menu">
 							    <li><a href="<?=base_url('staff/trip/edit/'.$trips->id)?>" class="text-yellow"><span class="fa fa-edit fa-fw"></span>แก้ไขความต้องการเดินทาง</a></li>
-							    <li><a href="<?=base_url('staff/trip/remove/'.$trips->id)?>" class="text-red" onclick="return confirm('ยืนยันการลบรายการ กำหนดการเดินทางที่เกี่ยวข้องจะถูกลบ?')"><span class="fa fa-remove fa-fw"></span>ลบ</a></li>
+							    <!-- <li><a href="<?=base_url('staff/trip/remove/'.$trips->id)?>" class="text-red" onclick="return confirm('ยืนยันการลบรายการ กำหนดการเดินทางที่เกี่ยวข้องจะถูกลบ?')"><span class="fa fa-remove fa-fw"></span>ลบ</a></li> -->
 							  </ul>
 </div>
 <p>องค์ความรู้ที่สนใจ: <?php foreach(json_decode($trips->knowledge_selected,TRUE) as $knowledge):?><span class="label label-primary"><?=$knowledge?></span> <?php endforeach?></p>

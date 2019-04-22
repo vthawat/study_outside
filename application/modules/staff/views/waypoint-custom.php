@@ -1,6 +1,6 @@
 <?php $place_selected=json_decode($trips->place_ordering);?>
 <div class="col-md-4">
-<h4><i class="fa fa-fw fa-list"></i>ลำดับสถานที่ใหม่ เพื่อปรับเปลี่ยนเส้นทาง</h4>
+<h4 class="text-green"><i class="fa fa-fw fa-arrows-v"></i>คลิกแล้วลากเพื่อจัดเรียงสถานที่</h4>
 <ul class="list-group place-sortable">
 <?php $i=1;foreach($place_selected as $item):?>
 <?php if($item->place_id!=0):?>
