@@ -223,6 +223,58 @@ var marker = new google.maps.Marker({
 
  }
 
+// Create Schedule 
+ $('.schedule-create').click(function(){
+    var trip_duration=<?=$trips->duration?>;
+    var schedule_start_time=[];
+    var schedule_end_time=[];
+    var schedule_arrive_place=[];
+    var schedule_depart_place=[];
+      //console.log(trip_duration);
+      //days=1;
+      for(day=1;day<=trip_duration;day++){
+
+        // keep start time of schedule  
+        $('span.schedule-start-time-day'+day.toString()).each(function (i) {
+            
+            schedule_start_time.push({
+              "days":day,
+              "time":$(this).text()
+            });       
+          });
+    // keep end time of schedule
+          $('span.schedule-end-time-day'+day.toString()).each(function (i) {
+            
+            schedule_end_time.push({
+              "days":day,
+              "time":$(this).text()
+            });         
+
+          });
+     // keep end arrive place of schedule
+         $('span.schedule-arrive-place-day'+day.toString()).each(function (i) {
+            
+         if($(this).is('input'))
+         {
+          schedule_arrive_place.push({
+            "days":day,
+            "time":$(this).val()
+          });  
+         }
+         else{
+          schedule_arrive_place.push({
+            "days":day,
+            "time":$(this).text()
+          });  
+         }
+       
+
+        });
+      }
+      console.log(schedule_arrive_place);
+
+ });
+
 });
 
 

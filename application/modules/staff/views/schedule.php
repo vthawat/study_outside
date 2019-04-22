@@ -92,13 +92,13 @@
 
             ?>
                 <tr class="bg-gray">
-                 <td class="text-center">1 ชั่วโมง</td>
+                 <td class="text-center"><span class="schedule-start-time-day<?=$days?> schedule-end-time-day<?=$days?>">1 ชั่วโมง</span></td>
                  <td></td>
-                 <td><input type="text" name="lunch_break[]" class="form-control schedule-break day<?=$days?>" value="--พักกลางวัน--"></td>
+                 <td><input type="text" name="lunch_break[]" class="form-control schedule-break schedule-arrive-place-day<?=$days?>" value="--พักกลางวัน--"></td>
                 </tr>
             <?php endif;?>
         <tr>
-            <td class="text-center"><span class="schedule-start-time day<?=$days?>"><?=$start_time?></span> - <span class="schedule-end-time day<?=$days?>"><?=$end_time?></span></td>
+            <td class="text-center"><span class="schedule-start-time-day<?=$days?>"><?=$start_time?></span> - <span class="schedule-end-time-day<?=$days?>"><?=$end_time?></span></td>
             <td>
             <?php if($rout->end_place_id!=0):?>
                  <select class="form-control" name="study_time[]">
@@ -112,14 +112,14 @@
                 </select>
             <?php endif;?>
             </td>
-            <td>จาก<span class="schedule-arrive-place day<?=$days?>"><?=$rout->start_location?> <?=$start_location_details?></span> <i class="fa fa-fw fa-angle-double-right"></i>ถึง<span class="schedule-depart-place day<?=$days?>"><?=$rout->end_location?> <?=$end_location_details?></span></td>
+            <td>จาก<span class="schedule-arrive-place-day<?=$days?>"><?=$rout->start_location?> <?=$start_location_details?></span> <i class="fa fa-fw fa-angle-double-right"></i>ถึง<span class="schedule-depart-place-day<?=$days?>"><?=$rout->end_location?> <?=$end_location_details?></span></td>
         </tr>
         <?php  if(!empty($stop_time))if($this->study_trip->isTimeBreak($start_time,$end_time)):?>
             <?php $flag_break=TRUE;$break_mode=2;?>
                 <tr class="bg-gray">
-                 <td class="text-center">1 ชั่วโมง</td>
+                 <td class="text-center"><span class="schedule-start-time-day<?=$days?> schedule-end-time-day<?=$days?>">1 ชั่วโมง</span></td>
                  <td></td>
-                 <td><input type="text" name="lunch_break[]" class="form-control schedule-break day<?=$days?>" value="--พักกลางวัน--"></td>
+                 <td><input type="text" name="lunch_break[]" class="form-control schedule-break schedule-arrive-place-day<?=$days?>" value="--พักกลางวัน--"></td>
                 </tr>
             <?php endif;?>
 
@@ -192,7 +192,7 @@
     <div class="text-center">
     <button class="btn icon-btn btn-primary schedule-modify"><span class="btn-glyphicon fa fa-history img-circle text-primary"></span>ปรับปรุงกำหนดการ</button>
     <?php  if(!empty($stop_time)):?>
-    <button class="btn icon-btn btn-success schedule-save" type="button"><span class="btn-glyphicon fa fa-save img-circle text-success"></span>สร้างกำหนดการเดินทาง</button>
+    <button class="btn icon-btn btn-success schedule-create" type="button"><span class="btn-glyphicon fa fa-save img-circle text-success"></span>สร้างกำหนดการเดินทาง</button>
     <?php endif;?>
     </div>
     </form>
