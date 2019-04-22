@@ -89,7 +89,7 @@ class Staff extends CI_Controller {
 			$this->template->add_css($this->load->view('css/map.css',null,TRUE),'embed',TRUE);
 			$this->template->add_js($this->load->view('js/modal.js',null,TRUE),'embed',TRUE);
 			$this->template->add_js($this->load->view('js/map-waypoint.js',$data,TRUE),'embed',TRUE);
-			$this->template->write('page_header','<a href="../trip"><i class="fa fa-fw fa-calendar-check-o"></i>ความต้องการเดินทาง</a><i class="fa fa-fw fa-angle-double-right"></i>สร้างเส้นทาง');
+			$this->template->write('page_header','<a href="../trip"><i class="fa fa-fw fa-calendar-check-o"></i>ความต้องการเดินทาง</a><i class="fa fa-fw fa-angle-double-right"></i>สร้างเส้นทางอัตโนมัติ');
 			$title='รายวิชา '.$this->ftps->get_subject($this->study_trip->get_by_id($id)->subject_list_id)->subject_code.' '.$this->ftps->get_subject($this->study_trip->get_by_id($id)->subject_list_id)->subject_name;
 			$data['place_relation']=$this->study_trip->suggest_location($id);
 			$data['content']=['title'=>$title,
@@ -109,7 +109,7 @@ class Staff extends CI_Controller {
 			$this->template->add_js($this->load->view('js/map-waypoint-custom.js',$data,TRUE),'embed',TRUE);
 			$this->template->add_css($this->load->view('css/sortable.css',null,TRUE),'embed',TRUE);
 				$data['trips']=$this->study_trip->get_by_id($id);
-				$this->template->write('page_header','<a href="../waypoint/'.$id.'"><i class="fa fa-fw fa-calendar-check-o"></i>เส้นทางอัตโนมัติ</a><i class="fa fa-fw fa-angle-double-right"></i>ปรับแต่งเส้นทาง');
+				$this->template->write('page_header','<a href="../waypoint/'.$id.'"><i class="fa fa-fw fa-calendar-check-o"></i>เส้นทางอัตโนมัติ</a><i class="fa fa-fw fa-angle-double-right"></i>ปรับแต่งเส้นทางด้วยตนเอง');
 				//$data['place_selected']=$this->study_trip->suggest_location($id);
 				$title='รายวิชา '.$this->ftps->get_subject($this->study_trip->get_by_id($id)->subject_list_id)->subject_code.' '.$this->ftps->get_subject($this->study_trip->get_by_id($id)->subject_list_id)->subject_name;
 				$data['content']=['title'=>$title,
