@@ -112,7 +112,7 @@
                 </select>
             <?php endif;?>
             </td>
-            <td>จาก<span class="schedule-arrive-place-day<?=$days?>"><?=$rout->start_location?> <?=$start_location_details?></span> <i class="fa fa-fw fa-angle-double-right"></i>ถึง<span class="schedule-depart-place-day<?=$days?>"><?=$rout->end_location?> <?=$end_location_details?></span></td>
+            <td><input type="hidden" class="cut-schedule" value="<?=$rout->start_place_id?>"> จาก<span class="schedule-arrive-place-day<?=$days?>"><?=$rout->start_location?> <?=$start_location_details?></span> <i class="fa fa-fw fa-angle-double-right"></i>ถึง<span class="schedule-depart-place-day<?=$days?>"><?=$rout->end_location?> <?=$end_location_details?></span></td>
         </tr>
         <?php  if(!empty($stop_time))if($this->study_trip->isTimeBreak($start_time,$end_time)):?>
             <?php $flag_break=TRUE;$break_mode=2;?>

@@ -58,6 +58,14 @@ $(document).ready(function(){
                   data: { start_time: place_stat_time, duration: place_rest_duration }
                 })
                   .done(function( res_data ) {
+                    //cut schedule item
+                    $('.cut-schedule:input').filter(function(){return this.value==route_with_place_rest[0].place_rest_selected.cut_start_place_id}).parent().parent().remove();
+                    var schedule_insert='<tr><td>1</td><td>2</td><td>3</td></tr>';
+                    $('.cut-schedule:input').filter(function(){return this.value==route_with_place_rest[0].place_rest_selected.cut_end_place_id}).parent().parent().before(schedule_insert);
+                    // insert schedule next day first item
+
+                    
+          
                     $('.place-'+route_with_place_rest[0].place_rest_selected.rest_place_id+'-end-time').text(res_data);
                     $('ul.place-listed li.list-group-item').removeClass('bg-gray');
                     $('ul.place-listed span.place-rest-selected').removeClass('place-rest-selected');
