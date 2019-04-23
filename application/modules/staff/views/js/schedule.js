@@ -59,13 +59,20 @@ $(document).ready(function(){
                 })
                   .done(function( res_data ) {
                     $('.place-'+route_with_place_rest[0].place_rest_selected.rest_place_id+'-end-time').text(res_data);
-                    $('ul.place-listed li.list-group-item').removeClass('bg-gray selected');
-                    $('.place-'+route_with_place_rest[0].place_rest_selected.rest_place_id+'-end-time').parent().parent().addClass('bg-gray selected');
-                   // alert( "Data Saved: " + msg );
+                    $('ul.place-listed li.list-group-item').removeClass('bg-gray');
+                    $('ul.place-listed span.place-rest-selected').removeClass('place-rest-selected');
+                    $('ul.place-listed li.list-group-item').find('.arrive-place').removeClass('selected');
+                    $('ul.place-listed li.list-group-item').find('.depart-place').removeClass('selected');
+
+                    $('.place-'+route_with_place_rest[0].place_rest_selected.rest_place_id+'-end-time').parent().parent().addClass('bg-gray');
+                    $('.place-'+route_with_place_rest[0].place_rest_selected.rest_place_id+'-end-time').parent().parent().find('.arrive-place').addClass('selected');
+                    $('.place-'+route_with_place_rest[0].place_rest_selected.rest_place_id+'-end-time').parent().parent().find('.depart-place').addClass('selected');
+
+                    $('.place-'+route_with_place_rest[0].place_rest_selected.rest_place_id+'-start-time').addClass('place-rest-selected');
+                    $('.place-'+route_with_place_rest[0].place_rest_selected.rest_place_id+'-end-time').addClass('place-rest-selected');
+
                   });
-                //getEndTime(10,10);
-               // console.log(getEndTime(10,10))
-               // $('.place-'+route_with_place_rest[0].place_rest_selected.rest_place_id+'-end-time').text(test);
+
                 $('.modal-select-place-rest').modal('hide');
               //  console.log(route_with_place_rest);
            }
@@ -153,7 +160,7 @@ $(document).ready(function(){
     });
 
     var myOptions = {
-        zoom: 12,
+        zoom: 6,
        zoomControl: true,
         mapTypeId: google.maps.MapTypeId.ROADMAP,
         //gestureHandling: 'none',
@@ -225,32 +232,72 @@ var marker = new google.maps.Marker({
 
 // Create Schedule 
  $('.schedule-create').click(function(){
-    var trip_duration=<?=$trips->duration?>;
+    var schedule_day_title=[];
     var schedule_start_time=[];
     var schedule_end_time=[];
     var schedule_arrive_place=[];
     var schedule_depart_place=[];
       //console.log(trip_duration);
-      //days=1;
-      for(day=1;day<=trip_duration;day++){
+    var day=1;
+     // for(day=1;day<=trip_duration;day++){
+    $('.schedule-day-title').each(function (i) {
+      
+        schedule_day_title.push({
+            "days":day,
+            "title":$(this).text()
+        });
 
-        // keep start time of schedule  
-        $('span.schedule-start-time-day'+day.toString()).each(function (i) {
-            
+        // keep all schedule  
+        $('.schedule-start-time-day'+day.toString()).each(function (i) {
+          
+          if($(this).hasClass('place-rest-selected'))  // mark place rest selected
+          {
+            //*** start-time */
+            schedule_start_time.push({
+              "days":day,
+              "time":$(this).text(),
+              "is_rest_place":true
+            });  
+            //**** end-time */
+            schedule_end_time.push({
+              "days":day,
+              "time":$(this).text(),
+              "is_rest_place":true
+            });  
+
+          }
+          else if($(this).hasClass('lunch-break')) // mark lunch time
+          {
+            /*** start break time */
+            schedule_start_time.push({
+              "days":day,
+              "time":$(this).text(),
+              "is_lunch":true
+            }); 
+            /*** end break time */
+            schedule_end_time.push({
+              "days":day,
+              "time":$(this).text(),
+              "is_lunch":true
+            }); 
+          }
+          else if(!$(this).hasClass('place-rest'))
+          {
             schedule_start_time.push({
               "days":day,
               "time":$(this).text()
-            });       
-          });
-    // keep end time of schedule
-          $('span.schedule-end-time-day'+day.toString()).each(function (i) {
-            
+            });  
             schedule_end_time.push({
               "days":day,
-              "time":$(this).text()
-            });         
+              "time":$(this).next().text()
+            }); 
+          }
+
 
           });
+
+
+
      // keep end arrive place of schedule
          $('.schedule-arrive-place-day'+day.toString()).each(function (i) {
             
@@ -261,7 +308,14 @@ var marker = new google.maps.Marker({
             "place":$(this).val()
           });  
          }
-         else{
+         else if($(this).hasClass('selected')){
+          schedule_arrive_place.push({
+            "days":day,
+            "place":$(this).text(),
+            "is_rest_place":true
+          });  
+         }
+         else if(!$(this).hasClass('arrive-place')){
           schedule_arrive_place.push({
             "days":day,
             "place":$(this).text()
@@ -276,12 +330,19 @@ var marker = new google.maps.Marker({
             
               if($(this).is('input:text'))
               {
-                schedule_depart_place.push({
+               schedule_depart_place.push({
                  "days":day,
                  "place":$(this).val()
                });  
               }
-              else{
+              else if($(this).hasClass('selected')){
+                schedule_depart_place.push({
+                 "days":day,
+                 "place":$(this).text(),
+                 "is_rest_place":true
+               });  
+              }
+              else if(!$(this).hasClass('depart-place')){
                 schedule_depart_place.push({
                  "days":day,
                  "place":$(this).text()
@@ -290,8 +351,8 @@ var marker = new google.maps.Marker({
             
      
              });
-
-      } // end for days
+             day++
+      }) // end for days
       console.log(schedule_depart_place);
 
  });

@@ -28,7 +28,7 @@
      <tr>
                  <td></td>
                  <td></td>
-                 <td><h3 class="thai-font"><span class="fa fa-table fa-fw"></span>กำหนดการเดินทางของวันที่ <?=$this->ftps->DateThai($this->study_trip->NextDay($trips->start_date,$days))?></h3></td>
+                 <td><h3 class="thai-font"><span class="fa fa-table fa-fw"></span><span class="schedule-day-title">กำหนดการเดินทางของวันที่ <?=$this->ftps->DateThai($this->study_trip->NextDay($trips->start_date,$days))?></span></h3></td>
                 </tr>
         <tr class="bg-blue-active">
             <th class="col-md-2 col-xs-2 text-center">เวลาเดินทาง</th>
@@ -92,9 +92,9 @@
 
             ?>
                 <tr class="bg-gray">
-                 <td class="text-center"><span class="schedule-start-time-day<?=$days?> schedule-end-time-day<?=$days?>">1 ชั่วโมง</span></td>
+                 <td class="text-center"><span class="schedule-start-time-day<?=$days?> schedule-end-time-day<?=$days?> lunch-break">1 ชั่วโมง</span></td>
                  <td></td>
-                 <td><input type="text" name="lunch_break[]" class="form-control schedule-arrive-place-day<?=$days?> schedule-depart-place-day<?=$days?>" value="--พักกลางวัน--"></td>
+                 <td><input type="text" name="lunch_break[]" class="form-control schedule-break schedule-arrive-place-day<?=$days?> schedule-depart-place-day<?=$days?>" value="--พักกลางวัน--"></td>
                 </tr>
             <?php endif;?>
         <tr>
@@ -117,7 +117,7 @@
         <?php  if(!empty($stop_time))if($this->study_trip->isTimeBreak($start_time,$end_time)):?>
             <?php $flag_break=TRUE;$break_mode=2;?>
                 <tr class="bg-gray">
-                 <td class="text-center"><span class="schedule-start-time-day<?=$days?> schedule-end-time-day<?=$days?>">1 ชั่วโมง</span></td>
+                 <td class="text-center"><span class="schedule-start-time-day<?=$days?> schedule-end-time-day<?=$days?> lunch-break">1 ชั่วโมง</span></td>
                  <td></td>
                  <td><input type="text" name="lunch_break[]" class="form-control schedule-break schedule-arrive-place-day<?=$days?> schedule-depart-place-day<?=$days?>" value="--พักกลางวัน--"></td>
                 </tr>
@@ -159,8 +159,8 @@
                                     });
                 </script>
                     <li class="list-group-item">
-                    <span>จาก<?=$rout->start_location?> <i class="fa fa-fw fa-angle-double-right"></i>ถึง<?=$place_rest->place_name.' ต.'. $place_rest->DISTRICT_NAME.' อ.'.$place_rest->AMPHUR_NAME?></span>
-                    <div><span class="place-<?=$place_rest->id?>-start-time"><?=$start_time?></span> - <span class="place-<?=$place_rest->id?>-end-time"></span></div>
+                    <span>จาก<span class="arrive-place schedule-arrive-place-day<?=$days-1?>"><?=$rout->start_location?></span> <i class="fa fa-fw fa-angle-double-right"></i>ถึง<span class="depart-place schedule-depart-place-day<?=$days-1?>"><?=$place_rest->place_name.' ต.'. $place_rest->DISTRICT_NAME.' อ.'.$place_rest->AMPHUR_NAME?></span></span>
+                    <div><span class="place-rest place-<?=$place_rest->id?>-start-time schedule-start-time-day<?=$days-1?>"><?=$start_time?></span> - <span class="place-<?=$place_rest->id?>-end-time schedule-end-time-day<?=$days-1?>"></span></div>
                     <div class="pull-right">
                     <a class="btn btn-primary" data-toggle="modal" href="<?=base_url('staff/place_rest_detail/'.$place_rest->id)?>" data-target=".modal-place-rest-details"><i class="fa fa-fw fa-search-plus"></i>ดูรายละเอียด</a>
                     <button type="button" data-toggle="modal" class="btn btn-danger select-rest-place" value="<?=$place_rest->id?>"><i class="fa fa-fw fa-map-marker"></i>เลือก</button>
@@ -176,7 +176,7 @@
                 <tr>
                  <td></td>
                  <td></td>
-                 <td><h3 class="thai-font"><span class="fa fa-table fa-fw"></span>กำหนดการเดินทางของวันที่ <?=$this->ftps->DateThai($this->study_trip->NextDay($trips->start_date,$days))?></h3></td>
+                 <td><h3 class="thai-font"><span class="fa fa-table fa-fw"></span><span class="schedule-day-title">กำหนดการเดินทางของวันที่ <?=$this->ftps->DateThai($this->study_trip->NextDay($trips->start_date,$days))?></span></h3></td>
                 </tr>
                 <tr class="bg-blue-active">
             <th class="col-md-2 col-xs-2 text-center">เวลา</th>
