@@ -7,7 +7,7 @@ $(document).ready(function(){
     var place_rest_select;
     var route_place_rest=[];
     var route_with_place_rest=[];
-
+    var schedule_plan=[];
     //*** select plce button click */
   initialize();
     $('.select-rest-place').click(function(){
@@ -374,7 +374,14 @@ var marker = new google.maps.Marker({
              });
              day++
       }) // end for days
-      console.log(schedule_end_time);
+     // console.log(schedule_end_time);
+     schedule_plan.push({
+        "start_time":schedule_start_time,
+        "end_time":schedule_end_time,
+        "arrive_place":schedule_arrive_place,
+        "depart_place":schedule_depart_place
+     });
+     console.log(schedule_plan);
 
  });
 

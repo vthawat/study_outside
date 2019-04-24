@@ -90,6 +90,13 @@ class Study_trip extends CI_Model
 		return $trips;
 		//return $this->db->get($this->table)->row();
 	}
+	function get_schedule_plan_by_trip_id($id)
+	{
+		$this->db->where('period_trip_id',$id);
+		$result=$this->db->get('schedule_plan')->row();
+		return $result;
+
+	}
 	function set_trip_status()
 	{
 		$this->trip_status=[1=>'อยู่ระหว่างการดำเนินการ',
@@ -98,6 +105,7 @@ class Study_trip extends CI_Model
 							4=>'อนุมัติแล้ว'
 							];
 	}
+
 	function post_trip()
 	{
 		$data=$this->input->post();
