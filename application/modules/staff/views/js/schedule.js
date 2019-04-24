@@ -68,7 +68,7 @@ $(document).ready(function(){
                     place_set_time+='<option value="7200">2:00</option>'
                     place_set_time+='<option value="9000">2:30</option>'
                     place_set_time+='<option value="10800">3:00</option></select>'
-                    var schedule_insert='<tr class="insert-schedule"><td class="text-center">? - ?</td>';
+                    var schedule_insert='<tr class="insert-schedule"><td class="text-center"><span class="schedule-start-time-day'+(route_with_place_rest[0].place_rest_selected.schedule_days+1)+'">?</span> - <span class="schedule-end-time-day'+(route_with_place_rest[0].place_rest_selected.schedule_days+1)+'">'+secondsToDhms(route_with_place_rest[0].route_place_rest[1].duration)+'</span></td>';
                         schedule_insert+='<td>'+place_set_time+'</td>';
                         schedule_insert+='<td>จาก'+'<span class="schedule-arrive-place-day'+(route_with_place_rest[0].place_rest_selected.schedule_days+1)+'">'+route_with_place_rest[0].place_rest_selected.rest_place_name+'</span> <i class="fa fa-fw fa-angle-double-right"></i>ถึง<span class="schedule-depart-place-day'+(route_with_place_rest[0].place_rest_selected.schedule_days+1)+'">'+route_with_place_rest[0].place_rest_selected.cut_end_place_name+'</span></td></tr>';
                         
@@ -374,7 +374,7 @@ var marker = new google.maps.Marker({
              });
              day++
       }) // end for days
-      console.log(schedule_depart_place);
+      console.log(schedule_end_time);
 
  });
 
