@@ -119,7 +119,7 @@ class Staff extends CI_Controller {
 			
 			break;
 
-			case 'schedule': /** กำหนดการเดินทาง */
+			case 'schedule': /** กำหนดการเดินทางอัตโนมัติ */
 			//load map
 			$data['trips']=$this->study_trip->get_by_id($id);
 			$this->template->add_js('https://maps.google.com/maps/api/js?key=AIzaSyBGE-KGQB9PP6uq4wErMO0Xbxmz4FWxy3Q&libraries=places&language=th','link');
@@ -135,7 +135,18 @@ class Staff extends CI_Controller {
 							  'detail'=>$this->load->view('schedule',$data,TRUE)];
 			$this->template->write_view('content','contents',$data);			
 			break;
+			case 'custom_schedule': /** ปรับแต่งกำหนดการด้วยตนเอง */
+				$data['trips']=$this->study_trip->get_by_id($id);
+				$title='รายวิชา '.$this->ftps->get_subject($this->study_trip->get_by_id($id)->subject_list_id)->subject_code.' '.$this->ftps->get_subject($this->study_trip->get_by_id($id)->subject_list_id)->subject_name;
+				$this->template->write('page_header','<a href="'.base_url('staff/trip/edit/'.$id).'"><i class="fa fa-fw fa-calendar-check-o"></i>ความต้องการเดินทาง</a><i class="fa fa-fw fa-angle-double-right"></i>ปรับแต่งกำหนดการเดินทางด้วยตนเอง');
+				$data['schedule']=$this->study_trip->get_schedule_plan_by_trip_id($id);
+				$data['content']=['title'=>$title,
+				'color'=>'primary',
+				'detail'=>$this->load->view('schedule_custom',$data,TRUE)];
+				$this->template->write_view('content','contents',$data);
 
+			break;
+ 
 		default: /** แสดงรายการความต้องการเดินทางทั้งหมด */
 		$data['Trip_list']=$this->study_trip->get_all();
 		$data['content']=['title'=>'รายการความต้องการเดินทาง',
@@ -565,7 +576,7 @@ function place_rest_detail($place_id=null)
 				$data['schedule_json']=json_encode($this->input->post('schedule_json'));
 				$data['period_trip_id']=$study_place_id;
 				if($this->study_trip->post_schedule($data)) print "ok";
-				else print 'no';
+				//else print 'no';
 				
 				
 			break;

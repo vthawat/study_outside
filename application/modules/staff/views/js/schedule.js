@@ -386,9 +386,9 @@ var marker = new google.maps.Marker({
         "arrive_place":schedule_arrive_place,
         "depart_place":schedule_depart_place
      });
-      console.log(schedule_plan);
+    //  console.log(schedule_plan);
          // post schedule plan
-             /*    $.ajax({ method: "POST",
+                 $.ajax({ method: "POST",
                  url: "<?=base_url('staff/post/schedule/'.$trips->id)?>",
                  data:{schedule_json:schedule_plan}
                                })
@@ -396,9 +396,13 @@ var marker = new google.maps.Marker({
                                      alert('ไม่สามารถบันทึกได้')
                                  })
                                  .done(function( msg ) {
-                                   alert(msg)
+                                   var trip_id="<?=$trips->id?>";
+                                   var url="<?=base_url('staff/trip/custom_schedule/')?>";
+                                   url+=trip_id;
+                                   //alert(url);
+                                   window.location.href=url;
                                        });
-                    */
+                   
    
 
  });
