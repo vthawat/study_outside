@@ -7,7 +7,6 @@ $(document).ready(function(){
     var place_rest_select;
     var route_place_rest=[];
     var route_with_place_rest=[];
-    var schedule_plan=[];
     //*** select plce button click */
   initialize();
     $('.select-rest-place').click(function(){
@@ -253,6 +252,7 @@ var marker = new google.maps.Marker({
 
 // Create Schedule 
  $('.schedule-create').click(function(){
+    var schedule_plan=[];
     var schedule_day_title=[];
     var schedule_start_time=[];
     var schedule_end_time=[];
@@ -326,7 +326,9 @@ var marker = new google.maps.Marker({
          {
           schedule_arrive_place.push({
             "days":day,
-            "place":$(this).val()
+            "place":$(this).val(),
+            "is_lunch":true
+
           });  
          }
          else if($(this).hasClass('selected')){
@@ -353,7 +355,8 @@ var marker = new google.maps.Marker({
               {
                schedule_depart_place.push({
                  "days":day,
-                 "place":$(this).val()
+                 "place":$(this).val(),
+                 "is_lunch":true
                });  
               }
               else if($(this).hasClass('selected')){
@@ -366,7 +369,8 @@ var marker = new google.maps.Marker({
               else if(!$(this).hasClass('depart-place')){
                 schedule_depart_place.push({
                  "days":day,
-                 "place":$(this).text()
+                 "place":$(this).text(),
+                 "end_place_id":$(this).next().val()
                });  
               }
             
@@ -376,12 +380,26 @@ var marker = new google.maps.Marker({
       }) // end for days
      // console.log(schedule_end_time);
      schedule_plan.push({
+        "schedule_days":schedule_day_title,
         "start_time":schedule_start_time,
         "end_time":schedule_end_time,
         "arrive_place":schedule_arrive_place,
         "depart_place":schedule_depart_place
      });
-     console.log(schedule_plan);
+      console.log(schedule_plan);
+         // post schedule plan
+             /*    $.ajax({ method: "POST",
+                 url: "<?=base_url('staff/post/schedule/'.$trips->id)?>",
+                 data:{schedule_json:schedule_plan}
+                               })
+                                 .fail(function(){
+                                     alert('ไม่สามารถบันทึกได้')
+                                 })
+                                 .done(function( msg ) {
+                                   alert(msg)
+                                       });
+                    */
+   
 
  });
 

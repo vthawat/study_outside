@@ -559,6 +559,16 @@ function place_rest_detail($place_id=null)
 				}
 			else show_error('กรอกข้อมูลยังไม่สมบูรณ์');
 			break;
+			case 'schedule':
+			//print_r($this->input->post('schedule_json'));
+				$data=array();
+				$data['schedule_json']=json_encode($this->input->post('schedule_json'));
+				$data['period_trip_id']=$study_place_id;
+				if($this->study_trip->post_schedule($data)) print "ok";
+				else print 'no';
+				
+				
+			break;
 			default;
 			show_error('ไม่สามารถดำเนินการได้');
 		}

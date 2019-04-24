@@ -105,7 +105,19 @@ class Study_trip extends CI_Model
 							4=>'อนุมัติแล้ว'
 							];
 	}
-
+	function post_schedule($data)
+	{
+		$result=$this->get_schedule_plan_by_trip_id($data['period_trip_id']);
+		if(empty($result)) { // insert new row
+			return $this->db->insert("schedule_plan",$data);
+		}
+		else{
+			// update row
+			$this->db->where('period_trip_id',$data['period_trip_id']);
+			return $this->db->update("schedule_plan",$data);
+		}
+		//return $this->db->insert("schedule_plan",$data);
+	}
 	function post_trip()
 	{
 		$data=$this->input->post();
