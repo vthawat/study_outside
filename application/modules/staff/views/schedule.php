@@ -160,7 +160,7 @@
                 </script>
                     <li class="list-group-item">
                     <span>จาก<span class="arrive-place schedule-arrive-place-day<?=$days-1?>"><?=$rout->start_location?></span> <i class="fa fa-fw fa-angle-double-right"></i>ถึง<span class="depart-place schedule-depart-place-day<?=$days-1?>"><?=$place_rest->place_name.' ต.'. $place_rest->DISTRICT_NAME.' อ.'.$place_rest->AMPHUR_NAME?></span></span>
-                    <div><span class="place-rest place-<?=$place_rest->id?>-start-time schedule-start-time-day<?=$days-1?>"><?=$start_time?></span> - <span class="place-<?=$place_rest->id?>-end-time schedule-end-time-day<?=$days-1?>"></span></div>
+                    <div><span class="place-rest place-<?=$place_rest->id?>-start-time schedule-start-time-day<?=$days-1?>"><?=$start_time?></span> - <span class="place-rest place-<?=$place_rest->id?>-end-time schedule-end-time-day<?=$days-1?>"></span></div>
                     <div class="pull-right">
                     <a class="btn btn-primary" data-toggle="modal" href="<?=base_url('staff/place_rest_detail/'.$place_rest->id)?>" data-target=".modal-place-rest-details"><i class="fa fa-fw fa-search-plus"></i>ดูรายละเอียด</a>
                     <button type="button" data-toggle="modal" class="btn btn-danger select-rest-place" value="<?=$place_rest->id?>"><i class="fa fa-fw fa-map-marker"></i>เลือก</button>

@@ -282,7 +282,7 @@ var marker = new google.maps.Marker({
             //**** end-time */
             schedule_end_time.push({
               "days":day,
-              "time":$(this).text(),
+              "time":$(this).next().text(),
               "is_rest_place":true
             });  
 
@@ -386,7 +386,7 @@ var marker = new google.maps.Marker({
         "arrive_place":schedule_arrive_place,
         "depart_place":schedule_depart_place
      });
-    //  console.log(schedule_plan);
+     // console.log(schedule_plan);
          // post schedule plan
                  $.ajax({ method: "POST",
                  url: "<?=base_url('staff/post/schedule/'.$trips->id)?>",
@@ -402,6 +402,7 @@ var marker = new google.maps.Marker({
                                    //alert(url);
                                    window.location.href=url;
                                        });
+                                      
                    
    
 

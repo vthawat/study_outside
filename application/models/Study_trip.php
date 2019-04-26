@@ -97,6 +97,12 @@ class Study_trip extends CI_Model
 		return $result;
 
 	}
+	function has_schedule($id)
+	{
+		$result=$this->get_schedule_plan_by_trip_id($id);
+		if($result) return TRUE;
+		else return FALSE;
+	}
 	function set_trip_status()
 	{
 		$this->trip_status=[1=>'อยู่ระหว่างการดำเนินการ',
@@ -109,6 +115,7 @@ class Study_trip extends CI_Model
 	{
 		$result=$this->get_schedule_plan_by_trip_id($data['period_trip_id']);
 		if(empty($result)) { // insert new row
+			$this->put_trip_status($data['period_trip_id'],"สร้างกำหนดการเดินทางแล้ว");
 			return $this->db->insert("schedule_plan",$data);
 		}
 		else{

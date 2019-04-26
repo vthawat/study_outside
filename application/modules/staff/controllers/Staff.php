@@ -136,10 +136,19 @@ class Staff extends CI_Controller {
 			$this->template->write_view('content','contents',$data);			
 			break;
 			case 'custom_schedule': /** ปรับแต่งกำหนดการด้วยตนเอง */
+			$this->template->add_js('assets/froala/js/froala_editor.min.js');
+			$this->template->add_js('assets/froala/js/froala_editor.pkgd.min.js');
+			//$this->template->add_js('assets/froala/handlebars.runtime.min.js');
+			//$this->template->add_js('assets/froala/bootstrap3-wysihtml5.min.js');
+				//$this->template->add_js('assets/wysihtml5/bootstrap3-wysihtml5.min.js');
+				$this->template->add_css('assets/froala/css/froala_editor.min.css');
+				$this->template->add_css('assets/froala/css/froala_editor.pkgd.min.css');
+				$this->template->add_js($this->load->view('js/schedule-editor.js',null,TRUE),'embed',TRUE);
 				$data['trips']=$this->study_trip->get_by_id($id);
 				$title='รายวิชา '.$this->ftps->get_subject($this->study_trip->get_by_id($id)->subject_list_id)->subject_code.' '.$this->ftps->get_subject($this->study_trip->get_by_id($id)->subject_list_id)->subject_name;
 				$this->template->write('page_header','<a href="'.base_url('staff/trip/edit/'.$id).'"><i class="fa fa-fw fa-calendar-check-o"></i>ความต้องการเดินทาง</a><i class="fa fa-fw fa-angle-double-right"></i>ปรับแต่งกำหนดการเดินทางด้วยตนเอง');
 				$data['schedule']=$this->study_trip->get_schedule_plan_by_trip_id($id);
+				$data['schedule_html']=$this->load->view('schedule_html',$data,TRUE);
 				$data['content']=['title'=>$title,
 				'color'=>'primary',
 				'detail'=>$this->load->view('schedule_custom',$data,TRUE)];
