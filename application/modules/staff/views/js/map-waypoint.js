@@ -33,13 +33,14 @@ var place_ordering=[];
                                             alert('ไม่สามารถบันทึกได้')
                                         })
                                         .done(function( msg ) {
+                                           // location.reload();
                                               });
   
                 
             }
         });
               initialize();
-              
+             // location.reload();
 
     });
 

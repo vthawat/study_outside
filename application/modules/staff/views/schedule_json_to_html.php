@@ -17,11 +17,11 @@
     </td>
     <?php if(empty($schedule_items[0]->arrive_place[$index]->is_lunch)):?>
     <td><p>จาก<?=$schedule_items[0]->arrive_place[$index]->place;?><br>
-        ถึง<?=$schedule_items[0]->depart_place[$index]->place;?><br>
+        ถึง<?=$schedule_items[0]->depart_place[$index]->place;?> 
         <?php if(empty($schedule_items[0]->depart_place[$index]->is_rest_place)):?>
          <?php if($schedule_items[0]->depart_place[$index]->end_place_id!=0):?>
          <?php $place_details=$this->study_place->get_by_id($schedule_items[0]->depart_place[$index]->end_place_id);?>
-        การติดต่อ: <?=$place_details->contact_name?> (<?=$place_details->contact_position?>) โทรศัพท์: <?=$place_details->contact_phone?>
+        <u>การติดต่อ:</u> <?=$place_details->contact_name?> (<?=$place_details->contact_position?>) โทรศัพท์: <?=$place_details->contact_phone?>
         <?php endif?>
 <?php endif;?>
     </p></td>

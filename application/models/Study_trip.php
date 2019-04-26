@@ -75,6 +75,7 @@ class Study_trip extends CI_Model
 	}
 	function get_all()
 	{
+		$this->db->order_by('id',"desc");
 		return $this->db->get($this->table)->result();
 	}
 	function get_by_id($id)
