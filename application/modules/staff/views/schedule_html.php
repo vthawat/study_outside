@@ -21,7 +21,7 @@
         <?php if(empty($schedule_items[0]->depart_place[$index]->is_rest_place)):?>
          <?php if($schedule_items[0]->depart_place[$index]->end_place_id!=0):?>
          <?php $place_details=$this->study_place->get_by_id($schedule_items[0]->depart_place[$index]->end_place_id);?>
-        การติดต่อ: <?=$place_details->contact_name?> <?=$place_details->contact_position?> <?=$place_details->contact_phone?>
+        การติดต่อ: <?=$place_details->contact_name?> <?=$place_details->contact_position?> โทรศัพท์: <?=$place_details->contact_phone?>
         <?php endif?>
 <?php endif;?>
     </p></td>
