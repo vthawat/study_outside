@@ -120,6 +120,7 @@ class Study_trip extends CI_Model
 		}
 		else{
 			// update row
+			$data['schedule_html']=NULL; 
 			$this->db->where('period_trip_id',$data['period_trip_id']);
 			return $this->db->update("schedule_plan",$data);
 		}
@@ -139,7 +140,11 @@ class Study_trip extends CI_Model
 		if($this->db->insert($this->table,$data)) return $this->db->insert_id();
 		else return FALSE;
 	}
-
+	function put_schedule($data)
+	{
+		$this->db->where('period_trip_id',$data['period_trip_id']);
+		return $this->db->update("schedule_plan",$data);
+	}
 	function put_trip($id)
 	{
 		$data=$this->input->post();

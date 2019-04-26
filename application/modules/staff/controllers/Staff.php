@@ -136,19 +136,24 @@ class Staff extends CI_Controller {
 			$this->template->write_view('content','contents',$data);			
 			break;
 			case 'custom_schedule': /** ปรับแต่งกำหนดการด้วยตนเอง */
+			$data['trips']=$this->study_trip->get_by_id($id);
+			
+			//$this->template->add_js('assets/froala/js/html2pdf.bundle.js');
 			$this->template->add_js('assets/froala/js/froala_editor.min.js');
 			$this->template->add_js('assets/froala/js/froala_editor.pkgd.min.js');
-			//$this->template->add_js('assets/froala/handlebars.runtime.min.js');
-			//$this->template->add_js('assets/froala/bootstrap3-wysihtml5.min.js');
-				//$this->template->add_js('assets/wysihtml5/bootstrap3-wysihtml5.min.js');
 				$this->template->add_css('assets/froala/css/froala_editor.min.css');
 				$this->template->add_css('assets/froala/css/froala_editor.pkgd.min.css');
-				$this->template->add_js($this->load->view('js/schedule-editor.js',null,TRUE),'embed',TRUE);
+				$this->template->add_js($this->load->view('js/schedule-editor.js',$data,TRUE),'embed',TRUE);
 				$data['trips']=$this->study_trip->get_by_id($id);
 				$title='รายวิชา '.$this->ftps->get_subject($this->study_trip->get_by_id($id)->subject_list_id)->subject_code.' '.$this->ftps->get_subject($this->study_trip->get_by_id($id)->subject_list_id)->subject_name;
 				$this->template->write('page_header','<a href="'.base_url('staff/trip').'"><i class="fa fa-fw fa-calendar-check-o"></i>ความต้องการเดินทาง</a><i class="fa fa-fw fa-angle-double-right"></i>ปรับแต่งกำหนดการเดินทางด้วยตนเอง');
 				$data['schedule']=$this->study_trip->get_schedule_plan_by_trip_id($id);
-				$data['schedule_html']=$this->load->view('schedule_html',$data,TRUE);
+				if(empty($data['schedule']->schedule_html))
+				    // load schedule from json
+					$data['schedule_html']=$this->load->view('schedule_json_to_html',$data,TRUE);
+				else
+				   // load schedule from html
+					$data['schedule_html']=$data['schedule']->schedule_html;
 				$data['content']=['title'=>$title,
 				'color'=>'primary',
 				'detail'=>$this->load->view('schedule_custom',$data,TRUE)];
@@ -641,6 +646,17 @@ function place_rest_detail($place_id=null)
 			case 'trip_routing':
 				print $this->study_trip->put_trip_routing($id);
 	
+			break;
+			case 'schedule':
+			
+				$data=array();
+				$data['schedule_html']=$this->input->post('schedule_html');
+				$data['period_trip_id']=$id;
+				if($this->study_trip->put_schedule($data)) print "success";
+				else print 'fail';
+
+				
+				
 			break;
 		
 			default;
