@@ -136,7 +136,7 @@
                  ?>
                  <?php $place_list=$this->study_place_rest->get_all($filter);?>
                  <?php if(empty($place_list)):?>
-                    <div class="alert text-red">ไม่พบข้อมูลสถานที่พักค้างคืน ใน <?=$start_location_details?> <a class="btn icon-btn btn-warning" href="<?=base_url('staff/place_rest/new');?>"><span class="btn-glyphicon fa fa-bed img-circle text-warning"></span>เพิ่มสถานที่พักค้างคืน</a></div>
+                    <div class="alert text-red">ไม่พบข้อมูลสถานที่พักค้างคืนใน <?=$start_location_details?> <a class="btn icon-btn btn-warning" href="<?=base_url('staff/place_rest/new');?>"><span class="btn-glyphicon fa fa-bed img-circle text-warning"></span>เพิ่มสถานที่พักค้างคืน</a></div>
                 <?php endif?>
                 <?php if(!empty($place_list)):?><h3 class="thai-font text-blue"><i class="fa fa-fw fa-bed"></i> เลือกสถานที่พักค้างคืนใน <?=$start_location_details?></h3><?php endif?>
                 <ul class="list-group place-listed">
