@@ -60,24 +60,33 @@ $(document).ready(function(){
                     //cut schedule item
                     $('.cut-schedule:input').filter(function(){return this.value==route_with_place_rest[0].place_rest_selected.cut_start_place_id}).parent().parent().remove();
                     // insert schedule next day first item
-                    
+                    var trip_start_time='<?=$trips->start_timeframe?>';
+                    var end_time_cut_place;
+                    $.ajax({ method: "GET",
+                    url: "<?=base_url('staff/json_get_end_time')?>",
+                    data:{start_time:trip_start_time,duration:route_with_place_rest[0].route_place_rest[1].duration}
+                                  })
+                                    .fail(function(){
+                                       // alert('ไม่สามารถบันทึกได้')
+                                    })
+                                    .done(function( next_time ) {
+                                          //console.log(msg);
+                                          end_time_cut_place=next_time;
+                                          
+                                         
+                                          console.log(end_time_cut_place)             
                     var place_set_time='<select class="form-control" name="study_time[]">'
                     place_set_time+='<option value="3600" selected="">1:00</option>'
                     place_set_time+='<option value="5400">1:30</option>'
                     place_set_time+='<option value="7200">2:00</option>'
                     place_set_time+='<option value="9000">2:30</option>'
                     place_set_time+='<option value="10800">3:00</option></select>'
-                    var schedule_insert='<tr class="insert-schedule"><td class="text-center"><span class="schedule-start-time-day'+(route_with_place_rest[0].place_rest_selected.schedule_days+1)+'">?</span> - <span class="schedule-end-time-day'+(route_with_place_rest[0].place_rest_selected.schedule_days+1)+'">'+secondsToDhms(route_with_place_rest[0].route_place_rest[1].duration)+'</span></td>';
+                    var schedule_insert='<tr class="insert-schedule"><td class="text-center"><span class="schedule-start-time-day'+(route_with_place_rest[0].place_rest_selected.schedule_days+1)+'">'+trip_start_time+'</span> - <span class="schedule-end-time-day'+(route_with_place_rest[0].place_rest_selected.schedule_days+1)+'">'+end_time_cut_place+'</span></td>';
                         schedule_insert+='<td>'+place_set_time+'</td>';
                         schedule_insert+='<td>จาก'+'<span class="schedule-arrive-place-day'+(route_with_place_rest[0].place_rest_selected.schedule_days+1)+'">'+route_with_place_rest[0].place_rest_selected.rest_place_name+'</span> <i class="fa fa-fw fa-angle-double-right"></i>ถึง<span class="schedule-depart-place-day'+(route_with_place_rest[0].place_rest_selected.schedule_days+1)+'">'+route_with_place_rest[0].place_rest_selected.cut_end_place_name+'</span><input type="hidden" class="end_place_id" value="'+route_with_place_rest[0].place_rest_selected.cut_end_place_id+'"></td></tr>';
                         
                         
-                        $('.cut-schedule:input').filter(function(){return this.value==route_with_place_rest[0].place_rest_selected.cut_end_place_id}).parent().parent().before(schedule_insert);
-                   // if()
-                    
-
-                    
-          
+                    $('.cut-schedule:input').filter(function(){return this.value==route_with_place_rest[0].place_rest_selected.cut_end_place_id}).parent().parent().before(schedule_insert);
                     $('.place-'+route_with_place_rest[0].place_rest_selected.rest_place_id+'-end-time').text(res_data);
                     $('ul.place-listed li.list-group-item').removeClass('bg-gray');
                     $('ul.place-listed span.place-rest-selected').removeClass('place-rest-selected');
@@ -90,9 +99,9 @@ $(document).ready(function(){
 
                     $('.place-'+route_with_place_rest[0].place_rest_selected.rest_place_id+'-start-time').addClass('place-rest-selected');
                     $('.place-'+route_with_place_rest[0].place_rest_selected.rest_place_id+'-end-time').addClass('place-rest-selected');
-
+                  })                   
                   });
-                  console.log(optimize_routing);
+                  //console.log(optimize_routing);
                 $('.modal-select-place-rest').modal('hide');
               //  console.log(route_with_place_rest);
            }
