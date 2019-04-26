@@ -12,7 +12,7 @@ $(document).ready(function(){
  $(function() {
   $('#schedule-html')
     .froalaEditor({
-      toolbarButtons: ['fontFamily', '|', 'fontSize', '|','color', 'paragraphFormat','lineHeight', '|','selectAll','clearFormatting', 'bold', 'italic', 'underline','strikeThrough','align','indent','outdent','formatOL','formatUL','insertTable','insertHR', '|','save','undo', 'redo', 'fullscreen'],
+      toolbarButtons: ['fontFamily', '|', 'fontSize', '|','color', 'paragraphFormat','lineHeight', '|','selectAll','clearFormatting', 'bold', 'italic', 'underline','strikeThrough','align','indent','outdent','formatOL','formatUL','insertTable','insertHR', '|','save','undo', 'redo', 'fullscreen','print'],
       fontFamilySelection: true,
       fontSizeSelection: true,
       paragraphFormatSelection: true,
