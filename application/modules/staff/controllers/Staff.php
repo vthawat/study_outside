@@ -38,13 +38,24 @@ class Staff extends CI_Controller {
 	{
 		
 		$this->template->write('page_header','<i class="fa fa-fw fa-calendar"></i>ปฏิทินการเดินทาง');
-		$this->template->add_css('uiux/web/vendors/AdminLTE/plugins/fullcalendar/fullcalendar.min.css');
+		/*$this->template->add_css('uiux/web/vendors/AdminLTE/plugins/fullcalendar/fullcalendar.min.css');
 		$this->template->add_css('uiux/web/vendors/AdminLTE/plugins/fullcalendar/fullcalendar.min.css');
 		$this->template->add_js('https://cdnjs.cloudflare.com/ajax/libs/moment.js/2.11.2/moment.min.js','link');
 		$this->template->add_js('uiux/web/vendors/AdminLTE/plugins/fullcalendar/fullcalendar.min.js');
-		$this->template->add_js($this->load->view('js/calendar.js',null,TRUE),'embed',TRUE);
+		*/
+		$this->template->add_js('assets/fullcalendar-3.10.0/lib/moment.min.js');
+		
+		$this->template->add_js('assets/fullcalendar-3.10.0/fullcalendar.min.js');
+		$this->template->add_js('assets/fullcalendar-3.10.0/locale/th.js');
+		$this->template->add_css('assets/fullcalendar-3.10.0/fullcalendar.min.css');
+		
+		
+		
+		$data['trip_event']=$this->study_trip->get_trip_show_oncalendar();
+		$this->template->add_js($this->load->view('js/calendar.js',$data,TRUE),'embed',TRUE);
 		$this->template->write_view('content','calendar');
 		$this->template->render();
+	
 	}
 	function trip($action=null,$id=null)
 	{
@@ -165,7 +176,7 @@ class Staff extends CI_Controller {
 		$data['Trip_list']=$this->study_trip->get_all();
 		$data['content']=['title'=>'รายการความต้องการเดินทาง',
 						  'color'=>'success',
-						  'toolbar'=>'<a class="btn icon-btn btn-success add-new" href="'.base_url('staff/trip/new').'"><span class="btn-glyphicon fa fa-plus img-circle text-success"></span>สร้างใหม่</a>',
+						  'toolbar'=>'<a class="btn icon-btn btn-primary" href="'.base_url('staff/calendar').'"><span class="btn-glyphicon fa fa-calendar-o img-circle text-blue"></span>ปฏิทินการเดินทาง</a> <a class="btn icon-btn btn-success add-new" href="'.base_url('staff/trip/new').'"><span class="btn-glyphicon fa fa-plus img-circle text-success"></span>สร้างใหม่</a>',
 						  'detail'=>$this->load->view('trip',$data,TRUE)];
 		$this->template->write_view('content','contents',$data);
 		$this->template->write('page_header','<a href="trip"><i class="fa fa-fw fa-calendar-check-o"></i>ความต้องการเดินทาง</a>');

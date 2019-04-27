@@ -50,29 +50,7 @@ class Study_trip extends CI_Model
 		$time_frame  = $end-$start; // unit second
 		return $time_frame;
 	}
-	function is_create_schedule($day=1,$routing)
-	{
-		$time_frame=$this->cal_trip_perday()*$day;
-		foreach($routing as $route)
-		{
-			if(!empty($route->total_duration)){
 
-				$duration_time=$route->total_duration*$day;
-				$percent=($duration_time*100)/$this->cal_trip_perday();
-				$percent=floor($percent);
-				print $percent;
-				if($day==1)
-					if($percent<100) return TRUE;
-				elseif($day==2)
-				    if($percent>100) return TRUE;
-				elseif($day==3)
-				    if($percent>200) return TRUE;
-					
-		
-				//else return FALSE;
-			}
-		}
-	}
 	function get_all()
 	{
 		$this->db->order_by('id',"desc");
@@ -96,6 +74,33 @@ class Study_trip extends CI_Model
 		$this->db->where('period_trip_id',$id);
 		$result=$this->db->get('schedule_plan')->row();
 		return $result;
+
+	}
+	function get_trip_show_oncalendar()
+	{
+		$json_trips=array();
+		$sql="SELECT
+			study_period_trip.id,
+			subject_list.subject_code,
+			subject_list.subject_name,
+			study_period_trip.start_date,
+			study_period_trip.end_date,
+			study_period_trip.`status`
+			FROM
+			study_period_trip
+			INNER JOIN subject_list ON study_period_trip.subject_list_id = subject_list.id";
+		$result=$this->db->query($sql)->result();
+		if(!empty($result))
+			foreach($result as $item)
+			{
+				array_push($json_trips,["id"=>$item->id,
+										"title"=>$item->subject_code.' '.$item->subject_name,
+										"start"=>$item->start_date,
+										"end"=>$item->end_date]);
+			}
+		return json_encode($json_trips);
+		
+		
 
 	}
 	function has_schedule($id)
