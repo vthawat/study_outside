@@ -18,16 +18,16 @@ class TmdWeather extends CI_Model
         $bodys=array();
         $url=$this->config->item('tmd_api_focecasts_locatin_based').'?fields=tc_max,cond,rain,rh&duration=1&date='.$date.'&lat='.$lat.'&lon='.$lon;
 		// via header parameter
-        $headers['Authorization']='Bearer '.$this->access_token;
-        $headers['Accept']='application/json';
+        $headers['authorization']='Bearer '.$this->access_token;
+        $headers['accept']='application/json';
 		//$headers['Content-Type']='application/json';
-        print $url;
+       // print $url;
 
 		$client = new GuzzleHttp\Client();
 
   		try{
 
-                $response = $client->request('GET',$url ,['verify'=>TRUE], ['headers' =>$headers]);
+                $response = $client->request('GET',$url , ['headers' =>$headers]);
 				$this->status_code=$response->getStatusCode();
 				return json_decode($response->getBody()->getContents());											
 		   
