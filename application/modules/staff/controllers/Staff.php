@@ -98,6 +98,7 @@ if ($err) {
 	//	$this->template->add_css($this->load->view('css/tabs.css',null,TRUE),'embed',TRUE);
 		$data['trips']=$this->study_trip->get_by_id($id);
 		$data['schedule']=$this->study_trip->get_schedule_plan_by_trip_id($id);
+		$data['force_casts']=$this->load->view('schedule_weather_json_to_html',$data,TRUE);
 		$title='รายวิชา '.$this->ftps->get_subject($this->study_trip->get_by_id($id)->subject_list_id)->subject_code.' '.$this->ftps->get_subject($this->study_trip->get_by_id($id)->subject_list_id)->subject_name;
 		$data["content"]=["title"=>'<h3 class="thai-font">รายละเอียดการเดินทางของ'.$title.'<h3>',
 											"color"=>"success",

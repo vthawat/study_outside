@@ -2,8 +2,7 @@
     $schedule_items=json_decode($schedule->schedule_json);
    // print_r($schedule_items);
 ?>
-<h3 class="text-center text-blue thai-font">กำหนดการเดินทางศึกษาภาคสนาม<br>จาก<?=$trips->start_location?> ไปยัง จ.<?=$trips->end_location?> เริ่มเดินทางระหว่างวันที่ <?=$this->ftps->DateThai($trips->start_date)?> ถึง
- <?=$this->ftps->DateThai($trips->end_date)?> เป็นเวลา <?=$trips->duration?> วัน</h3>
+<h3 class="text-center text-blue thai-font">พยากรณ์อากาศ</h3>
 <?php foreach($schedule_items[0]->schedule_days as $item):?>
 <h3 class="thai-font text-green text-center"><?=$item->title;?></h3>
 <table class="table">
@@ -17,11 +16,11 @@
     </td>
     <?php if(empty($schedule_items[0]->arrive_place[$index]->is_lunch)):?>
     <td><p>จาก<?=$schedule_items[0]->arrive_place[$index]->place;?><br>
-        ถึง<?=$schedule_items[0]->depart_place[$index]->place;?> 
+        <?=$schedule_items[0]->depart_place[$index]->place;?> 
         <?php if(empty($schedule_items[0]->depart_place[$index]->is_rest_place)):?>
          <?php if($schedule_items[0]->depart_place[$index]->end_place_id!=0):?>
          <?php $place_details=$this->study_place->get_by_id($schedule_items[0]->depart_place[$index]->end_place_id);?>
-        <u>การติดต่อ:</u> <?=$place_details->contact_name?> (<?=$place_details->contact_position?>) โทรศัพท์: <?=$place_details->contact_phone?>
+        <u>พยากรณ์อากาศ:</u>
         <?php endif?>
 <?php endif;?>
     </p></td>
