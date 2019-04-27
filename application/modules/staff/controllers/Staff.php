@@ -11,6 +11,7 @@ class Staff extends CI_Controller {
 		if(empty($userinfo)) redirect(base_url('psuauthen'));
 		$this->load->model('userinfo');
 		$this->load->model('ftps');
+		$this->load->model('tmdweather');
 		$this->template->set_template('admin');
 		$data['User_info']=$this->userinfo->get_active_sign_in();
 		$data['app_icon']=prep_url($this->config->item('uiux_path').'/web/vendors/ecs/images/app_icons/'.$this->config->item('uiux_app_icon'));
@@ -33,6 +34,39 @@ class Staff extends CI_Controller {
 	{	
 		//$this->template->render();
 		redirect(base_url('staff/calendar'));
+	}
+	function test()
+	{
+		$tmd_focecasts=$this->tmdweather->getDailyFocecasts("2019-04-28",7.5353135,99.93826739999997);
+	//	print_r($tmd_focecasts);
+/*
+	$curl = curl_init();
+
+curl_setopt_array($curl, array(
+  CURLOPT_URL => "https://data.tmd.go.th/nwpapi/v1/forecast/location/daily/at?lat=13.10&lon=100.10&fields=tc_max,rh&date=2017-08-17&duration=2",
+	CURLOPT_RETURNTRANSFER => true,
+  CURLOPT_ENCODING => "",
+  CURLOPT_MAXREDIRS => 10,
+  CURLOPT_TIMEOUT => 30,
+  CURLOPT_HTTP_VERSION => CURL_HTTP_VERSION_1_1,
+  CURLOPT_CUSTOMREQUEST => "GET",
+  CURLOPT_HTTPHEADER => array(
+    "accept: application/json",
+    "authorization: Bearer eyJ0eXAiOiJKV1QiLCJhbGciOiJSUzI1NiIsImp0aSI6IjFmMGRjZGMzNTEwOTY5ODI2MzY1MjZkNTkxODcwZjBiZjRlNjVjNzE1ODIxY2NhNzFjMzJjNmY4M2NmNGMzMDJjYzhkZTg0NjE5MzFmYTFmIn0.eyJhdWQiOiIyIiwianRpIjoiMWYwZGNkYzM1MTA5Njk4MjYzNjUyNmQ1OTE4NzBmMGJmNGU2NWM3MTU4MjFjY2E3MWMzMmM2ZjgzY2Y0YzMwMmNjOGRlODQ2MTkzMWZhMWYiLCJpYXQiOjE1MzEyNDAwNzQsIm5iZiI6MTUzMTI0MDA3NCwiZXhwIjoxNTYyNzc2MDc0LCJzdWIiOiIyMjIiLCJzY29wZXMiOltdfQ.EnqaD3pTC-d4n1T8bn4lGO85pxb3JofrzNwxH2KMuItuFF385c-p0z8l5hs2RnbkWclrf-bgagUvxDr-AUASQoe8x5AVliRMFThsamqcDeU1ldtxvmXa8biJ6tzYWOtTXhh0DqVq_r9EoiPGgrrvZpLDmHUiLuGMrh9nu8M_5FUcXwb1Z8OB-K2PHuqoQHgv9DzrF07XRZvMF-zLG3MG6Oq64XgimxrMfC96CDm6qnFdgMFcsbgmV8tNyWJ3hWmK4kTAsjxC03xQoyCXR5RxdEjpBl621hddTPBLtMwNoPdANgWWosQYxKgfoCXJp5qX8bedPz9qDCoYl3-IzC-Dr3W3Pwc8MRFurh5539Py-Vl0upLIYxzLshgavXHkhkuj2OS1EzVrsdFvx7wyW5T2-nJhaGeU_qPtn7JrOvKzt1JNYByBrsRVf_I3vN9dO29I0RSeREDhqSYNFTkB0SDJGzWqV4mkKPJVl5pq-NTR9RoWRdLhBGlOBDGXJHeO27mWwR4fzd19kBaLY1CcyHCyy0EL3U02wVEwGKVnmpv3Xk10EGml71b2SSSJunEkwrxym15K75EjGKpJGiOv6O28lfKECCULojddeafss2GoXJ9GI3GnXFEUjhFXBaf5fiihwFXa4-eKnHYxTIDDH7Gp2jV8KllTqPu1raTeTjPVjaY",
+  ),
+));
+
+$response = curl_exec($curl);
+$err = curl_error($curl);
+
+curl_close($curl);
+
+if ($err) {
+  echo "cURL Error #:" . $err;
+} else {
+  echo $response;
+}
+*/
 	}
 	function calendar()
 	{
