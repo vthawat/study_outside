@@ -1,4 +1,5 @@
 $(function () {
+  $.ajaxSetup({ cache: false });
     /* initialize the calendar
      -----------------------------------------------------------------*/
     //Date for the calendar events (dummy data)
@@ -21,14 +22,18 @@ $(function () {
         week: 'สัปดาห์',
         day: 'วัน'
       },
-      eventClick: function(calEvent, jsEvent, view) {
-        //alert(info);
-        console.log(calEvent.end)
-                 //  alert('a day has been clicked!');
-                  //  var view = $('#calendar').fullCalendar('getView');
-        //            alert("The view's title is " + view.title);
-                } ,
-     // events: trip_events,
+      eventClick: function(calEvent, jsEvent, view)
+      {
+        // ** load trip detail on modal *** // 
+        var trip_detail_url="<?=base_url('staff/calendar_trip_details/"+calEvent.id+"')?>";
+        $('.modal-content').load(trip_detail_url,function(){
+
+           $('.modal-trip-detail').modal('show');
+          
+          });
+
+      } ,
+     
      events: {
       url: "<?=base_url('staff/get_calendar_events')?>",
      },  
@@ -41,4 +46,10 @@ $(function () {
 
       
     })
+
+    $('.modal').on('hidden.bs.modal', function (e) {
+      // do something...
+       $(this).removeData();
+    }) 
+
 });

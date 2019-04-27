@@ -59,6 +59,18 @@ class Staff extends CI_Controller {
             ->set_status_header(200)
             ->set_output($this->study_trip->get_trip_show_oncalendar());
 	}
+	function calendar_trip_details($id=null)
+	{
+	//	$this->template->add_css($this->load->view('css/tabs.css',null,TRUE),'embed',TRUE);
+		$data['trips']=$this->study_trip->get_by_id($id);
+		$data['schedule']=$this->study_trip->get_schedule_plan_by_trip_id($id);
+		$title='รายวิชา '.$this->ftps->get_subject($this->study_trip->get_by_id($id)->subject_list_id)->subject_code.' '.$this->ftps->get_subject($this->study_trip->get_by_id($id)->subject_list_id)->subject_name;
+		$data["content"]=["title"=>'<h3 class="thai-font">รายละเอียดการเดินทางของ'.$title.'<h3>',
+											"color"=>"success",
+											"detail"=>$this->load->view('trip_details_tabs',$data,TRUE)];
+		print $this->load->view('contents',$data,TRUE);
+	//	$this->template->write_view('content','contents',$data);
+	}
 	function trip($action=null,$id=null)
 	{
 		switch($action)

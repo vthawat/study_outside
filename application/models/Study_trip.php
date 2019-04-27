@@ -138,6 +138,7 @@ class Study_trip extends CI_Model
 		else{
 			// update row
 			$data['schedule_html']=NULL; 
+			$this->put_trip_status($data['period_trip_id'],"สร้างกำหนดการเดินทางแล้ว");
 			$this->db->where('period_trip_id',$data['period_trip_id']);
 			return $this->db->update("schedule_plan",$data);
 		}
