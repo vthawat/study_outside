@@ -98,7 +98,8 @@ class Study_trip extends CI_Model
 										"title"=>$item->subject_code.' '.$item->subject_name,
 										"description"=>'จ.'.$item->end_location,
 										"start"=>$item->start_date,
-										"end"=>$item->end_date,
+										"end"=>$item->end_date.' 24:00:00',
+										"allDay"=>true,
 										"color"=>'#'.$this->random_color()]);
 			}
 		return json_encode($json_trips);

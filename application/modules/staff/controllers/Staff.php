@@ -44,18 +44,20 @@ class Staff extends CI_Controller {
 		$this->template->add_js('uiux/web/vendors/AdminLTE/plugins/fullcalendar/fullcalendar.min.js');
 		*/
 		$this->template->add_js('assets/fullcalendar-3.10.0/lib/moment.min.js');
-		
 		$this->template->add_js('assets/fullcalendar-3.10.0/fullcalendar.min.js');
 		$this->template->add_js('assets/fullcalendar-3.10.0/locale/th.js');
 		$this->template->add_css('assets/fullcalendar-3.10.0/fullcalendar.min.css');
-		
-		
-		
-		$data['trip_event']=$this->study_trip->get_trip_show_oncalendar();
-		$this->template->add_js($this->load->view('js/calendar.js',$data,TRUE),'embed',TRUE);
+		$this->template->add_js($this->load->view('js/calendar.js',null,TRUE),'embed',TRUE);
 		$this->template->write_view('content','calendar');
 		$this->template->render();
 	
+	}
+	function get_calendar_events()
+	{
+		return $this->output
+            ->set_content_type('application/json')
+            ->set_status_header(200)
+            ->set_output($this->study_trip->get_trip_show_oncalendar());
 	}
 	function trip($action=null,$id=null)
 	{

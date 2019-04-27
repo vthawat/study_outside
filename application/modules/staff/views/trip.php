@@ -14,7 +14,7 @@
                 <td><?=$num?></td>
                 <td><?=$this->ftps->get_subject($item->subject_list_id)->subject_code?> <?=$this->ftps->get_subject($item->subject_list_id)->subject_name?></td>
                 <td><?=$this->ftps->DateThai($item->start_date)?> <i class="fa fa-fw fa-angle-double-right"></i> <?=$this->ftps->DateThai($item->end_date)?>
-                <span><i class="fa fa-fw fa-calendar-times-o"></i><?=$item->duration?></span></td>
+                <span><i class="fa fa-fw fa-calendar-o"></i><?=$item->duration?></span></td>
                 <td><?=$item->end_location?></td>
                 <td>
                 			<!-- Single button -->
