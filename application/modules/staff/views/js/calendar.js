@@ -20,7 +20,17 @@ $(function () {
         week: 'สัปดาห์',
         day: 'วัน'
       },
-      events: trip_events
+      eventClick: function(info) {
+        //alert(info);
+        console.log(info.id)
+                 //  alert('a day has been clicked!');
+                  //  var view = $('#calendar').fullCalendar('getView');
+        //            alert("The view's title is " + view.title);
+                } ,
+      events: trip_events,
+      eventRender: function(event, element) { 
+        element.find('.fc-title').append("<br/>" + event.description); 
+     } 
 
       
     })

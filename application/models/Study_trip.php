@@ -85,7 +85,8 @@ class Study_trip extends CI_Model
 			subject_list.subject_name,
 			study_period_trip.start_date,
 			study_period_trip.end_date,
-			study_period_trip.`status`
+			study_period_trip.`status`,
+			study_period_trip.end_location
 			FROM
 			study_period_trip
 			INNER JOIN subject_list ON study_period_trip.subject_list_id = subject_list.id";
@@ -95,13 +96,22 @@ class Study_trip extends CI_Model
 			{
 				array_push($json_trips,["id"=>$item->id,
 										"title"=>$item->subject_code.' '.$item->subject_name,
+										"description"=>'จ.'.$item->end_location,
 										"start"=>$item->start_date,
-										"end"=>$item->end_date]);
+										"end"=>$item->end_date,
+										"color"=>'#'.$this->random_color()]);
 			}
 		return json_encode($json_trips);
 		
 		
 
+	}
+	function random_color_part() {
+		return str_pad( dechex( mt_rand( 0, 255 ) ), 2, '0', STR_PAD_LEFT);
+	}
+	
+	function random_color() {
+		return $this->random_color_part() . $this->random_color_part() . $this->random_color_part();
 	}
 	function has_schedule($id)
 	{
