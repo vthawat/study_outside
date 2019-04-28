@@ -12,7 +12,7 @@
 							    <span class="fa fa-cog fa-fw"></span><span class="caret"></span>
 							  </button>
 							  <ul class="dropdown-menu">
-                                <li><a href="<?=base_url('staff/trip/student/'.$trips->id)?>"><span class="fa fa-fw fa-user"></span>รายชื่อนักศึกษา</li>
+                                <li><a href="<?=base_url('staff/trip/student/'.$trips->id)?>"><span class="fa fa-fw fa-user"></span>รายชื่อผู้ร่วมเดินทาง</li>
                                 <li role="separator" class="divider"></li>
                                 <?php if($this->study_trip->check_trip_status($trips->status)==1):?>
                                 <li><a href="<?=base_url('staff/trip/waypoint/'.$trips->id)?>" class="text-green"><span class="fa fa-fw fa-map-marker"></span>สร้างเส้นทาง</a></li>
@@ -33,7 +33,7 @@
   <ul class="nav nav-tabs trip-tabs" role="tablist">
     <li role="presentation" class="active"><a href="#schedule" aria-controls="schedule" role="tab" data-toggle="tab"><i class="fa fa-fw fa-table"></i>กำหนดการเดินทาง</a></li>
     <li role="presentation"><a href="#weather" aria-controls="weather" role="tab" data-toggle="tab"><i class="fa fa-fw fa-cloud"></i>พยากรณ์อากาศ</a></li>
-    <li role="presentation"><a href="#students" aria-controls="students" role="tab" data-toggle="tab"><i class="fa fa-fw fa-user"></i>รายชื่อนักศึกษา</a></li>
+    <li role="presentation"><a href="#students" aria-controls="students" role="tab" data-toggle="tab"><i class="fa fa-fw fa-user"></i>รายชื่อผู้ร่วมเดินทาง</a></li>
 
   </ul>
   <!-- Tab panes -->
@@ -46,7 +46,7 @@
         <?php endif?>
     </div>
     <div role="tabpanel" class="tab-pane" id="weather"><?=$force_casts?></div>
-    <div role="tabpanel" class="tab-pane" id="students">...</div>
+    <div role="tabpanel" class="tab-pane" id="students"><?=$student_list?></div>
 
   </div>
 

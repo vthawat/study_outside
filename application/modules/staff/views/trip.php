@@ -23,7 +23,7 @@
 							    <span class="fa fa-cog fa-fw"></span><span class="caret"></span>
 							  </button>
 							  <ul class="dropdown-menu">
-                                <li><a href="<?=base_url('staff/trip/student/'.$item->id)?>"><span class="fa fa-fw fa-user"></span>รายชื่อนักศึกษา</li>
+                                <li><a href="<?=base_url('staff/trip/student/'.$item->id)?>"><span class="fa fa-fw fa-user"></span>รายชื่อผู้ร่วมเดินทาง</li>
                                 <li role="separator" class="divider"></li>
                                 <?php if($this->study_trip->check_trip_status($item->status)==1):?>
                                 <li><a href="<?=base_url('staff/trip/waypoint/'.$item->id)?>" class="text-green"><span class="fa fa-fw fa-map-marker"></span>สร้างเส้นทาง</a></li>

@@ -61,6 +61,8 @@ class Staff extends CI_Controller {
 	}
 	function calendar_trip_details($id=null)
 	{	
+		$data['student_list']=$this->study_trip->get_student_list_by_trip_id($id);
+		$data['student_list']=$this->load->view('student_list_view',$data,TRUE);
 		$data['trips']=$this->study_trip->get_by_id($id);
 		$data['schedule']=$this->study_trip->get_schedule_plan_by_trip_id($id);
 		$data['force_casts']=$this->load->view('schedule_weather_json_to_html',$data,TRUE);
@@ -235,41 +237,17 @@ class Staff extends CI_Controller {
 
 			}
 			else show_error("ไม่พบไฟล์ที่จะ Upload");
-		/*		$inputFileName = realpath('excel_student/test.xlsx');
-				$spreadsheet = \PhpOffice\PhpSpreadsheet\IOFactory::load($inputFileName);
-				$data['sheetData']=$spreadsheet->getActiveSheet();
-			
-				$rows = [];
-				$r=0;
-				foreach ($sheetData->getRowIterator() AS $row) {
-					if($r>1)
-					{
-				//	print '<tr>';
-					$cellIterator = $row->getCellIterator();
-					$cellIterator->setIterateOnlyExistingCells(FALSE); // This loops through all cells,
-					$cells = [];
-					foreach ($cellIterator as $cell) {
-						
-						$cells[] = $cell->getValue();
-					//	print '<td>'.$cell->getValue().'</td>';
-		
-					}
-					//$rows[] = $cells;
-					//print_r($rows);
-				//	print '</tr>';
-				}
-					$r++;
-				}
-*/
 
 			break;
-			case 'student':  /***  รายชื่อนักศึกษา */
 
+			case 'student':  /***  จัดการรายชื่อนักศึกษา */
+
+				$this->template->add_css($this->load->view('css/student-upload.css',null,TRUE),'embed',TRUE);
 				$data['student_list']=$this->study_trip->get_student_list_by_trip_id($id);
 				$title='รายวิชา '.$this->ftps->get_subject($this->study_trip->get_by_id($id)->subject_list_id)->subject_code.' '.$this->ftps->get_subject($this->study_trip->get_by_id($id)->subject_list_id)->subject_name;
-				$this->template->write('page_header','<a href="'.base_url('staff/trip').'"><i class="fa fa-fw fa-calendar-check-o"></i>ความต้องการเดินทาง</a><i class="fa fa-fw fa-angle-double-right"></i>รายชื่อนักศึกษา');
+				$this->template->write('page_header','<a href="'.base_url('staff/trip').'"><i class="fa fa-fw fa-calendar-check-o"></i>ความต้องการเดินทาง</a><i class="fa fa-fw fa-angle-double-right"></i>รายชื่อผู้ร่วมเดินทาง');
 				$data['content']=['title'=>$title,
-				'toolbar'=>'<form method="post" action="'.base_url("staff/trip/upload_student/".$id).'" enctype="multipart/form-data"><div class="form-group"><input class="form-control-file" type="file" accept="application/vnd.openxmlformats-officedocument.spreadsheetml.sheet, application/vnd.ms-excel" name="excel_student" required /><button type="submit" name="import" class="btn icon-btn btn-success upload-excel"><span class="btn-glyphicon fa fa-save img-circle text-success"></span>Upload</button></div></form>',
+				'toolbar'=>'<form method="post" action="'.base_url("staff/trip/upload_student/".$id).'" enctype="multipart/form-data"><div class="form-group"><input class="form-control-file" type="file" accept="application/vnd.openxmlformats-officedocument.spreadsheetml.sheet, application/vnd.ms-excel" name="excel_student" required /><button type="submit" name="import" class="btn icon-btn btn-warning upload-excel"><span class="btn-glyphicon fa fa-file-excel-o img-circle text-black"></span>Upload</button> <a class="btn icon-btn btn-primary" href="'.base_url('staff/calendar').'"><span class="btn-glyphicon fa fa-calendar-o img-circle text-blue"></span>ปฏิทินการเดินทาง</a> <a class="btn icon-btn btn-success add-new" href="'.base_url('staff/student/new/'.$id).'"><span class="btn-glyphicon fa fa-plus img-circle text-success"></span>เพิ่มรายชื่อ</a></div></form>',
 				'color'=>'primary',
 				'detail'=>$this->load->view('student',$data,TRUE)];
 				$this->template->write_view('content','contents',$data);
