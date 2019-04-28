@@ -184,6 +184,9 @@ class Staff extends CI_Controller {
 				$this->template->write_view('content','contents',$data);
 
 			break;
+			case 'upload_student':
+						
+			break;
 			case 'student':  /***  รายชื่อนักศึกษา */
 
 			$inputFileName = realpath('excel_student/test.xlsx');

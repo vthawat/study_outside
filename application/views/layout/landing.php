@@ -6,33 +6,33 @@
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <title><?=$title?></title>
     <!-- Bootstrap -->
-    <link href="<?=prep_url($this->config->item('uiux_path').'/web/vendors/bent/css/bootstrap.min.css')?>" rel="stylesheet">
+    <link href="<?=base_url('uiux/web/vendors/bent/css/bootstrap.min.css')?>" rel="stylesheet">
 
     <!-- Owl Carousel Assets -->
-    <link href="<?=prep_url($this->config->item('uiux_path').'/web/vendors/bent/css/owl.carousel.css')?>" rel="stylesheet">
-    <link href="<?=prep_url($this->config->item('uiux_path').'/web/vendors/bent/css/owl.theme.css')?>" rel="stylesheet">
+    <link href="<?=base_url('uiux/web/vendors/bent/css/owl.carousel.css')?>" rel="stylesheet">
+    <link href="<?=base_url('uiux/web/vendors/bent/css/owl.theme.css')?>" rel="stylesheet">
 
     <!-- Pixeden Icon Font -->
-    <link rel="stylesheet" href="<?=prep_url($this->config->item('uiux_path').'/web/vendors/bent/css/Pe-icon-7-stroke.css')?>">
+    <link rel="stylesheet" href="<?=base_url('uiux/web/vendors/bent/css/Pe-icon-7-stroke.css')?>">
 
     <!-- Font Awesome -->
-    <link href="<?=prep_url($this->config->item('uiux_path').'/web/vendors/Font-Awesome/css/font-awesome.min.css')?>" rel="stylesheet">
+    <link href="<?=base_url('uiux/web/vendors/Font-Awesome/css/font-awesome.min.css')?>" rel="stylesheet">
 
 
     <!-- PrettyPhoto -->
-    <link href="<?=prep_url($this->config->item('uiux_path').'/web/vendors/bent/css/prettyPhoto.css')?>" rel="stylesheet">
+    <link href="<?=base_url('uiux/web/vendors/bent/css/prettyPhoto.css')?>" rel="stylesheet">
     
     <?=$_scripts?>
     <!-- Favicon -->
-<link rel="shortcut icon" href="<?=prep_url($this->config->item('uiux_path'))?>/web/vendors/ecs/images/app_icons/<?=$this->config->item('uiux_app_icon')?>">
+<link rel="shortcut icon" href="<?=base_url('uiux')?>/web/vendors/ecs/images/app_icons/<?=$this->config->item('uiux_app_icon')?>">
 
     <!-- Style -->
-    <link href="<?=prep_url($this->config->item('uiux_path').'/web/vendors/bent/css/style.css')?>" rel="stylesheet">
-    <link href="<?=prep_url($this->config->item('uiux_path'))?>/web/vendors/bootsnipp/custom.css" rel="stylesheet" type="text/css" />
+    <link href="<?=base_url('uiux/web/vendors/bent/css/style.css')?>" rel="stylesheet">
+    <link href="<?=base_url('uiux/web/vendors/bootsnipp/custom.css')?>" rel="stylesheet" type="text/css" />
 
-    <link href="<?=prep_url($this->config->item('uiux_path').'/web/vendors/bent/css/animate.css')?>" rel="stylesheet">
+    <link href="<?=base_url('uiux/web/vendors/bent/css/animate.css')?>" rel="stylesheet">
     <!-- Responsive CSS -->
-    <link href="<?=prep_url($this->config->item('uiux_path').'/web/vendors/bent/css/responsive.css')?>" rel="stylesheet">
+    <link href="<?=base_url('uiux/web/vendors/bent/css/responsive.css')?>" rel="stylesheet">
     <!-- HTML5 Shim and Respond.js IE8 support of HTML5 elements and media queries -->
     <!-- WARNING: Respond.js doesn't work if you view the page via file:// -->
     <!--[if lt IE 9]>
@@ -105,19 +105,19 @@
 ============================== -->
 
 
-    <script src="<?=prep_url($this->config->item('uiux_path').'/web/vendors/bent/js/jquery.min.js')?>"></script>
-    <script src="<?=prep_url($this->config->item('uiux_path').'/web/vendors/bent/js/bootstrap.min.js')?>"></script>
-    <script src="<?=prep_url($this->config->item('uiux_path').'/web/vendors/bent/js/owl.carousel.js')?>"></script>
-    <script src="<?=prep_url($this->config->item('uiux_path').'/web/vendors/bent/js/jquery.fitvids.js')?>"></script>
-    <script src="<?=prep_url($this->config->item('uiux_path').'/web/vendors/bent/js/smoothscroll.js')?>"></script>
-    <script src="<?=prep_url($this->config->item('uiux_path').'/web/vendors/bent/js/jquery.parallax-1.1.3.js')?>"></script>
-    <script src="<?=prep_url($this->config->item('uiux_path').'/web/vendors/bent/js/jquery.prettyPhoto.js')?>"></script>
-    <script src="<?=prep_url($this->config->item('uiux_path').'/web/vendors/bent/js/jquery.ajaxchimp.min.js')?>"></script>
-    <script src="<?=prep_url($this->config->item('uiux_path').'/web/vendors/bent/js/jquery.ajaxchimp.langs.js')?>"></script>
-    <script src="<?=prep_url($this->config->item('uiux_path').'/web/vendors/bent/js/wow.min.js')?>"></script>
-    <script src="<?=prep_url($this->config->item('uiux_path').'/web/vendors/bent/js/waypoints.min.js')?>"></script>
-    <script src="<?=prep_url($this->config->item('uiux_path').'/web/vendors/bent/js/jquery.counterup.min.js')?>"></script>
-    <script src="<?=prep_url($this->config->item('uiux_path').'/web/vendors/bent/js/script.js')?>"></script>
+    <script src="<?=base_url('uiux/web/vendors/bent/js/jquery.min.js')?>"></script>
+    <script src="<?=base_url('uiux/web/vendors/bent/js/bootstrap.min.js')?>"></script>
+    <script src="<?=base_url('uiux/web/vendors/bent/js/owl.carousel.js')?>"></script>
+    <script src="<?=base_url('uiux/web/vendors/bent/js/jquery.fitvids.js')?>"></script>
+    <script src="<?=base_url('uiux/web/vendors/bent/js/smoothscroll.js')?>"></script>
+    <script src="<?=base_url('uiux/web/vendors/bent/js/jquery.parallax-1.1.3.js')?>"></script>
+    <script src="<?=base_url('uiux/web/vendors/bent/js/jquery.prettyPhoto.js')?>"></script>
+    <script src="<?=base_url('uiux/web/vendors/bent/js/jquery.ajaxchimp.min.js')?>"></script>
+    <script src="<?=base_url('uiux/web/vendors/bent/js/jquery.ajaxchimp.langs.js')?>"></script>
+    <script src="<?=base_url('uiux/web/vendors/bent/js/wow.min.js')?>"></script>
+    <script src="<?=base_url('uiux/web/vendors/bent/js/waypoints.min.js')?>"></script>
+    <script src="<?=base_url('uiux/web/vendors/bent/js/jquery.counterup.min.js')?>"></script>
+    <script src="<?=base_url('uiux/web/vendors/bent/js/script.js')?>"></script>
 </body>
 
 </html>
