@@ -1,8 +1,7 @@
 <table class="table">
 	<thead>
-		<th>รหัสนักศึกษา</th>
-		<th>คำนำหน้า</th>
-		<th>ชื่อ</th>
+		<th width="120px">รหัสนักศึกษา</th>
+		<th width="200px">ชื่อ</th>
 		<th>นามสกุล</th>
 	</thead>
 	<tbody>
