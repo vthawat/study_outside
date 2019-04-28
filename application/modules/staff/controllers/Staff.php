@@ -30,6 +30,7 @@ class Staff extends CI_Controller {
 		$this->template->add_css($this->load->view('guest/css/guest-syle.css',null,TRUE),'embed',TRUE);
 		$this->template->write_view('sidebar','sidebar');
 	}
+
 	public function index()
 	{	
 		//$this->template->render();
@@ -181,6 +182,23 @@ class Staff extends CI_Controller {
 				'color'=>'primary',
 				'detail'=>$this->load->view('schedule_custom',$data,TRUE)];
 				$this->template->write_view('content','contents',$data);
+
+			break;
+			case 'student':  /***  รายชื่อนักศึกษา */
+
+			$inputFileName = realpath('excel_student/test.xlsx');
+			$spreadsheet = \PhpOffice\PhpSpreadsheet\IOFactory::load($inputFileName);
+			
+				$data['sheetData']=$spreadsheet->getActiveSheet();
+			//	exit(print_r($data['sheetData']));
+				$data['trips']=$this->study_trip->get_by_id($id);
+				$title='รายวิชา '.$this->ftps->get_subject($this->study_trip->get_by_id($id)->subject_list_id)->subject_code.' '.$this->ftps->get_subject($this->study_trip->get_by_id($id)->subject_list_id)->subject_name;
+				$this->template->write('page_header','<a href="'.base_url('staff/trip').'"><i class="fa fa-fw fa-calendar-check-o"></i>ความต้องการเดินทาง</a><i class="fa fa-fw fa-angle-double-right"></i>รายชื่อนักศึกษา');
+				$data['content']=['title'=>$title,
+				'color'=>'primary',
+				'detail'=>$this->load->view('student',$data,TRUE)];
+				$this->template->write_view('content','contents',$data);
+				
 
 			break;
  

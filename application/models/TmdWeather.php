@@ -6,22 +6,21 @@ class TmdWeather extends CI_Model
 	function __construct()
 	{
 		parent::__construct();
-        $this->load->library('guzzle');
+       // $this->load->library('guzzle');
         $this->load->config('tmd_weather');
 		$this->access_token=$this->config->item('tmd_access_token');
 
     }
     function getDailyFocecasts($date=null,$lat=null,$lon=null)
 	{
-       // print $this->access_token;
+
         $headers=array();
         $bodys=array();
         $url=$this->config->item('tmd_api_focecasts_locatin_based').'?fields=tc_max,cond,rain,rh&duration=1&date='.$date.'&lat='.$lat.'&lon='.$lon;
 		// via header parameter
         $headers['authorization']='Bearer '.$this->access_token;
         $headers['accept']='application/json';
-		//$headers['Content-Type']='application/json';
-       // print $url;
+
 
 		$client = new GuzzleHttp\Client();
 
