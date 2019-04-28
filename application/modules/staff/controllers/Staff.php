@@ -184,24 +184,96 @@ class Staff extends CI_Controller {
 				$this->template->write_view('content','contents',$data);
 
 			break;
-			case 'upload_student':
+			case 'upload_student':  /** upload excel student list */
+			if (isset($_POST["import"]))
+			{
+				$allowedFileType = ['application/vnd.ms-excel','text/xls','text/xlsx','application/vnd.openxmlformats-officedocument.spreadsheetml.sheet'];
+				if(in_array($_FILES["excel_student"]["type"],$allowedFileType))
+				{
+						// start upload file
+						$targetPath = 'excel_student/'.$_FILES['excel_student']['name'];
+						move_uploaded_file($_FILES['excel_student']['tmp_name'], $targetPath);
+
+						// start read from excel file
+						$inputFileName = realpath($targetPath);
+				$spreadsheet = \PhpOffice\PhpSpreadsheet\IOFactory::load($inputFileName);
+				$sheetData=$spreadsheet->getActiveSheet();
+					 // drop all record studen_list by id
+					 $this->study_trip->delete_all_student_list_by_trip_id($id);
+
+
+					 $r=0;
+					 foreach ($sheetData->getRowIterator() AS $row)
+					 {
+								if($r>1)
+								{
+									$cellIterator = $row->getCellIterator();
+									$cellIterator->setIterateOnlyExistingCells(FALSE); // This loops through all cells,
+									$student_item=[]; // set data for keep new row
+									foreach ($cellIterator as $col=>$cell)
+												{
+													
+															$student_item['period_trip_id']=$id;
+															if($col=="A") $student_item['std_code']=$cell->getValue();
+															if($col=="B") $student_item['first_name']=$cell->getValue();
+															if($col=="C") $student_item['last_name']=$cell->getValue();
+															if($col=="D") $student_item['comment']=$cell->getValue();
+															
+												}
+											//	print_r($student_item);	
+											// insert 
+											$this->study_trip->post_student_list($student_item);
+								
+								}
+						$r++;
+					}
+					// finish import
+					redirect(base_url('staff/trip/student/'.$id));
+
+				}
+				else show_error("ต้องเป็นไฟล์ Excel,*.xls , *.xlsx");
+
+			}
+			else show_error("ไม่พบไฟล์ที่จะ Upload");
+		/*		$inputFileName = realpath('excel_student/test.xlsx');
+				$spreadsheet = \PhpOffice\PhpSpreadsheet\IOFactory::load($inputFileName);
+				$data['sheetData']=$spreadsheet->getActiveSheet();
+			
+				$rows = [];
+				$r=0;
+				foreach ($sheetData->getRowIterator() AS $row) {
+					if($r>1)
+					{
+				//	print '<tr>';
+					$cellIterator = $row->getCellIterator();
+					$cellIterator->setIterateOnlyExistingCells(FALSE); // This loops through all cells,
+					$cells = [];
+					foreach ($cellIterator as $cell) {
 						
+						$cells[] = $cell->getValue();
+					//	print '<td>'.$cell->getValue().'</td>';
+		
+					}
+					//$rows[] = $cells;
+					//print_r($rows);
+				//	print '</tr>';
+				}
+					$r++;
+				}
+*/
+
 			break;
 			case 'student':  /***  รายชื่อนักศึกษา */
 
-			$inputFileName = realpath('excel_student/test.xlsx');
-			$spreadsheet = \PhpOffice\PhpSpreadsheet\IOFactory::load($inputFileName);
-			
-				$data['sheetData']=$spreadsheet->getActiveSheet();
-			//	exit(print_r($data['sheetData']));
-				$data['trips']=$this->study_trip->get_by_id($id);
+				$data['student_list']=$this->study_trip->get_student_list_by_trip_id($id);
 				$title='รายวิชา '.$this->ftps->get_subject($this->study_trip->get_by_id($id)->subject_list_id)->subject_code.' '.$this->ftps->get_subject($this->study_trip->get_by_id($id)->subject_list_id)->subject_name;
 				$this->template->write('page_header','<a href="'.base_url('staff/trip').'"><i class="fa fa-fw fa-calendar-check-o"></i>ความต้องการเดินทาง</a><i class="fa fa-fw fa-angle-double-right"></i>รายชื่อนักศึกษา');
 				$data['content']=['title'=>$title,
+				'toolbar'=>'<form method="post" action="'.base_url("staff/trip/upload_student/".$id).'" enctype="multipart/form-data"><div class="form-group"><input class="form-control-file" type="file" accept="application/vnd.openxmlformats-officedocument.spreadsheetml.sheet, application/vnd.ms-excel" name="excel_student" required /><button type="submit" name="import" class="btn icon-btn btn-success upload-excel"><span class="btn-glyphicon fa fa-save img-circle text-success"></span>Upload</button></div></form>',
 				'color'=>'primary',
 				'detail'=>$this->load->view('student',$data,TRUE)];
 				$this->template->write_view('content','contents',$data);
-				
+			
 
 			break;
  

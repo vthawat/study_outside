@@ -76,6 +76,32 @@ class Study_trip extends CI_Model
 		return $result;
 
 	}
+	function get_student_list_by_trip_id($id)
+	{
+		$this->db->where('period_trip_id',$id);
+		$result=$this->db->get('student_list_name')->result();
+		return $result;
+
+	}
+	function post_student_list($data)
+	{
+		return $this->db->insert('student_list_name',$data);
+	}
+	function put_student_list($data)
+	{
+		$this->db->where('id',$id);
+		return $this->db->update('student_list_name',$data);
+	}
+	function delete_student_list_by_id($id)
+	{
+		$this->db->where('id',$id);
+		return $this->db->delete('student_list_name');
+	}
+	function delete_all_student_list_by_trip_id($id)
+	{
+		$this->db->where('period_trip_id',$id);
+		return $this->db->delete('student_list_name');
+	}
 	function get_trip_show_oncalendar()
 	{
 		$json_trips=array();
