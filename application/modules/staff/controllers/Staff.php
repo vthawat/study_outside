@@ -35,24 +35,13 @@ class Staff extends CI_Controller {
 		//$this->template->render();
 		redirect(base_url('staff/calendar'));
 	}
-	function test()
-	{
-		$tmd_focecasts=$this->tmdweather->getDailyFocecasts("2019-04-28",7.5353135,99.93826739999997);
-		print_r($tmd_focecasts);
-		 print "<br>";
-		 print $tmd_focecasts->WeatherForecasts[0]->forecasts[0]->data->cond;
-	
 
-	}
 	function calendar()
 	{
 		
 		$this->template->write('page_header','<i class="fa fa-fw fa-calendar"></i>ปฏิทินการเดินทาง');
-		/*$this->template->add_css('uiux/web/vendors/AdminLTE/plugins/fullcalendar/fullcalendar.min.css');
-		$this->template->add_css('uiux/web/vendors/AdminLTE/plugins/fullcalendar/fullcalendar.min.css');
-		$this->template->add_js('https://cdnjs.cloudflare.com/ajax/libs/moment.js/2.11.2/moment.min.js','link');
-		$this->template->add_js('uiux/web/vendors/AdminLTE/plugins/fullcalendar/fullcalendar.min.js');
-		*/
+		$this->template->add_js('assets/pace/pace.min.js');
+		$this->template->add_css($this->load->view('css/pace.css',null,TRUE),'embed',TRUE);
 		$this->template->add_js('assets/fullcalendar-3.10.0/lib/moment.min.js');
 		$this->template->add_js('assets/fullcalendar-3.10.0/fullcalendar.min.js');
 		$this->template->add_js('assets/fullcalendar-3.10.0/locale/th.js');
@@ -70,8 +59,7 @@ class Staff extends CI_Controller {
             ->set_output($this->study_trip->get_trip_show_oncalendar());
 	}
 	function calendar_trip_details($id=null)
-	{
-	//	$this->template->add_css($this->load->view('css/tabs.css',null,TRUE),'embed',TRUE);
+	{	
 		$data['trips']=$this->study_trip->get_by_id($id);
 		$data['schedule']=$this->study_trip->get_schedule_plan_by_trip_id($id);
 		$data['force_casts']=$this->load->view('schedule_weather_json_to_html',$data,TRUE);
@@ -80,7 +68,6 @@ class Staff extends CI_Controller {
 											"color"=>"success",
 											"detail"=>$this->load->view('trip_details_tabs',$data,TRUE)];
 		print $this->load->view('contents',$data,TRUE);
-	//	$this->template->write_view('content','contents',$data);
 	}
 	function trip($action=null,$id=null)
 	{

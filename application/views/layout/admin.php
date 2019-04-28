@@ -4,21 +4,21 @@
     <meta charset="UTF-8">
     <title><?=$title?></title>
     <meta content='width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no' name='viewport'>
-    <link rel="shortcut icon" href="<?=prep_url($this->config->item('uiux_path'))?>/web/vendors/ecs/images/app_icons/<?=$this->config->item('uiux_app_icon')?>">
+    <link rel="shortcut icon" href="<?=base_url('uiux')?>/web/vendors/ecs/images/app_icons/<?=$this->config->item('uiux_app_icon')?>">
     <!-- Bootstrap 3.3.4 -->
-    <link href="<?=prep_url($this->config->item('uiux_path'))?>/web/vendors/bootstrap/dist/css/bootstrap.min.css" rel="stylesheet" type="text/css" />
+    <link href="<?=base_url('uiux')?>/web/vendors/bootstrap/dist/css/bootstrap.min.css" rel="stylesheet" type="text/css" />
     <!-- Font Awesome Icons -->
-    <link href="<?=prep_url($this->config->item('uiux_path'))?>/web/vendors/Font-Awesome/css/font-awesome.min.css" rel="stylesheet" type="text/css" />
+    <link href="<?=base_url('uiux')?>/web/vendors/Font-Awesome/css/font-awesome.min.css" rel="stylesheet" type="text/css" />
     <!-- Ionicons -->
    
     <!-- Theme style -->
-    <link href="<?=prep_url($this->config->item('uiux_path'))?>/web/vendors/AdminLTE/dist/css/AdminLTE.min.css" rel="stylesheet" type="text/css" />
+    <link href="<?=base_url('uiux')?>/web/vendors/AdminLTE/dist/css/AdminLTE.min.css" rel="stylesheet" type="text/css" />
     <!-- AdminLTE Skins. We have chosen the skin-blue for this starter
           page. However, you can choose any other skin. Make sure you
           apply the skin class to the body tag so the changes take effect.
     -->
-    <link href="<?=prep_url($this->config->item('uiux_path'))?>/web/vendors/AdminLTE/dist/css/skins/skin-green.min.css" rel="stylesheet" type="text/css" />
-    <link href="<?=prep_url($this->config->item('uiux_path'))?>/web/vendors/bootsnipp/custom.css" rel="stylesheet" type="text/css" />
+    <link href="<?=base_url('uiux')?>/web/vendors/AdminLTE/dist/css/skins/skin-green.min.css" rel="stylesheet" type="text/css" />
+    <link href="<?=base_url('uiux')?>/web/vendors/bootsnipp/custom.css" rel="stylesheet" type="text/css" />
 	<?=$_styles?>
     <!-- HTML5 Shim and Respond.js IE8 support of HTML5 elements and media queries -->
     <!-- WARNING: Respond.js doesn't work if you view the page via file:// -->
@@ -29,13 +29,13 @@
         <!-- REQUIRED JS SCRIPTS -->
 
     <!-- jQuery 2.1.4 -->
-    <script src="<?=prep_url($this->config->item('uiux_path'))?>/web/vendors/AdminLTE/plugins/jQuery/jQuery-2.2.0.min.js"></script>
+    <script src="<?=base_url('uiux')?>/web/vendors/AdminLTE/plugins/jQuery/jQuery-2.2.0.min.js"></script>
     <!-- Bootstrap 3.3.2 JS -->
-    <script src="<?=prep_url($this->config->item('uiux_path'))?>/web/vendors/bootstrap/dist/js/bootstrap.min.js" type="text/javascript"></script>
+    <script src="<?=base_url('uiux')?>/web/vendors/bootstrap/dist/js/bootstrap.min.js" type="text/javascript"></script>
     <!-- SlimScroll -->
-    <script src="<?=prep_url($this->config->item('uiux_path'))?>/web/vendors/AdminLTE/plugins/slimScroll/jquery.slimscroll.min.js" type="text/javascript"></script>
+    <script src="<?=base_url('uiux')?>/web/vendors/AdminLTE/plugins/slimScroll/jquery.slimscroll.min.js" type="text/javascript"></script>
     <!-- AdminLTE App -->
-    <script src="<?=prep_url($this->config->item('uiux_path'))?>/web/vendors/AdminLTE/dist/js/app.min.js" type="text/javascript"></script>
+    <script src="<?=base_url('uiux')?>/web/vendors/AdminLTE/dist/js/app.min.js" type="text/javascript"></script>
   	<?=$_scripts?>
   </head>
   <!--

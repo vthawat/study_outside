@@ -26,6 +26,7 @@ $(function () {
       {
         // ** load trip detail on modal *** // 
         var trip_detail_url="<?=base_url('staff/calendar_trip_details/"+calEvent.id+"')?>";
+       
         $('.modal-content').load(trip_detail_url,function(){
 
            $('.modal-trip-detail').modal('show');
