@@ -92,7 +92,7 @@ class Study_trip extends CI_Model
 	{
 		return $this->db->insert('student_list_name',$data);
 	}
-	function put_student_list($data)
+	function put_student_list($data,$id)
 	{
 		$this->db->where('id',$id);
 		return $this->db->update('student_list_name',$data);

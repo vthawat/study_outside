@@ -781,8 +781,14 @@ function place_rest_detail($place_id=null)
 				if($this->study_trip->put_schedule($data)) print "success";
 				else print 'fail';
 
-				
-				
+			break;
+
+			case 'student':
+				$data=$this->input->post();
+				$period_trip_id=$this->study_trip->get_student_list_by_id($id)->period_trip_id;
+				if($this->study_trip->put_student_list($data,$id))
+					redirect(base_url('staff/trip/student/'.$period_trip_id));
+				else show_error('ไม่สามารถบันทึกได้');
 			break;
 		
 			default;
