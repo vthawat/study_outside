@@ -83,6 +83,11 @@ class Study_trip extends CI_Model
 		return $result;
 
 	}
+	function get_student_list_by_id($id)
+	{
+		$this->db->where('id',$id);
+		return $this->db->get('student_list_name')->row();
+	}
 	function post_student_list($data)
 	{
 		return $this->db->insert('student_list_name',$data);

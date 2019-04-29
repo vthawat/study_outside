@@ -72,6 +72,31 @@ class Staff extends CI_Controller {
 											"detail"=>$this->load->view('trip_details_tabs',$data,TRUE)];
 		print $this->load->view('contents',$data,TRUE);
 	}
+	function student($action=null,$id)
+	{
+		switch($action)
+		{
+			case 'new':
+				$this->template->write('page_header','<a href="'.base_url('staff/trip/student/'.$id).'"><i class="fa fa-fw fa-calendar-check-o"></i>รายชื่อผู้ร่วมเดินทาง</a><i class="fa fa-fw fa-angle-double-right"></i>เพิ่มใหม่');
+				$data['action']=base_url('staff/post/student/'.$id);
+				$data['content']=['title'=>'เพิ่มรายชื่อผู้ร่วมเดินทาง',
+								  'detail'=>$this->load->view('frm_student',$data,TRUE)];
+				$this->template->write_view('content','contents',$data);
+			
+				break;
+			case 'edit':
+					$data['edit_item']=$this->study_trip->get_student_list_by_id($id);
+					$this->template->write('page_header','<a href="'.base_url('staff/trip/student/'.$data['edit_item']->period_trip_id).'"><i class="fa fa-fw fa-calendar-check-o"></i>รายชื่อผู้ร่วมเดินทาง</a><i class="fa fa-fw fa-angle-double-right"></i>แก้ไข');
+					$data['action']=base_url('staff/put/student/'.$id);
+					$data['content']=['title'=>'แก้ไขรายชื่อผู้ร่วมเดินทาง',
+										'detail'=>$this->load->view('frm_student',$data,TRUE)];
+					$this->template->write_view('content','contents',$data);
+			break;
+		
+		}
+
+		$this->template->render();
+	}
 	function trip($action=null,$id=null)
 	{
 		switch($action)
@@ -637,7 +662,7 @@ function place_rest_detail($place_id=null)
 		$this->template->render();
 
 	}
-	function post($action=null,$study_place_id=null)
+	function post($action=null,$id=null)
 	{
 		switch($action)
 		{
@@ -662,8 +687,8 @@ function place_rest_detail($place_id=null)
 					else show_error('ไม่สามารถบันทึกได้');
 			break;			
 			case 'knowledge':
-				if($this->study_place->post_knowledge($study_place_id))
-				redirect(base_url('staff/place/'.$action.'/'.$study_place_id),'refresh');
+				if($this->study_place->post_knowledge($id))
+				redirect(base_url('staff/place/'.$action.'/'.$id),'refresh');
 				else show_error('ไม่สามารถบันทึกได้');
 			
 			break;
@@ -682,11 +707,18 @@ function place_rest_detail($place_id=null)
 			//print_r($this->input->post('schedule_json'));
 				$data=array();
 				$data['schedule_json']=json_encode($this->input->post('schedule_json'));
-				$data['period_trip_id']=$study_place_id;
+				$data['period_trip_id']=$id;
 				if($this->study_trip->post_schedule($data)) print "ok";
-				//else print 'no';
-				
-				
+				//else print 'no';			
+			break;
+			case 'student':
+					$data=$this->input->post();
+					$data['period_trip_id']=$id;
+					if($this->study_trip->post_student_list($data))
+					 redirect(base_url('staff/trip/student/'.$id));
+					else show_error('ไม่สามารถบันทึกได้');
+				//	print_r($data);
+
 			break;
 			default;
 			show_error('ไม่สามารถดำเนินการได้');
