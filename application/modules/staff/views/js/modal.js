@@ -21,7 +21,7 @@ $(document).ready(function(){
               .marker(function (map) {
                 return {
                   position: map.getCenter(),
-                  icon: 'http://maps.google.com/mapfiles/marker_green.png'
+                  icon: 'https://maps.google.com/mapfiles/marker_green.png'
                 };
               })
               .circle({
