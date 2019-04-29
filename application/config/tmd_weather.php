@@ -17,5 +17,7 @@ $config['tmd_access_token']='eyJ0eXAiOiJKV1QiLCJhbGciOiJSUzI1NiIsImp0aSI6IjFmMGR
 
 /** API Service URL  ข้อมูลพยากรณ์อากาศรายวัน เชิงพื้นที่ */
 
-$config['tmd_api_focecasts_locatin_based']='https://data.tmd.go.th/nwpapi/v1/forecast/location/daily/at';
+$config['tmd_api_forecasts_range_date']='https://data.tmd.go.th/nwpapi/v1/forecast/location/daily';
+
+$config['tmd_api_forecasts_locatin_based']='https://data.tmd.go.th/nwpapi/v1/forecast/location/daily/at';
 

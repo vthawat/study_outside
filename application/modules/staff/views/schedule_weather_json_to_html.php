@@ -34,8 +34,13 @@
          <?php if($schedule_items[0]->depart_place[$index]->end_place_id!=0):?>
          <?php $place_details=$this->study_place->get_by_id($schedule_items[0]->depart_place[$index]->end_place_id);?>
          <?php $tmd_focecasts=$this->tmdweather->getDailyFocecasts($this->study_trip->NextDay($trips->start_date,$days),$place_details->lat,$place_details->long);?>
-        <br><p><span class="text-blue">พยากรณ์อากาศ</span><br></span> <img src="<?=base_url('images/weather_icon/'.$tmd_focecasts->WeatherForecasts[0]->forecasts[0]->data->cond.'.png')?>"><?=$weather_cond[$tmd_focecasts->WeatherForecasts[0]->forecasts[0]->data->cond]?> อุณหภมิสูงสุด: <?=$tmd_focecasts->WeatherForecasts[0]->forecasts[0]->data->tc_max?> °C <br>
+        <br><p><span class="text-blue">พยากรณ์อากาศ</span><br>
+        <?php if(!empty($tmd_focecasts->WeatherForecasts[0]->forecasts)):?>
+        </span> <img src="<?=base_url('images/weather_icon/'.$tmd_focecasts->WeatherForecasts[0]->forecasts[0]->data->cond.'.png')?>"><?=$weather_cond[$tmd_focecasts->WeatherForecasts[0]->forecasts[0]->data->cond]?> อุณหภมิสูงสุด: <?=$tmd_focecasts->WeatherForecasts[0]->forecasts[0]->data->tc_max?> °C <br>
         ความชื้นสัมพัทธเฉลี่ย ที่ระดับพื้นผิว: <?=$tmd_focecasts->WeatherForecasts[0]->forecasts[0]->data->rh?> % ปริมาณฝนรวม 24 ชม. <?=$tmd_focecasts->WeatherForecasts[0]->forecasts[0]->data->rain?> มม.</p>
+        <?php else:?>
+        <div class="alert text-danger"><i class="fa fa-fw fa-exclamation"></i>ไม่พบข้อมูล เนื่องจากไม่สามารถพยากรณ์อากาศย้อนหลังได้</div>
+         <?php endif?>
         <?php endif?>
 <?php endif;?>
     </p></td>
