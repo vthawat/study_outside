@@ -4,14 +4,14 @@
   <head>
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <link rel="shortcut icon" href="<?=prep_url($CI->config->item('uiux_path'))?>/web/vendors/ecs/images/app_icons/<?=$CI->config->item('uiux_app_icon')?>">
+    <link rel="shortcut icon" href="<?=base_url('uiux')?>/web/vendors/ecs/images/app_icons/<?=$CI->config->item('uiux_app_icon')?>">
 
     <title>Error</title>
     <!-- Bootstrap core CSS -->
-     <link href="<?=prep_url($CI->config->item('uiux_path'))?>/web/vendors/bootstrap/dist/css/bootstrap.min.css" rel="stylesheet" type="text/css" />
-    <link href="<?=prep_url($CI->config->item('uiux_path'))?>/web/vendors/Font-Awesome/css/font-awesome.min.css" rel="stylesheet" type="text/css" />
+     <link href="<?=base_url('uiux')?>/web/vendors/bootstrap/dist/css/bootstrap.min.css" rel="stylesheet" type="text/css" />
+    <link href="<?=base_url('uiux')?>/web/vendors/Font-Awesome/css/font-awesome.min.css" rel="stylesheet" type="text/css" />
     <!-- Custom styles for this template -->
-   <link href="<?=prep_url($CI->config->item('uiux_path'))?>/web/vendors/ecs/css/error-404.css" rel="stylesheet" type="text/css" />
+   <link href="<?=base_url('uiux')?>/web/vendors/ecs/css/error-404.css" rel="stylesheet" type="text/css" />
   </head>
   <body>
 		<div class="container">
