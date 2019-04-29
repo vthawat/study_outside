@@ -12,6 +12,7 @@ $(document).ready(function(){
         // do something...
         $(function () {
             var center = place_location;
+            console.log(center);
             $('#gm-map')
               .gmap3({
                 center: center,
@@ -21,7 +22,7 @@ $(document).ready(function(){
               .marker(function (map) {
                 return {
                   position: map.getCenter(),
-                  icon: 'http://maps.google.com/mapfiles/marker_green.png'
+                  icon: 'https://maps.google.com/mapfiles/marker_green.png'
                 };
               })
               .circle({

@@ -12,6 +12,7 @@ $(document).ready(function(){
         // do something...
         $(function () {
             var center = place_location;
+            console.log(center);
             $('#gm-map')
               .gmap3({
                 center: center,

@@ -30,11 +30,7 @@ class Staff extends CI_Controller {
 		$this->template->add_css($this->load->view('guest/css/guest-syle.css',null,TRUE),'embed',TRUE);
 		$this->template->write_view('sidebar','sidebar');
 	}
-	function test()
-	{
 
-		$this->tmdweather->is_in_range_forecasts("2019-05-30");
-	}
 	public function index()
 	{	
 		//$this->template->render();
