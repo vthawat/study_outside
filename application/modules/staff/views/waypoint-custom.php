@@ -20,8 +20,9 @@
 <div id="map-waypoint" class="well"></div>
 <h4><i class="fa fa-fw fa-clock-o"></i>รายละเอียดของเส้นทางการเดินทาง สถานที่ ระยะทางและเวลา</h4>
 <div id="directions-panel"></div>
+<?php if($this->study_trip->check_trip_status($trips->status)>=2):?>
   <a class="btn icon-btn btn-success" href="<?=base_url('staff/trip/schedule/'.$trips->id)?>"><span class="btn-glyphicon fa fa-table img-circle text-green"></span>สร้างตารางกำหนดการเดินทาง</a>
-
+<?php endif?>
 </div>
 <div class="modal fade" tabindex="-1" role="dialog">
   <div class="modal-dialog" role="document">
