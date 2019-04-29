@@ -75,7 +75,7 @@
 <div id="map-waypoint" class="well"></div>
 <h4><i class="fa fa-fw fa-clock-o"></i>รายละเอียดของเส้นทางการเดินทาง สถานที่ ระยะทางและเวลา</h4>
 <div id="directions-panel"></div>
-<?php if($this->study_trip->check_trip_status($trips->status)==2):?>
+<?php if($this->study_trip->check_trip_status($trips->status)>=2):?>
   <a class="btn icon-btn btn-success" href="<?=base_url('staff/trip/schedule/'.$trips->id)?>"><span class="btn-glyphicon fa fa-table img-circle text-green"></span>สร้างตารางกำหนดการเดินทาง</a>
   <a class="btn icon-btn btn-warning" href="<?=base_url('staff/trip/custom_route/'.$trips->id)?>"><span class="btn-glyphicon fa fa-map img-circle text-warning"></span>ปรับแต่งเส้นทางด้วยตนเอง</a>
 <?php endif?>
