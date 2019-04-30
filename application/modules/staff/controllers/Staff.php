@@ -36,7 +36,12 @@ class Staff extends CI_Controller {
 		//$this->template->render();
 		redirect(base_url('staff/calendar'));
 	}
-
+	function test()
+	{
+		$mpdf = new \Mpdf\Mpdf();
+		$mpdf->WriteHTML('<h1>Hello world!</h1>');
+		$mpdf->Output();
+	}
 	function calendar()
 	{
 		

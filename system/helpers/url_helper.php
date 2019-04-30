@@ -443,7 +443,7 @@ if ( ! function_exists('prep_url'))
 	 */
 	function prep_url($str = '')
 	{
-		if ($str === 'http://' OR $str === '')
+		if ($str === 'https://' OR $str === '')
 		{
 			return '';
 		}
@@ -452,7 +452,7 @@ if ( ! function_exists('prep_url'))
 
 		if ( ! $url OR ! isset($url['scheme']))
 		{
-			return 'http://'.$str;
+			return 'https://'.$str;
 		}
 
 		return $str;
