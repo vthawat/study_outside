@@ -38,9 +38,30 @@ class Staff extends CI_Controller {
 	}
 	function test()
 	{
+		//print realpath('assets/fonts');
 		$mpdf = new \Mpdf\Mpdf();
-		$mpdf->WriteHTML('<h1>Hello world!</h1>');
+		$defaultConfig = (new Mpdf\Config\ConfigVariables())->getDefaults();
+		$fontDirs = $defaultConfig['fontDir'];
+
+		$defaultFontConfig = (new Mpdf\Config\FontVariables())->getDefaults();
+		$fontData = $defaultFontConfig['fontdata'];
+
+		$mpdf = new \Mpdf\Mpdf([
+			'fontDir' => array_merge($fontDirs, [
+				realpath('assets/fonts'),
+			]),
+			'fontdata' => $fontData + [
+				'thsarabun' => [
+					'R' => 'THSarabunNew.ttf',
+					'I' => 'THSarabunNew Italic.ttf',
+					'B' => 'THSarabunNew Bold.ttf',
+				]
+			],
+			'default_font' => 'thsarabun'
+		]);
+		$mpdf->WriteHTML('<h1>ทดสอบ Hello world!</h1>');
 		$mpdf->Output();
+		
 	}
 	function calendar()
 	{
