@@ -153,6 +153,16 @@ class Study_trip extends CI_Model
 	function random_color() {
 		return $this->random_color_part() . $this->random_color_part() . $this->random_color_part();
 	}
+	function has_car_record($id)
+	{
+		$this->db->where('period_trip_id',$id);
+		$this->db->where('record_html',NULL);
+		$result=$this->db->get('car_record')->row();
+		if(empty($result)) return FALSE;
+		elseif(empty($result->record_html)) return FALSE;
+		else return TRUE;
+
+	}
 	function has_schedule($id)
 	{
 		$result=$this->get_schedule_plan_by_trip_id($id);
