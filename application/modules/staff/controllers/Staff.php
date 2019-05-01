@@ -331,6 +331,11 @@ class Staff extends CI_Controller {
 		switch($action)
 		{
 		case 'create':
+		$data['trips']=$this->study_trip->get_by_id($id);
+		$data['content']=['title'=>'กรอกข้อมูลเพื่อสร้างบันทึกข้อความ',
+											'color'=>'success',
+											'detail'=>$this->load->view('frm_car_record',$data,TRUE)];
+		$this->template->write_view('content','contents',$data);
 		$this->template->write('page_header','<a href="'.base_url('staff/cars').'"><i class="fa fa-fw fa-car"></i>รายการขอใช้รถ</a><i class="fa fa-fw fa-angle-double-right"></i>สร้างบันทึกข้อความ');
 		break;
 
