@@ -105,8 +105,10 @@ class Study_trip extends CI_Model
 	}
 	function delete_student_list_by_id($id)
 	{
+		$trip_id=$this->get_student_list_by_id($id)->period_trip_id;
 		$this->db->where('id',$id);
-		return $this->db->delete('student_list_name');
+		if($this->db->delete('student_list_name')) return $trip_id;
+		else return FALSE;
 	}
 	function delete_all_student_list_by_trip_id($id)
 	{

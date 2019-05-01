@@ -872,6 +872,12 @@ function place_rest_detail($place_id=null)
 					redirect(base_url('staff/'.$action));
 				else show_error('ไม่สามารถลบได้');
 			break;
+			case 'student':
+			$is_delete=$this->study_trip->delete_student_list_by_id($id);
+				if($is_delete) 
+					redirect(base_url('staff/trip/'.$action.'/'.$is_delete));
+				else show_error('ไม่สามารถลบได้');
+			break;			
 			default;
 			show_error('ไม่สามารถดำเนินการได้');
 		}
