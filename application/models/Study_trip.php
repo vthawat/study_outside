@@ -69,6 +69,12 @@ class Study_trip extends CI_Model
 		return $trips;
 		//return $this->db->get($this->table)->row();
 	}
+	function get_by_status($status="")
+	{
+		$this->db->where('status',$status);
+		$result=$this->db->get($this->table)->result();
+		return $result;
+	}
 	function get_schedule_plan_by_trip_id($id)
 	{
 		$this->db->where('period_trip_id',$id);

@@ -311,6 +311,11 @@ class Staff extends CI_Controller {
 			break;
  
 		default: /** แสดงรายการความต้องการเดินทางทั้งหมด */
+		
+		$this->template->add_js('uiux/web/vendors/AdminLTE/plugins/datatables/jquery.dataTables.min.js');
+		$this->template->add_js('uiux/web/vendors/AdminLTE/plugins/datatables/dataTables.bootstrap.js');
+		$this->template->add_css('uiux/web/vendors/AdminLTE/plugins/datatables/dataTables.bootstrap.css');
+		$this->template->add_js($this->load->view('js/data-table-trips.js',null,TRUE),'embed',TRUE);
 		$data['Trip_list']=$this->study_trip->get_all();
 		$data['content']=['title'=>'รายการความต้องการเดินทาง',
 						  'color'=>'success',
@@ -324,6 +329,12 @@ class Staff extends CI_Controller {
 	function cars()
 	{
 
+		$data['trip_cars']=$this->study_trip->get_by_status('สร้างกำหนดการเดินทางแล้ว');
+		$data['content']=['title'=>'รายการบันทึกข้อความ การขอใช้รถในการเดินทาง',
+											'color'=>'primary',
+											'detail'=>$this->load->view('car_item_list',$data,TRUE)];
+		$this->template->write_view('content','contents',$data);
+		$this->template->write('page_header','<a href="trip"><i class="fa fa-fw fa-car"></i>ความต้องการเดินทาง</a><i class="fa fa-fw fa-angle-double-right"></i>ออกใบขอใช้รถ');
 		$this->template->render();
 		
 	}
