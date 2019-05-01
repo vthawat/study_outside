@@ -215,11 +215,15 @@ class Staff extends CI_Controller {
 			case 'custom_schedule': /** ปรับแต่งกำหนดการด้วยตนเอง */
 			$data['trips']=$this->study_trip->get_by_id($id);
 			
-			//$this->template->add_js('assets/froala/js/html2pdf.bundle.js');
-			$this->template->add_js('assets/froala/js/froala_editor.min.js');
+	
+			/*$this->template->add_js('assets/froala/js/froala_editor.min.js');
 			$this->template->add_js('assets/froala/js/froala_editor.pkgd.min.js');
 				$this->template->add_css('assets/froala/css/froala_editor.min.css');
 				$this->template->add_css('assets/froala/css/froala_editor.pkgd.min.css');
+				*/
+				$this->template->add_js('assets/summernote/summernote.min.js');
+				$this->template->add_css('assets/summernote/summernote.css');
+
 				$this->template->add_js($this->load->view('js/schedule-editor.js',$data,TRUE),'embed',TRUE);
 				$data['trips']=$this->study_trip->get_by_id($id);
 				$title='รายวิชา '.$this->ftps->get_subject($this->study_trip->get_by_id($id)->subject_list_id)->subject_code.' '.$this->ftps->get_subject($this->study_trip->get_by_id($id)->subject_list_id)->subject_name;
