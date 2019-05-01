@@ -326,15 +326,24 @@ class Staff extends CI_Controller {
 		}
 		$this->template->render();	
 	}
-	function cars()
+	function cars($action=null,$id=null)
 	{
+		switch($action)
+		{
+		case 'create':
+		$this->template->write('page_header','<a href="'.base_url('staff/cars').'"><i class="fa fa-fw fa-car"></i>รายการขอใช้รถ</a><i class="fa fa-fw fa-angle-double-right"></i>สร้างบันทึกข้อความ');
+		break;
 
+		default: /** แสดงรายขอใช้รถทั้งหมด */
 		$data['trip_cars']=$this->study_trip->get_by_status('สร้างกำหนดการเดินทางแล้ว');
 		$data['content']=['title'=>'รายการบันทึกข้อความ การขอใช้รถในการเดินทาง',
 											'color'=>'primary',
 											'detail'=>$this->load->view('car_item_list',$data,TRUE)];
 		$this->template->write_view('content','contents',$data);
-		$this->template->write('page_header','<a href="trip"><i class="fa fa-fw fa-car"></i>ความต้องการเดินทาง</a><i class="fa fa-fw fa-angle-double-right"></i>ออกใบขอใช้รถ');
+		
+		$this->template->write('page_header','<a href="trip"><i class="fa fa-fw fa-car"></i>ความต้องการเดินทาง</a><i class="fa fa-fw fa-angle-double-right"></i>ออกใบขอใช้รถ');	
+	
+	}
 		$this->template->render();
 		
 	}

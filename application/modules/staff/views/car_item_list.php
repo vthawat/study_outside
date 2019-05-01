@@ -10,10 +10,10 @@
 <tr>
     <td><?=$this->ftps->DateThai($item->start_date)?> <i class="fa fa-fw fa-angle-double-right"></i> <?=$this->ftps->DateThai($item->end_date)?></td>
     <td><?=$item->end_location?></td>
-    <?php if($this->study_trip->has_car_record($item->id)):?>
-    <td>สร้างบันทึกข้อความแล้ว</td>
+    <?php $use_car=0;if($this->study_trip->has_car_record($item->id)):?>
+    <td class="text-green"><?php $use_car=1?><i class="fa fa-fw fa-check"></i>ออกใบขอใช้รถแล้ว</td>
     <?php else:?>
-    <td class="text-red">ยังไม่สร้างบันทึกข้อความ</td>
+    <td class="text-red"><i class="fa fa-fw fa-ban"></i>ยังไม่ออกใบขอใช้รถ</td>
     <?php endif?>
     <td>
                     			<!-- Single button -->
@@ -21,6 +21,15 @@
 							  <button type="button" class="btn btn-default dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
 							    <span class="fa fa-cog fa-fw"></span><span class="caret"></span>
 							  </button>
+                              <ul class="dropdown-menu">
+                              <?php if($use_car==0):?>
+                              <li><a href="<?=base_url('staff/cars/create/'.$item->id)?>" class="text-green"><i class="fa fa-fw fa-bus"></i>ออกใบขอใช้รถ</a></li>
+                                <?php else:?>
+                                <li><a href="">เรียกดู</a></li>
+                                <li><a href="">แก้ไขข้อมูล</a></li>
+                                <li><a href="">แก้ไขร่างบันทึกข้อความ</a></li>
+                                <?php endif?>
+                              </ul>
     </td>
 </tr>
 <?php endforeach?>
