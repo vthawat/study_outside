@@ -7,7 +7,9 @@
 		margin-right: 2cm;
         margin-bottom: 2cm;
 	}
-
+    p.normal{
+        font-size:16px;
+    }
     .psu-logo{
         float: left;
     }
@@ -22,4 +24,5 @@
 <p>
 <img class="psu-logo" src="<?=realpath('images/logo-psu.jpg')?>"><span class="head-title">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;บันทึกข้อความ</span>
 </p>
+<p class="normal">ส่วนงาน คณะทรัพยากรธรรมชาติ ภาควิชาพัฒนาการเกษตร โทร 6121, 6122</p>
 </body>
