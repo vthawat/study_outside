@@ -59,6 +59,7 @@ class Staff extends CI_Controller {
 			],
 			'default_font' => 'thsarabun',
 			'mode' => 'utf-8',
+			'format' => 'A4',
 		]);
 		
 	//	$mpdf->SetAutoFont();

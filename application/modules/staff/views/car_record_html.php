@@ -9,18 +9,17 @@
 	}
 
     .psu-logo{
-      /*  float: left;*/
+        float: left;
     }
     .head-title{
-        margin-top:-10px;
         font-size:29px;
-        margin-left:15cm;
         font-weight:bold;
-        position:relative;
+        position:absolute;
+        margin-top:20cm;
     }
 </style>
-</head>
 <body>
 <p>
 <img class="psu-logo" src="<?=realpath('images/logo-psu.jpg')?>"><span class="head-title">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;บันทึกข้อความ</span>
 </p>
+</body>
