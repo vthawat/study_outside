@@ -57,9 +57,16 @@ class Staff extends CI_Controller {
 					'B' => 'THSarabunNew Bold.ttf',
 				]
 			],
-			'default_font' => 'thsarabun'
+			'default_font' => 'thsarabun',
+			'mode' => 'utf-8',
 		]);
-		$mpdf->WriteHTML('<h1>ทดสอบ Hello world!</h1>');
+		
+	//	$mpdf->SetAutoFont();
+			$html=$this->load->view('car_record_html',null,TRUE);
+		//	print $html;
+			$mpdf->WriteHTML($html);
+	//	$mpdf->WriteHTML('<h1>ทดสอบ Hello world!</h1>');
+
 		$mpdf->Output();
 		
 	}
@@ -330,7 +337,20 @@ class Staff extends CI_Controller {
 	{
 		switch($action)
 		{
+		case 'post':
+				//print_r($this->input->post());
+				$data=$this->input->post();
+				if($this->study_trip->post_booking_car($data,$id))
+				{
+					 // create html
+
+				}
+			//	redirect(base_url('staff/cars'));
+
+		break;
+
 		case 'create':
+		$data['action']=base_url('staff/cars/post/'.$id);
 		$data['trips']=$this->study_trip->get_by_id($id);
 		$data['content']=['title'=>'กรอกข้อมูลเพื่อสร้างบันทึกข้อความ',
 											'color'=>'success',
