@@ -15,7 +15,7 @@
   <div class="form-group">
     <label for="booking-title" class="col-sm-2 control-label">เรื่อง</label>
     <div class="col-sm-4">
-      <input type="text" class="form-control" name="booking_title" id="booking-title"  value="<?php if(!empty($edit_item)) print $edit_item->subject_name?>" required>
+      <input type="text" class="form-control" name="booking_title" id="booking-title"  value="ขออนุมัติใช้รถราชการและเดินทางไปราชการ/ปฏิบัติงานนอกเวลาราชการ" required>
     </div>
   </div>
 
