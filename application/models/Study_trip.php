@@ -94,6 +94,45 @@ class Study_trip extends CI_Model
 		$this->db->where('id',$id);
 		return $this->db->get('student_list_name')->row();
 	}
+
+	function get_car_record_with_trip()
+	{
+		$sql="SELECT
+		study_period_trip.id as period_trip_id,
+		study_period_trip.start_timeframe,
+		study_period_trip.end_timeframe,
+		study_period_trip.subject_major_selected,
+		study_period_trip.subject_list_id,
+		study_period_trip.approvers,
+		study_period_trip.approval,
+		study_period_trip.rec_date,
+		study_period_trip.last_update,
+		study_period_trip.duration,
+		study_period_trip.start_date,
+		study_period_trip.end_date,
+		study_period_trip.trip_mode,
+		study_period_trip.start_location,
+		study_period_trip.end_location,
+		study_period_trip.place_selected,
+		study_period_trip.place_ordering,
+		study_period_trip.knowledge_selected,
+		study_period_trip.`status`,
+		study_period_trip.routing,
+		study_period_trip.routing_with_rest_place,
+		car_record.id,
+		car_record.record_html,
+		car_record.record_html2pdf,
+		car_record.record_json
+		FROM
+		study_period_trip
+		LEFT JOIN car_record ON study_period_trip.id = car_record.period_trip_id
+		WHERE
+		study_period_trip.`status` = 'สร้างกำหนดการเดินทางแล้ว'";
+		$result=$this->db->query($sql);
+		return $result->result();
+
+	}
+
 	function get_car_record_by_id($id)
 	{
 			$this->db->where('id',$id);
@@ -187,7 +226,7 @@ class Study_trip extends CI_Model
 	function has_car_record($id)
 	{
 		$this->db->where('period_trip_id',$id);
-		$this->db->where('record_html',NULL);
+		//$this->db->where('record_html',NULL);
 		$result=$this->db->get('car_record')->row();
 		if(empty($result)) return FALSE;
 		elseif(empty($result->record_html)) return FALSE;
