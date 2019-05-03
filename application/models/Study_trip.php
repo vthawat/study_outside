@@ -94,6 +94,18 @@ class Study_trip extends CI_Model
 		$this->db->where('id',$id);
 		return $this->db->get('student_list_name')->row();
 	}
+	function get_car_record_by_id($id)
+	{
+			$this->db->where('id',$id);
+			return $this->db->get('car_record')->row();
+
+	}
+	function put_booking_car($data,$id)
+	{
+		$this->db->where('id',$id);
+		return $this->db->update('car_record',$data);
+
+	}
 	function post_booking_car($data,$id)
 	{
 		$car_record=array();
@@ -101,8 +113,11 @@ class Study_trip extends CI_Model
 		$car_record['period_trip_id']=$id;
 		$car_record['record_json']=$record_json;
 		if(!$this->has_car_record($id))
-			
-		return $this->db->insert('car_record',$car_record);
+			{
+		
+				$this->db->insert('car_record',$car_record);
+				return $this->db->insert_id();
+			}
 			
 	    else {
 			$this->db->where('period_trip_id',$id);

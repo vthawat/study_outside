@@ -36,7 +36,7 @@ class Staff extends CI_Controller {
 		//$this->template->render();
 		redirect(base_url('staff/calendar'));
 	}
-	function test()
+	function printPdf($html=null)
 	{
 		//print realpath('assets/fonts');
 		$mpdf = new \Mpdf\Mpdf();
@@ -63,7 +63,7 @@ class Staff extends CI_Controller {
 		]);
 		
 	//	$mpdf->SetAutoFont();
-			$html=$this->load->view('car_record_html',null,TRUE);
+		//	$html=$this->load->view('car_record_html',null,TRUE);
 		//	print $html;
 			$mpdf->WriteHTML($html);
 	//	$mpdf->WriteHTML('<h1>ทดสอบ Hello world!</h1>');
@@ -341,9 +341,43 @@ class Staff extends CI_Controller {
 		case 'post':
 				//print_r($this->input->post());
 				$data=$this->input->post();
-				if($this->study_trip->post_booking_car($data,$id))
+				$car_record_id=$this->study_trip->post_booking_car($data,$id);
+				if($car_record_id)
 				{
-					 // create html
+					// create html
+					$car_record_html=$this->load->view('car_record_html',null,TRUE);
+					$record_html['record_html']=$car_record_html;
+					if($this->study_trip->put_booking_car($record_html,$car_record_id))
+					{
+
+					// phase variable for print pdf
+					$car_record=$this->study_trip->get_car_record_by_id($car_record_id);
+					$record_json=json_decode($car_record->record_json);
+				//	print_r($record_json);
+					$html_pdf='';
+					$i=0;
+						foreach($record_json as $key=>$value)
+						{
+							//print $item."<br>";
+							if($i==0){
+
+								$html_pdf=str_replace("{".$key."}",$value,$car_record_html);
+							}
+							else{
+								$html_pdf=str_replace("{".$key."}",$value,$html_pdf);
+							}
+						//	=str_replace("{".$key."}",$value,$car_record_html);
+							//print_r($test);
+						//	$html_pdf=
+							$i++;
+						}
+						//print $html_pdf;
+				$this->printPdf($html_pdf);
+						//redirect(base_url('staff/'))
+
+					}
+					 
+
 
 				}
 			//	redirect(base_url('staff/cars'));
