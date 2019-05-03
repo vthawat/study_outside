@@ -113,6 +113,40 @@ class Staff extends CI_Controller {
 		$this->template->render();
 		
 	}
+	function test()
+	{
+		$mpdf = new \Mpdf\Mpdf();
+		$defaultConfig = (new Mpdf\Config\ConfigVariables())->getDefaults();
+		$fontDirs = $defaultConfig['fontDir'];
+
+		$defaultFontConfig = (new Mpdf\Config\FontVariables())->getDefaults();
+		$fontData = $defaultFontConfig['fontdata'];
+
+		$mpdf = new \Mpdf\Mpdf([
+			'fontDir' => array_merge($fontDirs, [
+				realpath('assets/fonts'),
+			]),
+			'fontdata' => $fontData + [
+				'thsarabun' => [
+					'R' => 'THSarabunNew.ttf',
+					'I' => 'THSarabunNew Italic.ttf',
+					'B' => 'THSarabunNew Bold.ttf',
+				]
+			],
+			'default_font' => 'thsarabun',
+			'mode' => 'utf-8',
+			'format' => 'A4',
+		]);
+		
+	//	$mpdf->SetAutoFont();
+		//	$html=$this->load->view('car_record_html',null,TRUE);
+		//	print $html;
+			$html=$this->load->view('car_record_html2pdf',null,TRUE);
+			$mpdf->WriteHTML($html);
+	//	$mpdf->WriteHTML('<h1>ทดสอบ Hello world!</h1>');
+
+		$mpdf->Output();
+	}
 	function printCarPdf($id=null)
 	{
 		//print realpath('assets/fonts');

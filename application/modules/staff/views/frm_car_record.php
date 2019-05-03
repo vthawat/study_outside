@@ -83,8 +83,8 @@
   <div class="form-group">
     <label for="booking-get-money" class="col-sm-2 control-label"></label>
     <div class="col-sm-10">
-      <input type="radio" name="booking_get_money" id="booking-get-money-1" value="1"> <label for="booking-get-money-1">ไม่ขอเบิกค่าใช้จ่าย</label>
-      <input type="radio" name="booking_get_money" id="booking-get-money-2" value="2"> <label for="booking-get-money-2" >ขอเบิกค่าใช้จ่ายต่าง ๆ ดังนี้</label>     
+      <input type="checkbox" name="booking_get_money1" id="booking-get-money-1" value="1"> <label for="booking-get-money-1">ไม่ขอเบิกค่าใช้จ่าย</label>
+      <input type="checkbox" name="booking_get_money2" id="booking-get-money-2" value="2"> <label for="booking-get-money-2" >ขอเบิกค่าใช้จ่ายต่าง ๆ ดังนี้</label>     
     </div>
   </div>
   <table class="table">

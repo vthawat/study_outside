@@ -25,7 +25,7 @@
                               <?php if($use_car==0):?>
                               <li><a href="<?=base_url('staff/cars/create/'.$item->period_trip_id)?>" class="text-green"><i class="fa fa-fw fa-bus"></i>ออกใบขอใช้รถ</a></li>
                                 <?php else:?>
-                                <li><a class="text-maroon" target="_blank" href="<?=base_url('staff/printCarPdf/'.$item->id)?>"><span class="fa fa-acrobat fa-fw"></span>พิมพ์เป็น PDF</a></li>
+                                <li><a class="text-maroon" target="_blank" href="<?=base_url('staff/printCarPdf/'.$item->id)?>"><span class="fa fa-file-pdf-o fa-fw"></span>พิมพ์เป็น PDF</a></li>
                                 <li><a href="<?=base_url('staff/cars/edit_data/'.$item->id)?>" class="text-primary"><span class="fa fa-edit fa-fw"></span>แก้ไขข้อมูล</a></li>
                                 <li><a href="<?=base_url('staff/cars/edit_draf/'.$item->id)?>" class="text-yellow"><span class="fa fa-edit fa-fw"></span>แก้ไขร่างบันทึกข้อความ</a></li>
                                 <?php endif?>
