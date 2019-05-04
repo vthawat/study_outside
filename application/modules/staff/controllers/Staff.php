@@ -43,7 +43,7 @@ class Staff extends CI_Controller {
 		case 'post':
 		$this->template->add_js('assets/summernote/summernote.min.js');
 		$this->template->add_css('assets/summernote/summernote.css');
-		$this->template->add_js($this->load->view('js/car_record_editor.js',null,TRUE),'embed',TRUE);
+		//$this->template->add_js($this->load->view('js/car_record_editor.js',null,TRUE),'embed',TRUE);
 				$data=$this->input->post();
 				$car_record_id=$this->study_trip->post_booking_car($data,$id);
 				if($car_record_id)
@@ -91,6 +91,7 @@ class Staff extends CI_Controller {
 		break;
 
 		case 'create':
+
 		$data['action']=base_url('staff/cars/post/'.$id);
 		$data['trips']=$this->study_trip->get_by_id($id);
 		$data['content']=['title'=>'กรอกข้อมูลเพื่อสร้างบันทึกข้อความ',
@@ -99,8 +100,30 @@ class Staff extends CI_Controller {
 		$this->template->write_view('content','contents',$data);
 		$this->template->write('page_header','<a href="'.base_url('staff/cars').'"><i class="fa fa-fw fa-car"></i>รายการขอใช้รถ</a><i class="fa fa-fw fa-angle-double-right"></i>สร้างบันทึกข้อความ');
 		break;
+		
+		case 'edit_draf':
+		$data['car_record']=$this->study_trip->get_car_record_by_id($id);
+		
+		$this->template->add_js($this->load->view('js/car_record_edit_html2pdf.js',$data,TRUE),'embed',TRUE);
+	
+		$data['content']=['title'=>'ปรับแต่งเพื่อจัดข้อความให้ได้ตามที่ต้องการ',
+					'color'=>'success',
+					'detail'=>$this->load->view('car_record_html_edit',$data,TRUE)];
+		$this->template->write_view('content','contents',$data);
+		$this->template->write('page_header','<a href="'.base_url('staff/cars').'"><i class="fa fa-fw fa-car"></i>รายการขอใช้รถ</a><i class="fa fa-fw fa-angle-double-right"></i>แก้ไขร่างบันทึกข้อความ');
+		
+		break;
 
-		default: /** แสดงรายขอใช้รถทั้งหมด */
+	/*	case 'put_record_html2pdf':
+		// update draf layout
+				$data=$this->input->post();
+				if($this->study_trip->put_booking_car($data,$id))
+				 print 'ok';
+				else print 'no';
+	
+		break;*/
+
+		default: /** แสดงรายการขอใช้รถทั้งหมด */
 		$data['trip_cars']=$this->study_trip->get_car_record_with_trip();
 		$data['content']=['title'=>'รายการบันทึกข้อความ การขอใช้รถในการเดินทาง',
 											'color'=>'primary',
@@ -112,6 +135,13 @@ class Staff extends CI_Controller {
 	}
 		$this->template->render();
 		
+	}
+	function put_car_record_html2pdf($id)
+	{
+		$data=$this->input->post();
+		if($this->study_trip->put_booking_car($data,$id))
+		 print 'ok';
+		else print 'no';
 	}
 	function test()
 	{
@@ -180,7 +210,7 @@ class Staff extends CI_Controller {
 			$mpdf->WriteHTML($html);
 	//	$mpdf->WriteHTML('<h1>ทดสอบ Hello world!</h1>');
 
-		$mpdf->Output();
+		$mpdf->Output('บันทึกข้อความ-การขอใช้รถ.pdf','I');
 		
 	}
 	function calendar()

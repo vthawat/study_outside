@@ -9,15 +9,12 @@
 	}
 
     p.normal{
-        font-size:16pt;
+        font-size:15pt;
     }
     body{
-        font-size:16pt;
+        font-size:15pt;
     }
-    .psu-logo{
-        /*float: left;*/
 
-    }
     .head-title{
         font-size:29pt;
         font-weight:bold;
@@ -40,7 +37,7 @@
     }
 </style>
 <body>
-<p><img class="psu-logo" src="<?=realpath('images/logo-psu.jpg')?>"><div class="head-title">บันทึกข้อความ</div></p>
+<p><img src="<?=realpath('images/logo-psu.jpg')?>"><div class="head-title">บันทึกข้อความ</div></p>
 <p class="sec-1"><b>ส่วนงาน</b>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;คณะทรัพยากรธรรมชาติ&nbsp;&nbsp;&nbsp;&nbsp;ภาควิชาพัฒนาการเกษตร&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;โทร 6121, 6122<br>
 มอ 520/{booking_num}&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<b>วันที่</b>&nbsp;&nbsp;{booking_date}<br>
 <b>เรื่อง</b>&nbsp;{booking_title}</p>
