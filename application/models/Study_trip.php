@@ -120,7 +120,6 @@ class Study_trip extends CI_Model
 		study_period_trip.routing,
 		study_period_trip.routing_with_rest_place,
 		car_record.id,
-		car_record.record_html,
 		car_record.record_html2pdf,
 		car_record.record_json
 		FROM
