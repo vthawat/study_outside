@@ -32,7 +32,7 @@
   <!-- Nav tabs -->
   <ul class="nav nav-tabs trip-tabs" role="tablist">
     <li role="presentation" class="active"><a href="#schedule" aria-controls="schedule" role="tab" data-toggle="tab"><i class="fa fa-fw fa-table"></i>กำหนดการเดินทาง</a></li>
-    <li role="presentation"><a href="#place-map" aria-controls="place-map" role="tab" data-toggle="tab"><i class="fa fa-fw fa-user"></i>แผนที่และรายละเอียดสถานที่่</a></li>
+    <li role="presentation"><a href="#place-map" aria-controls="place-map" role="tab" data-toggle="tab"><i class="fa fa-fw fa-map"></i>แผนที่และรายละเอียดสถานที่่</a></li>
     <li role="presentation"><a href="#weather" aria-controls="weather" role="tab" data-toggle="tab"><i class="fa fa-fw fa-cloud"></i>พยากรณ์อากาศ</a></li>
     <li role="presentation"><a href="#students" aria-controls="students" role="tab" data-toggle="tab"><i class="fa fa-fw fa-user"></i>รายชื่อผู้ร่วมเดินทาง</a></li>
 
