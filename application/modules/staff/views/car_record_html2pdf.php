@@ -34,6 +34,11 @@
     .sec-2{
         margin-top:-10px;
         line-height:1.15;
+    }
+    table.tb-money{
+        /*position:absolute;*/
+        padding-top:-20px;
+
     }	
 </style>
 <body>

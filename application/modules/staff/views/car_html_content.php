@@ -2,8 +2,13 @@
 ชื่อโครงการวิจัยด้วย)&nbsp;{booking_research_name}&nbsp;จึงใคร่ขออนุมัติใช้รถและเดินทางไปปฏิบัติงาน/
 ปฏิบัติงานนอกเวลา เพื่อปฏิบัติงานดังกล่าว โดยให้รถรับ&nbsp;{booking_depart_place}&nbsp;ในวันที่&nbsp;{booking_depart_date}&nbsp;เวลา&nbsp;{booking_depart_time}&nbsp;น.&nbsp;กลับถึงคณะฯ&nbsp;ในวันที่&nbsp;{booking_arrive_date}&nbsp;เวลา&nbsp;{booking_arrive_time}&nbsp;น.<br>
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;[{booking_get_money1}]&nbsp;ไม่ขอเบิกค่าใช้จ่าย&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;[{booking_get_money2}]&nbsp;ขอเบิกค่าใช้จ่ายต่าง ๆ ดังนี้<br>
-<u>หมวดค่าใช้สอย</u>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<u>หมวดค่าวัสดุและค่าตอบแทน</u>
-<table width="100%" cellspacing="0" cellpadding="0">
+<table class="tb-money" width="100%" cellspacing="0" cellpadding="0">
+<tr>
+
+    <td colspan="2"><u>หมวดค่าใช้สอย</u></td>
+    <td colspan="2"><u>หมวดค่าวัสดุและค่าตอบแทน</u></td>
+
+</tr>
 <tr>
     <td>1.&nbsp;ค่าวัสดุน้ำมันเชื้อเพลิง</td>
     <td style="text-align:right">{item_money_type1_1}&nbsp;บาท</td>
