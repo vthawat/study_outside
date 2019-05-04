@@ -2,81 +2,81 @@
 <div class="form-group">
     <label for="booking-num" class="col-sm-2 control-label">เลขที่หนังสือ มอ 520/</label>
     <div class="col-sm-1">
-      <input type="text" class="form-control" name="booking_num" id="booking-num"  value="<?php if(!empty($edit_item)) print $edit_item->subject_code?>" required>
+      <input type="text" class="form-control" name="booking_num" id="booking-num"  value="<?php if($mode!='edit') print $edit_item->subject_code?>" required>
     </div>
   </div>
   <div class="form-group">
     <label for="booking-date" class="col-sm-2 control-label">วันที่ออกบันทึกข้อความ</label>
     <div class="col-sm-2">
-      <input type="text" class="form-control" name="booking_date" id="booking-date"  value="<?=$this->ftps->DateThai(date('Y-m-d'))?>" required>
+      <input type="text" class="form-control" name="booking_date" id="booking-date"  value="<?php if($mode!='edit'):?><?=$this->ftps->DateThai(date('Y-m-d'))?><?php endif?>" required>
     </div>
   </div>
 
   <div class="form-group">
     <label for="booking-title" class="col-sm-2 control-label">เรื่อง</label>
     <div class="col-sm-4">
-      <input type="text" class="form-control" name="booking_title" id="booking-title"  value="ขออนุมัติใช้รถราชการและเดินทางไปราชการ/ปฏิบัติงานนอกเวลาราชการ" required>
+<input type="text" class="form-control" name="booking_title" id="booking-title"  value="<?php if($mode!='edit'):?>ขออนุมัติใช้รถราชการและเดินทางไปราชการ/ปฏิบัติงานนอกเวลาราชการ<?php endif;?>" required>
     </div>
   </div>
 
   <div class="form-group">
     <label for="booking-reference" class="col-sm-2 control-label">เรียน</label>
     <div class="col-sm-4">
-      <input type="text" class="form-control" name="booking_reference" id="booking-reference"  value="<?php if(!empty($edit_item)) print $edit_item->subject_name?>" required>
+      <input type="text" class="form-control" name="booking_reference" id="booking-reference"  value="<?php if($mode!='edit') print $edit_item->subject_name?>" required>
     </div>
   </div>
 
   <div class="form-group">
     <label for="booking-objective" class="col-sm-2 control-label">ด้วย</label>
     <div class="col-sm-10">
-      <input type="text" class="form-control" name="booking_objective" id="booking-objective"  value="รายวิชา <?=$this->ftps->get_subject($trips->subject_list_id)->subject_code?> <?=$this->ftps->get_subject($trips->subject_list_id)->subject_name?>" required>
+      <input type="text" class="form-control" name="booking_objective" id="booking-objective"  value="<?php if($mode!='edit'):?>รายวิชา <?=$this->ftps->get_subject($trips->subject_list_id)->subject_code?> <?=$this->ftps->get_subject($trips->subject_list_id)->subject_name?><?php endif?>" required>
     </div>
   </div>
 
   <div class="form-group">
     <label for="booking-go-place" class="col-sm-2 control-label">ไปปฏิบัติงานที่</label>
     <div class="col-sm-4">
-      <input type="text" class="form-control" name="booking_go_place" id="booking-go-place"  value="จังหวัด<?=trim($trips->end_location)?>" required>
+      <input type="text" class="form-control" name="booking_go_place" id="booking-go-place"  value="<?php if($mode!='edit'):?>จังหวัด<?=trim($trips->end_location)?><?php endif?>" required>
     </div>
   </div>
 
   <div class="form-group">
     <label for="booking-research-name" class="col-sm-2 control-label">ชื่อโครงการวิจัย</label>
     <div class="col-sm-5">
-      <input type="text" class="form-control" name="booking_research_name" id="booking-research-name"  value="<?php if(!empty($edit_item)) print $edit_item->subject_name?>">
+      <input type="text" class="form-control" name="booking_research_name" id="booking-research-name"  value="<?php if($mode!='edit') print $edit_item->subject_name?>">
     </div>
   </div>
 
   <div class="form-group">
     <label for="booking-depart-place" class="col-sm-2 control-label">สถานที่ให้รถมารับ</label>
     <div class="col-sm-4">
-      <input type="text" class="form-control" name="booking_depart_place" id="booking-depart-place"  value="<?php if(!empty($edit_item)) print $edit_item->subject_name?>">
+      <input type="text" class="form-control" name="booking_depart_place" id="booking-depart-place"  value="<?php if($mode!='edit') print $edit_item->subject_name?>">
     </div>
   </div>
   <div class="form-group">
     <label for="booking-depart-date" class="col-sm-2 control-label">วันที่ให้มารับ</label>
     <div class="col-sm-4">
-      <input type="text" class="form-control" name="booking_depart_date" id="booking-depart-date"  value="<?=$this->ftps->DateThai($trips->start_date)?>">
+      <input type="text" class="form-control" name="booking_depart_date" id="booking-depart-date"  value="<?php if($mode!='edit'):?><?=$this->ftps->DateThai($trips->start_date)?><?php endif?>">
     </div>
   </div>
 
   <div class="form-group">
     <label for="booking-depart-time" class="col-sm-2 control-label">เวลาให้มารับ</label>
     <div class="col-sm-1">
-      <input type="text" class="form-control" name="booking_depart_time" id="booking-depart-time"  value="<?=$trips->start_timeframe?>">
+      <input type="text" class="form-control" name="booking_depart_time" id="booking-depart-time"  value="<?php if($mode!='edit'):?><?=$trips->start_timeframe?><?php endif?>">
     </div>
   </div>
 
   <div class="form-group">
     <label for="booking-arrive-date" class="col-sm-2 control-label">กลับมาถึงคณะฯวันที่</label>
     <div class="col-sm-4">
-      <input type="text" class="form-control" name="booking_arrive_date" id="booking-arrive-date"  value="<?=$this->ftps->DateThai($trips->end_date)?>">
+      <input type="text" class="form-control" name="booking_arrive_date" id="booking-arrive-date"  value="<?php if($mode!='edit'):?><?=$this->ftps->DateThai($trips->end_date)?><?php endif?>">
     </div>
   </div>
   <div class="form-group">
     <label for="booking-depart-time" class="col-sm-2 control-label">กลับมาถึงเวลา</label>
     <div class="col-sm-1">
-      <input type="text" class="form-control" name="booking_depart_time" id="booking-depart-time"  value="<?=$trips->end_timeframe?>">
+      <input type="text" class="form-control" name="booking_depart_time" id="booking-depart-time"  value="<?php if($mode!='edit'):?><?=$trips->end_timeframe?><?php endif?>">
     </div>
   </div>
 
@@ -257,13 +257,13 @@
     <div class="form-group">
       <label class="col-sm-2 control-label"></label>
       <div class="col-sm-10">
-        <textarea name="booking-close-text" class="form-control">ปีงบประมาณ...........................พร้อมทั้งขอยืมเงินทดรองจ่ายจานวนดังกล่าวด้วย</textarea>
+        <textarea name="booking-close-text" class="form-control"><?php if($mode!='edit'):?>ปีงบประมาณ...........................พร้อมทั้งขอยืมเงินทดรองจ่ายจานวนดังกล่าวด้วย<?php endif?></textarea>
       </div>
     </div>
 
   	<div class="form-group">
     <div class="col-sm-10 col-sm-offset-2">
-    <button class="btn icon-btn btn-success save"><span class="btn-glyphicon fa fa-save img-circle text-success"></span>สร้างบันทึกข้อความ</button>
+    <button class="btn icon-btn btn-success save"><span class="btn-glyphicon fa fa-save img-circle text-success"></span>บันทึก</button>
     <a class="btn icon-btn btn-default cancel" href="javascript:history.back()"><span class="btn-glyphicon fa fa-stop img-circle text-gray"></span>ยกเลิก</a>
     </div>
   </div>

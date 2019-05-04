@@ -91,7 +91,7 @@ class Staff extends CI_Controller {
 		break;
 
 		case 'create':
-
+		$data['mode']='new';
 		$data['action']=base_url('staff/cars/post/'.$id);
 		$data['trips']=$this->study_trip->get_by_id($id);
 		$data['content']=['title'=>'กรอกข้อมูลเพื่อสร้างบันทึกข้อความ',
@@ -110,18 +110,30 @@ class Staff extends CI_Controller {
 					'color'=>'success',
 					'detail'=>$this->load->view('car_record_html_edit',$data,TRUE)];
 		$this->template->write_view('content','contents',$data);
-		$this->template->write('page_header','<a href="'.base_url('staff/cars').'"><i class="fa fa-fw fa-car"></i>รายการขอใช้รถ</a><i class="fa fa-fw fa-angle-double-right"></i>แก้ไขร่างบันทึกข้อความ');
+		$this->template->write('page_header','<a href="'.base_url('staff/cars').'"><i class="fa fa-fw fa-car"></i>รายการออกใบข้อใช้รถ</a><i class="fa fa-fw fa-angle-double-right"></i>แก้ไขร่างบันทึกข้อความ');
 		
 		break;
+		
+		case 'edit_data':
+		$data['car_record']=$this->study_trip->get_car_record_by_id($id);
+		$data['mode']='edit';
+		$data['action']=base_url('staff/cars/put_record_json');
+		$data['content']=['title'=>'ข้อมูลบันทึกขอความการขอใช้รถ',
+										'color'=>'primary',
+										'detail'=>$this->load->view('frm_car_record',$data,TRUE)];
+				$this->template->write_view('content','contents',$data);
+				$this->template->write('page_header','<a href="'.base_url('staff/cars').'"><i class="fa fa-fw fa-car"></i>รายการออกใบข้อใช้รถ</a><i class="fa fa-fw fa-angle-double-right"></i>แก้ไขข้อมูล');	
+		break;
 
-	/*	case 'put_record_html2pdf':
+		case 'put_record_html2pdf':
 		// update draf layout
 				$data=$this->input->post();
 				if($this->study_trip->put_booking_car($data,$id))
 				 print 'ok';
 				else print 'no';
+			exit();
 	
-		break;*/
+		break;
 
 		default: /** แสดงรายการขอใช้รถทั้งหมด */
 		$data['trip_cars']=$this->study_trip->get_car_record_with_trip();
@@ -130,19 +142,13 @@ class Staff extends CI_Controller {
 											'detail'=>$this->load->view('car_item_list',$data,TRUE)];
 		$this->template->write_view('content','contents',$data);
 		
-		$this->template->write('page_header','<a href="trip"><i class="fa fa-fw fa-car"></i>ความต้องการเดินทาง</a><i class="fa fa-fw fa-angle-double-right"></i>ออกใบขอใช้รถ');	
+		$this->template->write('page_header','<i class="fa fa-fw fa-car"></i>รายการออกใบข้อใช้รถ');	
 	
 	}
 		$this->template->render();
 		
 	}
-	function put_car_record_html2pdf($id)
-	{
-		$data=$this->input->post();
-		if($this->study_trip->put_booking_car($data,$id))
-		 print 'ok';
-		else print 'no';
-	}
+	
 	function test()
 	{
 		$mpdf = new \Mpdf\Mpdf();
@@ -969,6 +975,10 @@ function place_rest_detail($place_id=null)
 				if($this->study_trip->put_student_list($data,$id))
 					redirect(base_url('staff/trip/student/'.$period_trip_id));
 				else show_error('ไม่สามารถบันทึกได้');
+			break;
+
+			case 'car_record_json':
+					$data=$this->input->post();
 			break;
 		
 			default;

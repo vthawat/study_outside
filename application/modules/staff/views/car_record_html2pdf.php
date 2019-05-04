@@ -1,4 +1,4 @@
-<title>ใบขอใช้รถ</title>
+<title>บันทึกข้อความ การขอใช้รถ</title>
 <style>
 @page
 	{

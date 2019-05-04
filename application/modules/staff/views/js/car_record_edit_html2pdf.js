@@ -3,7 +3,7 @@ $(document).ready(function(){
     
 
     $.ajax({ method: "POST",
-    url: "<?=base_url('staff/put_car_record_html2pdf/'.$car_record->id)?>",
+    url: "<?=base_url('staff/cars/put_record_html2pdf/'.$car_record->id)?>",
     data:{"record_html2pdf":$('#record-html2pdf').val()}
                   })
                     .fail(function(){
