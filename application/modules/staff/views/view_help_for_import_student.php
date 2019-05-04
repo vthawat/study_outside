@@ -1,0 +1,2 @@
+<a href="<?=base_url('excel_student/student_template.xlsx')?>" class="btn btn-default"><i class="fa fa-fw fa-file-excel-o"></i>ดาวน์โหลด Template ไฟล์ Excel</a>
+<p><br>เพื่อนำรายชื่อนักศึกษาเข้ามาในระบบ เมื่อทำการ Upload ไฟล์แล้วระบบจะทำการล้างข้อมูลรายชื่อเดิมที่มีอยู่ทั้งหมด</p>

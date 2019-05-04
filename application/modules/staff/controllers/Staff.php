@@ -177,38 +177,6 @@ class Staff extends CI_Controller {
 		
 	}
 	
-	function test()
-	{
-		$mpdf = new \Mpdf\Mpdf();
-		$defaultConfig = (new Mpdf\Config\ConfigVariables())->getDefaults();
-		$fontDirs = $defaultConfig['fontDir'];
-
-		$defaultFontConfig = (new Mpdf\Config\FontVariables())->getDefaults();
-		$fontData = $defaultFontConfig['fontdata'];
-
-		$mpdf = new \Mpdf\Mpdf([
-			'fontDir' => array_merge($fontDirs, [
-				realpath('assets/fonts'),
-			]),
-			'fontdata' => $fontData + [
-				'thsarabun' => [
-					'R' => 'THSarabunNew.ttf',
-					'I' => 'THSarabunNew Italic.ttf',
-					'B' => 'THSarabunNew Bold.ttf',
-				]
-			],
-			'default_font' => 'thsarabun',
-			'mode' => 'utf-8',
-			'format' => 'A4',
-		]);
-		
-
-			$html=$this->load->view('car_record_html2pdf',null,TRUE);
-			$mpdf->WriteHTML($html);
-	//	$mpdf->WriteHTML('<h1>ทดสอบ Hello world!</h1>');
-
-		$mpdf->Output();
-	}
 	function printCarPdf($id=null)
 	{
 		//print realpath('assets/fonts');
@@ -497,11 +465,16 @@ class Staff extends CI_Controller {
 				$this->template->add_css($this->load->view('css/student-upload.css',null,TRUE),'embed',TRUE);
 				$data['student_list']=$this->study_trip->get_student_list_by_trip_id($id);
 				$title='รายวิชา '.$this->ftps->get_subject($this->study_trip->get_by_id($id)->subject_list_id)->subject_code.' '.$this->ftps->get_subject($this->study_trip->get_by_id($id)->subject_list_id)->subject_name;
-				$this->template->write('page_header','<a href="'.base_url('staff/trip').'"><i class="fa fa-fw fa-calendar-check-o"></i>ความต้องการเดินทาง</a><i class="fa fa-fw fa-angle-double-right"></i>รายชื่อผู้ร่วมเดินทาง');
-				$data['content']=['title'=>$title,
+				$this->template->write('page_header','<a href="'.base_url('staff/trip').'"><i class="fa fa-fw fa-calendar-check-o"></i>ความต้องการเดินทาง</a><i class="fa fa-fw fa-angle-double-right"></i>รายชื่อผู้ร่วมเดินทาง '.$title);
+				
+				$data['content']=['size'=>9,
 				'toolbar'=>'<form method="post" action="'.base_url("staff/trip/upload_student/".$id).'" enctype="multipart/form-data"><div class="form-group"><input class="form-control-file" type="file" accept="application/vnd.openxmlformats-officedocument.spreadsheetml.sheet, application/vnd.ms-excel" name="excel_student" required /><button type="submit" name="import" class="btn icon-btn btn-warning upload-excel"><span class="btn-glyphicon fa fa-arrow-circle-up img-circle text-black"></span>Upload</button> <a class="btn icon-btn btn-primary" href="'.base_url('staff/calendar').'"><span class="btn-glyphicon fa fa-calendar-o img-circle text-blue"></span>ปฏิทินการเดินทาง</a> <a class="btn icon-btn btn-success add-new" href="'.base_url('staff/student/new/'.$id).'"><span class="btn-glyphicon fa fa-plus img-circle text-success"></span>เพิ่มรายชื่อ</a></div></form>',
 				'color'=>'primary',
 				'detail'=>$this->load->view('student',$data,TRUE)];
+				$this->template->write_view('content','contents',$data);
+				$data['content']=['color'=>'primary','size'=>3,
+													'title'=>'คำแนะนำ',
+													'detail'=>$this->load->view('view_help_for_import_student',null,TRUE)];
 				$this->template->write_view('content','contents',$data);
 			
 
