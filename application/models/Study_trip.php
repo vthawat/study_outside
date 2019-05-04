@@ -229,7 +229,7 @@ class Study_trip extends CI_Model
 		//$this->db->where('record_html',NULL);
 		$result=$this->db->get('car_record')->row();
 		if(empty($result)) return FALSE;
-		elseif(empty($result->record_html)) return FALSE;
+		elseif(empty($result->record_html2pdf)) return FALSE;
 		else return TRUE;
 
 	}

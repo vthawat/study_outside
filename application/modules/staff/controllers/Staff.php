@@ -6,7 +6,6 @@ class Staff extends CI_Controller {
 	public function __construct()
 	{
 		parent::__construct();
-		//exit(print_r($this->session->userdata()));
 		$userinfo=$this->session->userdata('staff_id');
 		if(empty($userinfo)) redirect(base_url('psuauthen'));
 		$this->load->model('userinfo');
@@ -33,7 +32,7 @@ class Staff extends CI_Controller {
 
 	public function index()
 	{	
-		//$this->template->render();
+
 		redirect(base_url('staff/calendar'));
 	}
 	function cars($action=null,$id=null)
@@ -41,47 +40,41 @@ class Staff extends CI_Controller {
 		switch($action)
 		{
 		case 'post':
-		$this->template->add_js('assets/summernote/summernote.min.js');
-		$this->template->add_css('assets/summernote/summernote.css');
-		//$this->template->add_js($this->load->view('js/car_record_editor.js',null,TRUE),'embed',TRUE);
+
 				$data=$this->input->post();
 				$car_record_id=$this->study_trip->post_booking_car($data,$id);
 				if($car_record_id)
 				{
 					// create html
-					$car_record_html=$this->load->view('car_record_html2pdf',null,TRUE);
-					$record_html['record_html']=$car_record_html;
-					if($this->study_trip->put_booking_car($record_html,$car_record_id))
-					{
+				//	$data['car_html_content']=$this->load->view('car_html_content',null,TRUE);
+					//$car_record_html=$this->load->view('car_html_content',null,TRUE);
+				//	$record_html['record_html']=$car_record_html;
+				//	if($this->study_trip->put_booking_car($record_html,$car_record_id))
+				//	{
 
 					// phase variable for print pdf
 					$car_record=$this->study_trip->get_car_record_by_id($car_record_id);
 					$record_json=json_decode($car_record->record_json);
-				//	print_r($record_json);
-					$html_pdf='';
-					$i=0;
+					$html_pdf=$this->load->view('car_html_content',null,TRUE);;
+				//	$i=0;
 						foreach($record_json as $key=>$value)
 						{
-							//print $item."<br>";
-							if($i==0)
 
-								$html_pdf=str_replace("{".$key."}",$value,$car_record_html);
+					//		if($i==0)
+
+						//		$html_pdf=str_replace("{".$key."}",$value,$car_record_html);
 						
-							else
+					//		else
 								$html_pdf=str_replace("{".$key."}",$value,$html_pdf);
 							
-							$i++;
+						//	$i++;
 						}
 						$record_html2pdf=array();
 						$record_html2pdf['record_html2pdf']=$html_pdf;
 						if($this->study_trip->put_booking_car($record_html2pdf,$car_record_id))
 							redirect(base_url('staff/cars'));
-				//		$data['record_html']=$html_pdf;
-					//	$this->template->write_view('content','car_record_html_edit',$data);
-	//				$this->printPdf($html_pdf);
 						
-
-					}
+				//	}
 					 
 
 
@@ -102,6 +95,8 @@ class Staff extends CI_Controller {
 		break;
 		
 		case 'edit_draf':
+		$this->template->add_js('assets/summernote/summernote.min.js');
+		$this->template->add_css('assets/summernote/summernote.css');
 		$data['car_record']=$this->study_trip->get_car_record_by_id($id);
 		
 		$this->template->add_js($this->load->view('js/car_record_edit_html2pdf.js',$data,TRUE),'embed',TRUE);
@@ -117,14 +112,47 @@ class Staff extends CI_Controller {
 		case 'edit_data':
 		$data['car_record']=$this->study_trip->get_car_record_by_id($id);
 		$data['mode']='edit';
-		$data['action']=base_url('staff/cars/put_record_json');
+		$data['action']=base_url('staff/cars/put_record_json/'.$id);
 		$data['content']=['title'=>'ข้อมูลบันทึกขอความการขอใช้รถ',
 										'color'=>'primary',
 										'detail'=>$this->load->view('frm_car_record',$data,TRUE)];
 				$this->template->write_view('content','contents',$data);
 				$this->template->write('page_header','<a href="'.base_url('staff/cars').'"><i class="fa fa-fw fa-car"></i>รายการออกใบข้อใช้รถ</a><i class="fa fa-fw fa-angle-double-right"></i>แก้ไขข้อมูล');	
 		break;
+		case 'put_record_json':
+				$data['record_json']=json_encode($this->input->post());
 
+				if($this->study_trip->put_booking_car($data,$id))
+					/** update phase variable html2pdf */
+				{
+					
+					$car_record=$this->study_trip->get_car_record_by_id($id);
+				
+									
+					$record_json=json_decode($car_record->record_json);
+					$html_pdf=$this->load->view('car_html_content',null,TRUE);
+				//	$i=0;
+						foreach($record_json as $key=>$value)
+						{
+
+						//	if($i==0)
+
+						//		$html_pdf=str_replace("{".$key."}",$value,$car_record->record_html);
+						
+						//	else
+								$html_pdf=str_replace("{".$key."}",$value,$html_pdf);
+							
+						//	$i++;
+						}
+						$record_html2pdf=array();
+						$record_html2pdf['record_html2pdf']=$html_pdf;
+						if($this->study_trip->put_booking_car($record_html2pdf,$id))
+							redirect(base_url('staff/cars'));
+
+
+				}
+				else show_error('ไม่สามารถบันทึกได้');
+		break;
 		case 'put_record_html2pdf':
 		// update draf layout
 				$data=$this->input->post();
@@ -174,9 +202,7 @@ class Staff extends CI_Controller {
 			'format' => 'A4',
 		]);
 		
-	//	$mpdf->SetAutoFont();
-		//	$html=$this->load->view('car_record_html',null,TRUE);
-		//	print $html;
+
 			$html=$this->load->view('car_record_html2pdf',null,TRUE);
 			$mpdf->WriteHTML($html);
 	//	$mpdf->WriteHTML('<h1>ทดสอบ Hello world!</h1>');
@@ -208,15 +234,30 @@ class Staff extends CI_Controller {
 			'mode' => 'utf-8',
 			'format' => 'A4',
 		]);
-		
-	//	$mpdf->SetAutoFont();
-		//	$html=$this->load->view('car_record_html',null,TRUE);
-		//	print $html;
-			$html=$this->study_trip->get_car_record_by_id($id)->record_html2pdf;
-			$mpdf->WriteHTML($html);
-	//	$mpdf->WriteHTML('<h1>ทดสอบ Hello world!</h1>');
+	//	$html='';
+		$car_record=$this->study_trip->get_car_record_by_id($id);
+		//*** variable for header section */
+	
+		$record_json=json_decode($car_record->record_json);
+		$data['car_html_content']=$car_record->record_html2pdf;
+		$html_pdf=$this->load->view('car_record_html2pdf',$data,TRUE);
+		//$i=0;
+			foreach($record_json as $key=>$value)
+			{
 
-		$mpdf->Output('บันทึกข้อความ-การขอใช้รถ.pdf','I');
+			//	if($i==0)
+
+				//	$html_pdf=str_replace("{".$key."}",$value,$);
+			
+			//	else
+					$html_pdf=str_replace("{".$key."}",$value,$html_pdf);
+				
+			//	$i++;
+			}
+		
+
+			$mpdf->WriteHTML($html_pdf);
+			$mpdf->Output('บันทึกข้อความ-การขอใช้รถ.pdf','I');
 		
 	}
 	function calendar()

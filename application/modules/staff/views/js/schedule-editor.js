@@ -28,7 +28,7 @@ $('#schedule-html').summernote({
  $('.save-schedule').click(function(){
 
   //$('#schedule-html').froalaEditor('save.save');
-   var schedule_html=$('#schedule-html').summernote('code');;
+   var schedule_html=$('#schedule-html').summernote('code');
     //console.log(schedule_html)
     $.ajax({ method: "POST",
     url: "<?=base_url('staff/put/schedule/'.$trips->id)?>",
