@@ -45,41 +45,23 @@ class Staff extends CI_Controller {
 				$car_record_id=$this->study_trip->post_booking_car($data,$id);
 				if($car_record_id)
 				{
-					// create html
-				//	$data['car_html_content']=$this->load->view('car_html_content',null,TRUE);
-					//$car_record_html=$this->load->view('car_html_content',null,TRUE);
-				//	$record_html['record_html']=$car_record_html;
-				//	if($this->study_trip->put_booking_car($record_html,$car_record_id))
-				//	{
 
 					// phase variable for print pdf
 					$car_record=$this->study_trip->get_car_record_by_id($car_record_id);
 					$record_json=json_decode($car_record->record_json);
 					$html_pdf=$this->load->view('car_html_content',null,TRUE);;
-				//	$i=0;
 						foreach($record_json as $key=>$value)
 						{
-
-					//		if($i==0)
-
-						//		$html_pdf=str_replace("{".$key."}",$value,$car_record_html);
-						
-					//		else
 								$html_pdf=str_replace("{".$key."}",$value,$html_pdf);
-							
-						//	$i++;
 						}
 						$record_html2pdf=array();
 						$record_html2pdf['record_html2pdf']=$html_pdf;
 						if($this->study_trip->put_booking_car($record_html2pdf,$car_record_id))
 							redirect(base_url('staff/cars'));
 						
-				//	}
-					 
-
-
+			
 				}
-			//	redirect(base_url('staff/cars'));
+		
 
 		break;
 
@@ -131,18 +113,17 @@ class Staff extends CI_Controller {
 									
 					$record_json=json_decode($car_record->record_json);
 					$html_pdf=$this->load->view('car_html_content',null,TRUE);
-				//	$i=0;
+
 						foreach($record_json as $key=>$value)
 						{
+						//	if($key=='get_money_from_1')
+							//	if($value==1)
+									
+								
 
-						//	if($i==0)
-
-						//		$html_pdf=str_replace("{".$key."}",$value,$car_record->record_html);
-						
-						//	else
 								$html_pdf=str_replace("{".$key."}",$value,$html_pdf);
 							
-						//	$i++;
+
 						}
 						$record_html2pdf=array();
 						$record_html2pdf['record_html2pdf']=$html_pdf;
