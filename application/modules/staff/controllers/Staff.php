@@ -47,7 +47,7 @@ class Staff extends CI_Controller {
 				{
 
 					// phase variable for print pdf
-					$car_record=$this->study_trip->get_car_record_by_id($car_record_id);
+					$car_record=$this->study_trip->get_car_record_by_id($id);
 					$record_json=json_decode($car_record->record_json);
 					$html_pdf=$this->load->view('car_html_content',null,TRUE);;
 						foreach($record_json as $key=>$value)
@@ -256,7 +256,11 @@ class Staff extends CI_Controller {
 	}
 	function calendar()
 	{
-		
+		$this->template->add_js('https://maps.google.com/maps/api/js?key=AIzaSyBGE-KGQB9PP6uq4wErMO0Xbxmz4FWxy3Q&language=th','link');
+		$this->template->add_js('assets/gmaps/js/gmap3.js');
+		$this->template->add_css($this->load->view('css/map.css',null,TRUE),'embed',TRUE);
+	//	$this->template->add_js($this->load->view('js/modal.js',null,TRUE),'embed',TRUE);
+
 		$this->template->write('page_header','<i class="fa fa-fw fa-calendar"></i>ปฏิทินการเดินทาง');
 		$this->template->add_js('assets/pace/pace.min.js');
 		$this->template->add_css($this->load->view('css/pace.css',null,TRUE),'embed',TRUE);
@@ -277,10 +281,13 @@ class Staff extends CI_Controller {
             ->set_output($this->study_trip->get_trip_show_oncalendar());
 	}
 	function calendar_trip_details($id=null)
-	{	
+	{
+
+		//$this->template->add_js($this->load->view('js/map-waypoint-readonly.js',null,TRUE),'embed',TRUE);
+		$data['trips']=$this->study_trip->get_by_id($id);
+		$data['place_map']=$this->load->view('waypoint-readonly',$data,TRUE);
 		$data['student_list']=$this->study_trip->get_student_list_by_trip_id($id);
 		$data['student_list']=$this->load->view('student_list_view',$data,TRUE);
-		$data['trips']=$this->study_trip->get_by_id($id);
 		$data['schedule']=$this->study_trip->get_schedule_plan_by_trip_id($id);
 		$data['force_casts']=$this->load->view('schedule_weather_json_to_html',$data,TRUE);
 		$title='รายวิชา '.$this->ftps->get_subject($this->study_trip->get_by_id($id)->subject_list_id)->subject_code.' '.$this->ftps->get_subject($this->study_trip->get_by_id($id)->subject_list_id)->subject_name;

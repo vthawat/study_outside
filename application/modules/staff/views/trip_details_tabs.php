@@ -47,7 +47,7 @@
             <div class="alert alert-warning"><h4>ไม่พบข้อมูล กำหนดการเดินทาง เนื่องจากยังไม่สร้างกำหนดการเดินทาง</h4></div>
         <?php endif?>
     </div>
-    <div role="tabpanel" class="tab-pane" id="placemap"></div>
+    <div role="tabpanel" class="tab-pane" id="placemap"><?=$place_map?></div>
     <div role="tabpanel" class="tab-pane" id="weather"><?=$force_casts?></div>
     <div role="tabpanel" class="tab-pane" id="students"><?=$student_list?></div>
 

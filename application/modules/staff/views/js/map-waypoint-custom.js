@@ -17,7 +17,7 @@ function initialize() {
     });
 
     var myOptions = {
-        zoom: 3,
+        zoom: 6,
         mapTypeId: google.maps.MapTypeId.ROADMAP,
     }
 
