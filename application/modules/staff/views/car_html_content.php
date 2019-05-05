@@ -1,6 +1,5 @@
-<p class="sec-2">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;ด้วย{booking_objective}&nbsp;มีความประสงค์จะเดินทางไปปฏิบัติงานที่{booking_go_place}&nbsp;โดยมีวัตถุประสงค์เพื่อ (กรณีเดินทางเพื่อปฏิบัติงานในโครงการวิจัยให้ระบุ
-ชื่อโครงการวิจัยด้วย)&nbsp;{booking_research_name}&nbsp;จึงใคร่ขออนุมัติใช้รถและเดินทางไปปฏิบัติงาน/
-ปฏิบัติงานนอกเวลา เพื่อปฏิบัติงานดังกล่าว โดยให้รถรับ&nbsp;{booking_depart_place}&nbsp;ในวันที่&nbsp;{booking_depart_date}&nbsp;เวลา&nbsp;{booking_depart_time}&nbsp;น.&nbsp;กลับถึงคณะฯ&nbsp;ในวันที่&nbsp;{booking_arrive_date}&nbsp;เวลา&nbsp;{booking_arrive_time}&nbsp;น.<br>
+<p class="sec-2">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;ด้วย{booking_objective}&nbsp;มีความประสงค์จะเดินทางไปปฏิบัติงาน<br>ที่{booking_go_place}&nbsp;โดยมีวัตถุประสงค์เพื่อการเรียนการสอนและศึกษาภาคสนาม&nbsp;จึงใคร่ขออนุมัติใช้รถและเดินทางไปปฏิบัติ<br>
+งานนอกเวลา เพื่อปฏิบัติงานดังกล่าว โดยให้รถรับ&nbsp;{booking_depart_place}&nbsp;ในวันที่&nbsp;{booking_depart_date}&nbsp;เวลา&nbsp;{booking_depart_time}&nbsp;น.<br>กลับถึงคณะฯ&nbsp;ในวันที่&nbsp;{booking_arrive_date}&nbsp;เวลา&nbsp;{booking_arrive_time}&nbsp;น.<br>
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;[{booking_get_money1}]&nbsp;ไม่ขอเบิกค่าใช้จ่าย&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;[{booking_get_money2}]&nbsp;ขอเบิกค่าใช้จ่ายต่าง ๆ ดังนี้<br>
 <table class="tb-money" width="100%" cellspacing="0" cellpadding="0">
 <tr>
@@ -41,8 +40,8 @@
 </tr>
 </table>
 จากเงินงบประมาณ&nbsp;&nbsp;{get_money_from_1}&nbsp;โครงการวิจัย&nbsp;&nbsp;{get_money_from_2}&nbsp;ภาควิชา/หน่วยงาน&nbsp;&nbsp;{get_money_from_3}&nbsp;คณะฯ&nbsp;&nbsp;{get_money_from_4}&nbsp;อื่นๆ ระบุ&nbsp;{get_money_from_4_etc}<br>
-&nbsp;&nbsp;&nbsp;&nbsp;{booking_close_text}</p>
-<p>&nbsp;&nbsp;&nbsp;&nbsp;จึงเรียนมาเพื่อโปรดพิจารณา<br>
+{booking_close_text}</p>
+<p class="sec-3">&nbsp;&nbsp;&nbsp;&nbsp;จึงเรียนมาเพื่อโปรดพิจารณา<br>
 เรียน คณบดี/รองคณบดีฝ่ายบริหาร&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;(..................................................)<br>
 ได้จัดรถ (1)...หมายเลขทะเบียน..............&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;ตำแหน่ง................................................<br>
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;(2)...หมายเลขทะเบียน..............&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;เรียน คณบดี/รองคณบดีฝ่ายบริหารฯ<br>

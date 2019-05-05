@@ -116,10 +116,29 @@ class Staff extends CI_Controller {
 
 						foreach($record_json as $key=>$value)
 						{
-						//	if($key=='get_money_from_1')
-							//	if($value==1)
-									
-								
+							if(isset($record_json->booking_get_money1))
+								$html_pdf=str_replace("{booking_get_money1}","&nbsp;/&nbsp;",$html_pdf);
+							else $html_pdf=str_replace("{booking_get_money1}",'&nbsp;&nbsp;',$html_pdf);
+							
+								if(isset($record_json->booking_get_money2))
+									$html_pdf=str_replace("{booking_get_money2}","&nbsp;/&nbsp;",$html_pdf);
+								else $html_pdf=str_replace("{booking_get_money2}",'&nbsp;&nbsp;',$html_pdf);
+
+								if(isset($record_json->get_money_from_1))
+									$html_pdf=str_replace("{get_money_from_1}","[&nbsp;/&nbsp;]",$html_pdf);
+								else $html_pdf=str_replace("{get_money_from_1}",'[&nbsp;&nbsp;]',$html_pdf);
+
+								if(isset($record_json->get_money_from_2))
+								$html_pdf=str_replace("{get_money_from_2}","[&nbsp;/&nbsp;]",$html_pdf);
+							else $html_pdf=str_replace("{get_money_from_2}",'[&nbsp;&nbsp;]',$html_pdf);
+
+							if(isset($record_json->get_money_from_3))
+							$html_pdf=str_replace("{get_money_from_3}","[&nbsp;/&nbsp;]",$html_pdf);
+						else $html_pdf=str_replace("{get_money_from_3}",'[&nbsp;&nbsp;]',$html_pdf);
+
+						if(isset($record_json->get_money_from_4))
+						$html_pdf=str_replace("{get_money_from_4}","[&nbsp;/&nbsp;]",$html_pdf);
+					else $html_pdf=str_replace("{get_money_from_4}",'[&nbsp;&nbsp;]',$html_pdf);
 
 								$html_pdf=str_replace("{".$key."}",$value,$html_pdf);
 							
@@ -182,6 +201,7 @@ class Staff extends CI_Controller {
 			'default_font' => 'thsarabun',
 			'mode' => 'utf-8',
 			'format' => 'A4',
+		//	'allow_charset_conversion' => true
 		]);
 	//	$html='';
 		$car_record=$this->study_trip->get_car_record_by_id($id);

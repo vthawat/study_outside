@@ -41,12 +41,6 @@
     </div>
   </div>
 
-  <div class="form-group">
-    <label for="booking-research-name" class="col-sm-2 control-label">ชื่อโครงการวิจัย</label>
-    <div class="col-sm-5">
-      <input type="text" class="form-control" name="booking_research_name" id="booking-research-name"  value="<?php if($mode=='edit') print $booking_car->booking_research_name?>">
-    </div>
-  </div>
 
   <div class="form-group">
     <label for="booking-depart-place" class="col-sm-2 control-label">สถานที่ให้รถมารับ</label>
@@ -77,7 +71,7 @@
   <div class="form-group">
     <label for="booking-depart-time" class="col-sm-2 control-label">กลับมาถึงเวลา</label>
     <div class="col-sm-1">
-      <input type="text" class="form-control" name="booking_arrive_time" id="booking-arrive-time"  value="<?php if($mode!='edit'):?><?=$trips->end_timeframe?><?php else:?><?=$booking_car->booking_arrive_date?><?php endif?>">
+      <input type="text" class="form-control" name="booking_arrive_time" id="booking-arrive-time"  value="<?php if($mode!='edit'):?><?=$trips->end_timeframe?><?php else:?><?=$booking_car->booking_arrive_time?><?php endif?>">
     </div>
   </div>
 
@@ -258,7 +252,7 @@
     <div class="form-group">
       <label class="col-sm-2 control-label"></label>
       <div class="col-sm-10">
-<textarea name="booking_close_text" class="form-control"><?php if($mode!='edit'):?>ปีงบประมาณ...........................พร้อมทั้งขอยืมเงินทดรองจ่ายจานวนดังกล่าวด้วย<?php else:?><?=$booking_car->booking_close_text?><?php endif?></textarea>
+<textarea name="booking_close_text" class="form-control"><?php if($mode!='edit'):?>ปีงบประมาณ.....พร้อมทั้งขอยืมเงินทดรองจ่ายจำนวนดังกล่าวด้วย<?php else:?><?=$booking_car->booking_close_text?><?php endif?></textarea>
       </div>
     </div>
 
