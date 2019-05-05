@@ -201,7 +201,36 @@ class Staff extends CI_Controller {
 		$this->template->render();
 		
 	}
-	
+	function printSchedule($id=null)
+	{
+		$mpdf = new \Mpdf\Mpdf();
+		$defaultConfig = (new Mpdf\Config\ConfigVariables())->getDefaults();
+		$fontDirs = $defaultConfig['fontDir'];
+
+		$defaultFontConfig = (new Mpdf\Config\FontVariables())->getDefaults();
+		$fontData = $defaultFontConfig['fontdata'];
+
+		$mpdf = new \Mpdf\Mpdf([
+			'fontDir' => array_merge($fontDirs, [
+				realpath('assets/fonts'),
+			]),
+			'fontdata' => $fontData + [
+				'thsarabun' => [
+					'R' => 'THSarabunNew.ttf',
+					'I' => 'THSarabunNew Italic.ttf',
+					'B' => 'THSarabunNew Bold.ttf',
+				]
+			],
+			'default_font' => 'thsarabun',
+			'mode' => 'utf-8',
+			'format' => 'A4',
+		//	'allow_charset_conversion' => true
+		]);
+
+		$schedule=$this->study_trip->get_schedule_plan_by_trip_id($id);
+		$mpdf->WriteHTML($schedule->schedule_html);
+		$mpdf->Output('กำหนดการเดินทาง.pdf','I');
+	}
 	function printCarPdf($id=null)
 	{
 		//print realpath('assets/fonts');
@@ -419,6 +448,7 @@ class Staff extends CI_Controller {
 				$this->template->add_js($this->load->view('js/schedule-editor.js',$data,TRUE),'embed',TRUE);
 				$data['trips']=$this->study_trip->get_by_id($id);
 				$title='รายวิชา '.$this->ftps->get_subject($this->study_trip->get_by_id($id)->subject_list_id)->subject_code.' '.$this->ftps->get_subject($this->study_trip->get_by_id($id)->subject_list_id)->subject_name;
+				$data['subject']=$title;
 				$this->template->write('page_header','<a href="'.base_url('staff/trip').'"><i class="fa fa-fw fa-calendar-check-o"></i>ความต้องการเดินทาง</a><i class="fa fa-fw fa-angle-double-right"></i>ปรับแต่งกำหนดการเดินทางด้วยตนเอง');
 				$data['schedule']=$this->study_trip->get_schedule_plan_by_trip_id($id);
 				if(empty($data['schedule']->schedule_html))

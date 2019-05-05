@@ -42,6 +42,9 @@
   <div class="tab-content">
     <div role="tabpanel" class="tab-pane active" id="schedule">
         <?php if(!empty($schedule->schedule_html)):?>
+         <div class="text-right"><br>
+         <a target="_blank" href="<?=base_url('staff/printSchedule/'.$trips->id)?>" class="btn icon-btn btn-danger"><span class="btn-glyphicon fa fa-print img-circle text-black"></span>Print</a>
+        </div>
             <?=$schedule->schedule_html;?>
         <?php else:?>
             <div class="alert alert-warning"><h4>ไม่พบข้อมูล กำหนดการเดินทาง เนื่องจากยังไม่สร้างกำหนดการเดินทาง</h4></div>
