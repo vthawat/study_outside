@@ -1,5 +1,7 @@
 <script>
-  var place_location=[<?=$item->lat?>,<?=$item->long?>];
+
+  var place_location=[<?php print $item->lat?>,<?php print $item->long?>];
+
 </script>
 <div class="col-md-4 col-sm-12"><h3 class="thai-font"><i class="fa fa-fw fa-search"></i>ที่อยู่</h3>
   <address><?=$item->address?></address>

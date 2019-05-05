@@ -33,7 +33,7 @@ $(function () {
         // ** load trip detail on modal *** // 
         var trip_detail_url="<?=base_url('staff/calendar_trip_details/"+calEvent.id+"')?>";
        
-        $('.modal-content').load(trip_detail_url,function(){
+        $('.modal-trip-detail .modal-content').load(trip_detail_url,function(){
 
            $('.modal-trip-detail').modal('show');
           
@@ -54,7 +54,7 @@ $(function () {
       
     })
 
-    $('.modal').on('hidden.bs.modal', function (e) {
+    $('.modal-place-detail').on('hidden.bs.modal', function (e) {
       // do something...
        $(this).removeData();
     }) 
@@ -121,7 +121,7 @@ $(function () {
                           var start_location_name;
                           var end_location_name;
                         // console.log(route.legs);
-                        console.log(route.waypoint_order)
+                       // console.log(route.waypoint_order)
                         // route.waypoint_order=[1,0,2];
                         // console.log(route.waypoint_order)
                           $('#directions-panel').empty();
@@ -289,15 +289,16 @@ $(function () {
               }
           
               $('a[data-toggle="tab"]').on('shown.bs.tab', function (e) {
-                //var target = $(e.target).attr("href") // activated tab
-               // alert(target);
-               waypts = [];
-               location_selected=[];
-               map_routing=[];
-               place_ordering=[];
-              initialize();
-              loadWayPoint();
-
+                var target = $(e.target).attr("href") // activated tab
+                    if(target=='#placemap')
+                    {
+                        waypts = [];
+                        location_selected=[];
+                        map_routing=[];
+                        place_ordering=[];
+                        initialize();
+                        loadWayPoint();
+                    }
               });
 
     }) // end event show modal
@@ -309,7 +310,7 @@ $(function () {
       // do something...
       $(function () {
           var center = place_location;
-          console.log(center);
+         console.log(center);
           $('#gm-map')
             .gmap3({
               center: center,

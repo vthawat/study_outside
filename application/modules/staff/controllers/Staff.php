@@ -259,6 +259,7 @@ class Staff extends CI_Controller {
 		$this->template->add_js('https://maps.google.com/maps/api/js?key=AIzaSyBGE-KGQB9PP6uq4wErMO0Xbxmz4FWxy3Q&language=th','link');
 		$this->template->add_js('assets/gmaps/js/gmap3.js');
 		$this->template->add_css($this->load->view('css/map.css',null,TRUE),'embed',TRUE);
+		$this->template->add_css($this->load->view('css/tabs.css',null,TRUE),'embed',TRUE);
 	//	$this->template->add_js($this->load->view('js/modal.js',null,TRUE),'embed',TRUE);
 
 		$this->template->write('page_header','<i class="fa fa-fw fa-calendar"></i>ปฏิทินการเดินทาง');
@@ -380,12 +381,10 @@ class Staff extends CI_Controller {
 			//$this->template->add_js('assets/gmaps/js/gmap3.js');
 			$this->template->add_css($this->load->view('css/map.css',null,TRUE),'embed',TRUE);
 			$this->template->add_js('assets/sortable/jquery-sortable-min.js');
-			//$this->template->add_js($this->load->view('js/place_sortable.js',null,TRUE),'embed',TRUE);
 			$this->template->add_js($this->load->view('js/map-waypoint-custom.js',$data,TRUE),'embed',TRUE);
 			$this->template->add_css($this->load->view('css/sortable.css',null,TRUE),'embed',TRUE);
 				$data['trips']=$this->study_trip->get_by_id($id);
 				$this->template->write('page_header','<a href="../trip/"><i class="fa fa-fw fa-calendar-check-o"></i>ความต้องการเดินทาง</a><i class="fa fa-fw fa-angle-double-right"></i>ปรับแต่งเส้นทางด้วยตนเอง');
-				//$data['place_selected']=$this->study_trip->suggest_location($id);
 				$title='รายวิชา '.$this->ftps->get_subject($this->study_trip->get_by_id($id)->subject_list_id)->subject_code.' '.$this->ftps->get_subject($this->study_trip->get_by_id($id)->subject_list_id)->subject_name;
 				$data['content']=['title'=>$title,
 								  'color'=>'primary',
@@ -410,15 +409,10 @@ class Staff extends CI_Controller {
 							  'detail'=>$this->load->view('schedule',$data,TRUE)];
 			$this->template->write_view('content','contents',$data);			
 			break;
+
 			case 'custom_schedule': /** ปรับแต่งกำหนดการด้วยตนเอง */
-			$data['trips']=$this->study_trip->get_by_id($id);
-			
-	
-			/*$this->template->add_js('assets/froala/js/froala_editor.min.js');
-			$this->template->add_js('assets/froala/js/froala_editor.pkgd.min.js');
-				$this->template->add_css('assets/froala/css/froala_editor.min.css');
-				$this->template->add_css('assets/froala/css/froala_editor.pkgd.min.css');
-				*/
+				$data['trips']=$this->study_trip->get_by_id($id);
+
 				$this->template->add_js('assets/summernote/summernote.min.js');
 				$this->template->add_css('assets/summernote/summernote.css');
 
@@ -700,6 +694,8 @@ class Staff extends CI_Controller {
 	{
 	
 		// render for modal
+ 
+	
 		$data['knowledge_items']=$this->study_place->get_knowledge_by_study_place_id($place_id);
 		$data['view_knowledge']=$this->load->view('knowledge_list',$data,TRUE);
 		$data['item']=$this->study_place->get_by_id($place_id);
