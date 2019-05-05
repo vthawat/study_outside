@@ -8,7 +8,7 @@
 <?php if($item->place_id!=0):?>
 <li class="list-group-item pid-<?=$item->place_id?>">
   <input type="hidden" class="splace-id" value="<?=$item->place_id?>">
-<h3 class="text-blue thai-webfont"><span class="place-order-number"><?=$i?>.</span> <?=$item->place_name?></h3>
+<h3 class="text-blue thai-webfont"><span class="place-order-number"><?=$i?></span> <?=$item->place_name?></h3>
 <div class="col-xs-6">
   <?php  $knowledge_items=$this->study_place->get_knowledge_by_study_place_id($item->place_id);?>
   <?php if(!empty($knowledge_items)):?>   

@@ -72,8 +72,8 @@ $(function () {
 
               var directionsService = new google.maps.DirectionsService();
               var map;
-            /*  initialize();
-              loadWayPoint();*/
+             // initialize();
+            //  loadWayPoint();
               function initialize() {
                   directionsDisplay = new google.maps.DirectionsRenderer({
                       suppressMarkers: true
@@ -297,6 +297,7 @@ $(function () {
                place_ordering=[];
               initialize();
               loadWayPoint();
+
               });
 
     }) // end event show modal
@@ -336,5 +337,12 @@ $(function () {
 
       $('.modal-trip-detail').modal('show');
     })
+    
+    $('body').on('hidden.bs.modal', function () {
+      if($('.modal.in').length > 0)
+      {
+          $('body').addClass('modal-open');
+      }
+  });
 });
 
