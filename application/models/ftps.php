@@ -13,6 +13,22 @@ class Ftps extends CI_Model
         $this->load->model('study_place_rest');
         $this->load->model('study_trip');			
     }
+    function ReportSubjectMajor()
+    {
+        $sql="SELECT
+                subject_major.id as major_id,
+                subject_major.major_name,
+                (SELECT
+                COUNT(study_period_trip.id)
+                FROM
+                study_period_trip
+                WHERE
+                study_period_trip.subject_major_selected LIKE CONCAT('%', major_id, '%')) as total
+                FROM
+                subject_major";
+         $result=$this->db->query($sql)->result();
+         return $result;
+    }
     function DateThai($strDate)
 	{
 		$strYear = date("Y",strtotime($strDate))+543;

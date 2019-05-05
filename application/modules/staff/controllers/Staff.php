@@ -32,8 +32,25 @@ class Staff extends CI_Controller {
 
 	public function index()
 	{	
-
+		
 		redirect(base_url('staff/calendar'));
+	}
+	function report()
+	{
+		$data['report_major']=$this->ftps->ReportSubjectMajor();
+		$data['content']=['title'=>'',
+					'color'=>'success',
+					'size'=>9,
+					'detail'=>$this->load->view('ftps_report',$data,TRUE)];
+		$this->template->write_view('content','contents',$data);
+		$data['content']=['title'=>'ตัวกรองข้อมูล',
+		'color'=>'success',
+		'size'=>3,
+		'detail'=>''];
+$this->template->write_view('content','contents',$data);
+		$this->template->write('page_header','<i class="fa fa-fw fa-book"></i>รายงานสรุปการเดินทาง');
+		$this->template->render();
+		
 	}
 	function cars($action=null,$id=null)
 	{
@@ -257,7 +274,6 @@ class Staff extends CI_Controller {
 			'format' => 'A4',
 		//	'allow_charset_conversion' => true
 		]);
-	//	$html='';
 		$car_record=$this->study_trip->get_car_record_by_id($id);
 		//*** variable for header section */
 	
@@ -266,21 +282,10 @@ class Staff extends CI_Controller {
 		$html_pdf=$this->load->view('car_record_html2pdf',$data,TRUE);
 		//$i=0;
 			foreach($record_json as $key=>$value)
-			{
-
-			//	if($i==0)
-
-				//	$html_pdf=str_replace("{".$key."}",$value,$);
-			
-			//	else
 					$html_pdf=str_replace("{".$key."}",$value,$html_pdf);
-				
-			//	$i++;
-			}
-		
-
-			$mpdf->WriteHTML($html_pdf);
-			$mpdf->Output('บันทึกข้อความ-การขอใช้รถ.pdf','I');
+	
+		$mpdf->WriteHTML($html_pdf);
+		$mpdf->Output('บันทึกข้อความ-การขอใช้รถ.pdf','I');
 		
 	}
 	function calendar()
@@ -553,13 +558,7 @@ class Staff extends CI_Controller {
 		}
 		$this->template->render();	
 	}
-	
-	function report()
-	{
 
-		$this->template->render();
-		
-	}
 	function json_get_amphur_by_province_id($province_id)
 	{
 		$amphur=array();
