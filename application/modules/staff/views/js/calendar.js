@@ -62,15 +62,18 @@ $(function () {
 
     $('.modal-trip-detail').on('shown.bs.modal', function (e) 
     {
- 
+      waypts = [];
+      location_selected=[];
+      map_routing=[];
+      place_ordering=[];
       var directionsService = new google.maps.DirectionsService();
       var map;
      // console.log($('.splace-location-point').val());
 
               var directionsService = new google.maps.DirectionsService();
               var map;
-              initialize();
-              loadWayPoint();
+            /*  initialize();
+              loadWayPoint();*/
               function initialize() {
                   directionsDisplay = new google.maps.DirectionsRenderer({
                       suppressMarkers: true
@@ -285,14 +288,53 @@ $(function () {
                   });
               }
           
+              $('a[data-toggle="tab"]').on('shown.bs.tab', function (e) {
+                //var target = $(e.target).attr("href") // activated tab
+               // alert(target);
+               waypts = [];
+               location_selected=[];
+               map_routing=[];
+               place_ordering=[];
+              initialize();
+              loadWayPoint();
+              });
 
     }) // end event show modal
     
 
 
+    $('.modal-place-detail').on('shown.bs.modal', function (e) {
+      $('.modal-trip-detail').modal('hide');
+      // do something...
+      $(function () {
+          var center = place_location;
+          console.log(center);
+          $('#gm-map')
+            .gmap3({
+              center: center,
+              zoom: 6,
+              mapTypeId : google.maps.MapTypeId.ROADMAP
+            })
+            .marker(function (map) {
+              return {
+                position: map.getCenter(),
+                icon: 'https://maps.google.com/mapfiles/marker_green.png'
+              };
+            })
+            .circle({
+              center: center,
+              radius : 100,
+              fillColor : "#FFAF9F",
+              strokeColor : "#FF512F"
+            })
+            .fit();
+        });    
+    }) 
 
 
+    $('.modal-place-detail').on('hidden.bs.modal', function (e) {
 
-
+      $('.modal-trip-detail').modal('show');
+    })
 });
 

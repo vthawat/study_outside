@@ -24,3 +24,6 @@
 <?php if(!empty($view_knowledge)):?><?=$view_knowledge?><?php endif?>
 <h3 class="thai-font"><i class="fa fa-fw fa-map-o"></i>แผนที่</h3>
 <div id="gm-map"></div>
+<div class="box-footer text-center">
+  <button class="btn icon-btn btn-default" data-dismiss="modal"><span class="btn-glyphicon fa fa-stop img-circle text-gray"></span>Close</button>
+</div>
