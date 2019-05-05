@@ -52,6 +52,31 @@ class Staff extends CI_Controller {
 					$html_pdf=$this->load->view('car_html_content',null,TRUE);;
 						foreach($record_json as $key=>$value)
 						{
+							
+							if(isset($record_json->booking_get_money1))
+								$html_pdf=str_replace("{booking_get_money1}","&nbsp;/&nbsp;",$html_pdf);
+							else $html_pdf=str_replace("{booking_get_money1}",'&nbsp;&nbsp;',$html_pdf);
+							
+								if(isset($record_json->booking_get_money2))
+									$html_pdf=str_replace("{booking_get_money2}","&nbsp;/&nbsp;",$html_pdf);
+								else $html_pdf=str_replace("{booking_get_money2}",'&nbsp;&nbsp;',$html_pdf);
+
+								if(isset($record_json->get_money_from_1))
+									$html_pdf=str_replace("{get_money_from_1}","[&nbsp;/&nbsp;]",$html_pdf);
+								else $html_pdf=str_replace("{get_money_from_1}",'[&nbsp;&nbsp;]',$html_pdf);
+
+								if(isset($record_json->get_money_from_2))
+								$html_pdf=str_replace("{get_money_from_2}","[&nbsp;/&nbsp;]",$html_pdf);
+							else $html_pdf=str_replace("{get_money_from_2}",'[&nbsp;&nbsp;]',$html_pdf);
+
+							if(isset($record_json->get_money_from_3))
+							$html_pdf=str_replace("{get_money_from_3}","[&nbsp;/&nbsp;]",$html_pdf);
+						else $html_pdf=str_replace("{get_money_from_3}",'[&nbsp;&nbsp;]',$html_pdf);
+
+						if(isset($record_json->get_money_from_4))
+						$html_pdf=str_replace("{get_money_from_4}","[&nbsp;/&nbsp;]",$html_pdf);
+					else $html_pdf=str_replace("{get_money_from_4}",'[&nbsp;&nbsp;]',$html_pdf);
+
 								$html_pdf=str_replace("{".$key."}",$value,$html_pdf);
 						}
 						$record_html2pdf=array();
