@@ -29,6 +29,21 @@ class Ftps extends CI_Model
          $result=$this->db->query($sql)->result();
          return $result;
     }
+    function ReportProvince()
+    {
+        $sql="SELECT DISTINCT
+                    study_period_trip.end_location as province,
+                    (SELECT
+                    COUNT(study_period_trip.end_location)
+                    FROM
+                    study_period_trip
+                    WHERE
+                    study_period_trip.end_location = province) as total
+                    FROM
+                    study_period_trip";
+            $result=$this->db->query($sql)->result();
+            return $result;
+    }
     function DateThai($strDate)
 	{
 		$strYear = date("Y",strtotime($strDate))+543;

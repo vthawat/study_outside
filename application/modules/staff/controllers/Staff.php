@@ -38,6 +38,7 @@ class Staff extends CI_Controller {
 	function report()
 	{
 		$data['report_major']=$this->ftps->ReportSubjectMajor();
+		$data['report_province']=$this->ftps->ReportProvince();
 		$data['content']=['title'=>'',
 					'color'=>'success',
 					'size'=>9,
