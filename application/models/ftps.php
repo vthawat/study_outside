@@ -13,8 +13,47 @@ class Ftps extends CI_Model
         $this->load->model('study_place_rest');
         $this->load->model('study_trip');			
     }
-    function ReportSubjectMajor()
+    function ReportSubjectList($filter)
     {
+        if(empty($filter))
+        $sql="SELECT
+        subject_list.id as subject_id,
+        subject_list.subject_code,
+        subject_list.subject_name,
+        (SELECT
+                        COUNT(study_period_trip.id)
+                        FROM
+                        study_period_trip
+                        WHERE
+                        study_period_trip.subject_list_id=subject_id) as total
+        FROM
+        subject_list
+        ORDER BY total DESC";
+        else
+        $sql="SELECT
+        subject_list.id as subject_id,
+        subject_list.subject_code,
+        subject_list.subject_name,
+        (SELECT
+                        COUNT(study_period_trip.id)
+                        FROM
+                        study_period_trip
+                        WHERE
+                        study_period_trip.subject_list_id=subject_id 
+                        AND
+study_period_trip.start_date BETWEEN CAST('".$filter['start_date']."' AS DATE) AND CAST(study_period_trip.start_date AS DATE) AND
+study_period_trip.end_date BETWEEN CAST(study_period_trip.end_date AS DATE) AND CAST('".$filter['end_date']."' AS DATE)) as total
+        FROM
+        subject_list
+        ORDER BY total DESC";
+
+        $result=$this->db->query($sql)->result();
+        return $result;
+
+    }
+    function ReportSubjectMajor($filter)
+    {
+        if(empty($filter))
         $sql="SELECT
                 subject_major.id as major_id,
                 subject_major.major_name,
@@ -26,11 +65,28 @@ class Ftps extends CI_Model
                 study_period_trip.subject_major_selected LIKE CONCAT('%', major_id, '%')) as total
                 FROM
                 subject_major";
+        else
+        $sql="SELECT
+        subject_major.id as major_id,
+        subject_major.major_name,
+        (SELECT
+        COUNT(study_period_trip.id)
+        FROM
+        study_period_trip
+        WHERE
+        study_period_trip.subject_major_selected LIKE CONCAT('%', major_id, '%') 
+        AND
+study_period_trip.start_date BETWEEN CAST('".$filter['start_date']."' AS DATE) AND CAST(study_period_trip.start_date AS DATE) AND
+study_period_trip.end_date BETWEEN CAST(study_period_trip.end_date AS DATE) AND CAST('".$filter['end_date']."' AS DATE)) as total
+        FROM
+        subject_major";
+
          $result=$this->db->query($sql)->result();
          return $result;
     }
-    function ReportProvince()
+    function ReportProvince($filter)
     {
+        if(empty($filter))
         $sql="SELECT DISTINCT
                     study_period_trip.end_location as province,
                     (SELECT
@@ -41,6 +97,21 @@ class Ftps extends CI_Model
                     study_period_trip.end_location = province) as total
                     FROM
                     study_period_trip";
+        else
+        $sql="SELECT DISTINCT
+                    study_period_trip.end_location as province,
+                    (SELECT
+                    COUNT(study_period_trip.end_location)
+                    FROM
+                    study_period_trip
+                    WHERE
+                    study_period_trip.end_location = province 
+                    AND
+study_period_trip.start_date BETWEEN CAST('".$filter['start_date']."' AS DATE) AND CAST(study_period_trip.start_date AS DATE) AND
+study_period_trip.end_date BETWEEN CAST(study_period_trip.end_date AS DATE) AND CAST('".$filter['end_date']."' AS DATE)) as total
+                    FROM
+                    study_period_trip";
+        
             $result=$this->db->query($sql)->result();
             return $result;
     }

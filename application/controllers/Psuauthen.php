@@ -33,16 +33,21 @@ function credentail()
 		$username=$this->input->post('username');
 		$password=$this->input->post('password');
 		$response=$this->authen->credential($username,$password);
+
 		if(!$response) show_error("Login หรือ Username ไม่ถูกต้อง",403);
 		elseif(!in_array($response['fac_id'],$this->config->item('system_allow_fac')))
 						show_error("ระบบนี้ใช้งานกับบุคลากรของภาควิชาพัฒนาการเกษตร คณะทรัพยากรธรรมชาติเท่านั้น",403);
 		else
 		{	
+	
 			$this->session->set_userdata($response);
-			$system_user=$this->userinfo->get_active_sign_in();
-			if($system_user) 
-			 redirect(base_url($system_user->level));
-			else show_error('คุณไม่ได้รับสิทธิ์ในการใช้งานระบบนี้');
+			//$system_user=$this->userinfo->get_active_sign_in();
+			//if($system_user) 
+			 //redirect(base_url($system_user->level));
+			//elseif($response['dept_id']=='089') // dept_id 089 ภาควิชาพัฒนาการเกษตร
+				redirect(base_url('staff'));
+			//else show_error('คุณไม่ได้รับสิทธิ์ในการใช้งานระบบนี้');
+			
 		}
 				
 	}

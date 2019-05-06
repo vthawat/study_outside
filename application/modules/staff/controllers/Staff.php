@@ -37,9 +37,24 @@ class Staff extends CI_Controller {
 	}
 	function report()
 	{
-		$data['report_major']=$this->ftps->ReportSubjectMajor();
-		$data['report_province']=$this->ftps->ReportProvince();
-		$data['content']=['title'=>'',
+		$filter=array();
+		$show_filter='ทั้งหมด';
+		if(!empty($this->input->get('start_date'))&&!empty($this->input->get('end_date')))
+		{
+			$filter['start_date']=$this->input->get('start_date');
+			$filter['end_date']=$this->input->get('end_date');
+			$show_filter='ระหว่างวันที่ '.$this->ftps->DateThai($filter['start_date']).' ถึง '.$this->ftps->DateThai($filter['end_date']);
+		}
+
+		$this->template->add_js('assets/datepicker/bootstrap-datepicker.js');
+		$this->template->add_js('assets/datepicker/locales/bootstrap-datepicker.th.js');
+		$this->template->add_css('assets/datepicker/datepicker3.css');
+		$this->template->add_js($this->load->view('js/report-filter-datepicker.js',null,TRUE),'embed',TRUE);
+		$data['action']=base_url('staff/report');
+		$data['report_major']=$this->ftps->ReportSubjectMajor($filter);
+		$data['report_province']=$this->ftps->ReportProvince($filter);
+		$data['report_subject_list']=$this->ftps->ReportSubjectList($filter);
+		$data['content']=['title'=>'รายงานสรุปสาขาวิชาและจังหวัด ต่อจำนวนครั้งที่ออกไปศึกษาภาคสนาม',
 					'color'=>'success',
 					'size'=>9,
 					'detail'=>$this->load->view('ftps_report',$data,TRUE)];
@@ -47,9 +62,9 @@ class Staff extends CI_Controller {
 		$data['content']=['title'=>'ตัวกรองข้อมูล',
 		'color'=>'success',
 		'size'=>3,
-		'detail'=>''];
+		'detail'=>$this->load->view('ftps_report_filter',$data,TRUE)];
 $this->template->write_view('content','contents',$data);
-		$this->template->write('page_header','<i class="fa fa-fw fa-book"></i>รายงานสรุปการเดินทาง');
+		$this->template->write('page_header','<i class="fa fa-fw fa-book"></i>รายงานสรุปการเดินทาง'.$show_filter);
 		$this->template->render();
 		
 	}
