@@ -12,11 +12,11 @@
     <td>1.&nbsp;ค่าวัสดุน้ำมันเชื้อเพลิง</td>
     <td style="text-align:right">{item_money_type1_1}&nbsp;บาท</td>
     <td>&nbsp;1.&nbsp;ค่าวัสดุน้ำมันเชื้อเพลิง</td>
-    <td style="text-align:right">{item_money_type1_1}&nbsp;บาท</td>
+    <td style="text-align:right">{item_money_type2_1}&nbsp;บาท</td>
 </tr>
 <tr>
     <td>2.&nbsp;ค่าเบี้ยเลี้ยง&nbsp;{item_money_type1_2_duration}&nbsp;วัน</td>
-    <td style="text-align:right">{item_money_type1_2_duration}&nbsp;บาท</td>
+    <td style="text-align:right">{item_money_type1_2}&nbsp;บาท</td>
     <td>&nbsp;2.&nbsp;ค่าล่วงเวลา</td>
     <td style="text-align:right">{item_money_type2_2}&nbsp;บาท</td>
 </tr>
