@@ -145,7 +145,7 @@ $this->template->write_view('content','contents',$data);
 					'color'=>'success',
 					'detail'=>$this->load->view('car_record_html_edit',$data,TRUE)];
 		$this->template->write_view('content','contents',$data);
-		$this->template->write('page_header','<a href="'.base_url('staff/cars').'"><i class="fa fa-fw fa-car"></i>รายการออกใบข้อใช้รถ</a><i class="fa fa-fw fa-angle-double-right"></i>แก้ไขร่างบันทึกข้อความ');
+		$this->template->write('page_header','<a href="'.base_url('staff/cars').'"><i class="fa fa-fw fa-car"></i>รายการออกใบขอใช้รถ</a><i class="fa fa-fw fa-angle-double-right"></i>แก้ไขร่างบันทึกข้อความ');
 		
 		break;
 		
@@ -157,7 +157,7 @@ $this->template->write_view('content','contents',$data);
 										'color'=>'primary',
 										'detail'=>$this->load->view('frm_car_record',$data,TRUE)];
 				$this->template->write_view('content','contents',$data);
-				$this->template->write('page_header','<a href="'.base_url('staff/cars').'"><i class="fa fa-fw fa-car"></i>รายการออกใบข้อใช้รถ</a><i class="fa fa-fw fa-angle-double-right"></i>แก้ไขข้อมูล');	
+				$this->template->write('page_header','<a href="'.base_url('staff/cars').'"><i class="fa fa-fw fa-car"></i>รายการออกใบขอใช้รถ</a><i class="fa fa-fw fa-angle-double-right"></i>แก้ไขข้อมูล');	
 		break;
 		case 'put_record_json':
 				$data['record_json']=json_encode($this->input->post());
@@ -228,7 +228,7 @@ $this->template->write_view('content','contents',$data);
 											'detail'=>$this->load->view('car_item_list',$data,TRUE)];
 		$this->template->write_view('content','contents',$data);
 		
-		$this->template->write('page_header','<i class="fa fa-fw fa-car"></i>รายการออกใบข้อใช้รถ');	
+		$this->template->write('page_header','<i class="fa fa-fw fa-car"></i>รายการออกใบขอใช้รถ');	
 	
 	}
 		$this->template->render();
