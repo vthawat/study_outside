@@ -28,5 +28,11 @@ class Userinfo extends CI_Model
         }
         else return FALSE;
     }
+    function get_user_privilage($staff_id)
+    {
+        $this->db->where('staff_id', $staff_id);
+        $this->db->where('active',1);
+        return $this->db->get('user_privilage')->row();
+    }
 
 }

@@ -50,7 +50,7 @@ $config['app_info']=array('app_name'=>'FTPS Application',
 | config restrict FAC_ID
 |
 */
-$config['system_allow_fac']=array('06','12');
+$config['system_allow_fac']=array('12'); // allow fac nature
 
 /*
 |--------------------------------------------------------------------------
