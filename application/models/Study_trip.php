@@ -103,9 +103,8 @@ class Study_trip extends CI_Model
 		study_period_trip.end_timeframe,
 		study_period_trip.subject_major_selected,
 		study_period_trip.subject_list_id,
-		study_period_trip.approvers,
-		study_period_trip.approval,
-		study_period_trip.rec_date,
+		study_period_trip.creator_name,
+		study_period_trip.create_date,
 		study_period_trip.last_update,
 		study_period_trip.duration,
 		study_period_trip.start_date,
@@ -118,7 +117,6 @@ class Study_trip extends CI_Model
 		study_period_trip.knowledge_selected,
 		study_period_trip.`status`,
 		study_period_trip.routing,
-		study_period_trip.routing_with_rest_place,
 		car_record.id,
 		car_record.record_html2pdf,
 		car_record.record_json
@@ -197,7 +195,8 @@ class Study_trip extends CI_Model
 			study_period_trip.end_location
 			FROM
 			study_period_trip
-			INNER JOIN subject_list ON study_period_trip.subject_list_id = subject_list.id";
+			INNER JOIN subject_list ON study_period_trip.subject_list_id = subject_list.id 
+			WHERE study_period_trip.status='สร้างกำหนดการเดินทางแล้ว'";
 		$result=$this->db->query($sql)->result();
 		if(!empty($result))
 			foreach($result as $item)
@@ -273,6 +272,9 @@ class Study_trip extends CI_Model
 		$end_date=explode('/',$data['end_date']);
 		$data['start_date']=$start_date[2].'-'.$start_date[1].'-'.$start_date[0];
 		$data['end_date']=$end_date[2].'-'.$end_date[1].'-'.$end_date[0];
+		$data['create_date']=date('Y-m-d H:i:s');
+		$user=$this->userinfo->get_active_sign_in();
+		$data['creator_name']=$user->first_name.' '.$user->last_name;
 		if($this->db->insert($this->table,$data)) return $this->db->insert_id();
 		else return FALSE;
 	}
@@ -290,6 +292,7 @@ class Study_trip extends CI_Model
 		$end_date=explode('/',$data['end_date']);
 		$data['start_date']=$start_date[2].'-'.$start_date[1].'-'.$start_date[0];
 		$data['end_date']=$end_date[2].'-'.$end_date[1].'-'.$end_date[0];
+		$data['last_update']=date('Y-m-d H:i:s');
 		$this->db->where('study_period_trip.id',$id);
 		if($this->db->update($this->table,$data)) return TRUE;
 		else return FALSE;
